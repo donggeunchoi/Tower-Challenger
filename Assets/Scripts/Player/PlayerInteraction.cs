@@ -40,6 +40,12 @@ public class PlayerInteraction : MonoBehaviour
         if (currentUI == null)  //만약 지금 띄워진 UI가없으면 NPC의 UI를 지정위치에 인스턴스
         {
             currentUI = Instantiate(currentNPC.uiPrefab, interactionUIPannel);
+
+            var interactionUI = currentUI.GetComponent<InteractionUI>();
+            if (interactionUI != null)
+            {
+                interactionUI.owner = this;
+            }
         }
         else  //아니라면 닫기
         {
@@ -54,5 +60,10 @@ public class PlayerInteraction : MonoBehaviour
             Destroy(currentUI);
             currentUI = null;
         }
+    }
+    public void NotifyUIDestroyed(GameObject ui)
+    {
+        if (currentUI == ui)
+            currentUI = null;
     }
 }
