@@ -16,11 +16,8 @@ public class MapMover : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"충돌한 태그: {collision.tag}, 이름: {collision.name}");
-        
         if(collision.CompareTag("RespawnZone"))
         {
-            Debug.Log("메롱시티");
             Destroy(gameObject);
         }
     }

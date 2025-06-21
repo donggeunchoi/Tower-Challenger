@@ -15,40 +15,6 @@ public class Obstacle : MonoBehaviour
         Debug.Log(obstaclePrefabs);
     }
 
-    // IEnumerator SpawnRoutine()
-    // {
-    //     while (!DinoMiniGame.Instance.isGameOver)
-    //     {
-    //         yield return new WaitForSeconds(spawnInterval);
-    //         
-    //         GroundTile[] allTiles = FindObjectsOfType<GroundTile>();
-    //         var validGrounds = new System.Collections.Generic.List<GroundTile>();
-    //
-    //         foreach (var tile in allTiles)
-    //         {
-    //             if (!tile.isHole)
-    //             {
-    //                 validGrounds.Add(tile);
-    //             }
-    //         }
-    //
-    //         if (validGrounds.Count == 0)
-    //         {
-    //             yield break;
-    //         }
-    //         
-    //         //랜덤한 타일 중 하나 고르기
-    //         int index = Random.Range(0, validGrounds.Count);
-    //         GroundTile selectedTile = validGrounds[index];
-    //         
-    //         //장애물 생성
-    //         int obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
-    //         Vector3 spawnPos = selectedTile.transform.position + Vector3.up * obstacleYoffset;
-    //         
-    //         Instantiate(obstaclePrefabs[obstacleIndex], spawnPos, Quaternion.identity);
-    //     }
-    // }
-
     IEnumerator SpawnRoutine()
     {
         while (!DinoMiniGame.Instance.isGameOver)

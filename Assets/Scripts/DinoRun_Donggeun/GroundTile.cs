@@ -29,7 +29,6 @@ public class GroundTile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("닿았데아");
         if (other.CompareTag("RespawnZone"))
         {
             Reposition();

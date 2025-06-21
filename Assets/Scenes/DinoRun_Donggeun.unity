@@ -1519,6 +1519,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: 0}
+  m_PointAction: {fileID: 0}
+  m_MoveAction: {fileID: 0}
+  m_SubmitAction: {fileID: 0}
+  m_CancelAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 0}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &1120058250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1900,7 +1919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePrefabs:
-  - {fileID: 1565711545945979531, guid: 2bbf2b2bb0cf94eada564dde1ee0f6b9, type: 3}
+  - {fileID: 473643191443893156, guid: f95e057c6d9824f7fa77501abdbbe976, type: 3}
   spawnPoint: {fileID: 1847242822}
   spawnInterval: 2.5
   obstacleYoffset: 1
@@ -1952,7 +1971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRb: {fileID: 1230503449}
-  jumpForce: 10
+  jumpForce: 7
 --- !u!61 &1230503448
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2671,8 +2690,8 @@ Transform:
   m_GameObject: {fileID: 1847242821}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.97, y: -0.56, z: 0.06438927}
-  m_LocalScale: {x: 1, y: 1.8655558, z: 1}
+  m_LocalPosition: {x: 1.97, y: -1, z: 0.06438927}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1554533932}
