@@ -6,20 +6,35 @@ public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
     [Tooltip("Safe Area 기준 패딩 비율 (0.05 = 5%)")]
     public float safeAreaPaddingRatio = 0.05f;
 
+    // 마지막으로 감지한 화면 방향
     private ScreenOrientation lastOrientation;
+    // 마지막으로 감지한 해상도
+    private Vector2 lastResolution;
+    // 마지막으로 감지한 Safe Area
+    private Rect lastSafeArea;
 
     void Start()
     {
         lastOrientation = Screen.orientation;
+        lastResolution = new Vector2(Screen.width, Screen.height);
+        lastSafeArea = Screen.safeArea;
         ApplySafeArea();
     }
 
     void Update()
     {
-        if (Screen.orientation != lastOrientation)
+        // 화면 방향, 해상도, Safe Area 중 하나라도 바뀌면 Safe Area 적용
+        if (
+            Screen.orientation != lastOrientation ||
+            Screen.width != lastResolution.x ||
+            Screen.height != lastResolution.y ||
+            Screen.safeArea != lastSafeArea
+        )
         {
             ApplySafeArea();
             lastOrientation = Screen.orientation;
+            lastResolution = new Vector2(Screen.width, Screen.height);
+            lastSafeArea = Screen.safeArea;
         }
     }
 
