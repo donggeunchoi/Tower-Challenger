@@ -25,6 +25,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     public void OnClickImg() //이미지를 누를시
     {
+        if (isClick) return;
         if (isGreen)
         {
             speedUIBtn.interactable = false;
@@ -71,7 +72,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         {
             isGreen = false;
             trueOrFalse.text = "False!";
-            StartCoroutine(FailEffect());
+            OnClickImg();
             yield break;
         }
         else if (isGreen && isClick)  //했으면 성공

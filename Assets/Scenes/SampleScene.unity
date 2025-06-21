@@ -957,7 +957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 909bbc4861083364d8f3e95d48b48c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPrefab: {fileID: 5353236550200203296, guid: a4bdaf6cca77b794892010fcd73025c6,
+  uiPrefab: {fileID: 7666244706221792721, guid: 816bb2b6bace72f4ebe6b38a2e1809da,
     type: 3}
 --- !u!1 &1251947625
 GameObject:
@@ -1204,11 +1204,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2019604075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 400}
-  m_Pivot: {x: 1, y: 1}
+  m_SizeDelta: {x: 700, y: 400}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2019604074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionButton: {fileID: 264231944}
-  uiParent: {fileID: 1216165276}
+  interactionUIPannel: {fileID: 1951390900}
 --- !u!58 &2042111338
 CircleCollider2D:
   m_ObjectHideFlags: 0
