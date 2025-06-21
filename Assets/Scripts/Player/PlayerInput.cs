@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public RectTransform stick;             // 조이스틱
     private float radius;                   // 조이스틱 이동 반지름
     private Vector2 inputDir = Vector2.zero;// 입력 방향 벡터
+    private float deadZone = 0.15f;
     public float speed = 5;
 
     void Start()
@@ -36,10 +37,18 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             stick, eventData.position, eventData.pressEventCamera, out localPoint))
         {
-            Vector2 dir = localPoint.normalized;  //방향 계산
             float dist = Mathf.Min(localPoint.magnitude, radius);  //스틱거리제한
-            stick.anchoredPosition = dir * dist;  //드래그한 길이계산
-            inputDir = dir;  //입력방향 저장
+            Vector2 dir = localPoint.normalized;  //방향 계산
+            if (dist < radius * deadZone) //미세조정값이 들어오면 컨트롤러가 떨리는 것을 방지
+            {
+                stick.anchoredPosition = Vector2.zero;
+                inputDir = Vector2.zero;
+            }
+            else
+            {
+                stick.anchoredPosition = dir * dist;  //드래그한 길이계산
+                inputDir = dir;  //입력방향 저장
+            }
         }
     }
 

@@ -2,7 +2,6 @@
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //화면 가로고정
@@ -13,7 +12,6 @@ public class UIManager : MonoBehaviour
         Screen.autorotateToPortraitUpsideDown = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
