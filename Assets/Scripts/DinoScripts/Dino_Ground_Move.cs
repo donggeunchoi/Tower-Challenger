@@ -31,7 +31,7 @@ public class Dino_Ground_Move : MonoBehaviour
         transform.position += Vector3.left * groundSpeed * Time.deltaTime;
 
         // 화면 왼쪽 바깥으로 나가면 오른쪽 끝으로 이동
-        if (transform.position.x < -20)
+        if (transform.position.x < -10)
         {
             float rightGround = GetRightPosition();
             transform.position = new Vector2(rightGround + groundWidth, transform.position.y);

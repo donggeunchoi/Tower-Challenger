@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GroundTileSpawner : MonoBehaviour
 {
@@ -20,5 +20,4 @@ public class GroundTileSpawner : MonoBehaviour
             spawnX += tileWidth;
         }
     }
-    
 }
