@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -6,7 +6,6 @@ using TMPro;
 
 public class DinoMiniGame : MonoBehaviour
 {
-    
     [Header("Game Settings")]
     public int lifePoints = 4;
     public float gameDuration = 60f;

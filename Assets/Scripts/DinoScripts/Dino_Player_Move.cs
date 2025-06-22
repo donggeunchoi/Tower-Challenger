@@ -10,7 +10,7 @@ public class Dino_Player_Move : MonoBehaviour
 
     private bool isGround;
 
-    private void Start()
+    private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
 
