@@ -7,12 +7,10 @@ public class Obstacle : MonoBehaviour
     public GameObject[] obstaclePrefabs;
     public Transform spawnPoint;
     public float spawnInterval = 2.5f;
-    public float obstacleYoffset = 1f;
 
     void Start()
     {
         StartCoroutine(SpawnRoutine());
-        Debug.Log(obstaclePrefabs);
     }
 
     IEnumerator SpawnRoutine()

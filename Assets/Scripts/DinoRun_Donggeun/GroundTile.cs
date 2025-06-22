@@ -7,8 +7,6 @@ public class GroundTile : MonoBehaviour
     public float moveSpeed = 5f;
     
     [Header("타일 전환용")]
-    public Sprite groundSprite;
-    public Sprite holeSprite;
     public SpriteRenderer spriteRenderer;
     public Collider2D groundCollider;
     public bool isHole = false;
@@ -45,19 +43,6 @@ public class GroundTile : MonoBehaviour
         
         float rightMost = GetRightMostX(this.gameObject);
         transform.position = new Vector3(rightMost + tileWidth, transform.position.y, transform.position.z);
-
-        if (Random.value > 0.3f)
-        {
-            spriteRenderer.sprite = groundSprite;
-            groundCollider.enabled = true;
-            isHole = false;
-        }
-        else
-        {
-            spriteRenderer.sprite = holeSprite;
-            groundCollider.enabled = false;
-            isHole = true;
-        }
         
         float GetRightMostX(GameObject exclude)
         {
