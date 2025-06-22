@@ -6,7 +6,7 @@ public class Dino_Player_Move : MonoBehaviour
     public LayerMask groundLayer;
 
     public float jump;
-    public float rayLength = 0.2f;
+    public float rayLength;
 
     private bool isGround;
 
