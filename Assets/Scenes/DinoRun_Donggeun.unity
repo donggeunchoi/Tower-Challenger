@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 629085180}
   m_Layer: 0
   m_Name: DeadZone
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -861,6 +861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: 1230503449}
   jumpForce: 7
+  respawnPosition: {x: -3, y: -1.5, z: 0}
 --- !u!61 &1230503448
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -999,7 +1000,7 @@ Transform:
   m_GameObject: {fileID: 1230503446}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: -1.427, z: 0}
+  m_LocalPosition: {x: -3, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1429,5 +1430,5 @@ SceneRoots:
   - {fileID: 162400198}
   - {fileID: 1380394360}
   - {fileID: 1194895237}
-  - {fileID: 629085181}
   - {fileID: 1476790039}
+  - {fileID: 629085181}
