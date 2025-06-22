@@ -35,6 +35,15 @@ public class Player : MonoBehaviour
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
         }
     }
+    void LateUpdate()
+    {
+        // Y값이 -5보다 아래로 떨어졌을 경우
+        if (transform.position.y < -5f)
+        {
+            // 떨어지지 않도록 리스폰 위치로 복구
+            transform.position = respawnPosition;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -64,8 +73,6 @@ public class Player : MonoBehaviour
     {
         isInvincible = true;
         gameObject.layer = invincibleLayer;
-
-        PushOutFromObstacle();
         
         float invincibleTime = 3f;
         float elapsed = 0f;
@@ -88,18 +95,6 @@ public class Player : MonoBehaviour
             sr.color = Color.white;
         
         isInvincible = false;
-    }
-    
-    void PushOutFromObstacle()
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.5f);
-        foreach (var hit in hits)
-        {
-            if (hit.CompareTag("Obstacle"))
-            {
-                transform.position += new Vector3(-1f, 0f, 0f); // 왼쪽으로 조금 밀기
-            }
-        }
     }
    
 }
