@@ -1731,8 +1731,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifePoints: 4
-  gameDuration: 60
+  gameDuration: 10
   isGameOver: 0
+  baseSpeed: 5
+  speedIncreaseRate: 0.5
   lpIcon:
   - {fileID: 665305359016360596}
   - {fileID: 2047527979992594154}

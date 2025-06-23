@@ -9,10 +9,14 @@ public class DinoMiniGame : MonoBehaviour
     
     [Header("Game Settings")]
     public int lifePoints = 4;
-    public float gameDuration = 60f;
+    public float gameDuration = 10f;
     private float gameTimer;
     public bool isGameOver = false;
     public static DinoMiniGame Instance;
+    
+    public float baseSpeed = 5f;
+    public float speedIncreaseRate = 1f;
+    public float currentSpeed { get;private set; }
 
     [Header("UI")]
     public GameObject[] lpIcon;
@@ -38,7 +42,9 @@ public class DinoMiniGame : MonoBehaviour
         // Timer
         gameTimer -= Time.deltaTime;
         timerText.text = "Time: " + Mathf.CeilToInt(gameTimer).ToString();
-
+        
+        currentSpeed = baseSpeed + (gameDuration - gameTimer) * speedIncreaseRate;
+        
         float percent = gameTimer / gameDuration;
         timeBarImage.fillAmount = percent;
         

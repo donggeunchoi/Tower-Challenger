@@ -4,7 +4,6 @@ public class GroundTile : MonoBehaviour
 {
 
     public float tileWidth = 10f;
-    public float moveSpeed = 5f;
     
     [Header("타일 전환용")]
     public SpriteRenderer spriteRenderer;
@@ -22,7 +21,8 @@ public class GroundTile : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        float speed = DinoMiniGame.Instance.currentSpeed;
+        transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
