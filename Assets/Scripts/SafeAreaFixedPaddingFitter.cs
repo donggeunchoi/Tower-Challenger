@@ -3,66 +3,39 @@
 [RequireComponent(typeof(RectTransform))]
 public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
 {
-    [Tooltip("Safe Area 기준 패딩 비율 (0.05 = 5%)")]
+    [Header("SafeArea 패딩 비율 (0.05 = 5%)")]
+    [Range(0.01f, 0.2f)]
     public float safeAreaPaddingRatio = 0.05f;
 
-    // 마지막으로 감지한 화면 방향
-    private ScreenOrientation lastOrientation;
-    // 마지막으로 감지한 해상도
-    private Vector2 lastResolution;
-    // 마지막으로 감지한 Safe Area
-    private Rect lastSafeArea;
+    [Header("최소/최대 패딩(픽셀)")]
+    public int minPaddingPx = 16;
+    public int maxPaddingPx = 48;
 
-    void Start()
-    {
-        lastOrientation = Screen.orientation;
-        lastResolution = new Vector2(Screen.width, Screen.height);
-        lastSafeArea = Screen.safeArea;
-        ApplySafeArea();
-    }
+    private void Start() => ApplySafeArea();
+    private void OnRectTransformDimensionsChange() => ApplySafeArea();
 
-    void Update()
+    public void ApplySafeArea()
     {
-        // 화면 방향, 해상도, Safe Area 중 하나라도 바뀌면 Safe Area 적용
-        if (
-            Screen.orientation != lastOrientation ||
-            Screen.width != lastResolution.x ||
-            Screen.height != lastResolution.y ||
-            Screen.safeArea != lastSafeArea
-        )
-        {
-            ApplySafeArea();
-            lastOrientation = Screen.orientation;
-            lastResolution = new Vector2(Screen.width, Screen.height);
-            lastSafeArea = Screen.safeArea;
-        }
-    }
-
-    void ApplySafeArea()
-    {
-        RectTransform rect = GetComponent<RectTransform>();
+        RectTransform rt = GetComponent<RectTransform>();
         Rect safeArea = Screen.safeArea;
 
-        float screenWidth = Screen.width;
-        float screenHeight = Screen.height;
+        // 비율로 계산한 패딩
+        float padX = safeArea.width * safeAreaPaddingRatio;
+        float padY = safeArea.height * safeAreaPaddingRatio;
 
-        // Safe Area의 크기
-        float safeWidth = safeArea.width;
-        float safeHeight = safeArea.height;
+        // Clamp로 최소/최대 픽셀 보정
+        padX = Mathf.Clamp(padX, minPaddingPx, maxPaddingPx);
+        padY = Mathf.Clamp(padY, minPaddingPx, maxPaddingPx);
 
-        // Safe Area 기준 5% 패딩(픽셀 단위)
-        float padX = safeWidth * safeAreaPaddingRatio;
-        float padY = safeHeight * safeAreaPaddingRatio;
+        // 앵커 계산
+        float anchorMinX = (safeArea.xMin + padX) / Screen.width;
+        float anchorMinY = (safeArea.yMin + padY) / Screen.height;
+        float anchorMaxX = (safeArea.xMax - padX) / Screen.width;
+        float anchorMaxY = (safeArea.yMax - padY) / Screen.height;
 
-        // Anchor 계산 (스크린 기준 정규화)
-        float anchorMinX = (safeArea.xMin + padX) / screenWidth;
-        float anchorMaxX = (safeArea.xMax - padX) / screenWidth;
-        float anchorMinY = (safeArea.yMin + padY) / screenHeight;
-        float anchorMaxY = (safeArea.yMax - padY) / screenHeight;
-
-        rect.anchorMin = new Vector2(anchorMinX, anchorMinY);
-        rect.anchorMax = new Vector2(anchorMaxX, anchorMaxY);
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
+        rt.anchorMin = new Vector2(anchorMinX, anchorMinY);
+        rt.anchorMax = new Vector2(anchorMaxX, anchorMaxY);
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
     }
 }
