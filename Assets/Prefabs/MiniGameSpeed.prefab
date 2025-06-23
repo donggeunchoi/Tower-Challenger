@@ -343,7 +343,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9122262098887712259}
   - component: {fileID: 744606216511329787}
-  - component: {fileID: 1102318022511845526}
   m_Layer: 5
   m_Name: MiniGameSpeed
   m_TagString: Untagged
@@ -385,16 +384,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trueOrFalse: {fileID: 1993223880917764910}
   speedUIBtn: {fileID: 5088610643936996639}
---- !u!114 &1102318022511845526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666244706221792721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3748083e3651108418e768e1640c1565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  safeAreaPaddingRatio: 0.05
