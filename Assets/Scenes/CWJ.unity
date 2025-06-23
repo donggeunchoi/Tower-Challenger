@@ -854,7 +854,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1262199023}
-  - component: {fileID: 1262199024}
+  - component: {fileID: 1262199025}
+  - component: {fileID: 1262199026}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -877,7 +878,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1262199024
+--- !u!114 &1262199025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262199022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2980e231e7c5fe42add40f0e1f3cf80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {fileID: 4962970575007972452, guid: 1b1d2e922e6b0754ba90eb3e9a50d49d, type: 3}
+  spawner: {fileID: 1262199026}
+--- !u!114 &1262199026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -891,8 +906,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundPrefabs: {fileID: 5872572466452887299, guid: 1b1d2e922e6b0754ba90eb3e9a50d49d,
     type: 3}
+  groundHolePrefab: {fileID: 6285327343316669169, guid: 5feb71208676e544e9279b95ca078017,
+    type: 3}
   groundCount: 6
   groundWidth: 6
+  groundX: -5
+  groundScale: {x: 6, y: 1, z: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

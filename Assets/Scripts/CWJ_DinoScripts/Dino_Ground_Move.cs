@@ -6,17 +6,10 @@ public class Dino_Ground_Move : MonoBehaviour
 
     public Dino_Ground_Move[] groundPrefabs;
 
-    private Collider2D groiundCollider;
+    public SpriteRenderer groundSprite;
+    public SpriteRenderer holeSprite;
 
-    private void Awake()
-    {
-        groiundCollider = GetComponent<Collider2D>();
-    }
-
-    private void Start()
-    {
-
-    }
+    [HideInInspector] public Collider2D groiundCollider;
 
     private void Update()
     {
@@ -28,7 +21,7 @@ public class Dino_Ground_Move : MonoBehaviour
         transform.position += Vector3.left * groundSpeed * Time.deltaTime;
 
         // 화면 왼쪽 바깥으로 나가면 오른쪽 끝으로 이동
-        if (transform.position.x < -10)
+        if (transform.position.x < -12)
         {
             float rightGround = GetRightPosition();
             transform.position = new Vector2(rightGround + Dino_Ground_Manager.instance.spawner.GraoundWidth(), transform.position.y);

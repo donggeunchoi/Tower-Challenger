@@ -7,7 +7,7 @@ public class GroundTileSpawner : MonoBehaviour
     public int initialTileCount = 10;
     public float tileWidth = 5f;
     public float tileY = -3.5f;
-    public Transform groundsContainer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,7 +17,7 @@ public class GroundTileSpawner : MonoBehaviour
         {
             bool isHole = Random.value < 0.1f;
             GameObject prefab = isHole ? holeTilePrefab : groundTilePrefab;
-            GameObject tile = Instantiate(prefab, new Vector3(spawnX, tileY, 0), Quaternion.identity,groundsContainer);
+            GameObject tile = Instantiate(prefab, new Vector3(spawnX, tileY, 0), Quaternion.identity);
             spawnX += tileWidth;
         }
     }
