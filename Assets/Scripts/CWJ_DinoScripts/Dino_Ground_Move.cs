@@ -3,22 +3,19 @@
 public class Dino_Ground_Move : MonoBehaviour
 {
     public float groundSpeed;
-    private float groundWidth;
 
     public Dino_Ground_Move[] groundPrefabs;
 
-    private SpriteRenderer groundSprite;
     private Collider2D groiundCollider;
 
     private void Awake()
     {
-        groundSprite = GetComponent<SpriteRenderer>();
         groiundCollider = GetComponent<Collider2D>();
     }
 
     private void Start()
     {
-        groundWidth = GroundWidth();
+
     }
 
     private void Update()
@@ -34,21 +31,10 @@ public class Dino_Ground_Move : MonoBehaviour
         if (transform.position.x < -10)
         {
             float rightGround = GetRightPosition();
-            transform.position = new Vector2(rightGround + groundWidth, transform.position.y);
-            Debug.Log("타일 재배치됨!");
+            transform.position = new Vector2(rightGround + Dino_Ground_Manager.instance.spawner.GraoundWidth(), transform.position.y);
         }
     }
 
-    private float GroundWidth()
-    {
-        if (groundSprite != null)
-        {
-            return groundSprite.bounds.size.x;
-        }
-
-        Debug.LogWarning("SpriteRenderer가 없습니다. 기본값 6 사용");
-        return 6f;
-    }
     private float GetRightPosition()
     {
         groundPrefabs = FindObjectsByType<Dino_Ground_Move>(FindObjectsSortMode.None);
