@@ -7,7 +7,9 @@ using System.Linq;
 public class SellGameManager : MonoBehaviour
 {
 
-    public GameObject FadeIn;
+    public GameObject FadeIn, Blocker; //페이드인 브로커
+    public GameObject StartGameBtn;
+
     public Button[] buttons; // UI에 배치된 버튼들
 
     public Animator anim;//당청 카드 보여주기
@@ -39,21 +41,32 @@ public class SellGameManager : MonoBehaviour
         // 게임 시작 시 버튼들을 셔플
         StartCoroutine(StartGame());
     }
-    IEnumerator StartGame()//시작
+    IEnumerator StartGame()
     {
+        Blocker.SetActive(true);         
+        StartGameBtn.SetActive(false);
         FadeIn.SetActive(true);
         yield return new WaitForSeconds(1);
         FadeIn.SetActive(false);
         yield return new WaitForSeconds(1);
         anim.SetTrigger("ThisCard");
         yield return new WaitForSeconds(2);
+        StartGameBtn.SetActive(true);
+        Blocker.SetActive(false);        
+    }
+    public void StartGameBtnClick()
+    {
+        Blocker.SetActive(true);        
+        StartGameBtn.SetActive(false);
         StartCoroutine(ShuffleRoutine(count));
     }
     IEnumerator OnWrongAnswer()
     {
+        Blocker.SetActive(true);
         anim.SetTrigger("ThisCard");
         yield return new WaitForSeconds(2);
-        StartCoroutine(ShuffleRoutine(count));
+        yield return StartCoroutine(ShuffleRoutine(count));
+        Blocker.SetActive(false);
     }
 
     // 버튼 클릭 시 호출되는 함수
@@ -65,7 +78,9 @@ public class SellGameManager : MonoBehaviour
         }
         else
         {
+            
             StartCoroutine(OnWrongAnswer());
+
         }
     }
 
@@ -74,9 +89,11 @@ public class SellGameManager : MonoBehaviour
     {
         for (int i = 0; i < times; i++)
         {
-            yield return StartCoroutine(ShuffleOnce());       // 한번 셔플
-            yield return new WaitForSeconds(WaitShuffle);            // 셔플 간 간격
+            yield return StartCoroutine(ShuffleOnce());
+            yield return new WaitForSeconds(WaitShuffle);
         }
+
+        Blocker.SetActive(false);
     }
 
     // 버튼 위치를 한번 셔플하는 루틴
