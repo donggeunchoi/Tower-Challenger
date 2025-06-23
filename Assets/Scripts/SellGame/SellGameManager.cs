@@ -80,7 +80,7 @@ public class SellGameManager : MonoBehaviour
 
         int[] original = (int[])order.Clone(); // 현재 순서 백업
 
-        // 셔플 전후 순서가 같으면 다시 셔플 (최대 100번 시도)
+        
         do
         {
             Shuffle(order);
