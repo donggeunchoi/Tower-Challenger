@@ -2,12 +2,15 @@
 using UnityEngine.UI;
 using System.Collections;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class SellGameManager : MonoBehaviour
 {
+
     public GameObject FadeIn;
     public Button[] buttons; // UI에 배치된 버튼들
 
+    public Animator anim;//당청 카드 보여주기
     private RectTransform[] rects; // 각 버튼의 RectTransform 컴포넌트 참조
     private Vector3[] positions;   // 버튼들의 원래 위치 저장
     private float duration = 0.15f; // 버튼 이동 애니메이션 시간
@@ -36,13 +39,21 @@ public class SellGameManager : MonoBehaviour
         // 게임 시작 시 버튼들을 셔플
         StartCoroutine(StartGame());
     }
-    IEnumerator StartGame()
+    IEnumerator StartGame()//시작
     {
         FadeIn.SetActive(true);
         yield return new WaitForSeconds(1);
         FadeIn.SetActive(false);
+        yield return new WaitForSeconds(1);
+        anim.SetTrigger("ThisCard");
+        yield return new WaitForSeconds(2);
         StartCoroutine(ShuffleRoutine(count));
-
+    }
+    IEnumerator OnWrongAnswer()
+    {
+        anim.SetTrigger("ThisCard");
+        yield return new WaitForSeconds(2);
+        StartCoroutine(ShuffleRoutine(count));
     }
 
     // 버튼 클릭 시 호출되는 함수
@@ -54,7 +65,7 @@ public class SellGameManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(ShuffleRoutine(count));
+            StartCoroutine(OnWrongAnswer());
         }
     }
 
