@@ -5,7 +5,7 @@ public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
 {
     [Header("비대칭 패딩 비율 (0.05=5%)")]
     [Tooltip("좌, 우, 상, 하 순서")]
-    public Vector4 paddingRatio = new Vector4(0.05f, 0.05f, 0.1f, 0.05f);
+    public Vector4 paddingRatio = new Vector4(0.05f, 0.05f, 0.05f, 0.05f);
 
     [Header("동적 패딩 제한 (화면 크기 %)")]
     [Range(0.01f, 0.1f)]
@@ -14,7 +14,7 @@ public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
     public float maxPaddingRatio = 0.08f;
 
     private ScreenOrientation lastOrientation;
-    private Vector2 lastResolution; // [추가] 마지막 해상도 저장
+    private Vector2 lastResolution; //마지막 해상도 저장
     private RectTransform rectTransform;
 
     private void Start()

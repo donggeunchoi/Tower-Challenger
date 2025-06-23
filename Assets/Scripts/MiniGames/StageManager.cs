@@ -39,6 +39,7 @@ public class StageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
@@ -160,7 +161,6 @@ public class StageManager : MonoBehaviour
     private void GameOver()
     {
         //값을 넘겨주고
-        Destroy(this);
     }
 
     private void RandomStage()
