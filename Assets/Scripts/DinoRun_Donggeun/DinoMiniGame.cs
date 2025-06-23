@@ -15,7 +15,7 @@ public class DinoMiniGame : MonoBehaviour
     public static DinoMiniGame Instance;
 
     [Header("UI")]
-    public TMP_Text lpText;
+    public GameObject[] lpIcon;
     public TMP_Text timerText;
 
     private void Awake()
@@ -46,7 +46,10 @@ public class DinoMiniGame : MonoBehaviour
 
     void UpdateLPUI()
     {
-        lpText.text = "LP: " + lifePoints;
+        for (int i = 0; i < lpIcon.Length; i++)
+        {
+            lpIcon[i].SetActive(i<lifePoints);
+        }
     }
 
     void GameOver()
@@ -64,7 +67,7 @@ public class DinoMiniGame : MonoBehaviour
     
     public void HandleHit()
     {
-        lifePoints--;
+        lifePoints = Mathf.Max(lifePoints - 1);
         UpdateLPUI();
 
         if (lifePoints <= 0)
