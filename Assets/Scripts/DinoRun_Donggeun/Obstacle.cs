@@ -7,6 +7,7 @@ public class Obstacle : MonoBehaviour
     public GameObject[] obstaclePrefabs;
     public Transform spawnPoint;
     public float spawnInterval = 2.5f;
+    public Transform obstaclesContainer;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class Obstacle : MonoBehaviour
                 if (tile != null && !tile.isHole)
                 {
                     int index = Random.Range(0, obstaclePrefabs.Length);
-                    Instantiate(obstaclePrefabs[index], spawnPoint.position, Quaternion.identity);
+                    Instantiate(obstaclePrefabs[index], spawnPoint.position, Quaternion.identity, obstaclesContainer);
                 }
                 else
                 {
