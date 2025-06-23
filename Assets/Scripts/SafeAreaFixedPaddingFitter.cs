@@ -3,39 +3,94 @@
 [RequireComponent(typeof(RectTransform))]
 public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
 {
-    [Header("SafeArea 패딩 비율 (0.05 = 5%)")]
-    [Range(0.01f, 0.2f)]
-    public float safeAreaPaddingRatio = 0.05f;
+    [Header("비대칭 패딩 비율 (0.05=5%)")]
+    [Tooltip("좌, 우, 상, 하 순서")]
+    public Vector4 paddingRatio = new Vector4(0.05f, 0.05f, 0.1f, 0.05f);
 
-    [Header("최소/최대 패딩(픽셀)")]
-    public int minPaddingPx = 16;
-    public int maxPaddingPx = 48;
+    [Header("동적 패딩 제한 (화면 크기 %)")]
+    [Range(0.01f, 0.1f)]
+    public float minPaddingRatio = 0.03f;
+    [Range(0.05f, 0.15f)]
+    public float maxPaddingRatio = 0.08f;
 
-    private void Start() => ApplySafeArea();
+    private ScreenOrientation lastOrientation;
+    private Vector2 lastResolution; // [추가] 마지막 해상도 저장
+    private RectTransform rectTransform;
+
+    private void Start()
+    {
+        rectTransform = GetComponent<RectTransform>();
+        lastOrientation = Screen.orientation;
+        lastResolution = new Vector2(Screen.width, Screen.height); // [추가] 초기 해상도 저장
+        ApplySafeArea();
+    }
+
+    private void Update()
+    {
+        // 화면 회전 감지
+        if (Screen.orientation != lastOrientation)
+        {
+            lastOrientation = Screen.orientation;
+            ApplySafeArea();
+        }
+
+        // [추가] 해상도 변화 감지
+        if (Screen.width != lastResolution.x || Screen.height != lastResolution.y)
+        {
+            lastResolution = new Vector2(Screen.width, Screen.height);
+            ApplySafeArea();
+        }
+    }
+
     private void OnRectTransformDimensionsChange() => ApplySafeArea();
 
     public void ApplySafeArea()
     {
-        RectTransform rt = GetComponent<RectTransform>();
+        if (rectTransform == null)
+            rectTransform = GetComponent<RectTransform>();
+
         Rect safeArea = Screen.safeArea;
 
-        // 비율로 계산한 패딩
-        float padX = safeArea.width * safeAreaPaddingRatio;
-        float padY = safeArea.height * safeAreaPaddingRatio;
+        // 안전 영역 무결성 검사
+        if (safeArea.width <= 10 || safeArea.height <= 10)
+            safeArea = new Rect(0, 0, Screen.width, Screen.height);
 
-        // Clamp로 최소/최대 픽셀 보정
-        padX = Mathf.Clamp(padX, minPaddingPx, maxPaddingPx);
-        padY = Mathf.Clamp(padY, minPaddingPx, maxPaddingPx);
+        // 동적 패딩 계산 (화면 비율 기반)
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
 
-        // 앵커 계산
-        float anchorMinX = (safeArea.xMin + padX) / Screen.width;
-        float anchorMinY = (safeArea.yMin + padY) / Screen.height;
-        float anchorMaxX = (safeArea.xMax - padX) / Screen.width;
-        float anchorMaxY = (safeArea.yMax - padY) / Screen.height;
+        // 개별 방향 패딩 계산 및 클램핑
+        float leftPad = Mathf.Clamp(
+            safeArea.width * paddingRatio.x,
+            screenWidth * minPaddingRatio,
+            screenWidth * maxPaddingRatio
+        );
 
-        rt.anchorMin = new Vector2(anchorMinX, anchorMinY);
-        rt.anchorMax = new Vector2(anchorMaxX, anchorMaxY);
-        rt.offsetMin = Vector2.zero;
-        rt.offsetMax = Vector2.zero;
+        float rightPad = Mathf.Clamp(
+            safeArea.width * paddingRatio.y,
+            screenWidth * minPaddingRatio,
+            screenWidth * maxPaddingRatio
+        );
+
+        float topPad = Mathf.Clamp(
+            safeArea.height * paddingRatio.z,
+            screenHeight * minPaddingRatio,
+            screenHeight * maxPaddingRatio
+        );
+
+        float bottomPad = Mathf.Clamp(
+            safeArea.height * paddingRatio.w,
+            screenHeight * minPaddingRatio,
+            screenHeight * maxPaddingRatio
+        );
+
+        // 앵커 계산 (비대칭 적용)
+        float anchorMinX = (safeArea.xMin + leftPad) / screenWidth;
+        float anchorMinY = (safeArea.yMin + bottomPad) / screenHeight;
+        float anchorMaxX = (safeArea.xMax - rightPad) / screenWidth;
+        float anchorMaxY = (safeArea.yMax - topPad) / screenHeight;
+
+        rectTransform.anchorMin = new Vector2(anchorMinX, anchorMinY);
+        rectTransform.anchorMax = new Vector2(anchorMaxX, anchorMaxY);
     }
 }

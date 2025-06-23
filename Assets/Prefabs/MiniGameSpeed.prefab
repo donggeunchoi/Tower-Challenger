@@ -343,6 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9122262098887712259}
   - component: {fileID: 744606216511329787}
+  - component: {fileID: 8991405917843493960}
   m_Layer: 5
   m_Name: MiniGameSpeed
   m_TagString: Untagged
@@ -365,10 +366,10 @@ RectTransform:
   - {fileID: 6381090568751115298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 600}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &744606216511329787
 MonoBehaviour:
@@ -384,3 +385,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trueOrFalse: {fileID: 1993223880917764910}
   speedUIBtn: {fileID: 5088610643936996639}
+--- !u!114 &8991405917843493960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666244706221792721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3748083e3651108418e768e1640c1565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paddingRatio: {x: 0, y: 0, z: 0.1, w: 0}
+  minPaddingRatio: 0.02
+  maxPaddingRatio: 0.15
