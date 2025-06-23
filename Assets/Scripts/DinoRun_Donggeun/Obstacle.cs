@@ -25,14 +25,14 @@ public class Obstacle : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(spawnPoint.position + Vector3.down * 0.1f, Vector2.down, 2f);
             if (hit.collider == null)
             { 
-                Debug.Log("❌ 구덩이 위라서 장애물 생성 안 함");
+                Debug.Log("구덩이 위라서 장애물 생성 안 함");
                 continue;
             }
             
             GroundTile tile = hit.collider.GetComponent<GroundTile>();
             if (tile == null || tile.isHole)
             {
-                Debug.Log("❌ 땅이 없어서 장애물 생성 안 함");
+                Debug.Log("땅이 없어서 장애물 생성 안 함");
                 continue;
             }
             
@@ -51,7 +51,7 @@ public class Obstacle : MonoBehaviour
 
             if (isAfterHole)
             {
-                Debug.Log("❌ 구덩이 바로 뒤이므로 장애물 생성 안 함");
+                Debug.Log("구덩이 바로 뒤이므로 장애물 생성 안 함");
                 continue;
             }
             
