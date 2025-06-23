@@ -12,8 +12,7 @@ public class Player : MonoBehaviour
     private bool isSliding = false;
     private bool isInvincible = false;
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
-    private Vector3 originalScale;
-    private Vector3 slideScale;
+    
     
     private int normalLayer;
     private int invincibleLayer;
@@ -23,9 +22,6 @@ public class Player : MonoBehaviour
         normalLayer = LayerMask.NameToLayer("Default");
         invincibleLayer = LayerMask.NameToLayer("InvinciblePlayer");
         respawnPosition = transform.position;
-        
-        originalScale = transform.localScale;
-        slideScale = new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z);
     }
 
     // Update is called once per frame
@@ -37,15 +33,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
-        }
-
-        if (Input.GetKey(KeyCode.S) && isGrounded)
-        {
-            transform.localScale = slideScale;
-        }
-        else
-        {
-            transform.localScale = originalScale;
         }
     }
     void LateUpdate()
