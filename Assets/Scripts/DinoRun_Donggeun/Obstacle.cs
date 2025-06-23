@@ -22,26 +22,42 @@ public class Obstacle : MonoBehaviour
 
             // 스폰 포인트 아래 방향으로 레이 발사 (GroundTile을 찾기 위해)
             RaycastHit2D hit = Physics2D.Raycast(spawnPoint.position + Vector3.down * 0.1f, Vector2.down, 2f);
-
-            if (hit.collider != null)
-            {
-                GroundTile tile = hit.collider.GetComponent<GroundTile>();
-
-                // 아래에 GroundTile이 있고, 그것이 구덩이가 아니면 생성
-                if (tile != null && !tile.isHole)
-                {
-                    int index = Random.Range(0, obstaclePrefabs.Length);
-                    Instantiate(obstaclePrefabs[index], spawnPoint.position, Quaternion.identity, obstaclesContainer);
-                }
-                else
-                {
-                    Debug.Log("❌ 구덩이 위라서 장애물 생성 안 함");
-                }
+            if (hit.collider == null)
+            { 
+                Debug.Log("❌ 구덩이 위라서 장애물 생성 안 함");
+                continue;
             }
-            else
+            
+            GroundTile tile = hit.collider.GetComponent<GroundTile>();
+            if (tile == null || tile.isHole)
             {
                 Debug.Log("❌ 땅이 없어서 장애물 생성 안 함");
+                continue;
             }
+            
+            Vector2 prevCheckPos = hit.collider.transform.position + Vector3.left * tile.tileWidth;
+            RaycastHit2D prevHit = Physics2D.Raycast(prevCheckPos + Vector2.down * 0.1f, Vector2.down, 2f);
+            
+            bool isAfterHole = false;
+            if (prevHit.collider != null)
+            {
+                GroundTile prevTile = prevHit.collider.GetComponent<GroundTile>();
+                if (prevTile != null && prevTile.isHole)
+                {
+                    isAfterHole = true;
+                }
+            }
+
+            if (isAfterHole)
+            {
+                Debug.Log("❌ 구덩이 바로 뒤이므로 장애물 생성 안 함");
+                continue;
+            }
+            
+            int index = Random.Range(0, obstaclePrefabs.Length);
+            Instantiate(obstaclePrefabs[index], spawnPoint.position, Quaternion.identity, obstaclesContainer);
+                
+          
         }
     }
     
