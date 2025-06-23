@@ -16,6 +16,7 @@ public class DinoMiniGame : MonoBehaviour
 
     [Header("UI")]
     public GameObject[] lpIcon;
+    public Image timeBarImage;
     public TMP_Text timerText;
 
     private void Awake()
@@ -38,6 +39,9 @@ public class DinoMiniGame : MonoBehaviour
         gameTimer -= Time.deltaTime;
         timerText.text = "Time: " + Mathf.CeilToInt(gameTimer).ToString();
 
+        float percent = gameTimer / gameDuration;
+        timeBarImage.fillAmount = percent;
+        
         if (gameTimer <= 0 && !isGameOver)
         {
             GameClear();
