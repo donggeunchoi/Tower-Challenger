@@ -10,6 +10,7 @@ public class GroundTile : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Collider2D groundCollider;
     public bool isHole = false;
+    private static bool lastHole = false;
     
     void Awake()
     {
@@ -43,6 +44,17 @@ public class GroundTile : MonoBehaviour
         
         float rightMost = GetRightMostX(this.gameObject);
         transform.position = new Vector3(rightMost + tileWidth, transform.position.y, transform.position.z);
+        
+        if (lastHole)
+        {
+            isHole = false;
+            lastHole = false;
+        }
+        else
+        {
+            // isHole = Random.value < 0.3f;
+            lastHole = isHole;
+        }
         
         float GetRightMostX(GameObject exclude)
         {
