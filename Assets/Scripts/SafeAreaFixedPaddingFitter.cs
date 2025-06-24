@@ -13,11 +13,12 @@ public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
     [Range(0.05f, 0.15f)]
     public float maxPaddingRatio = 0.08f;
 
+
     private ScreenOrientation lastOrientation;
     private Vector2 lastResolution; //마지막 해상도 저장
     private RectTransform rectTransform;
 
-    private void Start()
+    void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         lastOrientation = Screen.orientation;
@@ -25,16 +26,16 @@ public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
         ApplySafeArea();
     }
 
-    private void Update()
+    void Update()
     {
+        // 화면 방향, 해상도, Safe Area 중 하나라도 바뀌면 Safe Area 적용
         // 화면 회전 감지
         if (Screen.orientation != lastOrientation)
         {
             lastOrientation = Screen.orientation;
             ApplySafeArea();
         }
-
-        // [추가] 해상도 변화 감지
+        // 해상도 변화 감지
         if (Screen.width != lastResolution.x || Screen.height != lastResolution.y)
         {
             lastResolution = new Vector2(Screen.width, Screen.height);
@@ -44,8 +45,9 @@ public class SafeAreaWithRelativePaddingFitter : MonoBehaviour
 
     private void OnRectTransformDimensionsChange() => ApplySafeArea();
 
-    public void ApplySafeArea()
+    void ApplySafeArea()
     {
+
         if (rectTransform == null)
             rectTransform = GetComponent<RectTransform>();
 

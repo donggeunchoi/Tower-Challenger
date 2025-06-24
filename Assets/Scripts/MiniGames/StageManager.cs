@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -7,12 +8,13 @@ public class StageManager : MonoBehaviour
 
     [Header("게임 정보")]
     public const int DEFALT_LP = 4;
-    public int bonusLP = 0;
-    public int currentLP;
+    public int bonusLP;
+    private int currentLP;
     private int bestStage;
     private int currentStage;
     private int floor;
     public float gameSpeed;
+    public TextMeshProUGUI LPText;
 
     private int currentStageIndex;
     private GameObject currentMiniGame;
@@ -27,7 +29,6 @@ public class StageManager : MonoBehaviour
     [Header("타이머")]
     public float stageTimer = 60f;
     private float timerMultiplier = 1f; // 타이머 가속 배율
-
 
     private void Awake()
     {
@@ -48,6 +49,8 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
+        LPText.text = currentLP + "";
+
         if (isGameActive)
             stageTimer -= Time.deltaTime;
     }
@@ -80,6 +83,7 @@ public class StageManager : MonoBehaviour
 
     public void NextStage()
     {
+        Destroy(currentMiniGame);
         stageTimer = 60f;
         currentStage++;
         UpdateFloorLogic();
@@ -88,15 +92,16 @@ public class StageManager : MonoBehaviour
         StartNextMiniGame();
     }
 
-    public bool LPdown()
+    public void LPdown()
     {
-        currentLP--;
+        currentLP = Mathf.Max(currentLP - 1, 0);
+        Debug.Log($"LP 감소! 현재 LP: {currentLP}");
+
         if (currentLP <= 0)
         {
             GameOver();
-            return false; // 생존 실패
+            return; // 추가 실행 방지
         }
-        return true; // 생존 성공
     }
 
     public void ReportGameResult(bool isSuccess)
@@ -127,20 +132,20 @@ public class StageManager : MonoBehaviour
 
     private void HandleStageFailure()
     {
-        // LP 감소
-        bool stillAlive = LPdown();
+        LPdown();
 
-        if (stillAlive)
+        // 게임 오버 시 추가 처리 중단
+        if (!isGameActive) return;
+
+        if (currentLP > 0)
         {
-            // 스테이지 내 추가 게임 존재 시
             if (currentStageIndex < stageMiniGames.Count - 1)
             {
-                currentStageIndex++; // 다음 미니게임으로 강제 이동
+                currentStageIndex++;
                 StartNextMiniGame();
             }
             else
             {
-                // 마지막 미니게임 실패 시 스테이지 재시작
                 currentStageIndex = 0;
                 StartNextMiniGame();
             }
@@ -154,13 +159,23 @@ public class StageManager : MonoBehaviour
             Destroy(currentMiniGame);
         }
 
+        Debug.Log("게임 시작!");
+
         MiniGameData nextGame = stageMiniGames[currentStageIndex];
         currentMiniGame = Instantiate(nextGame.miniGamePrefab, miniGameSlot);
     }
 
     private void GameOver()
     {
-        //값을 넘겨주고
+        isGameActive = false;
+
+        if (currentMiniGame != null)
+        {
+            Destroy(currentMiniGame);
+            currentMiniGame = null;
+        }
+
+        Debug.Log("게임 오버");
     }
 
     private void RandomStage()

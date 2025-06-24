@@ -23,19 +23,37 @@ public class MiniGameSpeedTest : MonoBehaviour
     private void Start()
     {
         trueOrFalse.text = "";
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        if (miniGameCoroutine != null)
+        {
+            StopCoroutine(miniGameCoroutine);
+            miniGameCoroutine = null;
+        }
+
+        isGreen = false;
+        isClick = false;
+        speedUIBtn.interactable = true;
         miniGameCoroutine = StartCoroutine(StartMiniGame());
-        
+        speedUIBtn.onClick.RemoveAllListeners();
         speedUIBtn.onClick.AddListener(OnClickImg);
     }
 
 
     public void OnClickImg() //이미지를 누를시
     {
-        if (isClick) return;
+        if (isClick)
+            return;
+
+        isClick = true;
+
+        speedUIBtn.interactable = false;
 
         if (isGreen)
         {
-            speedUIBtn.interactable = false;
             trueOrFalse.text = "True!";
             isClick = true;
             isGreen = false;
@@ -43,32 +61,52 @@ public class MiniGameSpeedTest : MonoBehaviour
             if (miniGameCoroutine != null)
                 StopCoroutine(miniGameCoroutine);
 
-            stageManager.ReportGameResult(true);
+            GameResult(true);
         }
         else
         {
-            speedUIBtn.interactable = false;
             trueOrFalse.text = "False!";
             StartCoroutine(FailEffect());
-
-            stageManager.ReportGameResult(false);
         }
+    }
 
-        
+    private void GameResult(bool gameResult)
+    {
+        if (gameResult)
+        {
+            stageManager.ReportGameResult(true);
+            return;
+        }
+        else
+        {
+            stageManager.LPdown();
+            ResetGameState();
+            StartGame();
+        }
+    }
+
+    private void ResetGameState()
+    {
+        isGreen = false;
+        isClick = false;
+        speedUIBtn.interactable = true;
+        speedUIBtn.image.color = Color.white;
     }
 
     private IEnumerator StartMiniGame() //미니게임
     {
+        
         speedUIBtn.image.color = Color.white;            //시작색 초기화
         trueOrFalse.text = "is green Click To display!"; //게임설명
         isGreen = false;
         isClick = false;
         yield return new WaitForSeconds(1f);
-        trueOrFalse.text = "";
+
+        trueOrFalse.text = "Ready?";
 
         float randomGameTime = Random.Range(0f, 6f);                 //랜덤값설정
         randomGameTime = Mathf.Round(randomGameTime * 100f) / 100f;   //반올림
-        Debug.Log(randomGameTime + 1);   //랜덤시간 몇초인지 로그
+        Debug.Log(randomGameTime);   //랜덤시간 몇초인지 로그
         yield return new WaitForSeconds(randomGameTime); //랜덤시간동안 기다렸다가
 
         speedUIBtn.image.color = Color.green;
@@ -91,8 +129,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     private IEnumerator FailEffect()  //실패 임팩트
     {
-        speedUIBtn.interactable = false;
-        if (isFalseEffect) yield break;  
+        if (isFalseEffect) yield break;
         isFalseEffect = true;
 
         speedUIBtn.image.color = Color.red;
@@ -100,5 +137,9 @@ public class MiniGameSpeedTest : MonoBehaviour
         speedUIBtn.image.color = Color.white;
 
         isFalseEffect = false;
+        isClick = false;
+        speedUIBtn.interactable = true;
+
+        GameResult(false);
     }
 }

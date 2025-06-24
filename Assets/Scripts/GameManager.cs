@@ -3,7 +3,6 @@
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
 
     private void Awake()
     {
@@ -16,20 +15,5 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    private void Start()
-    {
-        
-    }
-
-    public void StageClear()
-    {
-
-    }
-
-    public void FailStage()
-    {
-        
     }
 }
