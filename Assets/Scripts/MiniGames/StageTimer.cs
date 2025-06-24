@@ -3,13 +3,27 @@
 public class StageTimer : MonoBehaviour
 {
     public float timer = 60f;
-    private bool _isActive = true;
+    private bool isActive = false;
+
+    private void Start()
+    {
+        isActive = false;
+    }
 
     private void Update()
     {
-        if (_isActive) timer -= Time.deltaTime;
+        if (isActive) timer -= Time.deltaTime;
     }
 
-    public void Pause() => _isActive = false;
-    public void Resume() => _isActive = true;
+    public void SetTimer()
+    {
+        timer = 60f;
+        isActive = true;
+    }
+
+    public void ResetTimer()
+    {
+        timer = 60f;
+        isActive = false;
+    }
 }

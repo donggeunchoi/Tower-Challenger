@@ -12,6 +12,6 @@ public class NextFoorPotal : MonoBehaviour
 
     private void Start()
     {
-
+        
     }
 }
