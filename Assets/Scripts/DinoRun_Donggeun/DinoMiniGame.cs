@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -6,11 +6,9 @@ using TMPro;
 
 public class DinoMiniGame : MonoBehaviour
 {
-
-    StageManager stageManager;
     
     [Header("Game Settings")]
-    public int lifePoints = 4;
+    public int LP = 4;
     public float gameDuration = 10f;
     private float gameTimer;
     public bool isGameOver = false;
@@ -32,7 +30,6 @@ public class DinoMiniGame : MonoBehaviour
 
     void Start()
     {
-        stageManager = StageManager.Instance;
         gameTimer = gameDuration;
         
         UpdateLPUI();
@@ -61,18 +58,31 @@ public class DinoMiniGame : MonoBehaviour
     {
         for (int i = 0; i < lpIcon.Length; i++)
         {
-            lpIcon[i].SetActive(i<lifePoints);
+            lpIcon[i].SetActive(i < LP);
         }
+    }
+
+    void GameOver()
+    {
+        isGameOver = true;
+        Time.timeScale = 0f;
     }
 
     void GameClear()
     {
-        stageManager.MiniGameResult(true);
+        isGameOver = true;
+        Time.timeScale = 0f;
     }
     
     
     public void HandleHit()
     {
-        stageManager.MiniGameResult(false);
+        LP = Mathf.Max(LP - 1);
+        UpdateLPUI();
+
+        if (LP <= 0)
+        {
+            GameOver();
+        }
     }
 }
