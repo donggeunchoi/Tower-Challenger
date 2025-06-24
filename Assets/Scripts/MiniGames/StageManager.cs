@@ -15,6 +15,9 @@ public class StageManager : MonoBehaviour
     private int floor;
     public float gameSpeed;
     public TextMeshProUGUI LPText;
+    public TextMeshProUGUI StageText;
+    public TextMeshProUGUI FloorText;
+
 
     private int currentStageIndex;
     private GameObject currentMiniGame;
@@ -50,6 +53,8 @@ public class StageManager : MonoBehaviour
     private void Update()
     {
         LPText.text = currentLP + "";
+        StageText.text = currentStage + "";
+        FloorText.text = floor + "";
 
         if (isGameActive)
             stageTimer -= Time.deltaTime;
@@ -64,7 +69,14 @@ public class StageManager : MonoBehaviour
         floor = 1;
 
         RandomStage();
-        StartNextMiniGame();
+    }
+
+    public void NextFloor()
+    {
+        currentStage = 1;
+        floor++;
+
+        RandomStage();
     }
 
     private void UpdateFloorLogic()
@@ -100,72 +112,43 @@ public class StageManager : MonoBehaviour
         if (currentLP <= 0)
         {
             GameOver();
-            return; // 추가 실행 방지
+            return;
         }
     }
 
     public void ReportGameResult(bool isSuccess)
     {
-        if (!isGameActive) return;
+        if (!isGameActive)
+        {
+            Destroy(currentMiniGame);
+            return; 
+        }
 
         new WaitForSeconds(3f);
 
         if (isSuccess)
         {
+            if (currentMiniGame != null)
+            {
+                Destroy(currentMiniGame);
+            }
             currentStageIndex++;
-
-            if (currentStageIndex >= stageMiniGames.Count)
-            {
-                NextStage(); // 모든 미니게임 성공 → 다음 스테이지
-            }
-            else
-            {
-                StartNextMiniGame(); // 동일 스테이지 내 다음 미니게임
-            }
         }
         else
         {
-            // 스테이지 실패 처리
-            HandleStageFailure();
+            LPdown();
         }
     }
 
-    private void HandleStageFailure()
+    private void StartNextMiniGame() //다음미니게임
     {
-        LPdown();
-
-        // 게임 오버 시 추가 처리 중단
-        if (!isGameActive) return;
-
-        if (currentLP > 0)
-        {
-            if (currentStageIndex < stageMiniGames.Count - 1)
-            {
-                currentStageIndex++;
-                StartNextMiniGame();
-            }
-            else
-            {
-                currentStageIndex = 0;
-                StartNextMiniGame();
-            }
-        }
-    }
-
-    private void StartNextMiniGame()
-    {
-        if (currentMiniGame != null)
-        {
-            Destroy(currentMiniGame);
-        }
-
         Debug.Log("게임 시작!");
 
         MiniGameData nextGame = stageMiniGames[currentStageIndex];
         currentMiniGame = Instantiate(nextGame.miniGamePrefab, miniGameSlot);
     }
 
-    private void GameOver()
+    private void GameOver()  //게임오버
     {
         isGameActive = false;
 
