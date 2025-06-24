@@ -13,6 +13,7 @@ public class UpAndDownUI : MonoBehaviour
 
     public void AnswerButton()
     {
-
+        UpAndDownManager.instance.upAndDown.Success();
+        UpAndDownManager.instance.upAndDown.Failure();
     }
 }
