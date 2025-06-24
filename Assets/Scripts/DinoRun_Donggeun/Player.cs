@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
     private Vector3 originalScale;
     private Vector3 slideScale;
+    public Animator animation;
     
     private int normalLayer;
     private int invincibleLayer;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
         
         originalScale = transform.localScale;
         slideScale = new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z);
+        animation = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -34,18 +36,27 @@ public class Player : MonoBehaviour
         // Touch for jump
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
+            animation.SetBool("IsJump", true);
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
         }
+        else
+        {
+            animation.SetBool("IsJump", false);
+        }
+        
+        
 
         if (Input.GetKey(KeyCode.S) && isGrounded)
         {
             transform.localScale = slideScale;
+            animation.SetBool("Sliding",true);
         }
         else
         {
             transform.localScale = originalScale;
+            animation.SetBool("Sliding", false);
         }
     }
     void LateUpdate()
