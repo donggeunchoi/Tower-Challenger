@@ -544,8 +544,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018904942030276325}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 155.65227, y: 520.5902, z: -4.3789024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -563,14 +563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e980e1f114a154bb316a3889eb9858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeIn: {fileID: 3408804569613434198}
+  fadeIn: {fileID: 3408804569613434198}
   Blocker: {fileID: 1827864976877075440}
   StartGameBtn: {fileID: 208384211801155516}
   buttons:
   - {fileID: 3531284925634533120}
   - {fileID: 8550118134919254536}
   - {fileID: 7713217987265354718}
-  anim: {fileID: 3058143318669392092}
+  animator: {fileID: 3058143318669392092}
+  shuffleDuration: 0.15
+  waitBetweenShuffles: 0.05
+  shuffleCount: 20
 --- !u!1 &3408804569613434198
 GameObject:
   m_ObjectHideFlags: 0
