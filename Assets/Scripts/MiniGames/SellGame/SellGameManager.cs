@@ -20,9 +20,13 @@ public class SellGameManager : MonoBehaviour
 
     private RectTransform[] rects;
     private Vector3[] originalPositions;
+    StageManager stageManager;
+
+    
 
     void Start()
     {
+        stageManager = StageManager.instance;
         InitializeButtons();
         StartCoroutine(GameIntroSequence());
     }
@@ -75,6 +79,7 @@ public class SellGameManager : MonoBehaviour
         }
         else
         {
+            stageManager.LPdown();
             StartCoroutine(OnWrongAnswer());
         }
     }
