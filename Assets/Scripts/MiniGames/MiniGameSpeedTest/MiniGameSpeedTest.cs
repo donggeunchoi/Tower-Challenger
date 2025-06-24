@@ -75,6 +75,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         if (gameResult)
         {
             stageManager.ReportGameResult(true);
+            return;
         }
         else
         {
@@ -103,7 +104,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
         trueOrFalse.text = "Ready?";
 
-        float randomGameTime = Random.Range(4f, 9f);                 //랜덤값설정
+        float randomGameTime = Random.Range(0f, 6f);                 //랜덤값설정
         randomGameTime = Mathf.Round(randomGameTime * 100f) / 100f;   //반올림
         Debug.Log(randomGameTime);   //랜덤시간 몇초인지 로그
         yield return new WaitForSeconds(randomGameTime); //랜덤시간동안 기다렸다가
@@ -111,7 +112,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         speedUIBtn.image.color = Color.green;
         isGreen = true;
         trueOrFalse.text = "Click!!";
-        yield return new WaitForSeconds(1f); //1초동안 눌러도되는시간
+        yield return new WaitForSeconds(3f); //1초동안 눌러도되는시간
 
         if (isGreen && !isClick)  //클릭했는지 안했는지 검사 안했으면 실패
         {
