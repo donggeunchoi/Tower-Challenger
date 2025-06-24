@@ -28,7 +28,6 @@ public class StageManager : MonoBehaviour
     public float stageTimer = 60f;
     private float timerMultiplier = 1f; // 타이머 가속 배율
 
-
     private void Awake()
     {
         if (instance == null)
