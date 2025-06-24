@@ -25,8 +25,6 @@ public class Player : MonoBehaviour
         invincibleLayer = LayerMask.NameToLayer("InvinciblePlayer");
         respawnPosition = transform.position;
         
-        originalScale = transform.localScale;
-        slideScale = new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z);
         animation = GetComponent<Animator>();
     }
 
@@ -50,12 +48,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.S) && isGrounded)
         {
-            transform.localScale = slideScale;
             animation.SetBool("Sliding",true);
         }
         else
         {
-            transform.localScale = originalScale;
             animation.SetBool("Sliding", false);
         }
     }
