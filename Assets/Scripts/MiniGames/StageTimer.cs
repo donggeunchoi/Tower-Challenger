@@ -3,17 +3,13 @@
 public class StageTimer : MonoBehaviour
 {
     public float timer = 60f;
-
-    StageManager stageManager;
-
-    private void Start()
-    {
-        stageManager = StageManager.instance;
-    }
+    private bool _isActive = true;
 
     private void Update()
     {
-        if (stageManager.isGameActive)
-            timer -= Time.deltaTime;
+        if (_isActive) timer -= Time.deltaTime;
     }
+
+    public void Pause() => _isActive = false;
+    public void Resume() => _isActive = true;
 }

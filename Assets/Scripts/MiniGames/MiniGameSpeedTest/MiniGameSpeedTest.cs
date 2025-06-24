@@ -17,7 +17,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     private void Awake()
     {
-        stageManager = StageManager.instance;
+        stageManager = StageManager.Instance;
     }
 
     private void Start()
@@ -74,12 +74,10 @@ public class MiniGameSpeedTest : MonoBehaviour
     {
         if (gameResult)
         {
-            stageManager.ReportGameResult(true);
             return;
         }
         else
         {
-            stageManager.LPdown();
             ResetGameState();
             StartGame();
         }

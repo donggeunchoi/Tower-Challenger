@@ -7,12 +7,11 @@ public class NextFoorPotal : MonoBehaviour
 
     private void Awake()
     {
-        stageManager = StageManager.instance;
+        stageManager = StageManager.Instance;
     }
 
     private void Start()
     {
-        stageManager.NextFloor();
-        SceneManager.LoadScene("TopScene-2");
+
     }
 }
