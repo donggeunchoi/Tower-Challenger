@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextFoorPotal : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class NextFoorPotal : MonoBehaviour
 
     private void Start()
     {
-        stageManager.NextStage();
+        stageManager.NextFloor();
+        SceneManager.LoadScene("TopScene-2");
     }
 }

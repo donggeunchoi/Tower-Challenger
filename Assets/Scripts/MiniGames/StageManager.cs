@@ -5,34 +5,34 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
+    StageTimer stageTimer;
+    StageLP stageLP;
 
     [Header("게임 정보")]
-    public const int DEFALT_LP = 4;
-    public int bonusLP;
-    private int currentLP;
-    private int bestStage;
-    private int currentStage;
-    private int floor;
-    public float gameSpeed;
-    public TextMeshProUGUI LPText;
-    public TextMeshProUGUI StageText;
-    public TextMeshProUGUI FloorText;
-
-
-    private int currentStageIndex;
-    private GameObject currentMiniGame;
+    
+    private int bestFloor;  //나중에 최고기록 저장
+    private int currentStage;  //현재 스테이지
+    private int floor;        //현재 층
+    public float gameSpeed;   //게임 속도
+    private int currentFloorStage; //현재 층 스테이지
+    private GameObject currentMiniGame;  //현재 게임
 
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;
     public int totalStageCount;
     private List<MiniGameData> stageMiniGames = new List<MiniGameData>();
     public Transform miniGameSlot;
-    private bool isGameActive = true;
+    public bool isGameActive = true;
 
     [Header("타이머")]
-    public float stageTimer = 60f;
+    
     private float timerMultiplier = 1f; // 타이머 가속 배율
 
+    [Header("테스트 텍스트")]
+    public TextMeshProUGUI LPText;
+    public TextMeshProUGUI StageText;
+    public TextMeshProUGUI FloorText;
+    public TextMeshProUGUI TimerText;
     private void Awake()
     {
         if (instance == null)
@@ -47,24 +47,30 @@ public class StageManager : MonoBehaviour
     }
     private void Start()
     {
+        stageTimer = GetComponent<StageTimer>();
+        stageLP = GetComponent<StageLP>();
         isGameActive = false;
     }
 
     private void Update()
     {
-        LPText.text = currentLP + "";
-        StageText.text = currentStage + "";
-        FloorText.text = floor + "";
+        if (LPText != null)
+            LPText.text = "LP" + stageLP.currentLP;
+        if (LPText != null)
+            StageText.text = "Stage : " + currentStage ;
+        if (LPText != null)
+            FloorText.text = "Floor : " + floor;
+        if (TimerText != null)
+            TimerText.text = "Timer : " + stageTimer.timer;
 
-        if (isGameActive)
-            stageTimer -= Time.deltaTime;
+        
     }
 
     public void StartGame()
     {
         isGameActive = true;
 
-        currentLP = DEFALT_LP + bonusLP;
+        stageLP.ResetLP();
         currentStage = 1;
         floor = 1;
 
@@ -73,9 +79,11 @@ public class StageManager : MonoBehaviour
 
     public void NextFloor()
     {
-        currentStage = 1;
+        currentStage = 0;
+        currentFloorStage = 0;
         floor++;
-
+        stageTimer.timer = 60f;
+        UpdateFloorLogic();
         RandomStage();
     }
 
@@ -95,21 +103,17 @@ public class StageManager : MonoBehaviour
 
     public void NextStage()
     {
-        Destroy(currentMiniGame);
-        stageTimer = 60f;
+        if (currentMiniGame != null)
+            Destroy(currentMiniGame);
+
         currentStage++;
-        UpdateFloorLogic();
         RandomStage();
-        currentStageIndex = 0;
-        StartNextMiniGame();
+        ShowPopupMiniGame(stageMiniGames[currentFloorStage].miniGamePrefab);
     }
 
     public void LPdown()
     {
-        currentLP = Mathf.Max(currentLP - 1, 0);
-        Debug.Log($"LP 감소! 현재 LP: {currentLP}");
-
-        if (currentLP <= 0)
+        if (!stageLP.IsLPdown())
         {
             GameOver();
             return;
@@ -124,15 +128,13 @@ public class StageManager : MonoBehaviour
             return; 
         }
 
-        new WaitForSeconds(3f);
-
         if (isSuccess)
         {
             if (currentMiniGame != null)
             {
                 Destroy(currentMiniGame);
             }
-            currentStageIndex++;
+            currentFloorStage++;
         }
         else
         {
@@ -144,7 +146,7 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("게임 시작!");
 
-        MiniGameData nextGame = stageMiniGames[currentStageIndex];
+        MiniGameData nextGame = stageMiniGames[currentFloorStage];
         currentMiniGame = Instantiate(nextGame.miniGamePrefab, miniGameSlot);
     }
 
@@ -179,6 +181,13 @@ public class StageManager : MonoBehaviour
             stageMiniGames.Add(selected);
         }
 
-        currentStageIndex = 0;
+        currentFloorStage = 0;
+    }
+    public void ShowPopupMiniGame(GameObject prefab)
+    {
+        float distance = 2f;
+        Vector3 spawnPos = Camera.main.transform.position + Camera.main.transform.forward * distance;
+        Quaternion spawnRot = Quaternion.LookRotation(-Camera.main.transform.forward);
+        GameObject popup = Instantiate(prefab, spawnPos, spawnRot);
     }
 }
