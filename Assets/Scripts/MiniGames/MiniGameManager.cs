@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
 {
@@ -12,8 +11,7 @@ public class MiniGameManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(stageManager);
         stageManager.StartGame();
     }
-
-
 }

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b6717b655d26e4a814a4e89d4b6954, type: 3}
   m_Name: MiniGameData 1
   m_EditorClassIdentifier: 
-  miniGamePrefab: {fileID: 0}
+  miniGameScene:
+    m_Handle: 0
   max_difficult: 1
-  stage: 1
+  allStage: 1
+  minStage: 1
+  maxStage: 1

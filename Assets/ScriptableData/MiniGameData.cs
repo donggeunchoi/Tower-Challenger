@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "MiniGameData", menuName = "New MiniGame")]
 
 public class MiniGameData : ScriptableObject
 {
-    [Header("미니게임 프리팹")] public GameObject miniGamePrefab;
+    [Header("씬 이름")] public string sceneName;
+    
     [Header("최고 난이도")][Min(1)] public int max_difficult = 1;
 
     [Header("모든 스테이지에서 등장")] public bool allStage = true;
