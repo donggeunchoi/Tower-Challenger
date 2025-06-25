@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public Rigidbody2D playerRb;
     public float jumpForce = 10f;
     private bool isGrounded = true;
-    private bool isSliding = false;
     private bool isInvincible = false;
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
     public Animator animation;
@@ -137,6 +136,8 @@ public class Player : MonoBehaviour
     }
 
     #region jump & Sliding
+    
+    
     
     public void Jump()
     {
