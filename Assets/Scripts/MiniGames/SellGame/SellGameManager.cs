@@ -79,7 +79,7 @@ public class SellGameManager : MonoBehaviour
         }
         else
         {
-            stageManager.LPdown();
+            stageManager.MiniGameResult(false);
             StartCoroutine(OnWrongAnswer());
         }
     }
