@@ -23,7 +23,7 @@ public class InteractionUI : MonoBehaviour
     {
         if (owner != null)
         {
-            owner.NotifyUIDestroyed(gameObject);
+            owner.UIDestroyed(gameObject);
         }
         Destroy(gameObject);
     }
@@ -32,7 +32,7 @@ public class InteractionUI : MonoBehaviour
     {
         if (owner != null)
         {
-            owner.NotifyUIDestroyed(gameObject);
+            owner.UIDestroyed(gameObject);
         }
     }
 }

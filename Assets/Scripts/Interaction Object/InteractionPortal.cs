@@ -14,6 +14,7 @@ public class InteractionPortal : MonoBehaviour, IInteractable
                 StageManager.instance.StartGame();  //게임이 시작됩니다
                 break;
             case PortalType.NextGame:
+                Debug.Log(playerPosition);
                 StageManager.instance.SavePlayerPosition(playerPosition);  //플레이어의 위치를 저장하고
                 StageManager.instance.StartNextMiniGame();  //미니게임 씬으로 이동합니다
                 break;
