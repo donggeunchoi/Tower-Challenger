@@ -21,7 +21,7 @@ public class GroundTile : MonoBehaviour
     }
     void Update()
     {
-        float speed = DinoMiniGame.Instance.currentSpeed;
+        float speed = DinoMiniGame.instance.CurrentSpeed;
         transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 

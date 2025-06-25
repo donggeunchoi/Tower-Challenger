@@ -11,11 +11,11 @@ public class DinoMiniGame : MonoBehaviour
     public float gameDuration = 10f;
     private float gameTimer;
     public bool isGameOver = false;
-    public static DinoMiniGame Instance;
+    public static DinoMiniGame instance;
     
     public float baseSpeed = 5f;
     public float speedIncreaseRate = 1f;
-    public float currentSpeed { get;private set; }
+    public float CurrentSpeed { get;private set; }
 
     [Header("UI")]
     public GameObject[] lpIcon;
@@ -24,14 +24,14 @@ public class DinoMiniGame : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     void Start()
     {
         gameTimer = gameDuration;
         
-        UpdateLPUI();
+        UpdateLpui();
     }
 
     void Update()
@@ -42,7 +42,7 @@ public class DinoMiniGame : MonoBehaviour
         gameTimer -= Time.deltaTime;
         timerText.text = "Time: " + Mathf.CeilToInt(gameTimer).ToString();
         
-        currentSpeed = baseSpeed + (gameDuration - gameTimer) * speedIncreaseRate;
+        CurrentSpeed = baseSpeed + (gameDuration - gameTimer) * speedIncreaseRate;
         
         float percent = gameTimer / gameDuration;
         timeBarImage.fillAmount = percent;
@@ -53,7 +53,7 @@ public class DinoMiniGame : MonoBehaviour
         }
     }
 
-    void UpdateLPUI()
+    void UpdateLpui()
     {
         for (int i = 0; i < lpIcon.Length; i++)
         {
@@ -76,6 +76,6 @@ public class DinoMiniGame : MonoBehaviour
     public void HandleHit()
     {
         StageManager.instance.MiniGameResult(false);
-        UpdateLPUI();
+        UpdateLpui();
     }
 }
