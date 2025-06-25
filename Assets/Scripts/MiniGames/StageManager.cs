@@ -22,6 +22,7 @@ public class StageManager : MonoBehaviour
     public int totalStageCount = 1;
     private float timerMultiplier = 1f;
     private Vector3 playerPosition;
+    private string currentSceneName;
 
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;
@@ -76,6 +77,10 @@ public class StageManager : MonoBehaviour
 
     public void StartNextMiniGame()  //미니게임시작
     {
+        currentSceneName = SceneManager.GetActiveScene().name;
+
+        Debug.Log(currentSceneName);
+
         UpdateAvailableMiniGames();
         if (ableMiniGames.Count == 0)
         {
@@ -101,6 +106,7 @@ public class StageManager : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene(currentSceneName);
             Debug.Log("Mini-game success!");
         }
 

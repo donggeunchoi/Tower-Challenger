@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -70,19 +70,12 @@ public class DinoMiniGame : MonoBehaviour
 
     void GameClear()
     {
-        isGameOver = true;
-        Time.timeScale = 0f;
+        StageManager.instance.MiniGameResult(true);
     }
     
     
     public void HandleHit()
     {
-        LP = Mathf.Max(LP - 1);
-        UpdateLPUI();
-
-        if (LP <= 0)
-        {
-            GameOver();
-        }
+        StageManager.instance.MiniGameResult(false);
     }
 }
