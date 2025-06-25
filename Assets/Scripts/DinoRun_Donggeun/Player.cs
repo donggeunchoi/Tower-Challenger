@@ -7,13 +7,10 @@ public class Player : MonoBehaviour
     [Header("Player Settings")]
     public Rigidbody2D playerRb;
     public float jumpForce = 10f;
-    // public float slideDuration = 0.5f;
     private bool isGrounded = true;
     private bool isSliding = false;
     private bool isInvincible = false;
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
-    private Vector3 originalScale;
-    private Vector3 slideScale;
     public Animator animation;
     
     private int normalLayer;
@@ -34,26 +31,46 @@ public class Player : MonoBehaviour
         // Touch for jump
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
 
+        //테스트용
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            animation.SetBool("IsJump", true);
-            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
+            Jump();
         }
         else
         {
-            animation.SetBool("IsJump", false);
+            StopJump();
         }
         
         
-
         if (Input.GetKey(KeyCode.S) && isGrounded)
         {
-            animation.SetBool("Sliding",true);
+            Sliding();
         }
         else
         {
-            animation.SetBool("Sliding", false);
+            StopSliding();
         }
+
+        #region MobileTouch
+        //모바일 터치 내용
+        // if (Input.touchCount > 0)
+        // {
+        //     Touch touch = Input.GetTouch(0);
+        //     float screenHalf = Screen.width / 2;
+        //
+        //     if (touch.phase == TouchPhase.Began && isGrounded)
+        //     {
+        //         if (touch.position.x < screenHalf)
+        //         {
+        //             Sliding();
+        //         }
+        //         else
+        //         {
+        //             Jump();
+        //         }
+        //     }
+        // }
+        #endregion        
     }
     void LateUpdate()
     {
@@ -73,7 +90,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
         {
-            DinoMiniGame.Instance.HandleHit();
+            DinoMiniGame.instance.HandleHit();
             StartCoroutine(InvencibilityRoutine());
         }
         
@@ -83,7 +100,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DeadZone") && !isInvincible)
         {
-            DinoMiniGame.Instance.HandleHit();
+            DinoMiniGame.instance.HandleHit();
             transform.position = respawnPosition;
             StartCoroutine(InvencibilityRoutine());
         }
@@ -112,9 +129,35 @@ public class Player : MonoBehaviour
         gameObject.layer = normalLayer;
         // 무적 해제 + 투명도 복구
         if (sr != null)
+        {
             sr.color = Color.white;
+        }
         
         isInvincible = false;
     }
+
+    #region jump & Sliding
+    
+    public void Jump()
+    {
+        animation.SetBool("IsJump", true);
+        playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
+    }
+
+    public void StopJump()
+    {
+        animation.SetBool("IsJump", false);
+    }
+
+    public void Sliding()
+    {
+        animation.SetBool("Sliding",true);
+    }
+
+    public void StopSliding()
+    {
+        animation.SetBool("Sliding", false);
+    }
+    #endregion
    
 }

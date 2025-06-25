@@ -12,7 +12,10 @@ public class StageTimer : MonoBehaviour
 
     private void Update()
     {
-        if (isActive) timer -= Time.deltaTime;
+        if (isActive)
+        {
+            timer -= Time.deltaTime;
+        }
     }
 
     public void SetTimer()

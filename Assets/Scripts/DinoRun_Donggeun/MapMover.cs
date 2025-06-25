@@ -6,7 +6,7 @@ public class MapMover : MonoBehaviour
 
     void Update()
     {
-        float speed = DinoMiniGame.Instance.currentSpeed;
+        float speed = DinoMiniGame.instance.CurrentSpeed;
         transform.Translate(Vector3.left * speed * Time.deltaTime);
 
         if (transform.position.x < -20f)

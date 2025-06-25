@@ -17,7 +17,7 @@ public class Obstacle : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
-        while (!DinoMiniGame.Instance.isGameOver)
+        while (!DinoMiniGame.instance.isGameOver)
         {
             yield return new WaitForSeconds(spawnInterval);
 
