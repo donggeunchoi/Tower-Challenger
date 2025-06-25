@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
         // Touch for jump
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
 
-
         //테스트용
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
@@ -51,7 +50,8 @@ public class Player : MonoBehaviour
         {
             StopSliding();
         }
-        
+
+        #region MobileTouch
         //모바일 터치 내용
         // if (Input.touchCount > 0)
         // {
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
         //         }
         //     }
         // }
+        #endregion        
     }
     void LateUpdate()
     {
