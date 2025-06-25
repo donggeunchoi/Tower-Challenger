@@ -1,201 +1,147 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
 
-    [Header("게임 정보")]
-    public const int DEFALT_LP = 4;
-    public int bonusLP;
-    private int currentLP;
-    private int bestStage;
-    private int currentStage;
-    private int floor;
-    public float gameSpeed;
-    public TextMeshProUGUI LPText;
+    [Header("정보")]
+    public StageTimer stageTimer;
+    public StageLP stageLP;
 
-    private int currentStageIndex;
-    private GameObject currentMiniGame;
+    [Header("게임 상태")]
+    public bool isGameActive = false;
+    private bool _isGameOver = false;
+
+    [Header("진행 정보")]
+    public int floor = 1;
+    public int bestFloor = 1;
+    public int stageCount = 0;
+    public int totalStageCount = 1;
+    private float timerMultiplier = 1f;
+    private Vector3 playerPosition;
+    private string currentSceneName;
 
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;
-    public int totalStageCount;
-    private List<MiniGameData> stageMiniGames = new List<MiniGameData>();
-    public Transform miniGameSlot;
-    private bool isGameActive = true;
+    private List<MiniGameData> ableMiniGames = new List<MiniGameData>();
 
-    [Header("타이머")]
-    public float stageTimer = 60f;
-    private float timerMultiplier = 1f; // 타이머 가속 배율
+    private const string _mainSceneName = "VillageScene";
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;  //씬전환후 추가 작업이 필요한 경우 실행
         }
         else
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
+
     private void Start()
     {
         isGameActive = false;
     }
 
-    private void Update()
-    {
-        LPText.text = currentLP + "";
-
-        if (isGameActive)
-            stageTimer -= Time.deltaTime;
-    }
-
     public void StartGame()
     {
+        _isGameOver = false;
         isGameActive = true;
-
-        currentLP = DEFALT_LP + bonusLP;
-        currentStage = 1;
+        stageLP.ResetLP();
+        stageTimer.SetTimer();
         floor = 1;
+        totalStageCount = 0;
+        timerMultiplier = 1f;
+        UpdateAvailableMiniGames(); // 게임 시작 시 랜덤 스테이지 생성
 
-        RandomStage();
-        StartNextMiniGame();
+        //다초기화하고 미니게임 장소로 이동
     }
 
-    private void UpdateFloorLogic()
+    public void SavePlayerPosition(Vector3 position) => playerPosition = position;  //현재 위치 저장
+
+    private void UpdateAvailableMiniGames()  //랜덤한 스테이지 생성
     {
-        if (floor % 5 == 0)
+        ableMiniGames.Clear();
+        foreach (var game in miniGameDatas)
         {
-            totalStageCount++;
-        }
-
-        if (floor % 10 == 0)
-        {
-            timerMultiplier *= 1.2f;
-        }
-        floor++;
-    }
-
-    public void NextStage()
-    {
-        Destroy(currentMiniGame);
-        stageTimer = 60f;
-        currentStage++;
-        UpdateFloorLogic();
-        RandomStage();
-        currentStageIndex = 0;
-        StartNextMiniGame();
-    }
-
-    public void LPdown()
-    {
-        currentLP = Mathf.Max(currentLP - 1, 0);
-        Debug.Log($"LP 감소! 현재 LP: {currentLP}");
-
-        if (currentLP <= 0)
-        {
-            GameOver();
-            return; // 추가 실행 방지
+            if (game.allStage || (floor >= game.minStage && floor <= game.maxStage))
+                ableMiniGames.Add(game);
         }
     }
 
-    public void ReportGameResult(bool isSuccess)
+    public void StartNextMiniGame()  //미니게임시작
     {
-        if (!isGameActive) return;
+        currentSceneName = SceneManager.GetActiveScene().name;
 
-        new WaitForSeconds(3f);
+        Debug.Log(currentSceneName);
 
-        if (isSuccess)
+        UpdateAvailableMiniGames();
+        if (ableMiniGames.Count == 0)
         {
-            currentStageIndex++;
+            Debug.LogWarning("No available mini-games!");
+            return;
+        }
 
-            if (currentStageIndex >= stageMiniGames.Count)
-            {
-                NextStage(); // 모든 미니게임 성공 → 다음 스테이지
-            }
-            else
-            {
-                StartNextMiniGame(); // 동일 스테이지 내 다음 미니게임
-            }
+        var selectedGame = ableMiniGames[Random.Range(0, ableMiniGames.Count)];
+        SceneManager.LoadScene(selectedGame.sceneName);
+    }  
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != _mainSceneName) return;
+    }
+
+    public void MiniGameResult(bool result) //게임이 끝나면 호출해줘야 하는 함수
+    {
+        if (!result)
+        {
+            stageLP.LPdown();
+            if (stageLP.currentLP <= 0) GameOver();
         }
         else
         {
-            // 스테이지 실패 처리
-            HandleStageFailure();
-        }
-    }
-
-    private void HandleStageFailure()
-    {
-        LPdown();
-
-        // 게임 오버 시 추가 처리 중단
-        if (!isGameActive) return;
-
-        if (currentLP > 0)
-        {
-            if (currentStageIndex < stageMiniGames.Count - 1)
-            {
-                currentStageIndex++;
-                StartNextMiniGame();
-            }
-            else
-            {
-                currentStageIndex = 0;
-                StartNextMiniGame();
-            }
-        }
-    }
-
-    private void StartNextMiniGame()
-    {
-        if (currentMiniGame != null)
-        {
-            Destroy(currentMiniGame);
+            SceneManager.LoadScene(currentSceneName);
+            Debug.Log("Mini-game success!");
         }
 
-        Debug.Log("게임 시작!");
-
-        MiniGameData nextGame = stageMiniGames[currentStageIndex];
-        currentMiniGame = Instantiate(nextGame.miniGamePrefab, miniGameSlot);
+        RestorePlayerPosition();
     }
 
-    private void GameOver()
+    private void RestorePlayerPosition() //플레이어를 찾아 해당 포지션으로 이동
     {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player) player.transform.position = playerPosition;
+    }
+
+    private void GameOver()  //게임오버가 되면 로비씬으로 이동
+    {
+        if (!isGameActive || _isGameOver) return;
+
+        if (stageTimer.timer <= 0 || stageLP.currentLP <= 0)
+
+        _isGameOver = true;
         isGameActive = false;
-
-        if (currentMiniGame != null)
-        {
-            Destroy(currentMiniGame);
-            currentMiniGame = null;
-        }
-
-        Debug.Log("게임 오버");
+        if (floor > bestFloor) bestFloor = floor;
+        SceneManager.LoadScene(_mainSceneName);
     }
 
-    private void RandomStage()
+    public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
-        stageMiniGames.Clear();
-        List<MiniGameData> availableGames = new List<MiniGameData>(miniGameDatas);
+        floor++;
+        stageTimer.timer = 60f;
 
-        for (int i = 0; i < totalStageCount; i++)
-        {
-            if (availableGames.Count == 0)
-            {
-                availableGames = new List<MiniGameData>(miniGameDatas);
-            }
+        if (floor % 5 == 0)
+            totalStageCount = Mathf.Min(totalStageCount + 1, 4);
 
-            int randomIndex = Random.Range(0, availableGames.Count);
-            MiniGameData selected = availableGames[randomIndex];
-            availableGames.RemoveAt(randomIndex);
-            stageMiniGames.Add(selected);
-        }
+        if (floor % 10 == 0)
+            timerMultiplier *= 1.2f;
 
-        currentStageIndex = 0;
+        UpdateAvailableMiniGames();
     }
 }
