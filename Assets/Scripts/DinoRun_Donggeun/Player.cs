@@ -138,6 +138,8 @@ public class Player : MonoBehaviour
         isInvincible = false;
     }
 
+    #region jump & Sliding
+    
     public void Jump()
     {
         animation.SetBool("IsJump", true);
@@ -158,5 +160,6 @@ public class Player : MonoBehaviour
     {
         animation.SetBool("Sliding", false);
     }
+    #endregion
    
 }
