@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
         while (elapsed < invincibleTime)
         {
-            // 깜빡임 효과 (선택)
+            // 깜빡임 효과
             if (sr != null)
                 sr.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time * 5, 1f));
 
