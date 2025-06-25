@@ -8,7 +8,6 @@ public class DinoMiniGame : MonoBehaviour
 {
     
     [Header("Game Settings")]
-    public int LP = 4;
     public float gameDuration = 10f;
     private float gameTimer;
     public bool isGameOver = false;
@@ -58,7 +57,7 @@ public class DinoMiniGame : MonoBehaviour
     {
         for (int i = 0; i < lpIcon.Length; i++)
         {
-            lpIcon[i].SetActive(i < LP);
+            lpIcon[i].SetActive(i < StageManager.instance.stageLP.currentLP);
         }
     }
 
@@ -77,5 +76,6 @@ public class DinoMiniGame : MonoBehaviour
     public void HandleHit()
     {
         StageManager.instance.MiniGameResult(false);
+        UpdateLPUI();
     }
 }
