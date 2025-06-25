@@ -12,7 +12,7 @@ public class StageLP : MonoBehaviour
     {
         currentLP = Mathf.Max(currentLP - 1, 0);
     }
-    public void RecoverLP(int amount)
+    public void HealLP(int amount)
     {
         currentLP = Mathf.Min(currentLP + amount, DEFALT_LP + bonusLP);
     }
