@@ -21,10 +21,8 @@ public class UpAndDownManager : MonoBehaviour
     {
         upAndDownUI.InitUi();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        upAndDownUI.slider.value = StageManager.instance.stageTimer.timer;
     }
 }
