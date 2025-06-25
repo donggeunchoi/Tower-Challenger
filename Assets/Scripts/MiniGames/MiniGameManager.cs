@@ -6,7 +6,7 @@ public class MiniGameManager : MonoBehaviour
 
     private void Awake()
     {
-        stageManager = StageManager.Instance;
+        stageManager = StageManager.instance;
     }
 
     private void Start()

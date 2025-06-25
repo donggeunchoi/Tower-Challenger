@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    public static StageManager Instance;
+    public static StageManager instance;
 
     [Header("정보")]
     public StageTimer stageTimer;
@@ -31,9 +31,9 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;  //씬전환후 추가 작업이 필요한 경우 실행
         }

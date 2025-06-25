@@ -10,14 +10,14 @@ public class InteractionPortal : MonoBehaviour
         switch (portalType)
         {
             case PortalType.StartGame:
-                StageManager.Instance.StartGame();  //게임이 시작됩니다
+                StageManager.instance.StartGame();  //게임이 시작됩니다
                 break;
             case PortalType.NextGame:
-                StageManager.Instance.SavePlayerPosition(player.transform.position);  //플레이어의 위치를 저장하고
-                StageManager.Instance.StartNextMiniGame();  //미니게임 씬으로 이동합니다
+                StageManager.instance.SavePlayerPosition(player.transform.position);  //플레이어의 위치를 저장하고
+                StageManager.instance.StartNextMiniGame();  //미니게임 씬으로 이동합니다
                 break;
             case PortalType.NextFloor:
-                StageManager.Instance.NextFloor();  //다음 층으로 이동합니다
+                StageManager.instance.NextFloor();  //다음 층으로 이동합니다
                 break;
         }
     }

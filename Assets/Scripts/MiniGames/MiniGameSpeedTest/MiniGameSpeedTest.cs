@@ -17,7 +17,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     private void Awake()
     {
-        stageManager = StageManager.Instance;
+        stageManager = StageManager.instance;
     }
 
     private void Start()
