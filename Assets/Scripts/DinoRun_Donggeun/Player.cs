@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
         {
-            DinoMiniGame.Instance.HandleHit();
+            DinoMiniGame.instance.HandleHit();
             StartCoroutine(InvencibilityRoutine());
         }
         
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DeadZone") && !isInvincible)
         {
-            DinoMiniGame.Instance.HandleHit();
+            DinoMiniGame.instance.HandleHit();
             transform.position = respawnPosition;
             StartCoroutine(InvencibilityRoutine());
         }
