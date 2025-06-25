@@ -2,8 +2,8 @@
 
 public class UpAndDown : MonoBehaviour
 {
-    private int failcount = 0;
-
+    public int failcount;
+    private bool isOver = false;
     public string NumGenration()
     {
         float num = Random.Range(0f, 101f);
@@ -36,13 +36,18 @@ public class UpAndDown : MonoBehaviour
             {
                 Debug.Log("Down");
             }
-            failcount++;
+            failcount--;
             Debug.Log(failcount);
         }
 
-        if (failcount == 7)
+        if (failcount == 0)
         {
-            Debug.Log("PL 1 감소");
+            StageManager.instance.stageLP.LPdown();
+
+            if (!isOver)
+            {
+                failcount = 7;
+            }
         }
     }
 }

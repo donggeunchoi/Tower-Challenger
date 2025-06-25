@@ -140,7 +140,7 @@ public class StageManager : MonoBehaviour
         if (player) player.transform.position = playerPosition;   //플레이어 위치를 수정
     }
 
-    private void GameOver()  //게임오버가 되면 로비씬으로 이동
+    public void GameOver()  //게임오버가 되면 로비씬으로 이동
     {
         if (!isGameActive || isGameOver) //현재 게임이 실행상태가 아니거나 게임오버 상태가 아니라면 돌아가기
             return;  
@@ -166,5 +166,4 @@ public class StageManager : MonoBehaviour
 
         RandomStage();
     }
-    
 }
