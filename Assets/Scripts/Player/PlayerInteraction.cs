@@ -41,7 +41,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    public void NotifyUIDestroyed(GameObject ui)  //만약에 UI가 자동으로 닫혔으면 null로 수정
+    public void UIDestroyed(GameObject ui)  //만약에 UI가 자동으로 닫혔으면 null로 수정
     {
         if (currentUI == ui)
             currentUI = null;
