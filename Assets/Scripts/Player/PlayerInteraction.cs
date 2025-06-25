@@ -3,65 +3,45 @@ using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public Button interactionButton; //상호작용 버튼
-    public Transform interactionUIPannel; //상호작용 UI가 뜰 공간
-    private InteractionNPC currentNPC;  //현재 NPC
-    private GameObject currentUI;  //현재 띄워진 UI를 저장
+    public Button interactionButton;          //상호작용 버튼
+    public Transform interactionUIPannel;     //상호작용 했을때 UI가 뜨는공간
+    private IInteractable currentInteractable;//상호작용 연결 (어떤상호작용이 추가되도 대처할 수 있도록)
+    private GameObject currentUI;             //상호작용에 의한 UI가 무엇인지 저장
 
     private void Start()
     {
-        interactionButton.onClick.AddListener(InteractWithNPC);
+        interactionButton.onClick.AddListener(Interact);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)  //트리거호출로 상호 작용이 가능하면 상호작용
     {
-        var npc = other.GetComponentInParent<InteractionNPC>();  //NPC에게서 스크립트 가져오기
-        if (npc != null)  //현재 NPC는 상호작용하고 있는 NPC
-        {
-            currentNPC = npc;
-        }
+        currentInteractable = other.GetComponent<IInteractable>();
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)  //NPC가 UI를 띄워줬으면 닫는 조치
     {
-        var npc = other.GetComponentInParent<InteractionNPC>(); //NPC에게서 스크립트 가져오기
-        if (npc != null && npc == currentNPC)  //NPC초기화 및 창닫기
+        if (other.GetComponent<IInteractable>() == currentInteractable)
         {
-            currentNPC = null;
-            CloseUI();
-        }
-    }
+            currentInteractable = null;
 
-    private void InteractWithNPC()
-    {
-        if (currentNPC == null)  //상호작용할 NPC가없으면 반환
-            return;
-
-        if (currentUI == null)  //만약 지금 띄워진 UI가없으면 NPC의 UI를 지정위치에 인스턴스
-        {
-            currentUI = Instantiate(currentNPC.uiPrefab, interactionUIPannel);
-
-            var interactionUI = currentUI.GetComponent<InteractionUI>();
-            if (interactionUI != null)
+            // NPC UI 닫기
+            if (currentUI != null)
             {
-                interactionUI.owner = this;
+                Destroy(currentUI);
+                currentUI = null;
             }
         }
-        else  //아니라면 닫기
+    }
+
+    private void Interact() //상호작용
+    {
+        if (currentInteractable != null)
         {
-            CloseUI();
+            currentInteractable.Interact();
         }
     }
 
-    private void CloseUI() //아까 지정했던 NPC의 UI를 파괴 및 지정UI초기화
-    {
-        if (currentUI != null)
-        {
-            Destroy(currentUI);
-            currentUI = null;
-        }
-    }
-    public void NotifyUIDestroyed(GameObject ui)
+    public void UIDestroyed(GameObject ui)  //만약에 UI가 자동으로 닫혔으면 null로 수정
     {
         if (currentUI == ui)
             currentUI = null;

@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
     private Vector3 originalScale;
     private Vector3 slideScale;
+    public Animator animation;
     
     private int normalLayer;
     private int invincibleLayer;
@@ -24,8 +25,7 @@ public class Player : MonoBehaviour
         invincibleLayer = LayerMask.NameToLayer("InvinciblePlayer");
         respawnPosition = transform.position;
         
-        originalScale = transform.localScale;
-        slideScale = new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z);
+        animation = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -34,19 +34,45 @@ public class Player : MonoBehaviour
         // Touch for jump
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
-        }
 
-        if (Input.GetKey(KeyCode.S) && isGrounded)
+        //테스트용
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            transform.localScale = slideScale;
+            Jump();
         }
         else
         {
-            transform.localScale = originalScale;
+            StopJump();
         }
+        
+        
+        if (Input.GetKey(KeyCode.S) && isGrounded)
+        {
+            Sliding();
+        }
+        else
+        {
+            StopSliding();
+        }
+        
+        //모바일 터치 내용
+        // if (Input.touchCount > 0)
+        // {
+        //     Touch touch = Input.GetTouch(0);
+        //     float screenHalf = Screen.width / 2;
+        //
+        //     if (touch.phase == TouchPhase.Began && isGrounded)
+        //     {
+        //         if (touch.position.x < screenHalf)
+        //         {
+        //             Sliding();
+        //         }
+        //         else
+        //         {
+        //             Jump();
+        //         }
+        //     }
+        // }
     }
     void LateUpdate()
     {
@@ -105,9 +131,32 @@ public class Player : MonoBehaviour
         gameObject.layer = normalLayer;
         // 무적 해제 + 투명도 복구
         if (sr != null)
+        {
             sr.color = Color.white;
+        }
         
         isInvincible = false;
+    }
+
+    public void Jump()
+    {
+        animation.SetBool("IsJump", true);
+        playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
+    }
+
+    public void StopJump()
+    {
+        animation.SetBool("IsJump", false);
+    }
+
+    public void Sliding()
+    {
+        animation.SetBool("Sliding",true);
+    }
+
+    public void StopSliding()
+    {
+        animation.SetBool("Sliding", false);
     }
    
 }
