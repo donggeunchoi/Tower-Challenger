@@ -7,13 +7,10 @@ public class Player : MonoBehaviour
     [Header("Player Settings")]
     public Rigidbody2D playerRb;
     public float jumpForce = 10f;
-    // public float slideDuration = 0.5f;
     private bool isGrounded = true;
     private bool isSliding = false;
     private bool isInvincible = false;
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
-    private Vector3 originalScale;
-    private Vector3 slideScale;
     public Animator animation;
     
     private int normalLayer;
