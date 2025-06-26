@@ -2010,12 +2010,14 @@ MonoBehaviour:
   obstaclePrefabs:
   - {fileID: 473643191443893156, guid: f95e057c6d9824f7fa77501abdbbe976, type: 3}
   - {fileID: 8303074342354130031, guid: dbf9bde86b6c24911bb9ee73f195ca5a, type: 3}
+  - {fileID: 8303074342354130031, guid: dbf9bde86b6c24911bb9ee73f195ca5a, type: 3}
   spawnPoint: {fileID: 5781053665545372217}
   spawnInterval: 2.5
   obstaclesContainer: {fileID: 6615926573897447456}
   obstacleOffsets:
-  - {x: 0, y: -0.5, z: 0}
+  - {x: 0, y: -0.2, z: 0}
   - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 1, z: 0}
 --- !u!1 &7465693890994707295
 GameObject:
   m_ObjectHideFlags: 0

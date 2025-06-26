@@ -3,6 +3,7 @@ using UnityEngine;
 public class MapMover : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float rotateSpeed = 5f;
 
     void Update()
     {
@@ -13,6 +14,7 @@ public class MapMover : MonoBehaviour
         {
             Debug.Log("way");
         }
+        
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
