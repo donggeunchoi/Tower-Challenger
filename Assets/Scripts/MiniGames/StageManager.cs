@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Splines;
 
 public class StageManager : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class StageManager : MonoBehaviour
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
     private List<MiniGameData> randomGames = new List<MiniGameData>();  //랜덤으로 미니게임 배열이 들어갈 공간
-
+    public TextMeshProUGUI Text;
     private const string _mainSceneName = "VillageScene";  //메인씬 이름
 
     [SerializeField] string[] mapScene;  //맵씬 모음
@@ -55,6 +54,11 @@ public class StageManager : MonoBehaviour
         isGameActive = false;
         infoUI.SetActive(isGameActive);
     }
+
+    private void Update()
+    {
+        Text.text = "Stage :" + stageCount + "Totla :" + totalStageCount + "Floor :" + floor;
+    }
     #region MiniGameCall
     public void StartGame()
     {
@@ -62,6 +66,7 @@ public class StageManager : MonoBehaviour
         isGameActive = true;  //현재 게임 시작
         infoUI.SetActive(isGameActive);
         ResetInfo();
+        stageLP.ResetLP();
         floor = 1;            //현재층 1층
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
@@ -83,19 +88,15 @@ public class StageManager : MonoBehaviour
         }
         
         Map map = FindAnyObjectByType<Map>();
-        Debug.Log(map);
         map.SetRandomPortal();
     }
 
     //씬로드가 완료가 됬을때 동작
 
-    //map.SetRandomPortal();
-
     private void ResetInfo()
     {
-        stageLP.ResetLP();
+        stageCount = 0;
         stageTimer.SetTimer();
-        ResetClearPortal();
     }
 
     public void StartNextMiniGame()  //미니게임시작
@@ -110,22 +111,24 @@ public class StageManager : MonoBehaviour
 
         MiniGameData selectedGame = randomGames[Random.Range(0, randomGames.Count)];  //배열에서도 랜덤
         SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
-        
     }
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
         ResetInfo();
+        stageCount = 0;
+        floor++;
 
-        if (floor % 5 == 0)  //5층마다 스테이지 갯수증가
+        if (floor - 1 % 5 == 0)  //5층마다 스테이지 갯수증가
             totalStageCount = Mathf.Min(totalStageCount + 1, 4);
+        else if (floor <= 0)
+            totalStageCount = 1;
 
         if (floor % 10 == 0) //10층마다 타이머 1.2배속
             timerMultiplier *= 1.2f;
 
         RandomStage();
-        Map map = FindAnyObjectByType<Map>();
-        map.SetRandomPortal();
+        StartCoroutine(StartGameLoad());
     }
     #endregion
     #region MiniGameSet
@@ -198,7 +201,7 @@ public class StageManager : MonoBehaviour
         }
         else  //성공
         {
-            StartCoroutine(LatePlayerPosition());  //플레이어를 원레 위치로
+            StartCoroutine(LatePlayerData());  //플레이어를 원레 위치로
         }
     }
     public void GameOver()  //게임오버가 되면 로비씬으로 이동
@@ -222,13 +225,16 @@ public class StageManager : MonoBehaviour
         layerNumber = layer;
         playerPosition = position;
     }
-    private IEnumerator LatePlayerPosition() //플레이어를 찾아 해당 포지션으로 이동 (오류나서 코루틴으로 변경)
+    private IEnumerator LatePlayerData() //플레이어를 찾아 해당 포지션으로 이동 (오류나서 코루틴으로 변경)
     {
         AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(currentSceneName); //어씬크
         while (!ansynLoad.isDone)
         {
             yield return null;
         }
+
+        Map map = FindAnyObjectByType<Map>();
+        map.AllClearFloor();
 
         GameObject player = null;
         while (player == null)
@@ -239,13 +245,27 @@ public class StageManager : MonoBehaviour
         if (player != null)
         {
             player.layer = layerNumber;
+            string LayerName;
+            switch (layerNumber)
+            {
+                case 20:
+                    LayerName = "Layer 1";
+                    break;
+                case 21:
+                    LayerName = "Layer 2";
+                    break;
+                default:
+                    LayerName = "Layer 3";
+                    break;
+            }
+            player.GetComponent<SpriteRenderer>().sortingLayerName = LayerName;
             player.transform.position = playerPosition;   //플레이어 위치를 수정
         }
-    }
 
-    public void SetPlayerPosition()
-    {
-        
+        if (stageCount >= totalStageCount)
+        {
+            ResetClearPortal();
+        }
     }
     #endregion
 }

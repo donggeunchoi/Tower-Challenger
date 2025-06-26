@@ -21,6 +21,7 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
+        nextFloorPortal.SetActive(false);
         for (int i = 0; i < nextStagePortal.Length; i++) //일단 다 꺼주고
         {
             nextStagePortal[i].GetComponent<InteractionPortal>().portalNumber = i;
@@ -43,7 +44,7 @@ public class Map : MonoBehaviour
         for (int i = 0; i < stageManager.stageClearPortal.Count; i++)  //스테이지 매니저에 있는 클리어 정보값을 받기
         {
             Debug.Log(nextStagePortal.Length);
-            nextStagePortal[stageManager.stageClearPortal[i]].gameObject.SetActive(true); 
+            nextStagePortal[stageManager.stageClearPortal[i]].gameObject.SetActive(true);
         }
         yield return null;
     }
@@ -62,5 +63,10 @@ public class Map : MonoBehaviour
         {
             StageManager.instance.AddPortal(randomPortal[i]);
         }
+    }
+
+    public void AllClearFloor()
+    {
+        nextFloorPortal.SetActive(true);
     }
 }
