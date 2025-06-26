@@ -96,7 +96,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         isDashing = true;
         canDash = false;
 
-        Debug.Log("Dash Time");
+        Debug.Log("달리는 시간이쥬?");
         float originalSpeed = speed;
         speed = DashSpeed;
         
@@ -104,7 +104,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         
         speed = originalSpeed;
         isDashing = false;
-        Debug.Log("Cool Time");
+        Debug.Log("달리기 멈추고 쿨타임시간");
         
         yield return new WaitForSeconds(CooldownTime);
         canDash = true;
