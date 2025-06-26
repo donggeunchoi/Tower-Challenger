@@ -7,7 +7,6 @@ public class GroundTile : MonoBehaviour
     
     [Header("타일 전환용")]
     public SpriteRenderer spriteRenderer;
-    public Collider2D groundCollider;
     public bool isHole = false;
     
     void Awake()
