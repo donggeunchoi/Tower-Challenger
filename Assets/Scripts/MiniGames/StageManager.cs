@@ -32,7 +32,7 @@ public class StageManager : MonoBehaviour
 
     private const string _mainSceneName = "VillageScene";  //메인씬 이름
 
-    [SerializeField] Scene[] mapScene;  //맵씬 모음
+    [SerializeField] string[] mapScene;  //맵씬 모음
 
     private void Awake()
     {
@@ -63,12 +63,17 @@ public class StageManager : MonoBehaviour
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
-        //맵을 넘긴다
+        LoadRandomMap();
 
-        //playerPrefab = Instantiate(playerPrefab, playerPosition, Quaternion.identity);  //플레이어를 해당위치로 놔주고
+        Map map = FindAnyObjectByType<Map>();
+        map.SetRandomPortal();
         Debug.Log("게임시작");
         //다초기화하고 미니게임 장소로 이동
     }
+
+    //씬로드가 완료가 됬을때 동작
+
+    //map.SetRandomPortal();
 
     private void ResetInfo()
     {
@@ -89,8 +94,7 @@ public class StageManager : MonoBehaviour
 
         MiniGameData selectedGame = randomGames[Random.Range(0, randomGames.Count)];  //배열에서도 랜덤
         SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
-        Map map = FindAnyObjectByType<Map>();
-        map.SetRandomPortal();
+        
     }
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
@@ -141,6 +145,18 @@ public class StageManager : MonoBehaviour
             this.randomGames.Add(randomGames);
         }
     }
+
+    public void LoadRandomMap()
+    {
+        int randomSceneNum = Random.Range(0, mapScene.Length);
+        if (mapScene == null)
+        {
+            return;
+        }
+        string mapName = mapScene[randomSceneNum];
+        SceneManager.LoadScene(mapName);
+    }
+
     public void AddPortal(int portal)
     {
         stageClearPortal.Add(portal);
