@@ -23,10 +23,6 @@ public class Bird : MonoBehaviour
 //어떤 속도로 이동할껀지 생각을 해보자.
    public void BirdMove()
    {
-       if ()
-       {
-           
-       }
-
+       
    }
 }
