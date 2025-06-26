@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
@@ -8,8 +9,16 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     private float radius;                   // 조이스틱 이동 반지름
     private Vector2 inputDir = Vector2.zero;// 입력 방향 벡터
     private float deadZone = 0.15f;
+    
+    [Header("움직임과 대쉬")]
     public float speed = 5;
+    public float DashSpeed = 10f;           // 대쉬스피드
+    public float DashTime = 5f;           //대쉬지속시간
+    public float CooldownTime = 3f;         //쿨타임
+    public bool canDash = true;             //대쉬할수 있는 상태
+    public bool isDashing = false;          //대쉬중은 아니니까 
 
+    
     void Start()
     {
         radius = stick.sizeDelta.x * 0.5f;     //스틱의 크기의 절반을 반지름으로
@@ -67,4 +76,38 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         stick.anchoredPosition = Vector2.zero;
         inputDir = Vector2.zero;
     }
+
+    
+    //버튼을 누르면 플레이어 속도가 대쉬 속도로 증가한다.
+    //대쉬 지속시간 후에는 원래 속도로 돌아오게 만든다
+    //쿨타임 3초동안은 다시 대쉬를 할 수 없어야 한다.
+    public void OnClickDash()
+    {
+        //대쉬할수 있고 대쉬중이 아니라면
+        if (canDash && !isDashing)
+        {
+            //해당 대쉬를 진행
+            StartCoroutine(DashRoutine());
+        }
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        isDashing = true;
+        canDash = false;
+
+        Debug.Log("Dash Time");
+        float originalSpeed = speed;
+        speed = DashSpeed;
+        
+        yield return new WaitForSeconds(DashTime);
+        
+        speed = originalSpeed;
+        isDashing = false;
+        Debug.Log("Cool Time");
+        
+        yield return new WaitForSeconds(CooldownTime);
+        canDash = true;
+    }
+    
 }
