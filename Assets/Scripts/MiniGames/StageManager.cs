@@ -119,10 +119,8 @@ public class StageManager : MonoBehaviour
         stageCount = 0;
         floor++;
 
-        if (floor - 1 % 5 == 0)  //5층마다 스테이지 갯수증가
+        if (floor % 5 == 1)  //5층마다 스테이지 갯수증가
             totalStageCount = Mathf.Min(totalStageCount + 1, 4);
-        else if (floor <= 0)
-            totalStageCount = 1;
 
         if (floor % 10 == 0) //10층마다 타이머 1.2배속
             timerMultiplier *= 1.2f;
