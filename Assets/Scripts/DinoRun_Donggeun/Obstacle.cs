@@ -9,6 +9,7 @@ public class Obstacle : MonoBehaviour
     public float spawnInterval = 2.5f;
     public Transform obstaclesContainer;
     public Vector3[] obstacleOffsets;
+    
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class Obstacle : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
-        while (!DinoMiniGame.Instance.isGameOver)
+        while (!DinoMiniGame.instance.isGameOver)
         {
             yield return new WaitForSeconds(spawnInterval);
 
@@ -58,7 +59,6 @@ public class Obstacle : MonoBehaviour
             int index = Random.Range(0, obstaclePrefabs.Length);
             Vector3 offset = obstacleOffsets[index];
             Instantiate(obstaclePrefabs[index], spawnPoint.position + offset, Quaternion.identity, obstaclesContainer);
-                
           
         }
     }

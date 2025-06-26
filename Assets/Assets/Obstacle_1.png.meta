@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f37b06e5a41bc415cbe0aafe66b9fc22
+guid: c003458d0cea0487a91953e78121258e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7062771792125880828
-    second: Timewatch_0
+      213: -6246872711644605899
+    second: Obstacle_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 25
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Timewatch_0
+      name: Obstacle_1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 12
-        height: 12
+        x: 1
+        y: 1
+        width: 46
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 40610b8a97efbfd90800000000000000
-      internalID: -7062771792125880828
+      spriteID: 5329759bd56ae49a0800000000000000
+      internalID: -6246872711644605899
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Timewatch_0: -7062771792125880828
+      Obstacle_1_0: -6246872711644605899
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
