@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +10,7 @@ public class StageManager : MonoBehaviour
     [Header("정보")]
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
-    public GameObject infoUI;
+    public GameObject infoUI;         //각종 인포메이션이 들어갈 공간 (타이머 LP등)[추후 UI매니저로 이동]
 
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
@@ -25,6 +24,7 @@ public class StageManager : MonoBehaviour
     private float timerMultiplier = 1f;//타이머 배속
     private Vector3 playerPosition;    //플레이어 포지션 저장
     private string currentSceneName;   //현재 씬 이름
+    public List<int> stageClearPortal = new List<int>();
 
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
@@ -37,12 +37,12 @@ public class StageManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -50,14 +50,13 @@ public class StageManager : MonoBehaviour
         isGameActive = false;
         infoUI.SetActive(isGameActive);
     }
-
+    #region MiniGameCall
     public void StartGame()
     {
         isGameOver = false;  //게임오버상태 초기화
         isGameActive = true;  //현재 게임 시작
         infoUI.SetActive(isGameActive);
-        stageLP.ResetLP();    //LP초기화
-        stageTimer.SetTimer();//타이머 시작
+        ResetInfo();
         floor = 1;            //현재층 1층
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
@@ -68,11 +67,41 @@ public class StageManager : MonoBehaviour
         //다초기화하고 미니게임 장소로 이동
     }
 
-    public void SavePlayerPosition(Vector3 position)
-    { 
-         playerPosition = position;
+    private void ResetInfo()
+    {
+        stageLP.ResetLP();
+        stageTimer.SetTimer();
+        ResetClearPortal();
     }
 
+    public void StartNextMiniGame()  //미니게임시작
+    {
+        currentSceneName = SceneManager.GetActiveScene().name;  //현재 씬 이름 가져오기
+
+        RandomStage();  //돌린 배열 가져와서 실행
+        if (randomGames.Count == 0)
+        {
+            return;
+        }
+
+        MiniGameData selectedGame = randomGames[Random.Range(0, randomGames.Count)];  //배열에서도 랜덤
+        SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
+    }
+
+    public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
+    {
+        ResetInfo();
+
+        if (floor % 5 == 0)  //5층마다 스테이지 갯수증가
+            totalStageCount = Mathf.Min(totalStageCount + 1, 4);
+
+        if (floor % 10 == 0) //10층마다 타이머 1.2배속
+            timerMultiplier *= 1.2f;
+
+        RandomStage();
+    }
+    #endregion
+    #region MiniGameSet
     private void RandomStage()  //랜덤한 스테이지 생성
     {
         randomGames.Clear();  // 랜덤 미니게임 배열 초기화
@@ -106,19 +135,15 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void StartNextMiniGame()  //미니게임시작
+    public void SaveClearPortal(int clear)
     {
-        currentSceneName = SceneManager.GetActiveScene().name;  //현재 씬 이름 가져오기
+        stageClearPortal.Add(clear);
+    }
 
-        RandomStage();  //돌린 배열 가져와서 실행
-        if (randomGames.Count == 0)
-        {
-            return;
-        }
-
-        MiniGameData selectedGame = randomGames[Random.Range(0, randomGames.Count)];  //배열에서도 랜덤
-        SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
-    }  
+    public void ResetClearPortal()
+    {
+        stageClearPortal.Clear();
+    }
 
     public void MiniGameResult(bool result) //게임이 끝나면 호출해줘야 하는 함수
     {
@@ -135,14 +160,6 @@ public class StageManager : MonoBehaviour
             StartCoroutine(LatePlayerPosition());  //플레이어를 원레 위치로
         }
     }
-
-    private IEnumerator LatePlayerPosition() //플레이어를 찾아 해당 포지션으로 이동 (오류나서 코루틴으로 변경)
-    {
-        yield return new WaitForSeconds(0.1f);
-        GameObject player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾아서 
-        if (player) player.transform.position = playerPosition;   //플레이어 위치를 수정
-    }
-
     private void GameOver()  //게임오버가 되면 로비씬으로 이동
     {
         if (!isGameActive || isGameOver) //현재 게임이 실행상태가 아니거나 게임오버 상태가 아니라면 돌아가기
@@ -157,19 +174,22 @@ public class StageManager : MonoBehaviour
             SceneManager.LoadScene(_mainSceneName); //메인씬 로드
         }
     }
-
-    public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
-    {
-        floor++;                    //층 상승
-        stageTimer.timer = 60f;     //타이머 초기화
-
-        if (floor % 5 == 0)  //5층마다 스테이지 갯수증가
-            totalStageCount = Mathf.Min(totalStageCount + 1, 4);
-
-        if (floor % 10 == 0) //10층마다 타이머 1.2배속
-            timerMultiplier *= 1.2f;
-
-        RandomStage();
+    #endregion
+    #region Player
+    public void SavePlayerPosition(Vector3 position)
+    { 
+         playerPosition = position;
     }
-    
+    private IEnumerator LatePlayerPosition() //플레이어를 찾아 해당 포지션으로 이동 (오류나서 코루틴으로 변경)
+    {
+        yield return new WaitForSeconds(0.1f);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾아서 
+        if (player) player.transform.position = playerPosition;   //플레이어 위치를 수정
+    }
+
+    public void SetPlayerPosition()
+    {
+        
+    }
+    #endregion
 }

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
+public enum PortalType { StartGame, NextGame, NextFloor }  //우선 포탈 타입을 나눠놓기
+
 public class InteractionPortal : MonoBehaviour, IInteractable
 {
-    public enum PortalType { StartGame, NextGame, NextFloor }  //우선 포탈 타입을 나눠놓기
+    
     public PortalType portalType;    //포탈 타입 인스펙터에서 고를 수 있게
     private Vector3 playerPosition;
 
