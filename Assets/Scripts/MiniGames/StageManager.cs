@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Splines;
 
 public class StageManager : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class StageManager : MonoBehaviour
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
     private float timerMultiplier = 1f;//타이머 배속
     private Vector3 playerPosition;    //플레이어 포지션 저장
+    private int layerNumber;
     private string currentSceneName;   //현재 씬 이름
     public List<int> stageClearPortal = new List<int>(); //여기에 활성화 되는 포탈 인덱스 값만 저장
 
@@ -32,7 +35,7 @@ public class StageManager : MonoBehaviour
 
     private const string _mainSceneName = "VillageScene";  //메인씬 이름
 
-    [SerializeField] Scene[] mapScene;  //맵씬 모음
+    [SerializeField] string[] mapScene;  //맵씬 모음
 
     private void Awake()
     {
@@ -63,12 +66,30 @@ public class StageManager : MonoBehaviour
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
-        //맵을 넘긴다
+        LoadRandomMap();
 
-        //playerPrefab = Instantiate(playerPrefab, playerPosition, Quaternion.identity);  //플레이어를 해당위치로 놔주고
+        StartCoroutine(StartGameLoad());
+        
         Debug.Log("게임시작");
         //다초기화하고 미니게임 장소로 이동
     }
+
+    private IEnumerator StartGameLoad()
+    {
+        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
+        while (!ansynLoad.isDone)
+        {
+            yield return null;
+        }
+        
+        Map map = FindAnyObjectByType<Map>();
+        Debug.Log(map);
+        map.SetRandomPortal();
+    }
+
+    //씬로드가 완료가 됬을때 동작
+
+    //map.SetRandomPortal();
 
     private void ResetInfo()
     {
@@ -89,8 +110,7 @@ public class StageManager : MonoBehaviour
 
         MiniGameData selectedGame = randomGames[Random.Range(0, randomGames.Count)];  //배열에서도 랜덤
         SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
-        Map map = FindAnyObjectByType<Map>();
-        map.SetRandomPortal();
+        
     }
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
@@ -141,6 +161,18 @@ public class StageManager : MonoBehaviour
             this.randomGames.Add(randomGames);
         }
     }
+
+    public string LoadRandomMap()
+    {
+        int randomSceneNum = Random.Range(0, mapScene.Length);
+        if (mapScene == null)
+        {
+            return "";
+        }
+        string mapName = mapScene[randomSceneNum];
+        return mapName;
+    }
+
     public void AddPortal(int portal)
     {
         stageClearPortal.Add(portal);
@@ -166,12 +198,10 @@ public class StageManager : MonoBehaviour
         }
         else  //성공
         {
-            SceneManager.LoadScene(currentSceneName);
-            Debug.Log(playerPosition);
             StartCoroutine(LatePlayerPosition());  //플레이어를 원레 위치로
         }
     }
-    private void GameOver()  //게임오버가 되면 로비씬으로 이동
+    public void GameOver()  //게임오버가 되면 로비씬으로 이동
     {
         if (!isGameActive || isGameOver) //현재 게임이 실행상태가 아니거나 게임오버 상태가 아니라면 돌아가기
             return;
@@ -187,15 +217,30 @@ public class StageManager : MonoBehaviour
     }
     #endregion
     #region Player
-    public void SavePlayerPosition(Vector3 position)
+    public void SavePlayerPosition(Vector3 position, int layer)
     { 
-         playerPosition = position;
+        layerNumber = layer;
+        playerPosition = position;
     }
     private IEnumerator LatePlayerPosition() //플레이어를 찾아 해당 포지션으로 이동 (오류나서 코루틴으로 변경)
     {
-        yield return new WaitForSeconds(0.1f);
-        GameObject player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾아서 
-        if (player) player.transform.position = playerPosition;   //플레이어 위치를 수정
+        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(currentSceneName); //어씬크
+        while (!ansynLoad.isDone)
+        {
+            yield return null;
+        }
+
+        GameObject player = null;
+        while (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾아서 
+        }
+        
+        if (player != null)
+        {
+            player.layer = layerNumber;
+            player.transform.position = playerPosition;   //플레이어 위치를 수정
+        }
     }
 
     public void SetPlayerPosition()
