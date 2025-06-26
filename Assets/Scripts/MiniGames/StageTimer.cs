@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class StageTimer : MonoBehaviour
 {
-    public const float MAX_TIME = 60f;
-    public float timer = 60f;
+    public const float MAX_TIME = 120f;
+    public float timer = 120f;
     private bool isActive = false;
     public TextMeshProUGUI timerText;
     public Image uiBar;
@@ -20,6 +20,10 @@ public class StageTimer : MonoBehaviour
         if (isActive)
         {
             timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                StageManager.instance.GameOver();
+            }
         }
 
         timerText.text = Mathf.Round(timer).ToString();
