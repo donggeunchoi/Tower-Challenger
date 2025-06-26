@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     [Header("정보")]
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
+    public GameObject infoUI;
 
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
@@ -46,17 +47,19 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-        isGameActive = false;  
+        isGameActive = false;
+        infoUI.SetActive(isGameActive);
     }
 
     public void StartGame()
     {
         isGameOver = false;  //게임오버상태 초기화
         isGameActive = true;  //현재 게임 시작
+        infoUI.SetActive(isGameActive);
         stageLP.ResetLP();    //LP초기화
         stageTimer.SetTimer();//타이머 시작
         floor = 1;            //현재층 1층
-        totalStageCount = 0;  //현재 스테이지 카운트 초기화
+        totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
 
@@ -143,14 +146,16 @@ public class StageManager : MonoBehaviour
     private void GameOver()  //게임오버가 되면 로비씬으로 이동
     {
         if (!isGameActive || isGameOver) //현재 게임이 실행상태가 아니거나 게임오버 상태가 아니라면 돌아가기
-            return;  
+            return;
 
         if (stageTimer.timer <= 0 || stageLP.currentLP <= 0)  //타이머가 0이되거나 LP가 0이되면 게임오버
-
-        isGameOver = true;
-        isGameActive = false;
-        if (floor > bestFloor) bestFloor = floor;
-        SceneManager.LoadScene(_mainSceneName); //메인씬 로드
+        {
+            isGameOver = true;
+            isGameActive = false;
+            infoUI.SetActive(isGameActive);
+            if (floor > bestFloor) bestFloor = floor;
+            SceneManager.LoadScene(_mainSceneName); //메인씬 로드
+        }
     }
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산

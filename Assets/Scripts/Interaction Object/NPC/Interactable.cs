@@ -8,7 +8,7 @@ public interface IInteractable  //상호작용이 가능하면 상호 작용을 
 
 public class InteractionUI : MonoBehaviour
 {
-    public PlayerInteraction owner;
+    public PlayerInteraction interaction;
     public Button closeButton;
 
     private void Start()
@@ -21,18 +21,18 @@ public class InteractionUI : MonoBehaviour
 
     private void Close()  //UI창을 여러개 띄워놓는 것을 방지!
     {
-        if (owner != null)
+        if (interaction != null)
         {
-            owner.UIDestroyed(gameObject);
+            interaction.UIDestroyed(gameObject);
         }
         Destroy(gameObject);
     }
 
     private void OnDestroy()  //만약에 자동으로 부숴지면 호출!
     {
-        if (owner != null)
+        if (interaction != null)
         {
-            owner.UIDestroyed(gameObject);
+            interaction.UIDestroyed(gameObject);
         }
     }
 }
