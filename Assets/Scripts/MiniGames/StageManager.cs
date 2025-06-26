@@ -24,13 +24,15 @@ public class StageManager : MonoBehaviour
     private float timerMultiplier = 1f;//타이머 배속
     private Vector3 playerPosition;    //플레이어 포지션 저장
     private string currentSceneName;   //현재 씬 이름
-    public List<int> stageClearPortal = new List<int>();
+    public List<int> stageClearPortal = new List<int>(); //여기에 활성화 되는 포탈 인덱스 값만 저장
 
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
     private List<MiniGameData> randomGames = new List<MiniGameData>();  //랜덤으로 미니게임 배열이 들어갈 공간
 
     private const string _mainSceneName = "VillageScene";  //메인씬 이름
+
+    [SerializeField] Scene[] mapScene;  //맵씬 모음
 
     private void Awake()
     {
@@ -61,8 +63,9 @@ public class StageManager : MonoBehaviour
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
+        //맵을 넘긴다
 
-
+        //playerPrefab = Instantiate(playerPrefab, playerPosition, Quaternion.identity);  //플레이어를 해당위치로 놔주고
         Debug.Log("게임시작");
         //다초기화하고 미니게임 장소로 이동
     }
@@ -86,6 +89,8 @@ public class StageManager : MonoBehaviour
 
         MiniGameData selectedGame = randomGames[Random.Range(0, randomGames.Count)];  //배열에서도 랜덤
         SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
+        Map map = FindAnyObjectByType<Map>();
+        map.SetRandomPortal();
     }
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
@@ -99,6 +104,8 @@ public class StageManager : MonoBehaviour
             timerMultiplier *= 1.2f;
 
         RandomStage();
+        Map map = FindAnyObjectByType<Map>();
+        map.SetRandomPortal();
     }
     #endregion
     #region MiniGameSet
@@ -124,7 +131,7 @@ public class StageManager : MonoBehaviour
             {
                 int randomNum = Random.Range(0, gameList.Count);
                 randomGames = gameList[randomNum];
-                gameList.RemoveAt(randomNum); 
+                gameList.RemoveAt(randomNum);
             }
             else  //그렇지않으면 중복허용
             {
@@ -134,10 +141,14 @@ public class StageManager : MonoBehaviour
             this.randomGames.Add(randomGames);
         }
     }
+    public void AddPortal(int portal)
+    {
+        stageClearPortal.Add(portal);
+    }
 
     public void SaveClearPortal(int clear)
     {
-        stageClearPortal.Add(clear);
+        stageClearPortal.Remove(clear);
     }
 
     public void ResetClearPortal()
