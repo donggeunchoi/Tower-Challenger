@@ -17,6 +17,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public float CooldownTime = 3f;         //쿨타임
     public bool canDash = true;             //대쉬할수 있는 상태
     public bool isDashing = false;          //대쉬중은 아니니까 
+    public SpriteRenderer spriteRenderer;   //방향전환 이미지
 
     
     void Start()
@@ -24,6 +25,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         radius = stick.sizeDelta.x * 0.5f;     //스틱의 크기의 절반을 반지름으로
         stick.anchoredPosition = Vector2.zero; //중앙 위치
         inputDir = Vector2.zero;               //입력 방향을 초기화
+        spriteRenderer = player.GetComponent<SpriteRenderer>(); //플레이어 스프라이트
     }
 
     void Update()
@@ -31,7 +33,9 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         if (player != null)
         {
             player.Translate(new Vector3(inputDir.x, inputDir.y, 0) * Time.deltaTime * speed);
+            FlipChange();
         }
+        
     }
 
     public void OnPointerDown(PointerEventData eventData)  //터치가 시작될 때 드래그 처리
@@ -109,5 +113,23 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         yield return new WaitForSeconds(CooldownTime);
         canDash = true;
     }
+
+
+    public void FlipChange()
+    {
+        Vector3 move = new Vector3(inputDir.x, inputDir.y, 0);
+        player.Translate(move * Time.deltaTime * speed);
+
+        // 방향 전환
+        if (inputDir.x > 0.1f)
+        {
+            spriteRenderer.flipX = false; // 오른쪽
+        }
+        else if (inputDir.x < -0.1f)
+        {
+            spriteRenderer.flipX = true;  // 왼쪽
+        }
+    }
+    
     
 }
