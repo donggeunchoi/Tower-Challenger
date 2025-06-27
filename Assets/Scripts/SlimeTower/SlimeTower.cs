@@ -23,11 +23,16 @@ public class SlimeTower : MonoBehaviour
             MoveSlime();
             Invoke("SpawnSlime",0.5f);
         }
+        
+        CheckTower();
     }
     //슬라임을 생성하는 메서드
     public void SpawnSlime()
     {
         currentSlime = Instantiate(slimePrefab, spawnPosition.position,Quaternion.identity);
+
+        Slime slime = currentSlime.GetComponent<Slime>();
+        slime.towerRoot = towerRoot;
     }
     //떨어지는 메서드(움직이는 물체를 보여줘야하니까)
     public void MoveSlime()
@@ -46,9 +51,14 @@ public class SlimeTower : MonoBehaviour
         float zAngle = towerRoot.eulerAngles.z;
         if (zAngle > 180f)
         {
+            zAngle -= 360f;
+        }
+
+        if (Mathf.Abs(zAngle) < tiltLimit)
+        {
+            Debug.Log($"이게 뭔지 다시 한번체크해봐야겠다.{zAngle}");
             
         }
     }
-    
     
 }
