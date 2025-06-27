@@ -30,6 +30,9 @@ public class SlimeTower : MonoBehaviour
     public void SpawnSlime()
     {
         currentSlime = Instantiate(slimePrefab, spawnPosition.position,Quaternion.identity);
+
+        Slime slime = currentSlime.GetComponent<Slime>();
+        slime.towerRoot = towerRoot;
     }
     //떨어지는 메서드(움직이는 물체를 보여줘야하니까)
     public void MoveSlime()
@@ -53,9 +56,9 @@ public class SlimeTower : MonoBehaviour
 
         if (Mathf.Abs(zAngle) < tiltLimit)
         {
-            Debug.Log("제한 기울기 도달 게임오버");
+            Debug.Log($"이게 뭔지 다시 한번체크해봐야겠다.{zAngle}");
+            
         }
     }
-    
     
 }
