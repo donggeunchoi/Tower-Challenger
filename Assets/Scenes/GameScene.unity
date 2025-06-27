@@ -565,7 +565,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7062771792125880828, guid: 14aab8e88bc52ac4b87cc43a6d5f6955,
+  m_Sprite: {fileID: -7062771792125880828, guid: f37b06e5a41bc415cbe0aafe66b9fc22,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1475,10 +1475,12 @@ MonoBehaviour:
   stageClearPortal: 
   miniGameDatas:
   - {fileID: 11400000, guid: da224f2646da1d74fa94ab8e8c1dba93, type: 2}
-  - {fileID: 11400000, guid: da224f2646da1d74fa94ab8e8c1dba93, type: 2}
+  - {fileID: 11400000, guid: 3c2e5b03cc437894782861f0f60e6411, type: 2}
+  - {fileID: 11400000, guid: f998f18be8c5ab94983e54bb1a4ee2dd, type: 2}
   Text: {fileID: 8972311443428119712}
   mapScene:
   - TopScene-1
+  - TopScene-3
 --- !u!223 &9085301136467635493
 Canvas:
   m_ObjectHideFlags: 0
@@ -1500,7 +1502,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

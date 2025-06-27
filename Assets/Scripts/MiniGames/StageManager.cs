@@ -52,11 +52,13 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         isGameActive = false;
+        if (infoUI  != null)
         infoUI.SetActive(isGameActive);
     }
 
     private void Update()
     {
+        if (Text != null)
         Text.text = "Stage :" + stageCount + "Totla :" + totalStageCount + "Floor :" + floor;
     }
     #region MiniGameCall
