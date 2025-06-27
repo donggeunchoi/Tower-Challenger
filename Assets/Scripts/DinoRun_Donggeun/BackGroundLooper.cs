@@ -13,7 +13,7 @@ public class BackGroundLooper : MonoBehaviour
 
     void Update()
     {
-        float speed = DinoMiniGame.Instance.currentSpeed;
+        float speed = DinoMiniGame.instance.CurrentSpeed;
         transform.Translate(Vector3.left * speed * Time.deltaTime);
 
         // 배경이 왼쪽으로 완전히 나가면 오른쪽으로 재배치

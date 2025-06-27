@@ -7,13 +7,9 @@ public class Player : MonoBehaviour
     [Header("Player Settings")]
     public Rigidbody2D playerRb;
     public float jumpForce = 10f;
-    // public float slideDuration = 0.5f;
     private bool isGrounded = true;
-    private bool isSliding = false;
     private bool isInvincible = false;
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
-    private Vector3 originalScale;
-    private Vector3 slideScale;
     public Animator animation;
     
     private int normalLayer;
@@ -34,7 +30,6 @@ public class Player : MonoBehaviour
         // Touch for jump
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
 
-
         //테스트용
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
@@ -54,7 +49,8 @@ public class Player : MonoBehaviour
         {
             StopSliding();
         }
-        
+
+        #region MobileTouch
         //모바일 터치 내용
         // if (Input.touchCount > 0)
         // {
@@ -73,6 +69,7 @@ public class Player : MonoBehaviour
         //         }
         //     }
         // }
+        #endregion        
     }
     void LateUpdate()
     {
@@ -92,7 +89,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
         {
-            DinoMiniGame.Instance.HandleHit();
+            DinoMiniGame.instance.HandleHit();
             StartCoroutine(InvencibilityRoutine());
         }
         
@@ -102,7 +99,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DeadZone") && !isInvincible)
         {
-            DinoMiniGame.Instance.HandleHit();
+            DinoMiniGame.instance.HandleHit();
             transform.position = respawnPosition;
             StartCoroutine(InvencibilityRoutine());
         }
@@ -120,7 +117,7 @@ public class Player : MonoBehaviour
 
         while (elapsed < invincibleTime)
         {
-            // 깜빡임 효과 (선택)
+            // 깜빡임 효과
             if (sr != null)
                 sr.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time * 5, 1f));
 
@@ -138,6 +135,10 @@ public class Player : MonoBehaviour
         isInvincible = false;
     }
 
+    #region jump & Sliding
+    
+    
+    
     public void Jump()
     {
         animation.SetBool("IsJump", true);
@@ -158,5 +159,6 @@ public class Player : MonoBehaviour
     {
         animation.SetBool("Sliding", false);
     }
+    #endregion
    
 }
