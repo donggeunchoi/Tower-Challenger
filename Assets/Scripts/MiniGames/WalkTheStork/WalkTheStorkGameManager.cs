@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using TMPro;
 
 public class WalkTheStorkGameManager : MonoBehaviour
 {
@@ -18,7 +20,12 @@ public class WalkTheStorkGameManager : MonoBehaviour
     public float angularDamping = 1.5f;     // 회전 감속 계수 (마찰 역할)
 
     [Header("새 부위")]
-    public GameObject Neck;                 // 회전을 적용할 목 오브젝트
+    public GameObject Body;                 // 회전을 적용할 목 오브젝트
+    public GameObject Head;
+
+    [Header("출력 UI")]
+
+    public GameObject PrintOut;
 
     // 내부 상태 값
     private float currentAngle = 0f;        // 현재 회전 각도
@@ -27,10 +34,32 @@ public class WalkTheStorkGameManager : MonoBehaviour
     // 바람/난이도 조절 관련
     private float autoRotate = 0f;          // 바람처럼 지속적으로 적용되는 회전력
     private float resetTimer = 0f;          // 난이도 타이머
-    private float resetClock = 0f;          // 다음 난이도 조정까지의 시간
+    private float resetClock = 0f;
 
+    private float Goal;// 다음 난이도 조정까지의 시간
+
+
+    int Lv = 1;
+
+    private void Start()
+    {
+
+        if (Lv == 1)
+        {
+            Goal = 10;
+        }
+        else if (Lv == 2)
+        {
+            Goal = 20;
+        }
+        Debug.Log("");
+
+
+    }
     void Update()
     {
+        PrintOut.GetComponent<TextMeshProUGUI>().text = tiltTimer.ToString("F1") +"/"+ Goal;
+
         float deltaTime = Time.deltaTime;
 
         // 자동 흔들림 
@@ -71,9 +100,13 @@ public class WalkTheStorkGameManager : MonoBehaviour
     
 
         // 실제 오브젝트 회전에 적용 (Neck 오브젝트에만 회전 적용)
-        if (Neck != null)
+        if (Body != null)
         {
-            Neck.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+            Body.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        }
+        if (Head != null)
+        {
+            Head.transform.rotation = Quaternion.Euler(0f, 0f, -currentAngle * 0.00001f);
         }
 
         //  바람 세기 및 자동 흔들림 난이도 변화
@@ -88,8 +121,5 @@ public class WalkTheStorkGameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        Debug.Log("currentAngle: ");
-    }
+    
 }
