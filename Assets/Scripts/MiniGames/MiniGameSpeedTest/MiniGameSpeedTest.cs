@@ -67,6 +67,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         {
             trueOrFalse.text = "False!";
             StartCoroutine(FailEffect());
+            GameResult(false);
         }
     }
 

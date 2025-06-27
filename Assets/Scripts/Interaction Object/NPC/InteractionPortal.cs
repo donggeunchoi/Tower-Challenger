@@ -20,7 +20,6 @@ public class InteractionPortal : MonoBehaviour, IInteractable
             case PortalType.NextGame:
                 Debug.Log(playerPosition);
                 StageManager.instance.SaveClearPortal(portalNumber);
-                StageManager.instance.stageCount++;
                 StageManager.instance.SavePlayerPosition(playerPosition, layerNumber);  //플레이어의 위치를 저장하고
                 StageManager.instance.StartNextMiniGame();  //미니게임 씬으로 이동합니다
                 break;
