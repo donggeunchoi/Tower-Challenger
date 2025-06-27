@@ -25,7 +25,6 @@ public class ShadowUI : MonoBehaviour
 
             Debug.Log($"button name : {buttonImages[i].name}");
             Debug.Log($"button sprite name : {buttonImages[i].sprite.name}");
-
         }
     }
 
