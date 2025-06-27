@@ -74,10 +74,12 @@ public class MiniGameSpeedTest : MonoBehaviour
     {
         if (gameResult)
         {
+            stageManager.MiniGameResult(true);
             return;
         }
         else
         {
+            stageManager.MiniGameResult(false);
             ResetGameState();
             StartGame();
         }

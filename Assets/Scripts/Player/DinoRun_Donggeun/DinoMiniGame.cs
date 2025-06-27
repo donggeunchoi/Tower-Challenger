@@ -57,7 +57,7 @@ public class DinoMiniGame : MonoBehaviour
     {
         for (int i = 0; i < lpIcon.Length; i++)
         {
-            lpIcon[i].SetActive(i < StageManager.instance.stageLP.currentLP);
+            //lpIcon[i].SetActive(i < StageManager.instance.stageLP.currentLP);
         }
     }
 
