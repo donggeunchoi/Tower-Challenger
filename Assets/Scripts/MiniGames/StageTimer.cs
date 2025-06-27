@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class StageTimer : MonoBehaviour
 {
-    public float timer = 60f;
+    public const float MAX_TIME = 120f;
+    public float timer = 120f;
     private bool isActive = false;
+    public TextMeshProUGUI timerText;
+    public Image uiBar;
 
     private void Start()
     {
@@ -12,25 +17,33 @@ public class StageTimer : MonoBehaviour
 
     private void Update()
     {
-        //if (isActive)
-        //{
-        //    timer -= Time.deltaTime;
-        //}
-        PlayTiem();
+        if (isActive)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                StageManager.instance.GameOver();
+            }
+        }
+
+        timerText.text = Mathf.Round(timer).ToString();
+        uiBar.fillAmount = GetPercent();
     }
-    public void PlayTiem()
-    {
-        timer -= Time.deltaTime;
-    }
+
     public void SetTimer()
     {
-        timer = 60f;
+        timer = MAX_TIME;
         isActive = true;
     }
 
     public void ResetTimer()
     {
-        timer = 60f;
+        timer = MAX_TIME;
         isActive = false;
+    }
+
+    float GetPercent()
+    {
+        return timer / MAX_TIME;
     }
 }
