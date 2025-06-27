@@ -24,17 +24,17 @@ public class StageManager : MonoBehaviour
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
     private float timerMultiplier = 1f;//타이머 배속
     private Vector3 playerPosition;    //플레이어 포지션 저장
-    private int layerNumber;
+    private int layerNumber;           //플레이어 레이어 저장
     private string currentSceneName;   //현재 씬 이름
     public List<int> stageClearPortal = new List<int>(); //여기에 활성화 되는 포탈 인덱스 값만 저장
 
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
     private List<MiniGameData> randomGames = new List<MiniGameData>();  //랜덤으로 미니게임 배열이 들어갈 공간
-    public TextMeshProUGUI Text;
+    public TextMeshProUGUI Text;            //테스트용 텍스트
     private const string _mainSceneName = "VillageScene";  //메인씬 이름
 
-    [SerializeField] string[] mapScene;  //맵씬 모음
+    [SerializeField] string[] mapScenes;  //맵씬 모음
 
     private void Awake()
     {
@@ -167,12 +167,12 @@ public class StageManager : MonoBehaviour
 
     public string LoadRandomMap()
     {
-        int randomSceneNum = Random.Range(0, mapScene.Length);
-        if (mapScene == null)
+        int randomSceneNum = Random.Range(0, mapScenes.Length);
+        if (mapScenes == null)
         {
             return "";
         }
-        string mapName = mapScene[randomSceneNum];
+        string mapName = mapScenes[randomSceneNum];
         return mapName;
     }
 
