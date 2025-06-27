@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
+    public GameObject gameOver;
 
     [Header("정보")]
     public StageTimer stageTimer;     //스테이지 타이머
@@ -24,17 +25,16 @@ public class StageManager : MonoBehaviour
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
     private float timerMultiplier = 1f;//타이머 배속
     private Vector3 playerPosition;    //플레이어 포지션 저장
-    private int layerNumber;
+    private int layerNumber;           //플레이어 레이어 저장
     private string currentSceneName;   //현재 씬 이름
     public List<int> stageClearPortal = new List<int>(); //여기에 활성화 되는 포탈 인덱스 값만 저장
 
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
     private List<MiniGameData> randomGames = new List<MiniGameData>();  //랜덤으로 미니게임 배열이 들어갈 공간
-    public TextMeshProUGUI Text;
-    private const string _mainSceneName = "VillageScene";  //메인씬 이름
+    
 
-    [SerializeField] string[] mapScene;  //맵씬 모음
+    [SerializeField] string[] mapScenes;  //맵씬 모음
 
     private void Awake()
     {
@@ -58,8 +58,7 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (Text != null)
-        Text.text = "Stage :" + stageCount + "Totla :" + totalStageCount + "Floor :" + floor;
+
     }
     #region MiniGameCall
     public void StartGame()
@@ -167,12 +166,12 @@ public class StageManager : MonoBehaviour
 
     public string LoadRandomMap()
     {
-        int randomSceneNum = Random.Range(0, mapScene.Length);
-        if (mapScene == null)
+        int randomSceneNum = Random.Range(0, mapScenes.Length);
+        if (mapScenes == null)
         {
             return "";
         }
-        string mapName = mapScene[randomSceneNum];
+        string mapName = mapScenes[randomSceneNum];
         return mapName;
     }
 
@@ -184,6 +183,7 @@ public class StageManager : MonoBehaviour
     public void SaveClearPortal(int clear)
     {
         stageClearPortal.Remove(clear);
+        
     }
 
     public void ResetClearPortal()
@@ -213,11 +213,14 @@ public class StageManager : MonoBehaviour
         {
             isGameOver = true;
             isGameActive = false;
-            infoUI.SetActive(isGameActive);
-            if (floor > bestFloor) bestFloor = floor;
-            SceneManager.LoadScene(_mainSceneName); //메인씬 로드
+            //infoUI.SetActive(isGameActive);
+            if (floor > bestFloor) 
+                bestFloor = floor;
+
+            GameObject gameOverPanel =  Instantiate(gameOver, infoUI.transform);
         }
     }
+
     #endregion
     #region Player
     public void SavePlayerPosition(Vector3 position, int layer)
@@ -233,8 +236,19 @@ public class StageManager : MonoBehaviour
             yield return null;
         }
 
-        Map map = FindAnyObjectByType<Map>();
-        map.AllClearFloor();
+        if (stageClearPortal.Count != 0)
+        {
+            for (int i = 0; i < stageClearPortal.Count; i++)
+            {
+                Debug.Log(stageClearPortal[i]);
+            }
+        }
+
+        if (stageClearPortal.Count == 0 && isGameActive)
+        {
+            Map map = FindAnyObjectByType<Map>();
+            map.AllClearFloor();
+        }
 
         GameObject player = null;
         while (player == null)
@@ -261,10 +275,12 @@ public class StageManager : MonoBehaviour
             player.GetComponent<SpriteRenderer>().sortingLayerName = LayerName;
             player.transform.position = playerPosition;   //플레이어 위치를 수정
         }
-
-        if (stageCount >= totalStageCount)
+        if (isGameActive)
         {
-            ResetClearPortal();
+            if (stageCount >= totalStageCount)
+            {
+                ResetClearPortal();
+            }
         }
     }
     #endregion
