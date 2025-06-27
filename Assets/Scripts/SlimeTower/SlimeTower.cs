@@ -23,6 +23,8 @@ public class SlimeTower : MonoBehaviour
             MoveSlime();
             Invoke("SpawnSlime",0.5f);
         }
+        
+        CheckTower();
     }
     //슬라임을 생성하는 메서드
     public void SpawnSlime()
@@ -46,7 +48,12 @@ public class SlimeTower : MonoBehaviour
         float zAngle = towerRoot.eulerAngles.z;
         if (zAngle > 180f)
         {
-            
+            zAngle -= 360f;
+        }
+
+        if (Mathf.Abs(zAngle) < tiltLimit)
+        {
+            Debug.Log("제한 기울기 도달 게임오버");
         }
     }
     

@@ -310,6 +310,37 @@ Transform:
   - {fileID: 8269467528389401328}
   m_Father: {fileID: 2460152164511323298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5396435190047187446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4282025721384573243}
+  m_Layer: 0
+  m_Name: TowerRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4282025721384573243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5396435190047187446}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2460152164511323298}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5455147596313824667
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +598,7 @@ Transform:
   m_Children:
   - {fileID: 252882790121111397}
   - {fileID: 2093228520366349664}
+  - {fileID: 4282025721384573243}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &907534405809399075
@@ -584,7 +616,7 @@ MonoBehaviour:
   slimePrefab: {fileID: 5042006565923922714, guid: de5402cd84bc54becaebe632e0e6c3ff,
     type: 3}
   spawnPosition: {fileID: 4892529266903209933}
-  towerRoot: {fileID: 0}
+  towerRoot: {fileID: 4282025721384573243}
 --- !u!1001 &2760608200911780007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -596,7 +628,7 @@ PrefabInstance:
     - target: {fileID: 4270259860928947655, guid: 7aaa717dd530244249edf73eec2b525c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4270259860928947655, guid: 7aaa717dd530244249edf73eec2b525c,
         type: 3}
