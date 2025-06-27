@@ -183,6 +183,7 @@ public class StageManager : MonoBehaviour
     public void SaveClearPortal(int clear)
     {
         stageClearPortal.Remove(clear);
+        
     }
 
     public void ResetClearPortal()
@@ -235,7 +236,15 @@ public class StageManager : MonoBehaviour
             yield return null;
         }
 
-        if (isGameActive)
+        if (stageClearPortal.Count != 0)
+        {
+            for (int i = 0; i < stageClearPortal.Count; i++)
+            {
+                Debug.Log(stageClearPortal[i]);
+            }
+        }
+
+        if (stageClearPortal.Count == 0 && isGameActive)
         {
             Map map = FindAnyObjectByType<Map>();
             map.AllClearFloor();
