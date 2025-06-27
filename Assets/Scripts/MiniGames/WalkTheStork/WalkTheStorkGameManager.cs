@@ -33,31 +33,31 @@ public class WalkTheStorkGameManager : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
 
-        // 1. 자동 흔들림 (자연스럽게 좌우 흔들림)
+        // 자동 흔들림 
         tiltTimer += deltaTime;
         float autoTilt = Mathf.Sin(tiltTimer * autoTiltSpeed) * autoTiltRange;
         angularVelocity += autoTilt * deltaTime;
 
-        // 2. 바람처럼 지속적으로 작용하는 회전력
+        //바람처럼 지속적으로 작용하는 회전력
         angularVelocity += autoRotate;
 
-        // 3. 사용자 입력에 따른 회전 가속
+        // 사용자 입력에 따른 회전 가속
         float input = Input.GetAxisRaw("Horizontal");
         angularVelocity += -input * rotationSpeed * deltaTime;
 
-        // 4. 좌우 꺾기 (즉시 꺾임)
+        // 좌우 꺾기
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             angularVelocity += (tiltAmount + tiltTimer*5);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             angularVelocity -= (tiltAmount + tiltTimer*5);
 
-        // 5. 기울어진 각도에 따라 더 기울어지게 만드는 중력 효과
+        // 기울어진 각도에 따라 더 기울어지게 만드는 중력 효과
         angularVelocity += currentAngle * gravityTiltStrength * deltaTime;
 
-        // 6. 회전 감속 처리 (자연스러운 정지 효과)
+        // 회전 감속 처리 (자연스러운 정지 효과)
         angularVelocity *= Mathf.Exp(-angularDamping * deltaTime);
 
-        // 7. 회전 각도 갱신
+        //  회전 각도 갱신
         currentAngle += angularVelocity * deltaTime;
 
         
@@ -70,13 +70,13 @@ public class WalkTheStorkGameManager : MonoBehaviour
         }
     
 
-        // 9. 실제 오브젝트 회전에 적용 (Neck 오브젝트에만 회전 적용)
+        // 실제 오브젝트 회전에 적용 (Neck 오브젝트에만 회전 적용)
         if (Neck != null)
         {
             Neck.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
         }
 
-        // 10. 바람 세기 및 자동 흔들림 난이도 변화
+        //  바람 세기 및 자동 흔들림 난이도 변화
         resetTimer += deltaTime;
         if (resetTimer > resetClock)
         {
