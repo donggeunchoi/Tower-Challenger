@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
+    public GameObject gameOver;
 
     [Header("정보")]
     public StageTimer stageTimer;     //스테이지 타이머
@@ -31,8 +32,7 @@ public class StageManager : MonoBehaviour
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
     private List<MiniGameData> randomGames = new List<MiniGameData>();  //랜덤으로 미니게임 배열이 들어갈 공간
-    public TextMeshProUGUI Text;            //테스트용 텍스트
-    private const string _mainSceneName = "VillageScene";  //메인씬 이름
+    
 
     [SerializeField] string[] mapScenes;  //맵씬 모음
 
@@ -58,8 +58,7 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (Text != null)
-        Text.text = "Stage :" + stageCount + "Totla :" + totalStageCount + "Floor :" + floor;
+
     }
     #region MiniGameCall
     public void StartGame()
@@ -213,11 +212,14 @@ public class StageManager : MonoBehaviour
         {
             isGameOver = true;
             isGameActive = false;
-            infoUI.SetActive(isGameActive);
-            if (floor > bestFloor) bestFloor = floor;
-            SceneManager.LoadScene(_mainSceneName); //메인씬 로드
+            //infoUI.SetActive(isGameActive);
+            if (floor > bestFloor) 
+                bestFloor = floor;
+
+            GameObject gameOverPanel =  Instantiate(gameOver, infoUI.transform);
         }
     }
+
     #endregion
     #region Player
     public void SavePlayerPosition(Vector3 position, int layer)
@@ -233,8 +235,11 @@ public class StageManager : MonoBehaviour
             yield return null;
         }
 
-        Map map = FindAnyObjectByType<Map>();
-        map.AllClearFloor();
+        if (isGameActive)
+        {
+            Map map = FindAnyObjectByType<Map>();
+            map.AllClearFloor();
+        }
 
         GameObject player = null;
         while (player == null)
@@ -261,10 +266,12 @@ public class StageManager : MonoBehaviour
             player.GetComponent<SpriteRenderer>().sortingLayerName = LayerName;
             player.transform.position = playerPosition;   //플레이어 위치를 수정
         }
-
-        if (stageCount >= totalStageCount)
+        if (isGameActive)
         {
-            ResetClearPortal();
+            if (stageCount >= totalStageCount)
+            {
+                ResetClearPortal();
+            }
         }
     }
     #endregion
