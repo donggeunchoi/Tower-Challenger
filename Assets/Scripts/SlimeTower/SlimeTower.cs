@@ -24,7 +24,7 @@ public class SlimeTower : MonoBehaviour
             Invoke("SpawnSlime",0.5f);
         }
         
-        CheckTower();
+        // CheckTower();
     }
     //슬라임을 생성하는 메서드
     public void SpawnSlime()
@@ -46,19 +46,19 @@ public class SlimeTower : MonoBehaviour
     }
     
     //타워를 체크해서 기울기를 확인하는 메서드
-    private void CheckTower()
-    {
-        float zAngle = towerRoot.eulerAngles.z;
-        if (zAngle > 180f)
-        {
-            zAngle -= 360f;
-        }
-
-        if (Mathf.Abs(zAngle) < tiltLimit)
-        {
-            Debug.Log($"이게 뭔지 다시 한번체크해봐야겠다.{zAngle}");
-            
-        }
-    }
+    // private void CheckTower()
+    // {
+    //     float zAngle = towerRoot.eulerAngles.z;
+    //     if (zAngle > 180f)
+    //     {
+    //         zAngle -= 360f;
+    //     }
+    //
+    //     if (Mathf.Abs(zAngle) < tiltLimit)
+    //     {
+    //         Debug.Log($"이게 뭔지 다시 한번체크해봐야겠다.{zAngle}");
+    //         
+    //     }
+    // }
     
 }
