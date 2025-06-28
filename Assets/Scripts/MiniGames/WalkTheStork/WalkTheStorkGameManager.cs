@@ -19,9 +19,12 @@ public class WalkTheStorkGameManager : MonoBehaviour
     [Header("감속 관련")]
     public float angularDamping = 1.5f;     // 회전 감속 계수 (마찰 역할)
 
-    [Header("새 부위")]
+    [Header("부위")]
     public GameObject Body;                 // 회전을 적용할 목 오브젝트
     public GameObject Head;
+    public GameObject Leg;
+    public GameObject Hand;
+
 
     [Header("출력 UI")]
 
@@ -46,11 +49,15 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
         if (Lv == 1)
         {
-            Goal = 10;
+            Goal = 30;
         }
         else if (Lv == 2)
         {
-            Goal = 20;
+            Goal = 50;
+        }
+        else if (Lv == 3)
+        {
+            Goal = 100;
         }
         Debug.Log("");
 
@@ -107,6 +114,14 @@ public class WalkTheStorkGameManager : MonoBehaviour
         if (Head != null)
         {
             Head.transform.rotation = Quaternion.Euler(0f, 0f, -currentAngle * 0.00001f);
+        }
+        if (Leg != null)
+        {
+            Leg.transform.rotation = Quaternion.Euler(0f, 0f, -currentAngle * 0.00001f);
+        }
+        if (Hand != null)
+        {
+            Hand.transform.rotation = Quaternion.Euler(0f, 0f, -currentAngle * 0.00001f);
         }
 
         //  바람 세기 및 자동 흔들림 난이도 변화
