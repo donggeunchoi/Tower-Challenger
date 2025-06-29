@@ -6,9 +6,12 @@ public class SlimeTower : MonoBehaviour
     public GameObject slimePrefab;
     public Transform spawnPosition;
     public Transform towerRoot;
+    public int clearGameCount;
 
     private GameObject currentSlime;
-    private float tiltLimit = 20f;
+    
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,7 +27,8 @@ public class SlimeTower : MonoBehaviour
             Invoke("SpawnSlime",0.5f);
         }
         
-        CheckTower();
+        
+        SlimeCountClear();
     }
     //슬라임을 생성하는 메서드
     public void SpawnSlime()
@@ -44,21 +48,13 @@ public class SlimeTower : MonoBehaviour
             currentSlime = null;
         }
     }
-    
-    //타워를 체크해서 기울기를 확인하는 메서드
-    private void CheckTower()
-    {
-        float zAngle = towerRoot.eulerAngles.z;
-        if (zAngle > 180f)
-        {
-            zAngle -= 360f;
-        }
 
-        if (Mathf.Abs(zAngle) < tiltLimit)
+    private void SlimeCountClear()
+    {
+        int slimeCount = towerRoot.childCount;
+        if (slimeCount == clearGameCount)
         {
-            Debug.Log($"이게 뭔지 다시 한번체크해봐야겠다.{zAngle}");
-            
+            StageManager.instance.MiniGameResult(true);
         }
     }
-    
 }
