@@ -120,4 +120,14 @@ public class VillageManager : MonoBehaviour
     }
 
     #endregion
+
+    public void OnClickMailBox()
+    {
+        MailBox.SetActive(true);
+    }
+
+    public void OnClickMailBoxClose()
+    {
+        MailBox.SetActive(false);
+    }
 }
