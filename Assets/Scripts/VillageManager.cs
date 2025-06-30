@@ -1,9 +1,15 @@
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VillageManager : MonoBehaviour
 {
+    [Header("fade")]
+    public Image fadePanel;
+    public float fadeDuration;
+    
     [Header("아이템 상점")]
     public GameObject StorePanel;
     public GameObject Item1;
@@ -29,13 +35,23 @@ public class VillageManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        fadePanel.gameObject.SetActive(true);
+        fadePanel.color = new Color(0, 0, 0, 1);
+        StartCoroutine("FadeOut");
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator FadeOut()
     {
-        
+        float time = 0;
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            float alpha = Mathf.Lerp(1, 0, time/fadeDuration);
+            fadePanel.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+
+        fadePanel.gameObject.SetActive(false);
     }
 
     public void VillageMove(string villageName)
@@ -60,6 +76,12 @@ public class VillageManager : MonoBehaviour
             case "StopPanel":
                 StopPanel.SetActive(true);
                 break;
+            case "TowerMove":
+                SceneManager.LoadScene("GameScene");
+                break;
+            
+            default:
+                break;
             
             
         }
@@ -68,11 +90,6 @@ public class VillageManager : MonoBehaviour
     public void OnClickOutStore()
     {
         StorePanel.SetActive(false);
-    }
-
-    public void OnClickTowerMove()
-    {
-        SceneManager.LoadScene("GameScene");
     }
 
     public void OnClickItem1()

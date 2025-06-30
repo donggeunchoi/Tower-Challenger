@@ -10,19 +10,36 @@ public class StartManager : MonoBehaviour
     public VideoPlayer videoPlayer;
     public Button startButton;
     public GameObject startPanel;
+    public Image fadeImage;
+    public float fadeDuration;
 
     void Start()
     {
         videoPanel.SetActive(false);
-        startButton.onClick.AddListener(PlayIntroVideo);
+        fadeImage.gameObject.SetActive(false);
+        fadeImage.color = new Color(0, 0, 0, 0);
+        
+        startButton.onClick.AddListener(() =>
+        {
+            StartCoroutine(PlayVideoSequence());
+        });
+        
     }
 
-    public void PlayIntroVideo()
+    IEnumerator PlayVideoSequence()
     {
+        fadeImage.gameObject.SetActive(true);
+        
+        yield return StartCoroutine(FadeIn());
+        
         videoPanel.SetActive(true);
         startPanel.SetActive(false);
+        
         videoPlayer.Play();
-        StartCoroutine(WaitforVideoToEnd());
+        
+        yield return StartCoroutine(FadeOut());
+
+        yield return StartCoroutine(WaitforVideoToEnd());
     }
 
     IEnumerator WaitforVideoToEnd()
@@ -33,10 +50,36 @@ public class StartManager : MonoBehaviour
         }
         
         videoPanel.SetActive(false);
+        
         SceneManager.LoadScene("VillageScene");
     }
-    // public void OnclickStart()
-    // {
-    //     SceneManager.LoadScene("VillageScene");
-    // }
+
+    IEnumerator FadeIn()
+    {
+        float time = 0f;
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            float alpha = Mathf.Lerp(0,1, time/fadeDuration);
+            fadeImage.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+        
+        fadeImage.color = new Color(0, 0, 0, 1);
+    }
+
+    IEnumerator FadeOut()
+    {
+        float time = 0f;
+
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            float alpha = Mathf.Lerp(1, 0, time/fadeDuration);
+            fadeImage.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+        fadeImage.color = new Color(0, 0, 0, 0);
+    }
+    
 }
