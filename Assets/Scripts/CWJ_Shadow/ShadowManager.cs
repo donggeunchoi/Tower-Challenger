@@ -8,6 +8,7 @@ public class ShadowManager : MonoBehaviour
 
     public Shadow shadow;
     public ShadowUI shadowUI;
+    public ShadowData[] shadowData;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class ShadowManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        shadowUI.Init();
+        shadowUI.shadowGameInit();
     }
 
     // Update is called once per frame

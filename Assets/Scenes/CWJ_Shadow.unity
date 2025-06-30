@@ -292,7 +292,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 602151712}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1035240412}
+        m_TargetAssemblyTypeName: ShadowUI, Assembly-CSharp
+        m_MethodName: AnswerButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &602151712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,18 +536,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01febce5ea1fd5040b5b7b61e65ec16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowSprite: []
-  imageSprite:
-  - {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  - {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  animalImage: {fileID: 628500807}
-  buttonImages:
+  shadowImage: {fileID: 628500807}
+  choicesImage:
   - {fileID: 602151712}
   - {fileID: 1844241809}
   - {fileID: 1202648530}
-  shadowIndex: 0
-  imageIndex: 0
+  randomIndex: 0
 --- !u!1 &1202648527
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +623,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202648530}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1035240412}
+        m_TargetAssemblyTypeName: ShadowUI, Assembly-CSharp
+        m_MethodName: AnswerButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1202648530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,7 +845,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1844241809}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1035240412}
+        m_TargetAssemblyTypeName: ShadowUI, Assembly-CSharp
+        m_MethodName: AnswerButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1844241809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,6 +955,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadow: {fileID: 1988020975}
   shadowUI: {fileID: 1035240412}
+  shadowData:
+  - {fileID: 11400000, guid: 30375c3733bd0b941b35746067c24590, type: 2}
+  - {fileID: 11400000, guid: fac97b289590343438187418c6327cc6, type: 2}
+  - {fileID: 11400000, guid: 19ffede48701acb478f3bebe8fb3bb26, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
