@@ -81,25 +81,7 @@ public class VillageManager : MonoBehaviour
                 break;
         }
     }
-
-    #region 인벤토리
-
-    public void OnClickInventoryClose()
-    {
-        Invetory.SetActive(false);
-    }
-
-    public void OnClickItemOpen()
-    {
-        InventoryItem.SetActive(true);
-    }
-
-    public void OnClickItemClose()
-    {
-        InventoryItem.SetActive(false);
-    }
-
-    #endregion
+    
 
     #region 옷가게
 
