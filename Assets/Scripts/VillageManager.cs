@@ -18,15 +18,18 @@ public class VillageManager : MonoBehaviour
     
     [Header("인벤토리")]
     public GameObject Invetory;
+    public GameObject InventoryItem;
 
     [Header("우편함")] 
     public GameObject MailBox;
 
     [Header("옷가게")] 
     public GameObject ClothesShopPanel;
+    public GameObject ClothesShopItem;
 
     [Header("길드")] 
     public GameObject Guild;
+    public GameObject GuildItem;
 
     [Header("설정")] 
     public GameObject StopPanel;
@@ -79,15 +82,11 @@ public class VillageManager : MonoBehaviour
             case "GameScene":
                 SceneManager.LoadScene("GameScene");
                 break;
-            
-            default:
-                break;
-            
-            
         }
     }
 
-    public void OnClickOutStore()
+    #region 상점
+    public void OnClickCloseStore()
     {
         StorePanel.SetActive(false);
     }
@@ -107,7 +106,7 @@ public class VillageManager : MonoBehaviour
         Item3.SetActive(true);
     }
 
-    public void OnClickItemRemove(int itemnumber)
+    public void OnClickItemClose(int itemnumber)
     {
         switch (itemnumber)
         {
@@ -122,4 +121,43 @@ public class VillageManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
+
+    #region 인벤토리
+
+    public void OnClickInventoryClose()
+    {
+        Invetory.SetActive(false);
+    }
+
+    public void OnClickItemOpen()
+    {
+        InventoryItem.SetActive(true);
+    }
+
+    public void OnClickItemClose()
+    {
+        InventoryItem.SetActive(false);
+    }
+
+    #endregion
+
+    #region 옷가게
+
+    public void OnClickClothesShopClose()
+    {
+        ClothesShopPanel.SetActive(false);
+    }
+
+    public void OnClickClothesItemOpen()
+    {
+        ClothesShopItem.SetActive(true);
+    }
+
+    public void OnClickClothesShopItemClose()
+    {
+        ClothesShopItem.SetActive(false);
+    }
+
+    #endregion
 }
