@@ -151,30 +151,35 @@ public class WalkTheStorkGameManager : MonoBehaviour
         {
             // 왼쪽으로 꺾기 → 왼발이 음수일수록 더 많이 흔들려야 하므로 balanceShift가 음수이면 +로 작용하게
             angularVelocity += (tiltAmount + tiltTimer * 5f) + balanceShift * sensitivity;
-            Debug.Log("오른발 Z 회전 (왼쪽): " + balanceShift);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             // 오른쪽으로 꺾기 → 왼발이 양수일수록 더 많이 흔들려야 하므로 balanceShift가 양수이면 +로 작용하게
             angularVelocity -= (tiltAmount + tiltTimer * 5f) + -balanceShift * sensitivity;
-            Debug.Log("왼발 Z 회전 (오른쪽): "  + -balanceShift);
         }
     }
 
     public void TiltLeftBtnClick()
     {
-        float balanceShift = LF.transform.localEulerAngles.z;
+      if (GameStart)
+        {
+         float balanceShift = LF.transform.localEulerAngles.z;
         if (balanceShift > 180f)
             balanceShift -= 360f;
         angularVelocity += (tiltAmount + tiltTimer * 5f) + balanceShift * sensitivity;
+        }
+        
     }
 
     public void TiltRightBtnClick()
     {
-        float balanceShift = LF.transform.localEulerAngles.z;
-        if (balanceShift > 180f)
-            balanceShift -= 360f;
-        angularVelocity -= (tiltAmount + tiltTimer * 5f) + -balanceShift * sensitivity;
+        if (GameStart)
+        {
+            float balanceShift = LF.transform.localEulerAngles.z;
+            if (balanceShift > 180f)
+                balanceShift -= 360f;
+            angularVelocity -= (tiltAmount + tiltTimer * 5f) + -balanceShift * sensitivity;
+        }
     }
     // 자동 흔들림 처리 (사인파 기반)
     private void ApplyAutoTilt(float deltaTime)
@@ -222,10 +227,10 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
         if (Head != null)
             Head.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
-        if (Leg != null)
-            Leg.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
         if (Hand != null)
             Hand.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
+        if (Leg != null)
+            Leg.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle * -0.30f);
     }
 
     // 난이도 자동 조절 (바람처럼 회전 유도)
@@ -255,7 +260,5 @@ public class WalkTheStorkGameManager : MonoBehaviour
         if (bg2.transform.position.x <= -backgroundWidth)
             bg2.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
     }
-
-    // 🆕 왼발 회전값에 따라 중심 쏠림을 유발하는 함수
 
 }
