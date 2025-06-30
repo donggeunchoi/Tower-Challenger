@@ -75,7 +75,7 @@ public class SellGameManager : MonoBehaviour
     {
         if (index == 0)
         {
-            Debug.Log("클리어!");
+            stageManager.MiniGameResult(true);
         }
         else
         {
@@ -116,7 +116,7 @@ public class SellGameManager : MonoBehaviour
         {
             ShuffleArray(order);
         } while (IsSameOrder(order, original));
-
+ 
         for (int i = 0; i < len; i++)
             StartCoroutine(MoveSmoothly(rects[i], originalPositions[order[i]]));
 
