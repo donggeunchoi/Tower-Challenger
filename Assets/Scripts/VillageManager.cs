@@ -65,11 +65,6 @@ public class VillageManager : MonoBehaviour
         }
     }
 
-    public void OnClickStore()
-    {
-        StorePanel.SetActive(true);
-    }
-
     public void OnClickOutStore()
     {
         StorePanel.SetActive(false);
@@ -95,23 +90,19 @@ public class VillageManager : MonoBehaviour
         Item3.SetActive(true);
     }
 
-    public void OnClickItemRemove()
+    public void OnClickItemRemove(int itemnumber)
     {
-        if(Item1 != null)
+        switch (itemnumber)
         {
-            Item1.SetActive(false);
-            return;
-        }
-
-        if(Item2 != null)
-        {
-            Item2.SetActive(false);
-            return;
-        }
-        
-        if(Item3 != null)
-        {
-            Item3.SetActive(false);
+            case 0:
+                Item1.SetActive(false);
+                break;
+            case 1:
+                Item2.SetActive(false);
+                break;
+            case 2:
+                Item3.SetActive(false);
+                break;
         }
     }
 }
