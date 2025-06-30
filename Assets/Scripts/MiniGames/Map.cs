@@ -40,10 +40,8 @@ public class Map : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log($"{nextStagePortal.Length}, {stageManager.stageClearPortal.Count}");
         for (int i = 0; i < stageManager.stageClearPortal.Count; i++)  //스테이지 매니저에 있는 클리어 정보값을 받기
         {
-            Debug.Log(nextStagePortal.Length);
             nextStagePortal[stageManager.stageClearPortal[i]].gameObject.SetActive(true);
         }
         yield return null;

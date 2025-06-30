@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,11 +20,12 @@ public class StageManager : MonoBehaviour
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
     private bool isGameOver = false;  //게임오버가 됬는지
+    public bool isTest = false;
 
     [Header("진행 정보")]
+    public const int FIRST_FLOOR = 1;
     public int floor = 1;              //현재층
     public int bestFloor = 1;          //최고 기록
-    public int stageCount = 0;         //현재 스테이지
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
     private float timerMultiplier = 1f;//타이머 배속
     private Vector3 playerPosition;    //플레이어 포지션 저장
@@ -32,7 +36,7 @@ public class StageManager : MonoBehaviour
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
     private List<MiniGameData> randomGames = new List<MiniGameData>();  //랜덤으로 미니게임 배열이 들어갈 공간
-    
+
 
     [SerializeField] string[] mapScenes;  //맵씬 모음
 
@@ -52,14 +56,10 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         isGameActive = false;
-        if (infoUI  != null)
-        infoUI.SetActive(isGameActive);
+        if (infoUI != null)
+            infoUI.SetActive(isGameActive);
     }
 
-    private void Update()
-    {
-
-    }
     #region MiniGameCall
     public void StartGame()
     {
@@ -67,17 +67,17 @@ public class StageManager : MonoBehaviour
         isGameActive = true;  //현재 게임 시작
         infoUI.SetActive(isGameActive);
         ResetInfo();
-        stageLP.ResetLP();
-        floor = 1;            //현재층 1층
+        floor = FIRST_FLOOR;            //현재층 1층
+
+        if (isTest) //테스트 코드
+            floor = 1;
+
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
-        LoadRandomMap();
+        LoadRandomMap(); //랜덤 맵
 
         StartCoroutine(StartGameLoad());
-        
-        Debug.Log("게임시작");
-        //다초기화하고 미니게임 장소로 이동
     }
 
     private IEnumerator StartGameLoad()
@@ -87,7 +87,7 @@ public class StageManager : MonoBehaviour
         {
             yield return null;
         }
-        
+
         Map map = FindAnyObjectByType<Map>();
         map.SetRandomPortal();
     }
@@ -96,8 +96,8 @@ public class StageManager : MonoBehaviour
 
     private void ResetInfo()
     {
-        stageCount = 0;
         stageTimer.SetTimer();
+        stageLP.ResetLP();
     }
 
     public void StartNextMiniGame()  //미니게임시작
@@ -117,7 +117,6 @@ public class StageManager : MonoBehaviour
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
         ResetInfo();
-        stageCount = 0;
         floor++;
 
         if (floor % 5 == 1)  //5층마다 스테이지 갯수증가
@@ -133,10 +132,8 @@ public class StageManager : MonoBehaviour
     #region MiniGameSet
     private void RandomStage()  //랜덤한 스테이지 생성
     {
-        randomGames.Clear();  // 랜덤 미니게임 배열 초기화
-
         List<MiniGameData> gameList = new List<MiniGameData>();  //사용가능한 배열생성
-        for (int i = 0; i < miniGameDatas.Length; i++)
+        for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
             MiniGameData game = miniGameDatas[i];
             if (game.allStage || (floor >= game.minStage && floor <= game.maxStage))
@@ -144,23 +141,31 @@ public class StageManager : MonoBehaviour
                 gameList.Add(game);
             }
         }
-
-        for (int i = 0; i < totalStageCount; i++)  //미니게임의 갯수를 비교해서
+        
+        List<int> randomNum = new List<int>();
+        
+        if (gameList.Count > 0)  //게임리스트에 있는 미니게임의 인덱스값을 재배열
+        randomNum.AddRange(Enumerable.Range(0, gameList.Count).OrderBy(x => Random.value).Take(Mathf.Min(gameList.Count, totalStageCount)).ToArray());
+        else
         {
-            MiniGameData randomGames;
+            Debug.Log("사용가능한 게임이 없습니다/ gameList가 비었습니다");
+            return;
+        }
 
-            if (gameList.Count > 0)  //미니게임이 더 많으면 중복 미니게임 방지
+
+        if (randomNum.Count < totalStageCount)  //만약에 게임이 모자라다면 모자란만큼 랜덤으로 추가
+        {
+            int neededGame = totalStageCount - randomNum.Count;
+
+            for (int j = 0; j < neededGame; j++)
             {
-                int randomNum = Random.Range(0, gameList.Count);
-                randomGames = gameList[randomNum];
-                gameList.RemoveAt(randomNum);
+                randomNum.Add(Random.Range(0, gameList.Count));
             }
-            else  //그렇지않으면 중복허용
-            {
-                int randomNum = Random.Range(0, miniGameDatas.Length);
-                randomGames = miniGameDatas[randomNum];
-            }
-            this.randomGames.Add(randomGames);
+        }
+
+        for (int k = 0; k < totalStageCount; k++)  //배열에 추가된 인덱스값에 i번째에있는 미니게임을 추가
+        {
+            randomGames.Add(gameList[randomNum[k]]);
         }
     }
 
@@ -183,7 +188,7 @@ public class StageManager : MonoBehaviour
     public void SaveClearPortal(int clear)
     {
         stageClearPortal.Remove(clear);
-        
+
     }
 
     public void ResetClearPortal()
@@ -196,7 +201,7 @@ public class StageManager : MonoBehaviour
         if (!result)  //실패
         {
             stageLP.LPdown();
-            if (stageLP.currentLP <= 0) 
+            if (stageLP.currentLP <= 0)
                 GameOver();
         }
         else  //성공
@@ -214,17 +219,17 @@ public class StageManager : MonoBehaviour
             isGameOver = true;
             isGameActive = false;
             //infoUI.SetActive(isGameActive);
-            if (floor > bestFloor) 
+            if (floor > bestFloor)
                 bestFloor = floor;
 
-            GameObject gameOverPanel =  Instantiate(gameOver, infoUI.transform);
+            GameObject gameOverPanel = Instantiate(gameOver, infoUI.transform);
         }
     }
 
     #endregion
     #region Player
     public void SavePlayerPosition(Vector3 position, int layer)
-    { 
+    {
         layerNumber = layer;
         playerPosition = position;
     }
@@ -255,7 +260,7 @@ public class StageManager : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾아서 
         }
-        
+
         if (player != null)
         {
             player.layer = layerNumber;
@@ -277,10 +282,8 @@ public class StageManager : MonoBehaviour
         }
         if (isGameActive)
         {
-            if (stageCount >= totalStageCount)
-            {
+            if (stageClearPortal.Count == 0)
                 ResetClearPortal();
-            }
         }
     }
     #endregion
