@@ -8,6 +8,8 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
     public GameObject gameOver;      //게임 오버 창
+    [Header("매니저")]
+    private UIManager uiManager;
 
     [Header("정보")]
     public StageTimer stageTimer;     //스테이지 타이머
@@ -51,6 +53,7 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
+        uiManager = UIManager.Instance;
         isGameActive = false;
         if (infoUI != null)
             infoUI.SetActive(isGameActive);
@@ -113,8 +116,14 @@ public class StageManager : MonoBehaviour
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
-        ResetInfo();
+        stageTimer.SetTimer();
         floor++;
+
+        if (floor % 5 == 0)
+        {
+            totalStageCount = 1;
+            Debug.Log("Boss 등장!");
+        }
 
         if (floor % 5 == 1)  //5층마다 스테이지 갯수증가
             totalStageCount = Mathf.Min(totalStageCount + 1, 4);
@@ -185,7 +194,6 @@ public class StageManager : MonoBehaviour
     public void SaveClearPortal(int clear)
     {
         stageClearPortal.Remove(clear);
-
     }
 
     public void ResetClearPortal()

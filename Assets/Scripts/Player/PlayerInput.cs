@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public RectTransform stick;             // 조이스틱
     private float radius;                   // 조이스틱 이동 반지름
     private Vector2 inputDir = Vector2.zero;// 입력 방향 벡터
-    private float deadZone = 0.15f;
+    private float deadZone = 0.15f;         // 민감도 조정
     
     [Header("움직임과 대쉬")]
     public float speed = 5;
