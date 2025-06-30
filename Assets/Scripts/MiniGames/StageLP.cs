@@ -37,7 +37,6 @@ public class StageLP : MonoBehaviour
             }
             brokenHeartCor = StartCoroutine(BrokenHeartImage());
         }
-    
     }
 
     public void HealLP(int amount)
@@ -59,6 +58,6 @@ public class StageLP : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         heartIcon[currentLP].gameObject.SetActive(false);
 
-        brokenHeartCor = null; // 코루틴 종료 표시
+        brokenHeartCor = null;
     }
 }

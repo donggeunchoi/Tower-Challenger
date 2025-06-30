@@ -40,10 +40,8 @@ public class Map : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log($"{nextStagePortal.Length}, {stageManager.stageClearPortal.Count}");
         for (int i = 0; i < stageManager.stageClearPortal.Count; i++)  //스테이지 매니저에 있는 클리어 정보값을 받기
         {
-            Debug.Log(nextStagePortal.Length);
             nextStagePortal[stageManager.stageClearPortal[i]].gameObject.SetActive(true);
         }
         yield return null;
@@ -52,13 +50,17 @@ public class Map : MonoBehaviour
     public void SetRandomPortal()
     {
         if (StageManager.instance == null) Debug.Log(StageManager.instance.totalStageCount);
-
+        
         int[] randomPortal = Enumerable.Range(0, nextStagePortal.Length).OrderBy(x => Random.value).Take(StageManager.instance.totalStageCount).ToArray();
         // Enumerable : 정수를 차례대로 추출 예시) 0 1 2 3[포탈이 네개 일 시]
-        // OrderBy : 무작위로 섞기 3 1 2 0 이런식으로 섞이면
+        // OrderBy x => Random.value : 무작위로 섞기 3 1 2 0 이런식으로 섞이면
         // Take : 예시) 스테이지가 두개일시 3 1 추출
         // ToArray : 3, 1 반환  결론: randomPortal에는 3, 1이 들어있음
 
+
+        //OrderBy 종류에대에서는 이 외에도
+        //x => x 오름차순 정렬, word => word.Length 등
+        //추출할값 => 정렬기준 으로 써서 그외에 것들도 오더로 내릴 수 있게됩니다
         for (int i = 0; i < randomPortal.Length; i++)
         {
             StageManager.instance.AddPortal(randomPortal[i]);
