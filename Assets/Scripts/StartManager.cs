@@ -19,11 +19,13 @@ public class StartManager : MonoBehaviour
         fadeImage.gameObject.SetActive(false);
         fadeImage.color = new Color(0, 0, 0, 0);
         
-        startButton.onClick.AddListener(() =>
-        {
-            StartCoroutine(PlayVideoSequence());
-        });
+        startButton.onClick.AddListener(OnStartButtonClick);
         
+    }
+
+    private void OnStartButtonClick()
+    {
+        StartCoroutine(PlayVideoSequence());
     }
 
     IEnumerator PlayVideoSequence()
