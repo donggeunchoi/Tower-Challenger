@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
-    public GameObject gameOver;
+    public GameObject gameOver;      //게임 오버 창
 
     [Header("정보")]
     public StageTimer stageTimer;     //스테이지 타이머
@@ -33,8 +33,7 @@ public class StageManager : MonoBehaviour
     [Header("미니게임 데이터")]
     public MiniGameData[] miniGameDatas;    //미니게임 데이터
     private List<MiniGameData> randomGames = new List<MiniGameData>();  //랜덤으로 미니게임 배열이 들어갈 공간
-
-
+    
     [SerializeField] string[] mapScenes;  //맵씬 모음
 
     private void Awake()
@@ -80,6 +79,7 @@ public class StageManager : MonoBehaviour
     private IEnumerator StartGameLoad()
     {
         AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
+
         while (!ansynLoad.isDone)
         {
             yield return null;
