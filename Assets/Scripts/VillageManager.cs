@@ -160,4 +160,23 @@ public class VillageManager : MonoBehaviour
     }
 
     #endregion
+
+    #region 길드
+
+    public void OnClickGuildClose()
+    {
+        Guild.SetActive(false);
+    }
+
+    public void OnClickGuildItemOpen()
+    {
+        GuildItem.SetActive(true);
+    }
+
+    public void OnClickGuildItemClose()
+    {
+        GuildItem.SetActive(false);
+    }
+
+    #endregion
 }
