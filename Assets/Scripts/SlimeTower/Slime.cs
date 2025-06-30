@@ -33,6 +33,7 @@ public class Slime : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Ground"))
         {
+            StageManager.instance.MiniGameResult(false);
             //이후에 LPDown으로 연결
             Debug.Log("땅에 착지");
             Destroy(gameObject);
@@ -84,6 +85,7 @@ public class Slime : MonoBehaviour
         //절반보다 적으면
         if (overlapWidth < myWidth * 0.5f)
         {
+            StageManager.instance.MiniGameResult(false);
             //LPDown을 불러오기
             Debug.Log("잘못된 착지");
             Destroy(gameObject);
