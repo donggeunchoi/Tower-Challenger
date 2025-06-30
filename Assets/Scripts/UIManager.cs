@@ -35,6 +35,4 @@ public class UIManager : MonoBehaviour
     {
         Instantiate(instanceUI, notDestroyCanvus);
     }
-
-    
 }

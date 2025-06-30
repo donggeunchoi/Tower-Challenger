@@ -13,12 +13,13 @@ public class GameOverUI : MonoBehaviour
     {
         stageManager = StageManager.instance;
         returnToTitle.onClick.AddListener(OnclickReturnTitle);
+        stageManager.stageTimer.StopTimer();
     }
 
     private void OnclickReturnTitle()
     {
         SceneManager.LoadScene(_mainSceneName);
-        StageManager.instance.infoUI.SetActive(false);
+        stageManager.infoUI.SetActive(false);
         Destroy(this.gameObject);
     }
 }

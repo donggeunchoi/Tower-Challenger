@@ -194,7 +194,6 @@ public class StageManager : MonoBehaviour
     public void SaveClearPortal(int clear)
     {
         stageClearPortal.Remove(clear);
-
     }
 
     public void ResetClearPortal()

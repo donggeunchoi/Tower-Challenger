@@ -46,4 +46,9 @@ public class StageTimer : MonoBehaviour
     {
         return timer / MAX_TIME;
     }
+
+    public void StopTimer()
+    {
+        isActive = false;
+    }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class AllClear : MonoBehaviour
 
     StageManager stageManager;
 
-
+    [SerializeField] private TextMeshProUGUI nextFloorText;
     //아이템 자료형 추가되는 랜덤아이템 관리
 
     [SerializeField] private Image reward;
@@ -31,6 +32,9 @@ public class AllClear : MonoBehaviour
 
         nextFloor.onClick.AddListener(OnClickNextStage);
         returnToTitle.onClick.AddListener(OnclickReturnTitle);
+
+        nextFloorText.text = $"Clear {stageManager.floor} floor";
+        stageManager.stageTimer.StopTimer();
     }
     private void OnClickNextStage()
     {
