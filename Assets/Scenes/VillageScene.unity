@@ -8839,8 +8839,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
+      - m_Target: {fileID: 1805933709}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: OnclickItem3
         m_Mode: 1
         m_Arguments:
@@ -9396,8 +9396,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
+      - m_Target: {fileID: 1805933709}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: OnClickItemClose
         m_Mode: 3
         m_Arguments:
@@ -12852,8 +12852,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
+      - m_Target: {fileID: 1805933709}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: OnClickCloseStore
         m_Mode: 1
         m_Arguments:
@@ -13093,8 +13093,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
+      - m_Target: {fileID: 1805933709}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: OnClickItemClose
         m_Mode: 3
         m_Arguments:
@@ -15820,8 +15820,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
+      - m_Target: {fileID: 1805933709}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: OnClickItem1
         m_Mode: 1
         m_Arguments:
@@ -16362,8 +16362,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
+      - m_Target: {fileID: 1805933709}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: OnClickItemClose
         m_Mode: 3
         m_Arguments:
@@ -18035,9 +18035,6 @@ MonoBehaviour:
   fadePanel: {fileID: 1878848681}
   fadeDuration: 1
   StorePanel: {fileID: 1805933705}
-  Item1: {fileID: 512511131}
-  Item2: {fileID: 1254613691}
-  Item3: {fileID: 1988547638}
   Invetory: {fileID: 1264809314}
   InventoryItem: {fileID: 557608476}
   MailBox: {fileID: 974985404}
@@ -20207,8 +20204,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
+      - m_Target: {fileID: 1805933709}
+        m_TargetAssemblyTypeName: Store, Assembly-CSharp
         m_MethodName: OnClickItem2
         m_Mode: 1
         m_Arguments:
@@ -20528,6 +20525,7 @@ GameObject:
   - component: {fileID: 1805933706}
   - component: {fileID: 1805933708}
   - component: {fileID: 1805933707}
+  - component: {fileID: 1805933709}
   m_Layer: 5
   m_Name: StorePanel
   m_TagString: Untagged
@@ -20600,6 +20598,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805933705}
   m_CullTransparentMesh: 1
+--- !u!114 &1805933709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805933705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558473d3cb1c248488c9aca7be5a9457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StorePanel: {fileID: 1805933705}
+  Item1: {fileID: 512511131}
+  Item2: {fileID: 1254613691}
+  Item3: {fileID: 1988547638}
 --- !u!1 &1812512789
 GameObject:
   m_ObjectHideFlags: 0
