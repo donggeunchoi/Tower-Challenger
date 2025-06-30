@@ -57,10 +57,10 @@ public class Map : MonoBehaviour
         // Take : 예시) 스테이지가 두개일시 3 1 추출
         // ToArray : 3, 1 반환  결론: randomPortal에는 3, 1이 들어있음
 
-
         //OrderBy 종류에대에서는 이 외에도
-        //x => x 오름차순 정렬, word => word.Length 등
+        //x => x 오름차순 정렬, word => word.Length 등 //글자수 
         //추출할값 => 정렬기준 으로 써서 그외에 것들도 오더로 내릴 수 있게됩니다
+        //그외에도 ThenBy로 추가 오더를 내릴 수 있습니다  OrderBy(x => word.Length).ThenBy(x => Age.age) 이름수와 나이순으로 정렬
         for (int i = 0; i < randomPortal.Length; i++)
         {
             StageManager.instance.AddPortal(randomPortal[i]);
