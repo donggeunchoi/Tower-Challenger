@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +6,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public StageTimer timerUI;
     public StageLP stageLPUI;
+    public GameObject gameOverUI;
 
     private void Awake()
     {
@@ -26,10 +25,5 @@ public class UIManager : MonoBehaviour
         stageManager = StageManager.instance;
         timerUI = stageManager.stageTimer;
         stageLPUI = stageManager.stageLP;
-    }
-
-    void Update()
-    {
-        
     }
 }
