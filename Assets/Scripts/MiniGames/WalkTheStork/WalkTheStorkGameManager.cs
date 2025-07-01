@@ -31,7 +31,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
     public GameObject PrintOut;
 
     [Header("배경 UI")]
-    public GameObject bg1, bg2;
+    public GameObject BG, BG2;
     public float backgroundScrollSpeed = 2f;
     private float backgroundWidth = 20f;
 
@@ -68,20 +68,20 @@ public class WalkTheStorkGameManager : MonoBehaviour
             _ => 30
         };
 
-        if (Man != null)
+        if (Man)
             Man.transform.position = manStartPos;
 
-        if (bg1 != null)
+        if (BG)
         {
-            SpriteRenderer sr = bg1.GetComponent<SpriteRenderer>();
-            if (sr != null)
+            SpriteRenderer sr = BG.GetComponent<SpriteRenderer>();
+            if (sr)
                 backgroundWidth = sr.bounds.size.x;
         }
 
-        if (bg1 != null && bg2 != null)
+        if (BG && BG2)
         {
-            bg1.transform.position = new Vector3(0f, bg1.transform.position.y, bg1.transform.position.z);
-            bg2.transform.position = new Vector3(backgroundWidth, bg2.transform.position.y, bg2.transform.position.z);
+            BG.transform.position = new Vector3(0f, BG.transform.position.y, BG.transform.position.z);
+            BG2.transform.position = new Vector3(backgroundWidth, BG2.transform.position.y, BG2.transform.position.z);
         }
     }
 
@@ -359,14 +359,14 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     private void ScrollBackground(float deltaTime)
     {
-        if (bg1 || bg2)
+        if (BG || BG2)
 
-        bg1.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
-        bg2.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
+            BG.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
+        BG2.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
 
-        if (bg1.transform.position.x <= -backgroundWidth)
-            bg1.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
-        if (bg2.transform.position.x <= -backgroundWidth)
-            bg2.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
+        if (BG.transform.position.x <= -backgroundWidth)
+            BG.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
+        if (BG2.transform.position.x <= -backgroundWidth)
+            BG2.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
     }
 }
