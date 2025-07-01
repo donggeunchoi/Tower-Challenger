@@ -56,13 +56,13 @@ public class StageManager : MonoBehaviour
         uiManager = UIManager.Instance;
         isGameActive = false;
 
-        //infoUI = uiManager.notDestroyCanvus.gameObject;
+        infoUI = uiManager.notDestroyCanvus.gameObject;
 
         if (infoUI != null)
             infoUI.SetActive(isGameActive);
 
-        //stageTimer = uiManager.timerUI;
-        //stageLP = uiManager.stageLPUI;
+        stageTimer = uiManager.timerUI;
+        stageLP = uiManager.stageLPUI;
     }
 
     #region MiniGameCall
@@ -132,7 +132,7 @@ public class StageManager : MonoBehaviour
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
-        stageTimer.SetTimer();
+        ResetInfo();
         floor++;
 
         if (floor % 5 == 0)
@@ -221,7 +221,7 @@ public class StageManager : MonoBehaviour
         int randomSceneNum = Random.Range(0, mapScenes.Length);
         if (mapScenes == null)
         {
-            return "";
+            return mapScenes[0];
         }
         string mapName = mapScenes[randomSceneNum];
         return mapName;
