@@ -76,8 +76,8 @@ public class VillageManager : MonoBehaviour
             case "StopPanel":
                 StopPanel.SetActive(true);
                 break;
-            case "GameScene":
-                SceneManager.LoadScene("GameScene");
+            case "TowerEntrance":
+                SceneManager.LoadScene("TowerEntrance");
                 break;
         }
     }
