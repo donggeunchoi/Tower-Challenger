@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventorySlot : MonoBehaviour
@@ -9,12 +10,15 @@ public class InventorySlot : MonoBehaviour
         switch (itemName)
         {
             case "Topticket":
+                Items.Instance.TopTicket();
                 Inventory.instance.OnClickUseButton(this.gameObject);
                 break;
             case "Sandglass":
+                Items.Instance.Sandglass();
                 Inventory.instance.OnClickUseButton(this.gameObject);
                 break;
             case "SpeedUp":
+                Items.Instance.MoveSpeedUp();
                 Inventory.instance.OnClickUseButton(this.gameObject);
                 break;
         }

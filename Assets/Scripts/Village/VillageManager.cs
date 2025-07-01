@@ -15,7 +15,6 @@ public class VillageManager : MonoBehaviour
     
     [Header("인벤토리")]
     public GameObject Invetory;
-    public GameObject InventoryItem;
 
     [Header("우편함")] 
     public GameObject MailBox;
@@ -26,7 +25,6 @@ public class VillageManager : MonoBehaviour
 
     [Header("길드")] 
     public GameObject Guild;
-    public GameObject GuildItem;
 
     [Header("설정")] 
     public GameObject StopPanel;
@@ -98,25 +96,6 @@ public class VillageManager : MonoBehaviour
     public void OnClickClothesShopItemClose()
     {
         ClothesShopItem.SetActive(false);
-    }
-
-    #endregion
-
-    #region 길드
-
-    public void OnClickGuildClose()
-    {
-        Guild.SetActive(false);
-    }
-
-    public void OnClickGuildItemOpen()
-    {
-        GuildItem.SetActive(true);
-    }
-
-    public void OnClickGuildItemClose()
-    {
-        GuildItem.SetActive(false);
     }
 
     #endregion
