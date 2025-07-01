@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class WalkTheStorkGameManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     [Header("부위")]
     public GameObject Man;
-    public GameObject Body, Head, Leg, LF, RF, Hand;
+    public GameObject Body, Head, Leg, LF, RF, Hand,high;
 
     [Header("출력 UI")]
     public GameObject PrintOut;
@@ -147,7 +148,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
         if (t >= 1f)
         {
             stageManager.MiniGameResult(true);
-            enabled = false; 
+            enabled = false;
         }
     }
 
@@ -220,16 +221,71 @@ public class WalkTheStorkGameManager : MonoBehaviour
         {
             stageManager.MiniGameResult(false);
             currentState = GameState.Ended;
-            LF.GetComponent<Animator>().enabled = false;
-            RF.GetComponent<Animator>().enabled = false;
+
+            // 애니메이션 멈추기
+            if (LF != null) LF.GetComponent<Animator>().enabled = false;
+            if (RF != null) RF.GetComponent<Animator>().enabled = false;
+
+            // 서서히 회전
+            if (Leg != null)
+                StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 2f));
+            if (high != null)
+                StartCoroutine(SmoothRotate(high, new Vector3(0f, 0f, -140), 2f));
+            if (Man != null)
+            {
+                Vector3 targetEuler = new Vector3(0f, 0f, -140f); // Z 회전
+                Vector3 targetPos = new Vector3(1, -3f, Man.transform.position.z); // Y만 변경
+                StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+            }
         }
         else
         {
             currentAngle = 0f;
             angularVelocity = 0f;
             stageManager.MiniGameResult(false);
-            
         }
+    }
+    private IEnumerator SmoothRotate(GameObject obj, Vector3 toEuler, float duration)
+    {
+        if (obj == null) yield break;
+
+        Quaternion startRotation = obj.transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(toEuler);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            obj.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t); // 더 부드럽게 회전
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        obj.transform.rotation = targetRotation; // 마지막 값 정확히 정렬
+    }
+    private IEnumerator SmoothRotateAndMove(GameObject obj, Vector3 toEuler, Vector3 toPosition, float duration)
+    {
+        if (obj == null) yield break;
+
+        Quaternion startRot = obj.transform.rotation;
+        Quaternion targetRot = Quaternion.Euler(toEuler);
+
+        Vector3 startPos = obj.transform.position;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+
+            obj.transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
+            obj.transform.position = Vector3.Lerp(startPos, toPosition, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        obj.transform.rotation = targetRot;
+        obj.transform.position = toPosition;
     }
 
     private void ApplyRotationToParts()
@@ -245,6 +301,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
             Hand.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
         if (Leg != null)
             Leg.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle * -0.30f);
+
     }
 
     private void HandleDifficultyScaling(float deltaTime)
