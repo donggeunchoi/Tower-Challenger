@@ -117,6 +117,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
             case GameState.Outro:
                 HandleOutro(deltaTime);
+                stageManager.MiniGameResult(true);
                 break;
 
             case GameState.Ended:
