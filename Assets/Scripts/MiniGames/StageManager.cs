@@ -55,8 +55,14 @@ public class StageManager : MonoBehaviour
     {
         uiManager = UIManager.Instance;
         isGameActive = false;
+
+        infoUI = uiManager.notDestroyCanvus.gameObject;
+
         if (infoUI != null)
             infoUI.SetActive(isGameActive);
+
+        stageTimer = uiManager.timerUI;
+        stageLP = uiManager.stageLPUI;
     }
 
     #region MiniGameCall
@@ -64,7 +70,10 @@ public class StageManager : MonoBehaviour
     {
         isGameOver = false;  //게임오버상태 초기화
         isGameActive = true;  //현재 게임 시작
+
+        if(infoUI != null)
         infoUI.SetActive(isGameActive);
+
         ResetInfo();
         floor = FIRST_FLOOR;            //현재층 1층
 
@@ -81,7 +90,12 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator StartGameLoad(bool isBoss)
     {
-        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
+        AsyncOperation ansynLoad;
+
+        if (isBoss)
+            ansynLoad = SceneManager.LoadSceneAsync("BossRoom");
+        else
+            ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
 
         while (!ansynLoad.isDone)
         {
@@ -96,15 +110,17 @@ public class StageManager : MonoBehaviour
 
     private void ResetInfo()
     {
-        stageTimer.SetTimer();
-        stageLP.ResetLP();
+        if (stageTimer != null)
+            stageTimer.SetTimer();
+
+        if (stageTimer != null)
+            stageLP.ResetLP();
     }
 
     public void StartNextMiniGame()  //미니게임시작
     {
         currentSceneName = SceneManager.GetActiveScene().name;  //현재 씬 이름 가져오기
 
-        RandomStage();  //돌린 배열 가져와서 실행
         if (randomGames.Count == 0)
         {
             return;
@@ -116,7 +132,7 @@ public class StageManager : MonoBehaviour
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
-        stageTimer.SetTimer();
+        ResetInfo();
         floor++;
 
         if (floor % 5 == 0)
@@ -141,6 +157,8 @@ public class StageManager : MonoBehaviour
     #region MiniGameSet
     private void RandomStage()  //랜덤한 스테이지 생성
     {
+        randomGames.Clear();
+
         List<MiniGameData> gameList = new List<MiniGameData>();  //사용가능한 배열생성
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
@@ -180,7 +198,22 @@ public class StageManager : MonoBehaviour
 
     public void BossStage()
     {
+        List<MiniGameData> gameList = new List<MiniGameData>();  //사용가능한 배열생성
+        for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
+        {
+            MiniGameData game = miniGameDatas[i];
+            if (game.isBoss)
+            {
+                gameList.Add(game);
+            }
+        }
 
+        randomGames.Add(gameList[floor / 5]);
+
+        if (randomGames.Count <= 0) //보스게임이 없으면 아무거나라도
+            RandomStage();
+
+        StartGameLoad(true);
     }
 
     public string LoadRandomMap()
@@ -188,7 +221,7 @@ public class StageManager : MonoBehaviour
         int randomSceneNum = Random.Range(0, mapScenes.Length);
         if (mapScenes == null)
         {
-            return "";
+            return mapScenes[0];
         }
         string mapName = mapScenes[randomSceneNum];
         return mapName;
