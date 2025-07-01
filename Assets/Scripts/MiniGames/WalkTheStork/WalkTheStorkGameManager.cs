@@ -3,7 +3,7 @@ using TMPro;
 
 public class WalkTheStorkGameManager : MonoBehaviour
 {
-    private enum GameState { Intro, Playing, Outro }
+    private enum GameState { Intro, Playing, Outro, Ended }
     private GameState currentState = GameState.Intro;
 
     [Header("회전 관련")]
@@ -117,6 +117,10 @@ public class WalkTheStorkGameManager : MonoBehaviour
             case GameState.Outro:
                 HandleOutro(deltaTime);
                 break;
+
+            case GameState.Ended:
+                // 아무것도 하지 않음 (정지 상태)
+                break;
         }
     }
 
@@ -209,11 +213,22 @@ public class WalkTheStorkGameManager : MonoBehaviour
         currentAngle += angularVelocity * deltaTime;
         currentAngle = Mathf.Clamp(currentAngle, -179f, 179f);
 
-        if (Mathf.Abs(currentAngle) >= 95f)
+        bool isOverLimit = currentAngle >= 95f || currentAngle <= -95f;
+        if (!isOverLimit) return;
+
+        if (StageManager.instance.stageLP.currentLP == 1)
+        {
+            stageManager.MiniGameResult(false);
+            currentState = GameState.Ended;
+            LF.GetComponent<Animator>().enabled = false;
+            RF.GetComponent<Animator>().enabled = false;
+        }
+        else
         {
             currentAngle = 0f;
             angularVelocity = 0f;
             stageManager.MiniGameResult(false);
+            
         }
     }
 
