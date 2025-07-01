@@ -2969,7 +2969,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -44025399
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -6199,15 +6199,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: NextFloorPortal
       objectReference: {fileID: 0}
+    - target: {fileID: 5493780589136826471, guid: 81157f0faab75b341829ba221dca4ea8,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7421598314827084773, guid: 81157f0faab75b341829ba221dca4ea8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.54
+      value: 3.86
       objectReference: {fileID: 0}
     - target: {fileID: 7421598314827084773, guid: 81157f0faab75b341829ba221dca4ea8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.38
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7421598314827084773, guid: 81157f0faab75b341829ba221dca4ea8,
         type: 3}
