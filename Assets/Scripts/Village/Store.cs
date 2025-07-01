@@ -50,16 +50,16 @@ public class Store : MonoBehaviour
     }
     public void BuyItem_SpeedUp()
     {
-        Inventory.instance.AddItme("SpeedUp", Item1Image);
+        Inventory.instance.AddItme("이동속도 주문서", Item1Image);
     }
 
     public void BuyItem_Sandglass()
     {
-        Inventory.instance.AddItme("Sandglass", Item2Image);
+        Inventory.instance.AddItme("마법의 모래시계", Item2Image);
     }
     public void BuyItem_TopTicket()
     {
-        Inventory.instance.AddItme("Topticket",Item3Image);
+        Inventory.instance.AddItme("타워 입장권",Item3Image);
     }
     
 
