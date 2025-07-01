@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
@@ -7,6 +7,7 @@ public class Slime : MonoBehaviour
 
     [Header("탑")] 
     public Transform towerRoot;
+    public float percentClearBar;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -83,7 +84,10 @@ public class Slime : MonoBehaviour
         float myWidth = myBounds.size.x;
 
         //절반보다 적으면
-        if (overlapWidth < myWidth * 0.5f)
+        if (percentClearBar > 1f)
+            percentClearBar = 1f;
+
+        if (overlapWidth < myWidth * percentClearBar)
         {
             StageManager.instance.MiniGameResult(false);
             //LPDown을 불러오기

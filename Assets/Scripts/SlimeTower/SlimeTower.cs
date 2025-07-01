@@ -1,25 +1,25 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SlimeTower : MonoBehaviour
 {
     [Header("슬라임 생성")]
-    public GameObject slimePrefab;
-    public Transform spawnPosition;
-    public Transform towerRoot;
-    public int clearGameCount;
+    public GameObject slimePrefab;  //슬라임 프리팹
+    public Transform spawnPosition; //스폰 포지션
+    public Transform towerRoot;     //타워 포지션
+    public int clearGameCount;      //몇개 쌓으면 클리어인지
 
-    private GameObject currentSlime;
+    private GameObject currentSlime; //현재슬라임
     
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SpawnSlime();
+        //SpawnSlime();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()// 온클릭으로 바꿔야함
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -31,7 +31,7 @@ public class SlimeTower : MonoBehaviour
         SlimeCountClear();
     }
     //슬라임을 생성하는 메서드
-    public void SpawnSlime()
+    public void SpawnSlime()  
     {
         currentSlime = Instantiate(slimePrefab, spawnPosition.position,Quaternion.identity);
 
