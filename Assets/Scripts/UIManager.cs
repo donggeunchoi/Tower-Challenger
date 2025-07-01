@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
         
         timerUI = stageManager.stageTimer;
         stageLPUI = stageManager.stageLP;
+
+        notDestroyCanvus.gameObject.SetActive(false);
     }
 
     public void InstantiateUI(GameObject instanceUI)
