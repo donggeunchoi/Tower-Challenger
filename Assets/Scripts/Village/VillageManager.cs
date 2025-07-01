@@ -29,6 +29,9 @@ public class VillageManager : MonoBehaviour
     [Header("설정")] 
     public GameObject StopPanel;
     
+    [Header("캐릭터 선택")]
+    public GameObject CharactorChoicePanel;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -73,6 +76,9 @@ public class VillageManager : MonoBehaviour
                 break;
             case "StopPanel":
                 StopPanel.SetActive(true);
+                break;
+            case "CharactorChoicePanel":
+                CharactorChoicePanel.SetActive(true);
                 break;
             case "TowerEntrance":
                 SceneManager.LoadScene("TowerEntrance");
