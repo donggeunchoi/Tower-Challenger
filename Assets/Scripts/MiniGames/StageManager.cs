@@ -76,10 +76,10 @@ public class StageManager : MonoBehaviour
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
         LoadRandomMap(); //랜덤 맵
 
-        StartCoroutine(StartGameLoad());
+        StartCoroutine(StartGameLoad(false));
     }
 
-    private IEnumerator StartGameLoad()
+    private IEnumerator StartGameLoad(bool isBoss)
     {
         AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
 
@@ -121,8 +121,11 @@ public class StageManager : MonoBehaviour
 
         if (floor % 5 == 0)
         {
+            stageTimer.StopTimer();
             totalStageCount = 1;
-            Debug.Log("Boss 등장!");
+            BossStage();
+            StartCoroutine (StartGameLoad(true));
+            return;
         }
 
         if (floor % 5 == 1)  //5층마다 스테이지 갯수증가
@@ -132,7 +135,7 @@ public class StageManager : MonoBehaviour
             timerMultiplier *= 1.2f;
 
         RandomStage();
-        StartCoroutine(StartGameLoad());
+        StartCoroutine(StartGameLoad(false));
     }
     #endregion
     #region MiniGameSet
@@ -175,6 +178,11 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    public void BossStage()
+    {
+
+    }
+
     public string LoadRandomMap()
     {
         int randomSceneNum = Random.Range(0, mapScenes.Length);
@@ -205,12 +213,16 @@ public class StageManager : MonoBehaviour
     {
         if (!result)  //실패
         {
-            stageLP.LPdown();
-            if (stageLP.currentLP <= 0)
-                GameOver();
+            if (stageLP != null)
+            {
+                stageLP.LPdown();
+                if (stageLP.currentLP <= 0)
+                    GameOver();
+            }
         }
         else  //성공
         {
+            if (isGameActive)
             StartCoroutine(LatePlayerData());  //플레이어를 원레 위치로
         }
     }
@@ -223,7 +235,6 @@ public class StageManager : MonoBehaviour
         {
             isGameOver = true;
             isGameActive = false;
-            //infoUI.SetActive(isGameActive);
             if (floor > bestFloor)
                 bestFloor = floor;
 

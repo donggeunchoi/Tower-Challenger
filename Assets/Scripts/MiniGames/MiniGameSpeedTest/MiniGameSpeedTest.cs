@@ -28,6 +28,8 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     private void StartGame()
     {
+        speedUIBtn.onClick.RemoveAllListeners();
+
         if (miniGameCoroutine != null)
         {
             StopCoroutine(miniGameCoroutine);
@@ -36,21 +38,21 @@ public class MiniGameSpeedTest : MonoBehaviour
 
         isGreen = false;
         isClick = false;
-        speedUIBtn.interactable = true;
-        miniGameCoroutine = StartCoroutine(StartMiniGame());
-        speedUIBtn.onClick.RemoveAllListeners();
+        speedUIBtn.interactable = false;
         speedUIBtn.onClick.AddListener(OnClickImg);
+        miniGameCoroutine = StartCoroutine(StartMiniGame());
     }
 
 
     public void OnClickImg() //이미지를 누를시
     {
+
+        speedUIBtn.interactable = false;
+
         if (isClick)
             return;
 
         isClick = true;
-
-        speedUIBtn.interactable = false;
 
         if (isGreen)
         {
@@ -61,28 +63,13 @@ public class MiniGameSpeedTest : MonoBehaviour
             if (miniGameCoroutine != null)
                 StopCoroutine(miniGameCoroutine);
 
-            GameResult(true);
+            stageManager.MiniGameResult(true);
         }
         else
         {
             trueOrFalse.text = "False!";
             StartCoroutine(FailEffect());
-            GameResult(false);
-        }
-    }
-
-    private void GameResult(bool gameResult)
-    {
-        if (gameResult)
-        {
-            stageManager.MiniGameResult(true);
-            return;
-        }
-        else
-        {
-            stageManager.MiniGameResult(false);
-            ResetGameState();
-            StartGame();
+            
         }
     }
 
@@ -90,7 +77,7 @@ public class MiniGameSpeedTest : MonoBehaviour
     {
         isGreen = false;
         isClick = false;
-        speedUIBtn.interactable = true;
+        speedUIBtn.interactable = false;
         speedUIBtn.image.color = Color.white;
     }
 
@@ -104,6 +91,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         trueOrFalse.text = "Ready?";
+        speedUIBtn.interactable = true;
 
         float randomGameTime = Random.Range(0f, 6f);                 //랜덤값설정
         randomGameTime = Mathf.Round(randomGameTime * 100f) / 100f;   //반올림
@@ -117,6 +105,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
         if (isGreen && !isClick)  //클릭했는지 안했는지 검사 안했으면 실패
         {
+            speedUIBtn.interactable = false;
             isGreen = false;
             trueOrFalse.text = "False!";
             OnClickImg();
@@ -141,6 +130,8 @@ public class MiniGameSpeedTest : MonoBehaviour
         isClick = false;
         speedUIBtn.interactable = true;
 
-        GameResult(false);
+        stageManager.MiniGameResult(false);
+        ResetGameState();
+        StartGame();
     }
 }

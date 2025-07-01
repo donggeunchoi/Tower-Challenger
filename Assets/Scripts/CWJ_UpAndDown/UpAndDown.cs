@@ -42,7 +42,7 @@ public class UpAndDown : MonoBehaviour
 
         if (failcount == 0)
         {
-            StageManager.instance.stageLP.LPdown();
+            //StageManager.instance.stageLP.LPdown();
 
             if (!isOver)
             {
