@@ -1,4 +1,6 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Store : MonoBehaviour
 {
@@ -6,6 +8,9 @@ public class Store : MonoBehaviour
     public GameObject Item1;
     public GameObject Item2;
     public GameObject Item3;
+    public Image Item1Image;
+    public Image Item2Image;
+    public Image Item3Image;
 
     
     public void OnClickCloseStore()
@@ -43,10 +48,20 @@ public class Store : MonoBehaviour
                 break;
         }
     }
+    public void BuyItem_SpeedUp()
+    {
+        Inventory.instance.AddItme("SpeedUp", Item1Image);
+    }
 
-    // public void BuyItem()
-    // {
-    //     Inventory.instance.AddItme();
-    // }
+    public void BuyItem_Sandglass()
+    {
+        Inventory.instance.AddItme("Sandglass", Item2Image);
+    }
+    public void BuyItem_TopTicket()
+    {
+        Inventory.instance.AddItme("Topticket",Item3Image);
+    }
+    
+
     
 }
