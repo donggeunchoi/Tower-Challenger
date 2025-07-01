@@ -7,7 +7,7 @@ public class Store : MonoBehaviour
     public GameObject Item2;
     public GameObject Item3;
 
-
+    
     public void OnClickCloseStore()
     {
         StorePanel.SetActive(false);
@@ -43,4 +43,10 @@ public class Store : MonoBehaviour
                 break;
         }
     }
+
+    // public void BuyItem()
+    // {
+    //     Inventory.instance.AddItme();
+    // }
+    
 }

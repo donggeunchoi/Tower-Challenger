@@ -76,8 +76,8 @@ public class VillageManager : MonoBehaviour
             case "StopPanel":
                 StopPanel.SetActive(true);
                 break;
-            case "GameScene":
-                SceneManager.LoadScene("GameScene");
+            case "TowerEntrance":
+                SceneManager.LoadScene("TowerEntrance");
                 break;
         }
     }
@@ -120,4 +120,14 @@ public class VillageManager : MonoBehaviour
     }
 
     #endregion
+
+    public void OnClickMailBox()
+    {
+        MailBox.SetActive(true);
+    }
+
+    public void OnClickMailBoxClose()
+    {
+        MailBox.SetActive(false);
+    }
 }
