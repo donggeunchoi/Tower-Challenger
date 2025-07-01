@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Guild : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class Guild : MonoBehaviour
     public GameObject RadManPanel;
     public GameObject GreenPanel;
     public GameObject NoonaPanel;
+    public Image Charactor1Image;
+    public Image Charactor2Image;
+    public Image Charactor3Image;
 
     public void OnClickRedMan()
     {
@@ -41,5 +45,20 @@ public class Guild : MonoBehaviour
     public void OnClickNoonaClose()
     {
         NoonaPanel.SetActive(false);
+    }
+    
+    public void Buy_Luke()
+    {
+        Debug.Log(Charactor1Image.sprite.name);
+        CharactorChoice.instance.AddItem("Luke", Charactor1Image);
+    }
+
+    public void Buy_Rin()
+    {
+        CharactorChoice.instance.AddItem("Rin", Charactor2Image);
+    }
+    public void Buy_Mir()
+    {
+        CharactorChoice.instance.AddItem("Mir",Charactor3Image);
     }
 }
