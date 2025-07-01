@@ -36,7 +36,6 @@ public class StartManager : MonoBehaviour
         
         videoPanel.SetActive(true);
         startPanel.SetActive(false);
-        
         videoPlayer.Play();
         
         yield return StartCoroutine(FadeOut());
@@ -56,7 +55,7 @@ public class StartManager : MonoBehaviour
         SceneManager.LoadScene("VillageScene");
     }
 
-    IEnumerator FadeIn()
+    IEnumerator FadeIn()//투명에서 검은거로 
     {
         float time = 0f;
         while (time < fadeDuration)
@@ -70,7 +69,7 @@ public class StartManager : MonoBehaviour
         fadeImage.color = new Color(0, 0, 0, 1);
     }
 
-    IEnumerator FadeOut()
+    IEnumerator FadeOut()//검은거에서 투명으로
     {
         float time = 0f;
 

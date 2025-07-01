@@ -388,7 +388,7 @@ MonoBehaviour:
   startButton: {fileID: 1197408494}
   startPanel: {fileID: 1893715157}
   fadeImage: {fileID: 1195072027}
-  fadeDuration: 3
+  fadeDuration: 1
 --- !u!114 &644483907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730545532}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: b3c2c9428e9f94a4abf9074477c3c987, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 771cd0a50789040168520092e7736fa1, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -522,7 +522,7 @@ VideoPlayer:
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
+  m_SkipOnDrop: 0
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
