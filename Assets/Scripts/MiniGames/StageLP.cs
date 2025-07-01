@@ -20,6 +20,7 @@ public class StageLP : MonoBehaviour
         for (int i = 0; i < heartIcon.Length; i++)
         {
             heartIcon[i].sprite = nomalHeart;
+            heartIcon[i].gameObject.SetActive(true);
         }
     }
 

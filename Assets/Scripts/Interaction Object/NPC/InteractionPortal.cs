@@ -24,7 +24,7 @@ public class InteractionPortal : MonoBehaviour, IInteractable
                 StageManager.instance.StartNextMiniGame();  //미니게임 씬으로 이동합니다
                 break;
             case PortalType.NextFloor:
-                StageManager.instance.NextFloor();  //다음 층으로 이동합니다
+                UIManager.Instance.InstantiateUI(UIManager.Instance.allClearUI);  //다음 층으로 이동하는 UI를 띄워줍니다
                 break;
         }
     }
