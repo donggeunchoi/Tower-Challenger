@@ -75,7 +75,7 @@ public class SellGameManager : MonoBehaviour
     {
         if (index == 0)
         {
-            stageManager.MiniGameResult(false);
+            stageManager.MiniGameResult(true);
         }
         else
         {

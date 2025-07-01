@@ -9,40 +9,84 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     private float radius;                   // 조이스틱 이동 반지름
     private Vector2 inputDir = Vector2.zero;// 입력 방향 벡터
     private float deadZone = 0.15f;         // 민감도 조정
-    
-    [Header("움직임과 대쉬")]
-    public float speed = 5;
-    public float DashSpeed = 10f;           // 대쉬스피드
-    public float DashTime = 5f;           //대쉬지속시간
-    public float CooldownTime = 3f;         //쿨타임
-    public bool canDash = true;             //대쉬할수 있는 상태
-    public bool isDashing = false;          //대쉬중은 아니니까 
-    public SpriteRenderer spriteRenderer;   //방향전환 이미지
 
-    
+    [Header("움직임과 대쉬")]
+    public float speed = 5;                 // 기본 이동 속도
+    public float DashSpeed = 10f;           // 대쉬 스피드
+    public float DashTime = 0.2f;           // 대쉬 지속 시간
+    public float CooldownTime = 1f;         // 대쉬 쿨타임
+    public bool canDash = true;             // 대쉬 가능 여부
+    public bool isDashing = false;          // 대쉬 중 여부
+    public SpriteRenderer spriteRenderer;   // 방향 전환 이미지
+
+    private Rigidbody2D rb;                 // Rigidbody2D 컴포넌트
+    private int currentPlayerLayer;         // 현재 플레이어 레이어
+
+    // 레이어 번호 (유니티 에디터에서 설정한 값)
+    private const int LAYER_1 = 20; // Layer 1
+    private const int LAYER_2 = 21; // Layer 2
+    private const int LAYER_3 = 22; // Layer 3
+
     void Start()
     {
         radius = stick.sizeDelta.x * 0.5f;     //스틱의 크기의 절반을 반지름으로
         stick.anchoredPosition = Vector2.zero; //중앙 위치
         inputDir = Vector2.zero;               //입력 방향을 초기화
-        spriteRenderer = player.GetComponent<SpriteRenderer>(); //플레이어 스프라이트
-    }
 
-    void Update()
-    {   //입력방향이 있을 때 speed만큼 플레이어를 이동시킴
         if (player != null)
         {
-            player.Translate(new Vector3(inputDir.x, inputDir.y, 0) * Time.deltaTime * speed);
-            FlipChange();
+            spriteRenderer = player.GetComponent<SpriteRenderer>(); //플레이어 스프라이트
+
+            rb = player.GetComponent<Rigidbody2D>();
+            if (rb == null)
+            {
+                rb = player.gameObject.AddComponent<Rigidbody2D>();
+                rb.gravityScale = 0; // 중력 비활성화 (2D 탑뷰 기준)
+                rb.freezeRotation = true; // 회전 고정
+                rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // 연속 충돌 감지
+            }
+
+            // 현재 플레이어 레이어 저장 및 충돌 설정
+            currentPlayerLayer = player.gameObject.layer;
+            UpdateCollisionSettings();
         }
-        
     }
 
-    public void OnPointerDown(PointerEventData eventData)  //터치가 시작될 때 드래그 처리
+    void FixedUpdate()
+    {
+        //플레이어와 리지드바디가 있을 때만 이동 처리
+        if (player != null && rb != null)
+        {
+            // 레이어가 바뀌었는지 감지
+            if (player.gameObject.layer != currentPlayerLayer)
+            {
+                currentPlayerLayer = player.gameObject.layer;
+                UpdateCollisionSettings();
+            }
+
+            float currentSpeed = isDashing ? DashSpeed : speed; // 대쉬 중이면 대쉬 속도
+            rb.linearVelocity = inputDir.normalized * currentSpeed;    // 방향 * 속도
+
+            FlipChange(); // 방향 전환 처리
+        }
+    }
+
+    // 플레이어가 속한 레이어에 따라 해당 레이어의 콜라이더와만 충돌하도록 설정
+    private void UpdateCollisionSettings()
+    {
+        // Layer 1에 있을 때: Layer 1과만 충돌, 나머지는 무시
+        Physics2D.IgnoreLayerCollision(currentPlayerLayer, LAYER_1, currentPlayerLayer != LAYER_1);
+        Physics2D.IgnoreLayerCollision(currentPlayerLayer, LAYER_2, currentPlayerLayer != LAYER_2);
+        Physics2D.IgnoreLayerCollision(currentPlayerLayer, LAYER_3, currentPlayerLayer != LAYER_3);
+    }
+
+    //터치가 시작될 때 드래그 처리
+    public void OnPointerDown(PointerEventData eventData)
     {
         OnDrag(eventData);
     }
 
+    //드래그 처리
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 localPoint;
@@ -65,32 +109,32 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)  //드래그가끝나면 리셋
+    //드래그가 끝나면 리셋
+    public void OnEndDrag(PointerEventData eventData)
     {
         ResetStick();
     }
 
-    public void OnPointerUp(PointerEventData eventData)  //터치가끝나면 리셋(한번터치하고 냅두면 계속이동해버림)
+    //터치가 끝나면 리셋(한번 터치하고 냅두면 계속이동해버림)
+    public void OnPointerUp(PointerEventData eventData)
     {
         ResetStick();
     }
 
-    private void ResetStick()  //스틱을 중앙으로 초기화 및 입력 초기화
+    //스틱을 중앙으로 초기화 및 입력 초기화
+    private void ResetStick()
     {
         stick.anchoredPosition = Vector2.zero;
         inputDir = Vector2.zero;
     }
 
-    
     //버튼을 누르면 플레이어 속도가 대쉬 속도로 증가한다.
     //대쉬 지속시간 후에는 원래 속도로 돌아오게 만든다
     //쿨타임 3초동안은 다시 대쉬를 할 수 없어야 한다.
     public void OnClickDash()
     {
-        //대쉬할수 있고 대쉬중이 아니라면
         if (canDash && !isDashing)
         {
-            //해당 대쉬를 진행
             StartCoroutine(DashRoutine());
         }
     }
@@ -100,36 +144,25 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         isDashing = true;
         canDash = false;
 
-        Debug.Log("달리는 시간이쥬?");
-        float originalSpeed = speed;
-        speed = DashSpeed;
-        
+        // 대쉬 시작
         yield return new WaitForSeconds(DashTime);
-        
-        speed = originalSpeed;
+
+        // 대쉬 종료
         isDashing = false;
-        Debug.Log("달리기 멈추고 쿨타임시간");
-        
+
+        // 쿨타임 대기
         yield return new WaitForSeconds(CooldownTime);
         canDash = true;
     }
 
-
+    //입력 방향에 따라 스프라이트 좌우 반전 처리
     public void FlipChange()
     {
-        Vector3 move = new Vector3(inputDir.x, inputDir.y, 0);
-        player.Translate(move * Time.deltaTime * speed);
+        if (spriteRenderer == null) return;
 
-        // 방향 전환
         if (inputDir.x > 0.1f)
-        {
             spriteRenderer.flipX = false; // 오른쪽
-        }
         else if (inputDir.x < -0.1f)
-        {
             spriteRenderer.flipX = true;  // 왼쪽
-        }
     }
-    
-    
 }
