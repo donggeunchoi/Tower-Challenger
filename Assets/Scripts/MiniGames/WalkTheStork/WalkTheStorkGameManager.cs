@@ -25,7 +25,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     [Header("부위")]
     public GameObject Man;
-    public GameObject Body, Head, Leg, LF, RF, Hand,high;
+    public GameObject Head, Leg, LF, RF, Hand,High;
 
     [Header("출력 UI")]
     public GameObject PrintOut;
@@ -216,34 +216,74 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
         bool isOverLimit = currentAngle >= 95f || currentAngle <= -95f;
         if (!isOverLimit) return;
-
-        if (StageManager.instance.stageLP.currentLP == 1)
+        else if (currentAngle <= -95f)
         {
-            stageManager.MiniGameResult(false);
-            currentState = GameState.Ended;
-
-            // 애니메이션 멈추기
-            if (LF != null) LF.GetComponent<Animator>().enabled = false;
-            if (RF != null) RF.GetComponent<Animator>().enabled = false;
-
-            // 서서히 회전
-            if (Leg != null)
-                StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 2f));
-            if (high != null)
-                StartCoroutine(SmoothRotate(high, new Vector3(0f, 0f, -140), 2f));
-            if (Man != null)
+            if (StageManager.instance.stageLP.currentLP == 1)//앞으로 넘어지기
             {
-                Vector3 targetEuler = new Vector3(0f, 0f, -140f); // Z 회전
-                Vector3 targetPos = new Vector3(1, -3f, Man.transform.position.z); // Y만 변경
-                StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                // 애니메이션 멈추기
+                if (LF != null) LF.GetComponent<Animator>().enabled = false;
+                if (RF != null) RF.GetComponent<Animator>().enabled = false;
+
+                // 서서히 회전
+                if (Leg != null)
+                    StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 2f));
+                if (High != null)
+                    StartCoroutine(SmoothRotate(High, new Vector3(0f, 0f, -140), 2f));
+                if (Man != null)
+                {
+                    Vector3 targetEuler = new Vector3(0f, 0f, -140f); // Z 회전
+                    Vector3 targetPos = new Vector3(1, -3f, Man.transform.position.z); // Y만 변경
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+                }
+            }
+            else
+            {
+                Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
+                currentAngle = 0f;
+                angularVelocity = 0f;
+                stageManager.MiniGameResult(false);
             }
         }
-        else
+        if (currentAngle >= 95f)
         {
-            currentAngle = 0f;
-            angularVelocity = 0f;
-            stageManager.MiniGameResult(false);
+            if (StageManager.instance.stageLP.currentLP == 1)//앞으로 넘어지기
+            {
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                // 애니메이션 멈추기
+                if (LF != null) LF.GetComponent<Animator>().enabled = false;
+                if (RF != null) RF.GetComponent<Animator>().enabled = false;
+
+                // 서서히 회전
+
+                if (Leg != null)
+                    StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, 90), 2f));
+                if (Head != null)
+                    StartCoroutine(SmoothRotate(Head, new Vector3(0f, 0f, 90), 2f));
+                if (Man != null)
+                {
+                    Vector3 targetEuler = new Vector3(0f, 0f,0); // Z 회전
+                    Vector3 targetPos = new Vector3(Man.transform.position.x-3, -3f, Man.transform.position.z); // Y만 변경
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+                }
+
+            }
+            else
+            {
+                Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
+                currentAngle = 0f;
+                angularVelocity = 0f;
+                stageManager.MiniGameResult(false);
+            }
         }
+
+
+
+      
     }
     private IEnumerator SmoothRotate(GameObject obj, Vector3 toEuler, float duration)
     {
@@ -290,8 +330,8 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     private void ApplyRotationToParts()
     {
-        if (Body != null)
-            Body.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        if (High != null)
+            High.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
 
         float minorTilt = currentAngle * -0.05f;
 
