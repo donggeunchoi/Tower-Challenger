@@ -3,6 +3,8 @@
 public class UpAndDown : MonoBehaviour
 {
     public int failcount;
+    public int curLP = 4;
+
     private bool isOver = false;
     public string NumGenration()
     {
@@ -39,10 +41,16 @@ public class UpAndDown : MonoBehaviour
             failcount--;
             Debug.Log(failcount);
         }
+        LPDown();
+       
+    }
 
+    public void LPDown()
+    {
         if (failcount == 0)
         {
-            //StageManager.instance.stageLP.LPdown();
+            curLP--;
+            UpAndDownManager.instance.upAndDownUI.LP[curLP].sprite = UpAndDownManager.instance.upAndDownUI.emptyLP;
 
             if (!isOver)
             {
