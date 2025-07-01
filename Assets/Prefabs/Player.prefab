@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5461775987737834809}
   - component: {fileID: 8890961892564277758}
   - component: {fileID: 1094484275157854596}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: UI Canvus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 8945181570517157846}
   - component: {fileID: 5006927501802793740}
   - component: {fileID: 1769304750690178299}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Jostick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 7374991222915336870}
   - component: {fileID: 7003061524523617997}
   - component: {fileID: 7116451171543722854}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: SafeAreaPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 7596344753289044529}
   - component: {fileID: 5686299313006647021}
   - component: {fileID: 4182355014316669795}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: DashButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2860521689241463352}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: NPCUIContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 1658956826428463425}
   - component: {fileID: 7854194110566092225}
   - component: {fileID: 2062344464026606047}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: 'InteractionButton '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 3628755318572121732}
   - component: {fileID: 8779323679251060261}
   - component: {fileID: 8697699003906066021}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -677,7 +677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1487384770269795576}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: PlayerUIContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,7 @@ GameObject:
   - component: {fileID: 1722386992732996109}
   - component: {fileID: 3504039372541559767}
   - component: {fileID: 5851759213340580545}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -911,7 +911,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!1 &6717296256876868760
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 6236405872669594724}
   - component: {fileID: 6037040323054246823}
   - component: {fileID: 1815127224497800545}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: JoystickBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1004,8 +1004,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3402059733480839755}
   stick: {fileID: 8945181570517157846}
-  speed: 3
-  DashSpeed: 7
+  speed: 7
+  DashSpeed: 14
   DashTime: 4
   CooldownTime: 3
   canDash: 1

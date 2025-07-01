@@ -208,7 +208,7 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        randomGames.Add(gameList[floor / 5 - 1]);
+        randomGames.Add(gameList[floor / 5]);
 
         if (randomGames.Count <= 0) //보스게임이 없으면 아무거나라도
             RandomStage();
