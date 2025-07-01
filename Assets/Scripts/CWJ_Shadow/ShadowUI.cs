@@ -23,10 +23,10 @@ public class ShadowUI : MonoBehaviour
         }
     }
 
-    //public void AnswerButton(int index)
-    //{
-    //    ShadowManager.instance.shadow.Answer(index);
-    //}
+    public void AnswerButton(int index)
+    {
+        ShadowManager.instance.shadow.Answer(index);
+    }
 
     //public void shadowGameInit()
     //{

@@ -28,6 +28,9 @@ public class StageManager : MonoBehaviour
     private Vector3 playerPosition;    //플레이어 포지션 저장
     private int layerNumber;           //플레이어 레이어 저장
     private string currentSceneName;   //현재 씬 이름
+    public int stamina = 5;           //기본스태미나
+    public int curStamina;             //현재스태미나
+    public float staminaTiem;          //스태미나 충전되는 시간
     public List<int> stageClearPortal = new List<int>(); //여기에 활성화 되는 포탈 인덱스 값만 저장
 
     [Header("미니게임 데이터")]
@@ -54,11 +57,18 @@ public class StageManager : MonoBehaviour
         isGameActive = false;
         if (infoUI != null)
             infoUI.SetActive(isGameActive);
+
+        curStamina = stamina;
     }
 
     #region MiniGameCall
     public void StartGame()
     {
+        if (Items.Instance.TopTicket() == false)
+        {
+            curStamina--;
+        }      
+
         isGameOver = false;  //게임오버상태 초기화
         isGameActive = true;  //현재 게임 시작
         infoUI.SetActive(isGameActive);
@@ -113,6 +123,7 @@ public class StageManager : MonoBehaviour
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
+        curStamina--;
         ResetInfo();
         floor++;
 
