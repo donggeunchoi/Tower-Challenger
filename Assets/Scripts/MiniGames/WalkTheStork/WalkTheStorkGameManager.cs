@@ -224,15 +224,15 @@ public class WalkTheStorkGameManager : MonoBehaviour
                 currentState = GameState.Ended;
 
                 // 애니메이션 멈추기
-                if (LF != null) LF.GetComponent<Animator>().enabled = false;
-                if (RF != null) RF.GetComponent<Animator>().enabled = false;
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
 
                 // 서서히 회전
-                if (Leg != null)
+                if (Leg)
                     StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 2f));
-                if (High != null)
+                if (High)
                     StartCoroutine(SmoothRotate(High, new Vector3(0f, 0f, -140), 2f));
-                if (Man != null)
+                if (Man)
                 {
                     Vector3 targetEuler = new Vector3(0f, 0f, -140f); // Z 회전
                     Vector3 targetPos = new Vector3(1, -3f, Man.transform.position.z); // Y만 변경
@@ -255,16 +255,16 @@ public class WalkTheStorkGameManager : MonoBehaviour
                 currentState = GameState.Ended;
 
                 // 애니메이션 멈추기
-                if (LF != null) LF.GetComponent<Animator>().enabled = false;
-                if (RF != null) RF.GetComponent<Animator>().enabled = false;
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
 
                 // 서서히 회전
 
-                if (Leg != null)
+                if (Leg)
                     StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, 90), 2f));
-                if (Head != null)
+                if (Head)
                     StartCoroutine(SmoothRotate(Head, new Vector3(0f, 0f, 90), 2f));
-                if (Man != null)
+                if (Man)
                 {
                     Vector3 targetEuler = new Vector3(0f, 0f,0); // Z 회전
                     Vector3 targetPos = new Vector3(Man.transform.position.x-3, -3f, Man.transform.position.z); // Y만 변경
@@ -330,16 +330,16 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     private void ApplyRotationToParts()
     {
-        if (High != null)
+        if (High)
             High.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
 
         float minorTilt = currentAngle * -0.05f;
 
-        if (Head != null)
+        if (Head)
             Head.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
-        if (Hand != null)
+        if (Hand)
             Hand.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
-        if (Leg != null)
+        if (Leg)
             Leg.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle * -0.30f);
 
     }
@@ -359,7 +359,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     private void ScrollBackground(float deltaTime)
     {
-        if (bg1 == null || bg2 == null) return;
+        if (bg1 || bg2)
 
         bg1.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
         bg2.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;

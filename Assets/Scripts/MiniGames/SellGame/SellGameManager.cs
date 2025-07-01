@@ -20,9 +20,9 @@ public class SellGameManager : MonoBehaviour
 
     private RectTransform[] rects;
     private Vector3[] originalPositions;
-    StageManager stageManager;
+    private StageManager stageManager;
 
-    
+
 
     void Start()
     {
@@ -75,7 +75,7 @@ public class SellGameManager : MonoBehaviour
     {
         if (index == 0)
         {
-            stageManager.MiniGameResult(true);
+            stageManager.MiniGameResult(false);
         }
         else
         {
