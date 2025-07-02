@@ -706,17 +706,17 @@ PrefabInstance:
     - target: {fileID: 4270259860928947655, guid: 7aaa717dd530244249edf73eec2b525c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4270259860928947655, guid: 7aaa717dd530244249edf73eec2b525c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4270259860928947655, guid: 7aaa717dd530244249edf73eec2b525c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4270259860928947655, guid: 7aaa717dd530244249edf73eec2b525c,
         type: 3}
@@ -786,7 +786,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1040309902805030778, guid: 7aaa717dd530244249edf73eec2b525c,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6772492789176234181}
+      addedObject: {fileID: 8288766959701096556}
   m_SourcePrefab: {fileID: 100100000, guid: 7aaa717dd530244249edf73eec2b525c, type: 3}
 --- !u!4 &2093228520366349664 stripped
 Transform:
@@ -800,7 +800,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2760608200911780007}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &6772492789176234181
+--- !u!95 &8288766959701096556
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -810,7 +810,7 @@ Animator:
   m_GameObject: {fileID: 2891393218226925533}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a9c8abb55a6d456696a9ca7abae5836, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
