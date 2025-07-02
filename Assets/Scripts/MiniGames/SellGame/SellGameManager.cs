@@ -84,6 +84,7 @@ public class SellGameManager : MonoBehaviour
 
     IEnumerator OnButtonClickRoutine(int index)
     {
+        Blocker.SetActive(true);
         Card[index].GetComponent<Animator>().SetTrigger("ThisCard");
         yield return new WaitForSeconds(0.3f);
         Card[index].GetComponent<Animator>().SetTrigger("Effect");
@@ -91,6 +92,7 @@ public class SellGameManager : MonoBehaviour
         if (index == 0)
         {
             stageManager.MiniGameResult(true);
+            Blocker.SetActive(false);
         }
         else
         {
