@@ -26,7 +26,7 @@ public class Bird : MonoBehaviour
    {
        if (isMove)
        {
-           transform.Translate(direction * birdSpeed * Time.deltaTime);
+           transform.Translate(-direction * birdSpeed * Time.deltaTime);
        }
    }
 
