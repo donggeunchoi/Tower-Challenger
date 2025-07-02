@@ -27,7 +27,6 @@ public class Inventory : MonoBehaviour
         inventorySlots.Add(newSlot);
 
         newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = itemName;
-        newSlot.GetComponentInChildren<Image>().sprite = itemIcon.sprite; 
         newSlot.GetComponent<InventorySlot>().itemName = itemName;
         newSlot.GetComponent<Image>().sprite = itemIcon.sprite;
     }
