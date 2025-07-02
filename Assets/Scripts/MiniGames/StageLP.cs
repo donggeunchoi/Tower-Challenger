@@ -12,8 +12,7 @@ public class StageLP : MonoBehaviour
     public Image[] heartIcon;
     private int beforLP;
     private Coroutine brokenHeartCor;
-
-
+    
     public void ResetLP()
     {
         currentLP = DEFALT_LP + bonusLP;
@@ -36,7 +35,10 @@ public class StageLP : MonoBehaviour
                 StopCoroutine(brokenHeartCor);
                 heartIcon[currentLP].gameObject.SetActive(false);
             }
-            brokenHeartCor = StartCoroutine(BrokenHeartImage());
+            else
+            {
+                brokenHeartCor = StartCoroutine(BrokenHeartImage());
+            }
         }
     }
 

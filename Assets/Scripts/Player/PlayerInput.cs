@@ -20,12 +20,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public SpriteRenderer spriteRenderer;   // 방향 전환 이미지
 
     private Rigidbody2D rb;                 // Rigidbody2D 컴포넌트
-    private int currentPlayerLayer;         // 현재 플레이어 레이어
-
-    // 레이어 번호 (유니티 에디터에서 설정한 값)
-    private const int LAYER_1 = 20; // Layer 1
-    private const int LAYER_2 = 21; // Layer 2
-    private const int LAYER_3 = 22; // Layer 3
 
     void Start()
     {
@@ -45,10 +39,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
                 rb.freezeRotation = true; // 회전 고정
                 rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // 연속 충돌 감지
             }
-
-            // 현재 플레이어 레이어 저장 및 충돌 설정
-            currentPlayerLayer = player.gameObject.layer;
-            UpdateCollisionSettings();
         }
     }
 
@@ -57,27 +47,11 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         //플레이어와 리지드바디가 있을 때만 이동 처리
         if (player != null && rb != null)
         {
-            // 레이어가 바뀌었는지 감지
-            if (player.gameObject.layer != currentPlayerLayer)
-            {
-                currentPlayerLayer = player.gameObject.layer;
-                UpdateCollisionSettings();
-            }
-
             float currentSpeed = isDashing ? DashSpeed : speed; // 대쉬 중이면 대쉬 속도
             rb.linearVelocity = inputDir.normalized * currentSpeed;    // 방향 * 속도
 
             FlipChange(); // 방향 전환 처리
         }
-    }
-
-    // 플레이어가 속한 레이어에 따라 해당 레이어의 콜라이더와만 충돌하도록 설정
-    private void UpdateCollisionSettings()
-    {
-        // Layer 1에 있을 때: Layer 1과만 충돌, 나머지는 무시
-        Physics2D.IgnoreLayerCollision(currentPlayerLayer, LAYER_1, currentPlayerLayer != LAYER_1);
-        Physics2D.IgnoreLayerCollision(currentPlayerLayer, LAYER_2, currentPlayerLayer != LAYER_2);
-        Physics2D.IgnoreLayerCollision(currentPlayerLayer, LAYER_3, currentPlayerLayer != LAYER_3);
     }
 
     //터치가 시작될 때 드래그 처리
