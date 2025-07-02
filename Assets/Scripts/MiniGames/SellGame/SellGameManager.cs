@@ -14,15 +14,15 @@ public class SellGameManager : MonoBehaviour
     public Animator animator;
 
     [Header("Settings")]
-    public float shuffleDuration = 0.15f;
-    public float waitBetweenShuffles = 0.05f;
-    public int shuffleCount = 20;
+    public float shuffleDuration = 0.15f;      //섞이는속도
+    public float waitBetweenShuffles = 0.05f;  //딜레이
+    public int shuffleCount = 20;              //셔플 횟수
 
     private RectTransform[] rects;
     private Vector3[] originalPositions;
-    StageManager stageManager;
+    private StageManager stageManager;
 
-    
+
 
     void Start()
     {

@@ -7,6 +7,9 @@ public class UIManager : MonoBehaviour
     public StageTimer timerUI;
     public StageLP stageLPUI;
     public GameObject gameOverUI;
+    public GameObject allClearUI;
+
+    public Transform notDestroyCanvus;
 
     private void Awake()
     {
@@ -23,7 +26,11 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         stageManager = StageManager.instance;
-        timerUI = stageManager.stageTimer;
-        stageLPUI = stageManager.stageLP;
+        notDestroyCanvus.gameObject.SetActive(false);
+    }
+
+    public void InstantiateUI(GameObject instanceUI)
+    {
+        Instantiate(instanceUI, notDestroyCanvus);
     }
 }

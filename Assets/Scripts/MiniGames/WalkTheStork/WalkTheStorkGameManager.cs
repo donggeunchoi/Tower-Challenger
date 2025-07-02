@@ -1,170 +1,350 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class WalkTheStorkGameManager : MonoBehaviour
 {
+    private enum GameState { Intro, Playing, Outro, Ended }
+    private GameState currentState = GameState.Intro;
+
     [Header("회전 관련")]
-    public float rotationSpeed = 400f;      // 키 입력에 따른 회전 가속도
-    public float tiltAmount = 200f;         // 꺾기 입력 시 추가 회전량
+    public float rotationSpeed = 400f;
+    public float tiltAmount = 200f;
+    private float sensitivity = 5f;
 
     [Header("자동 흔들림")]
-    public float autoTiltSpeed;             // 흔들림 속도 (주기)
-    public float autoTiltRange;             // 흔들림 범위 (세기)
-    private float tiltTimer;                // 시간 누적용 타이머
+    public float autoTiltSpeed;
+    public float autoTiltRange;
+    private float tiltTimer;
 
     [Header("기울기 중력 효과")]
-    public float gravityTiltStrength = 10f; // 기울기에 따른 자연스러운 낙하 회전 효과
+    public float gravityTiltStrength = 10f;
 
     [Header("감속 관련")]
-    public float angularDamping = 1.5f;     // 회전 감속 계수 (마찰처럼 작용)
+    public float angularDamping = 1.5f;
 
     [Header("부위")]
     public GameObject Man;
-    public GameObject Body;                 // 몸통 회전 대상
-    public GameObject Head;                 // 머리
-    public GameObject Leg;                  // 다리
-    public GameObject Hand;                 // 손
+    public GameObject Head, Leg, LF, RF, Hand,High;
 
     [Header("출력 UI")]
-    public GameObject PrintOut;             // 거리 출력용 UI 오브젝트
+    public GameObject PrintOut;
 
-    // 내부 상태
-    private float currentAngle = 0f;        // 현재 회전 각도
-    private float angularVelocity = 0f;     // 현재 회전 속도
+    [Header("배경 UI")]
+    public GameObject BG, BG2;
+    public float backgroundScrollSpeed = 2f;
+    private float backgroundWidth = 20f;
 
-    // 바람/난이도 조절 관련
-    private float autoRotate = 0f;          // 바람처럼 지속적으로 적용되는 회전력
-    private float resetTimer = 0f;          // 난이도 조절용 타이머
-    private float resetClock = 0f;          // 다음 난이도 조절까지 시간
+    private float currentAngle = 0f;
+    private float angularVelocity = 0f;
 
-    private float Goal;                     // 목표 거리 (난이도별)
-    private TextMeshProUGUI printText;      // 출력 텍스트 캐싱
+    private float autoRotate = 0f;
+    private float resetTimer = 0f;
+    private float resetClock = 0f;
+
+    private float Goal;
+    private TextMeshProUGUI printText;
 
     private Vector3 manStartPos = new Vector3(-12f, -1.5f, 0f);
     private Vector3 manEndPos = new Vector3(-5f, -1.5f, 0f);
-    private float moveDuration = 4f; // 이동 시간
-    private float moveTimer = 0f;    // 이동 경과 시간
+    private Vector3 manEndPos2 = new Vector3(15f, -1.5f, 0f);
+    private float moveDuration = 4f;
+    private float moveTimer = 0f;
 
-    private int Lv = 1;                     // 현재 난이도 레벨
-    private bool GameStart = false;
+    private int Lv = 1;
+
+    private StageManager stageManager;
+
     private void Start()
     {
+        stageManager = StageManager.instance;
         printText = PrintOut.GetComponent<TextMeshProUGUI>();
-        // 난이도에 따라 목표 거리 설정
+
         Goal = Lv switch
-        {    
+        {
             1 => 30,
             2 => 50,
-            3 => 100
+            3 => 100,
+            _ => 30
         };
 
-        // UI 텍스트 캐싱
-        
+        if (Man)
+            Man.transform.position = manStartPos;
+
+        if (BG)
+        {
+            SpriteRenderer sr = BG.GetComponent<SpriteRenderer>();
+            if (sr)
+                backgroundWidth = sr.bounds.size.x;
+        }
+
+        if (BG && BG2)
+        {
+            BG.transform.position = new Vector3(0f, BG.transform.position.y, BG.transform.position.z);
+            BG2.transform.position = new Vector3(backgroundWidth, BG2.transform.position.y, BG2.transform.position.z);
+        }
     }
 
     private void Update()
     {
         float deltaTime = Time.deltaTime;
 
-        if (!GameStart)
+        switch (currentState)
         {
-            if (Man != null)
-            {
-                moveTimer += deltaTime;
-                float t = Mathf.Clamp01(moveTimer / moveDuration); // 0~1
-                Man.transform.position = Vector3.Lerp(manStartPos, manEndPos, t);
+            case GameState.Intro:
+                HandleIntro(deltaTime);
+                break;
 
-                if (t >= 1f)
+            case GameState.Playing:
+                if (tiltTimer >= Goal)
                 {
-                    GameStart = true; // 이동 완료 후 게임 시작
+                    moveTimer = 0f;
+                    currentState = GameState.Outro;
                 }
-            }
-            return;
-        }
-        if (GameStart)
-        {
-            UpdateUI();                     // 현재 거리 표시
-            HandleInput(deltaTime);        // 사용자 입력 처리
-            ApplyAutoTilt(deltaTime);      // 자동 흔들림 적용
-            ApplyGravityTilt(deltaTime);   // 기울기 중력 효과
-            ApplyDamping(deltaTime);       // 회전 감속 적용
-            UpdateAngle(deltaTime);        // 회전 각도 갱신 및 리미트 체크
-            ApplyRotationToParts();        // 회전값을 각 오브젝트에 적용
-            HandleDifficultyScaling(deltaTime); // 난이도 랜덤 변화
+                else
+                {
+                    UpdateUI();
+                    HandleInput(deltaTime);
+                    ApplyAutoTilt(deltaTime);
+                    ApplyGravityTilt(deltaTime);
+                    ApplyDamping(deltaTime);
+                    UpdateAngle(deltaTime);
+                    ApplyRotationToParts();
+                    HandleDifficultyScaling(deltaTime);
+                    ScrollBackground(deltaTime);
+                }
+                break;
+
+            case GameState.Outro:
+                HandleOutro(deltaTime);
+                stageManager.MiniGameResult(true);
+                break;
+
+            case GameState.Ended:
+                // 아무것도 하지 않음 (정지 상태)
+                break;
         }
     }
 
-    // UI 업데이트
+    private void HandleIntro(float deltaTime)
+    {
+        if (Man == null) return;
+
+        moveTimer += deltaTime;
+        float t = Mathf.Clamp01(moveTimer / moveDuration);
+        Man.transform.position = Vector3.Lerp(manStartPos, manEndPos, t);
+
+        if (t >= 1f)
+            currentState = GameState.Playing;
+    }
+
+    private void HandleOutro(float deltaTime)
+    {
+        if (Man == null) return;
+
+        moveTimer += deltaTime;
+        float t = Mathf.Clamp01(moveTimer / moveDuration);
+        Man.transform.position = Vector3.Lerp(manEndPos, manEndPos2, t);
+
+        if (t >= 1f)
+        {
+            stageManager.MiniGameResult(true);
+            enabled = false;
+        }
+    }
+
     private void UpdateUI()
     {
         printText.text = $"{tiltTimer:F1}/{Goal}";
     }
 
-    // 키 입력에 따라 회전 가속도 적용
     private void HandleInput(float deltaTime)
     {
         float input = Input.GetAxisRaw("Horizontal");
         angularVelocity += -input * rotationSpeed * deltaTime;
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-            angularVelocity += (tiltAmount + tiltTimer * 5f); // 시간 누적에 비례해 강도 증가
+            ApplyTiltInput(true);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
-            angularVelocity -= (tiltAmount + tiltTimer * 5f);
+            ApplyTiltInput(false);
     }
 
-    // 자동 흔들림에 따른 회전력 적용
+    public void TiltLeftBtnClick()
+    {
+        if (currentState == GameState.Playing)
+            ApplyTiltInput(true);
+    }
+
+    public void TiltRightBtnClick()
+    {
+        if (currentState == GameState.Playing)
+            ApplyTiltInput(false);
+    }
+
+    private void ApplyTiltInput(bool isLeft)
+    {
+        float balanceShift = LF.transform.localEulerAngles.z;
+        if (balanceShift > 180f)
+            balanceShift -= 360f;
+
+        float tiltPower = (tiltAmount + tiltTimer * 5f) + Mathf.Abs(balanceShift) * sensitivity;
+
+        angularVelocity += isLeft ? tiltPower : -tiltPower;
+    }
+
     private void ApplyAutoTilt(float deltaTime)
     {
         tiltTimer += deltaTime;
         float autoTilt = Mathf.Sin(tiltTimer * autoTiltSpeed) * autoTiltRange;
         angularVelocity += autoTilt * deltaTime;
-        angularVelocity += autoRotate; // 바람 효과
+        angularVelocity += autoRotate;
     }
 
-    // 현재 각도에 따른 중력 효과 적용
     private void ApplyGravityTilt(float deltaTime)
     {
         angularVelocity += currentAngle * gravityTiltStrength * deltaTime;
     }
 
-    // 회전 감속 적용 (점점 느려지게)
     private void ApplyDamping(float deltaTime)
     {
         angularVelocity *= Mathf.Exp(-angularDamping * deltaTime);
     }
 
-    // 회전 각도 갱신 및 넘어짐 조건 체크
     private void UpdateAngle(float deltaTime)
     {
         currentAngle += angularVelocity * deltaTime;
         currentAngle = Mathf.Clamp(currentAngle, -179f, 179f);
 
-        // 너무 기울어졌을 경우 리셋
-        if (Mathf.Abs(currentAngle) >= 95f)
+        bool isOverLimit = currentAngle >= 95f || currentAngle <= -95f;
+        if (!isOverLimit) return;
+        else if (currentAngle <= -95f)
         {
-            currentAngle = 0f;
-            angularVelocity = 0f;
+            if (StageManager.instance.stageLP.currentLP == 1)//앞으로 넘어지기
+            {
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                // 애니메이션 멈추기
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
+
+                // 서서히 회전
+                if (Leg)
+                    StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 2f));
+                if (High)
+                    StartCoroutine(SmoothRotate(High, new Vector3(0f, 0f, -140), 2f));
+                if (Man)
+                {
+                    Vector3 targetEuler = new Vector3(0f, 0f, -140f); // Z 회전
+                    Vector3 targetPos = new Vector3(1, -3f, Man.transform.position.z); // Y만 변경
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+                }
+            }
+            else
+            {
+                Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
+                currentAngle = 0f;
+                angularVelocity = 0f;
+                stageManager.MiniGameResult(false);
+            }
         }
+        if (currentAngle >= 95f)
+        {
+            if (StageManager.instance.stageLP.currentLP == 1)//앞으로 넘어지기
+            {
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                // 애니메이션 멈추기
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
+
+                // 서서히 회전
+
+                if (Leg)
+                    StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, 90), 2f));
+                if (Head)
+                    StartCoroutine(SmoothRotate(Head, new Vector3(0f, 0f, 90), 2f));
+                if (Man)
+                {
+                    Vector3 targetEuler = new Vector3(0f, 0f,0); // Z 회전
+                    Vector3 targetPos = new Vector3(Man.transform.position.x-3, -3f, Man.transform.position.z); // Y만 변경
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+                }
+
+            }
+            else
+            {
+                Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
+                currentAngle = 0f;
+                angularVelocity = 0f;
+                stageManager.MiniGameResult(false);
+            }
+        }
+
+
+
+      
+    }
+    private IEnumerator SmoothRotate(GameObject obj, Vector3 toEuler, float duration)
+    {
+        if (obj == null) yield break;
+
+        Quaternion startRotation = obj.transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(toEuler);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            obj.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t); // 더 부드럽게 회전
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        obj.transform.rotation = targetRotation; // 마지막 값 정확히 정렬
+    }
+    private IEnumerator SmoothRotateAndMove(GameObject obj, Vector3 toEuler, Vector3 toPosition, float duration)
+    {
+        if (obj == null) yield break;
+
+        Quaternion startRot = obj.transform.rotation;
+        Quaternion targetRot = Quaternion.Euler(toEuler);
+
+        Vector3 startPos = obj.transform.position;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+
+            obj.transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
+            obj.transform.position = Vector3.Lerp(startPos, toPosition, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        obj.transform.rotation = targetRot;
+        obj.transform.position = toPosition;
     }
 
-    // 회전값을 오브젝트들에 적용
     private void ApplyRotationToParts()
     {
-        if (Body != null)
-            Body.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        if (High)
+            High.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
 
-        float minorTilt = currentAngle * -0.05f; // 부드러운 보조 움직임
+        float minorTilt = currentAngle * -0.05f;
 
-        if (Head != null)
+        if (Head)
             Head.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
-        if (Leg != null)
-            Leg.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
-        if (Hand != null)
+        if (Hand)
             Hand.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
+        if (Leg)
+            Leg.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle * -0.30f);
+
     }
 
-    // 일정 시간마다 자동 흔들림 강도와 바람 효과 갱신
     private void HandleDifficultyScaling(float deltaTime)
     {
         resetTimer += deltaTime;
@@ -176,5 +356,18 @@ public class WalkTheStorkGameManager : MonoBehaviour
             autoRotate = Random.Range(-0.1f, 0.1f);
             resetClock = Random.Range(1.5f, 5.5f);
         }
+    }
+
+    private void ScrollBackground(float deltaTime)
+    {
+        if (BG || BG2)
+
+            BG.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
+        BG2.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
+
+        if (BG.transform.position.x <= -backgroundWidth)
+            BG.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
+        if (BG2.transform.position.x <= -backgroundWidth)
+            BG2.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
     }
 }
