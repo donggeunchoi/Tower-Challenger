@@ -11,6 +11,8 @@ public class Guild : MonoBehaviour
     public Image Charactor1Image;
     public Image Charactor2Image;
     public Image Charactor3Image;
+    public GameObject[] ClearImage;
+    public Button[] targetButton;
 
     public void OnClickRedMan()
     {
@@ -51,14 +53,20 @@ public class Guild : MonoBehaviour
     {
         Debug.Log(Charactor1Image.sprite.name);
         CharactorChoice.instance.AddItem("Luke", Charactor1Image);
+        ClearImage[0].SetActive(true);
+        Destroy(targetButton[0]);
     }
 
     public void Buy_Rin()
     {
         CharactorChoice.instance.AddItem("Rin", Charactor2Image);
+        ClearImage[1].SetActive(true);
+        Destroy(targetButton[1]);
     }
     public void Buy_Mir()
     {
         CharactorChoice.instance.AddItem("Mir",Charactor3Image);
+        ClearImage[2].SetActive(true);
+        Destroy(targetButton[2]);
     }
 }
