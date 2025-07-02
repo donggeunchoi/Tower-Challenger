@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using Unity.VisualScripting;
 using System.Linq;
 
 public class SellGameManager : MonoBehaviour
@@ -10,8 +9,10 @@ public class SellGameManager : MonoBehaviour
     public GameObject fadeIn;
     public GameObject Blocker;
     public GameObject StartGameBtn;
-    public Button[] buttons;
-    public Animator animator;
+    public GameObject[] Card;
+
+
+
 
     [Header("Settings")]
     public float shuffleDuration = 0.15f;      //섞이는속도
@@ -27,23 +28,26 @@ public class SellGameManager : MonoBehaviour
     void Start()
     {
         stageManager = StageManager.instance;
-        InitializeButtons();
+        InitializeCards();
         StartCoroutine(GameIntroSequence());
     }
 
-    void InitializeButtons()
+    void InitializeCards()
     {
-        int len = buttons.Length;
+        int len = Card.Length;
         rects = new RectTransform[len];
         originalPositions = new Vector3[len];
 
         for (int i = 0; i < len; i++)
         {
-            rects[i] = buttons[i].GetComponent<RectTransform>();
+            GameObject obj = Card[i];
+            rects[i] = obj.GetComponent<RectTransform>();
             originalPositions[i] = rects[i].anchoredPosition;
 
             int index = i; // 캡처
-            buttons[i].onClick.AddListener(() => OnButtonClick(index));
+            Button btn = obj.GetComponent<Button>();
+            btn.onClick.RemoveAllListeners(); // 중복 방지
+            btn.onClick.AddListener(() => OnButtonClick(index));
         }
     }
 
@@ -57,9 +61,11 @@ public class SellGameManager : MonoBehaviour
         fadeIn.SetActive(false);
 
         yield return new WaitForSeconds(1f);
-        animator.SetTrigger("ThisCard");
+        Card[0].GetComponent<Animator>().SetTrigger("ThisCard");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        Card[0].GetComponent<Animator>().SetTrigger("Close");
+        yield return new WaitForSeconds(1.5f);
         StartGameBtn.SetActive(true);
         Blocker.SetActive(false);
     }
@@ -73,23 +79,38 @@ public class SellGameManager : MonoBehaviour
 
     void OnButtonClick(int index)
     {
+        StartCoroutine(OnButtonClickRoutine(index));
+    }
+
+    IEnumerator OnButtonClickRoutine(int index)
+    {
+        Card[index].GetComponent<Animator>().SetTrigger("ThisCard");
+        yield return new WaitForSeconds(1f);
+
+
         if (index == 0)
         {
+            Card[index].GetComponent<Animator>().SetTrigger("Close");
+            yield return new WaitForSeconds(1.5f);
             stageManager.MiniGameResult(true);
         }
         else
         {
+            Card[index].GetComponent<Animator>().SetTrigger("Close");
+            yield return new WaitForSeconds(1.5f);
             stageManager.MiniGameResult(false);
-            StartCoroutine(OnWrongAnswer());
+            yield return StartCoroutine(OnWrongAnswer());
         }
     }
 
     IEnumerator OnWrongAnswer()
     {
         Blocker.SetActive(true);
-        animator.SetTrigger("ThisCard");
+        Card[0].GetComponent<Animator>().SetTrigger("ThisCard");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        Card[0].GetComponent<Animator>().SetTrigger("Close");
+        yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(ShuffleMultipleTimes(shuffleCount));
 
         Blocker.SetActive(false);
@@ -108,7 +129,7 @@ public class SellGameManager : MonoBehaviour
 
     IEnumerator ShuffleOnce()
     {
-        int len = buttons.Length;
+        int len = Card.Length;
         int[] order = Enumerable.Range(0, len).ToArray();
         int[] original = (int[])order.Clone();
 
@@ -116,9 +137,11 @@ public class SellGameManager : MonoBehaviour
         {
             ShuffleArray(order);
         } while (IsSameOrder(order, original));
- 
+
         for (int i = 0; i < len; i++)
+        {
             StartCoroutine(MoveSmoothly(rects[i], originalPositions[order[i]]));
+        }
 
         yield return new WaitForSeconds(shuffleDuration);
     }
