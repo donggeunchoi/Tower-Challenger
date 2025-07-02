@@ -10,9 +10,14 @@ public class GameManager : MonoBehaviour
     public GameObject stageManagerPrefab;
     public GameObject uiManagerPrefab;
 
+    [Header("스테미나")]
     public const int MAX_STAMINA = 5;
     public int mainStamina;
     public const float STAMINA_TIME = 0.5f;
+
+    [Header("재화")]
+    public int gold;
+    public int diamond;
 
     //1800초 30분 마다 1참
     //게임이 꺼져도 차게할 방법.... 시작시간과 끝시간을 계산해서 채워준다..?
