@@ -23,6 +23,7 @@ public class StageManager : MonoBehaviour
 
     [Header("진행 정보")]
     public const int FIRST_FLOOR = 1;
+    public const int BOSS_FLOOR = 10;
     public int floor = 1;              //현재층
     public int bestFloor = 1;          //최고 기록
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
@@ -135,7 +136,7 @@ public class StageManager : MonoBehaviour
         ResetInfo();
         floor++;
 
-        if (floor % 5 == 0)
+        if (floor % BOSS_FLOOR == 0) //10층마다 보스
         {
             stageTimer.StopTimer();
             totalStageCount = 1;
@@ -213,19 +214,27 @@ public class StageManager : MonoBehaviour
         if (floor == 0)
             return;
 
-        int index = floor / 5;
+        int index = floor / BOSS_FLOOR;
 
         if (index < gameList.Count)
         {
             if (gameList[floor / 5] != null)
-                randomGames.Add(gameList[floor / 5]);
+                randomGames.Add(gameList[floor / BOSS_FLOOR]);
         }
-        
+
         randomGames.AddRange(gameList);
-
+        
         if (randomGames.Count <= 0) //보스게임이 없으면 아무거나라도
-            RandomStage();
-
+        {
+            if (gameList.Count >= 1)
+            {
+                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+            }
+            else
+            {
+                RandomStage();
+            }
+        }
         StartGameLoad(true);
     }
 
