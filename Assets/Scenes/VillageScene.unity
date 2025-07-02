@@ -10832,7 +10832,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1724231698}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.33333316
+  m_Size: 0.5011717
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12908,6 +12908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251177971}
   - component: {fileID: 1251177970}
+  - component: {fileID: 1251177972}
   m_Layer: 5
   m_Name: pausePanel
   m_TagString: Untagged
@@ -12944,6 +12945,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1251177972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251177968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2766bf360a5c64417a090fe58322ed9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254613691
 GameObject:
   m_ObjectHideFlags: 0
@@ -19113,7 +19126,7 @@ GameObject:
   - component: {fileID: 1763374196}
   - component: {fileID: 1763374195}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PopupGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
