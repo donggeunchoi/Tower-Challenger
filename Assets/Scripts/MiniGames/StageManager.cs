@@ -164,9 +164,12 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
             MiniGameData game = miniGameDatas[i];
-            if (game.allStage || (floor >= game.minStage && floor <= game.maxStage) || !game.isBoss)
+            if (!game.isBoss)
             {
-                gameList.Add(game);
+                if (game.allStage || (floor >= game.minStage && floor <= game.maxStage))
+                {
+                    gameList.Add(game);
+                }
             }
         }
         
