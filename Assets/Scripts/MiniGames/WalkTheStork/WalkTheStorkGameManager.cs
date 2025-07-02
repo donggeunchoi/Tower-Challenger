@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class WalkTheStorkGameManager : MonoBehaviour
 {
-    private enum GameState { Intro, Playing, Outro }
+    private enum GameState { Intro, Playing, Outro, Ended }
     private GameState currentState = GameState.Intro;
 
     [Header("회전 관련")]
@@ -24,13 +25,13 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     [Header("부위")]
     public GameObject Man;
-    public GameObject Body, Head, Leg, LF, RF, Hand;
+    public GameObject Head, Leg, LF, RF, Hand,High;
 
     [Header("출력 UI")]
     public GameObject PrintOut;
 
     [Header("배경 UI")]
-    public GameObject bg1, bg2;
+    public GameObject BG, BG2;
     public float backgroundScrollSpeed = 2f;
     private float backgroundWidth = 20f;
 
@@ -67,20 +68,20 @@ public class WalkTheStorkGameManager : MonoBehaviour
             _ => 30
         };
 
-        if (Man != null)
+        if (Man)
             Man.transform.position = manStartPos;
 
-        if (bg1 != null)
+        if (BG)
         {
-            SpriteRenderer sr = bg1.GetComponent<SpriteRenderer>();
-            if (sr != null)
+            SpriteRenderer sr = BG.GetComponent<SpriteRenderer>();
+            if (sr)
                 backgroundWidth = sr.bounds.size.x;
         }
 
-        if (bg1 != null && bg2 != null)
+        if (BG && BG2)
         {
-            bg1.transform.position = new Vector3(0f, bg1.transform.position.y, bg1.transform.position.z);
-            bg2.transform.position = new Vector3(backgroundWidth, bg2.transform.position.y, bg2.transform.position.z);
+            BG.transform.position = new Vector3(0f, BG.transform.position.y, BG.transform.position.z);
+            BG2.transform.position = new Vector3(backgroundWidth, BG2.transform.position.y, BG2.transform.position.z);
         }
     }
 
@@ -116,6 +117,11 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
             case GameState.Outro:
                 HandleOutro(deltaTime);
+                stageManager.MiniGameResult(true);
+                break;
+
+            case GameState.Ended:
+                // 아무것도 하지 않음 (정지 상태)
                 break;
         }
     }
@@ -143,7 +149,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
         if (t >= 1f)
         {
             stageManager.MiniGameResult(true);
-            enabled = false; 
+            enabled = false;
         }
     }
 
@@ -209,27 +215,134 @@ public class WalkTheStorkGameManager : MonoBehaviour
         currentAngle += angularVelocity * deltaTime;
         currentAngle = Mathf.Clamp(currentAngle, -179f, 179f);
 
-        if (Mathf.Abs(currentAngle) >= 95f)
+        bool isOverLimit = currentAngle >= 95f || currentAngle <= -95f;
+        if (!isOverLimit) return;
+        else if (currentAngle <= -95f)
         {
-            currentAngle = 0f;
-            angularVelocity = 0f;
-            stageManager.MiniGameResult(false);
+            if (StageManager.instance.stageLP.currentLP == 1)//앞으로 넘어지기
+            {
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                // 애니메이션 멈추기
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
+
+                // 서서히 회전
+                if (Leg)
+                    StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 2f));
+                if (High)
+                    StartCoroutine(SmoothRotate(High, new Vector3(0f, 0f, -140), 2f));
+                if (Man)
+                {
+                    Vector3 targetEuler = new Vector3(0f, 0f, -140f); // Z 회전
+                    Vector3 targetPos = new Vector3(1, -3f, Man.transform.position.z); // Y만 변경
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+                }
+            }
+            else
+            {
+                Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
+                currentAngle = 0f;
+                angularVelocity = 0f;
+                stageManager.MiniGameResult(false);
+            }
         }
+        if (currentAngle >= 95f)
+        {
+            if (StageManager.instance.stageLP.currentLP == 1)//앞으로 넘어지기
+            {
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                // 애니메이션 멈추기
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
+
+                // 서서히 회전
+
+                if (Leg)
+                    StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, 90), 2f));
+                if (Head)
+                    StartCoroutine(SmoothRotate(Head, new Vector3(0f, 0f, 90), 2f));
+                if (Man)
+                {
+                    Vector3 targetEuler = new Vector3(0f, 0f,0); // Z 회전
+                    Vector3 targetPos = new Vector3(Man.transform.position.x-3, -3f, Man.transform.position.z); // Y만 변경
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 2f));
+                }
+
+            }
+            else
+            {
+                Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
+                currentAngle = 0f;
+                angularVelocity = 0f;
+                stageManager.MiniGameResult(false);
+            }
+        }
+
+
+
+      
+    }
+    private IEnumerator SmoothRotate(GameObject obj, Vector3 toEuler, float duration)
+    {
+        if (obj == null) yield break;
+
+        Quaternion startRotation = obj.transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(toEuler);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            obj.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t); // 더 부드럽게 회전
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        obj.transform.rotation = targetRotation; // 마지막 값 정확히 정렬
+    }
+    private IEnumerator SmoothRotateAndMove(GameObject obj, Vector3 toEuler, Vector3 toPosition, float duration)
+    {
+        if (obj == null) yield break;
+
+        Quaternion startRot = obj.transform.rotation;
+        Quaternion targetRot = Quaternion.Euler(toEuler);
+
+        Vector3 startPos = obj.transform.position;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+
+            obj.transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
+            obj.transform.position = Vector3.Lerp(startPos, toPosition, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        obj.transform.rotation = targetRot;
+        obj.transform.position = toPosition;
     }
 
     private void ApplyRotationToParts()
     {
-        if (Body != null)
-            Body.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        if (High)
+            High.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
 
         float minorTilt = currentAngle * -0.05f;
 
-        if (Head != null)
+        if (Head)
             Head.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
-        if (Hand != null)
+        if (Hand)
             Hand.transform.rotation = Quaternion.Euler(0f, 0f, minorTilt);
-        if (Leg != null)
+        if (Leg)
             Leg.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle * -0.30f);
+
     }
 
     private void HandleDifficultyScaling(float deltaTime)
@@ -247,14 +360,14 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
     private void ScrollBackground(float deltaTime)
     {
-        if (bg1 == null || bg2 == null) return;
+        if (BG || BG2)
 
-        bg1.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
-        bg2.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
+            BG.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
+        BG2.transform.position += Vector3.left * backgroundScrollSpeed * deltaTime;
 
-        if (bg1.transform.position.x <= -backgroundWidth)
-            bg1.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
-        if (bg2.transform.position.x <= -backgroundWidth)
-            bg2.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
+        if (BG.transform.position.x <= -backgroundWidth)
+            BG.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
+        if (BG2.transform.position.x <= -backgroundWidth)
+            BG2.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
     }
 }

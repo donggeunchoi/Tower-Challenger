@@ -23,6 +23,7 @@ public class StageManager : MonoBehaviour
 
     [Header("진행 정보")]
     public const int FIRST_FLOOR = 1;
+    public const int BOSS_FLOOR = 10;
     public int floor = 1;              //현재층
     public int bestFloor = 1;          //최고 기록
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
@@ -55,8 +56,14 @@ public class StageManager : MonoBehaviour
     {
         uiManager = UIManager.Instance;
         isGameActive = false;
+
+        infoUI = uiManager.notDestroyCanvus.gameObject;
+
         if (infoUI != null)
             infoUI.SetActive(isGameActive);
+
+        stageTimer = uiManager.timerUI;
+        stageLP = uiManager.stageLPUI;
     }
 
     #region MiniGameCall
@@ -64,7 +71,10 @@ public class StageManager : MonoBehaviour
     {
         isGameOver = false;  //게임오버상태 초기화
         isGameActive = true;  //현재 게임 시작
+
+        if(infoUI != null)
         infoUI.SetActive(isGameActive);
+
         ResetInfo();
         floor = FIRST_FLOOR;            //현재층 1층
 
@@ -76,12 +86,17 @@ public class StageManager : MonoBehaviour
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
         LoadRandomMap(); //랜덤 맵
 
-        StartCoroutine(StartGameLoad());
+        StartCoroutine(StartGameLoad(false));
     }
 
-    private IEnumerator StartGameLoad()
+    private IEnumerator StartGameLoad(bool isBoss)
     {
-        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
+        AsyncOperation ansynLoad;
+
+        if (isBoss)
+            ansynLoad = SceneManager.LoadSceneAsync("BossRoom");
+        else
+            ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
 
         while (!ansynLoad.isDone)
         {
@@ -96,15 +111,17 @@ public class StageManager : MonoBehaviour
 
     private void ResetInfo()
     {
-        stageTimer.SetTimer();
-        stageLP.ResetLP();
+        if (stageTimer != null)
+            stageTimer.SetTimer();
+
+        if (stageTimer != null)
+            stageLP.ResetLP();
     }
 
     public void StartNextMiniGame()  //미니게임시작
     {
         currentSceneName = SceneManager.GetActiveScene().name;  //현재 씬 이름 가져오기
 
-        RandomStage();  //돌린 배열 가져와서 실행
         if (randomGames.Count == 0)
         {
             return;
@@ -116,13 +133,16 @@ public class StageManager : MonoBehaviour
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
     {
-        stageTimer.SetTimer();
+        ResetInfo();
         floor++;
 
-        if (floor % 5 == 0)
+        if (floor % BOSS_FLOOR == 0) //10층마다 보스
         {
+            stageTimer.StopTimer();
             totalStageCount = 1;
-            Debug.Log("Boss 등장!");
+            BossStage();
+            StartCoroutine (StartGameLoad(true));
+            return;
         }
 
         if (floor % 5 == 1)  //5층마다 스테이지 갯수증가
@@ -132,17 +152,19 @@ public class StageManager : MonoBehaviour
             timerMultiplier *= 1.2f;
 
         RandomStage();
-        StartCoroutine(StartGameLoad());
+        StartCoroutine(StartGameLoad(false));
     }
     #endregion
     #region MiniGameSet
     private void RandomStage()  //랜덤한 스테이지 생성
     {
+        randomGames.Clear();
+
         List<MiniGameData> gameList = new List<MiniGameData>();  //사용가능한 배열생성
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
             MiniGameData game = miniGameDatas[i];
-            if (game.allStage || (floor >= game.minStage && floor <= game.maxStage))
+            if (game.allStage || (floor >= game.minStage && floor <= game.maxStage) || !game.isBoss)
             {
                 gameList.Add(game);
             }
@@ -175,12 +197,53 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    public void BossStage()
+    {
+        randomGames.Clear();
+
+        List<MiniGameData> gameList = new List<MiniGameData>();  //사용가능한 배열생성
+        for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
+        {
+            MiniGameData game = miniGameDatas[i];
+            if (game.isBoss)
+            {
+                gameList.Add(game);
+            }
+        }
+
+        if (floor == 0)
+            return;
+
+        int index = floor / BOSS_FLOOR;
+
+        if (index < gameList.Count)
+        {
+            if (gameList[floor / 5] != null)
+                randomGames.Add(gameList[floor / BOSS_FLOOR]);
+        }
+
+        randomGames.AddRange(gameList);
+        
+        if (randomGames.Count <= 0) //보스게임이 없으면 아무거나라도
+        {
+            if (gameList.Count >= 1)
+            {
+                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+            }
+            else
+            {
+                RandomStage();
+            }
+        }
+        StartGameLoad(true);
+    }
+
     public string LoadRandomMap()
     {
         int randomSceneNum = Random.Range(0, mapScenes.Length);
         if (mapScenes == null)
         {
-            return "";
+            return mapScenes[0];
         }
         string mapName = mapScenes[randomSceneNum];
         return mapName;
@@ -205,12 +268,16 @@ public class StageManager : MonoBehaviour
     {
         if (!result)  //실패
         {
-            stageLP.LPdown();
-            if (stageLP.currentLP <= 0)
-                GameOver();
+            if (stageLP != null)
+            {
+                stageLP.LPdown();
+                if (stageLP.currentLP <= 0)
+                    GameOver();
+            }
         }
         else  //성공
         {
+            if (isGameActive)
             StartCoroutine(LatePlayerData());  //플레이어를 원레 위치로
         }
     }
@@ -223,7 +290,6 @@ public class StageManager : MonoBehaviour
         {
             isGameOver = true;
             isGameActive = false;
-            //infoUI.SetActive(isGameActive);
             if (floor > bestFloor)
                 bestFloor = floor;
 

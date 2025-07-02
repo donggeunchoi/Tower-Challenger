@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -19,13 +20,16 @@ public class Inventory : MonoBehaviour
         }
     }
     
-    // public void AddItme()
-    // {
-    //     GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
-    //     newSlot.SetActive(true);
-    //     inventorySlots.Add(newSlot);
-    //     
-    // }
+    public void AddItme(string itemName, Image itemIcon)
+    {
+        GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
+        newSlot.SetActive(true);
+        inventorySlots.Add(newSlot);
+
+        newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = itemName;
+        newSlot.GetComponent<InventorySlot>().itemName = itemName;
+        newSlot.GetComponent<Image>().sprite = itemIcon.sprite;
+    }
     
     public void OnClickInventoryClose()
     {

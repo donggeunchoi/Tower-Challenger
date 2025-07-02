@@ -5,7 +5,7 @@ public class MapData : ScriptableObject
 {
     [Header("씬 이름")] public string sceneName;
 
-
+    [Header("보스")] 
 
 
 

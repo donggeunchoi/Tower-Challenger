@@ -26,10 +26,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         stageManager = StageManager.instance;
-        
-        timerUI = stageManager.stageTimer;
-        stageLPUI = stageManager.stageLP;
-
         notDestroyCanvus.gameObject.SetActive(false);
     }
 
