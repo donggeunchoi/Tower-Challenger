@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     [Header("스테미나")]
     public const int MAX_STAMINA = 5;
     public int mainStamina;
-    public const float STAMINA_TIME = 0.5f;
+    public float staminatimer = 0;
+    public const float STAMINA_TIME = 1800f;
 
     [Header("재화")]
     public int gold;
@@ -56,15 +57,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time >= 0.5f)
+        if (mainStamina >= MAX_STAMINA)
+            return;
+
+        staminatimer += Time.deltaTime;
+
+        if (staminatimer >= STAMINA_TIME)
         {
             AddStamina();
+            staminatimer = 0;
         }
     }
 
     public void AddStamina()
     {
-        mainStamina = Mathf.Max(mainStamina + 1, MAX_STAMINA);
+        mainStamina = Mathf.Min(mainStamina + 1, MAX_STAMINA);
     }
 
     public void UseStamina()

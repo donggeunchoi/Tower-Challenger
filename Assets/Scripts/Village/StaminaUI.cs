@@ -3,12 +3,13 @@
 public class StaminaUI : MonoBehaviour
 {
     private GameManager gameManager;
-    private GameObject[] staminaUI;
+    [SerializeField] private GameObject[] staminaUI;
     private int stamina;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
+        UpdateStaminaUI();
     }
 
     private void Update()
@@ -21,14 +22,14 @@ public class StaminaUI : MonoBehaviour
 
     private void UpdateStaminaUI()
     {
-        for (int i = 0; i <= staminaUI.Length; i++)
+        for (int i = 0; i < staminaUI.Length; i++)
         {
             staminaUI[i].gameObject.SetActive(false);
         }
 
-        for (int i = 0; i <= gameManager.mainStamina; i++)
+        for (int j = 0; j < Mathf.Min(gameManager.mainStamina, staminaUI.Length); j++)
         {
-            staminaUI[i].gameObject.SetActive(true);
+            staminaUI[j].gameObject.SetActive(true);
         }
 
         stamina = gameManager.mainStamina;
