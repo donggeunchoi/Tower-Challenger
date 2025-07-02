@@ -14,21 +14,43 @@ public class UpAndDownUI : MonoBehaviour
     public Sprite fullLP;
     public Sprite emptyLP;
 
+    public Button[] answerButton;
+    public TextMeshProUGUI textAnswer;
+
+    public Image up;
+    public Image down;
+
     public void InitUi()
     {
         number.text = UpAndDownManager.instance.upAndDown.NumGenration();
-        count.text = UpAndDownManager.instance.upAndDown.failcount.ToString();
-        slider.maxValue = StageManager.instance.stageTimer.timer;
+        count.text = UpAndDownManager.instance.upAndDown.curCount.ToString();
+
+        SetActiveFalse();
 
         for (int i = 0; i < LP.Length; i++)
         {
             LP[i].sprite = fullLP;
         }
+        
     }
 
     public void AnswerButton()
     {
         UpAndDownManager.instance.upAndDown.Success();
         UpAndDownManager.instance.upAndDown.Failure();
+        count.text = UpAndDownManager.instance.upAndDown.curCount.ToString();
+        
+        textAnswer.text = "";
+    }
+
+    public void InputAnswerButton(int index)
+    {
+        UpAndDownManager.instance.upAndDown.InputAnswer(index);
+    }
+
+    public void SetActiveFalse()
+    {
+        up.gameObject.SetActive(false);
+        down.gameObject.SetActive(false);
     }
 }
