@@ -163,7 +163,7 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
             MiniGameData game = miniGameDatas[i];
-            if (game.allStage || (floor >= game.minStage && floor <= game.maxStage))
+            if (game.allStage || (floor >= game.minStage && floor <= game.maxStage) || !game.isBoss)
             {
                 gameList.Add(game);
             }
@@ -198,6 +198,8 @@ public class StageManager : MonoBehaviour
 
     public void BossStage()
     {
+        randomGames.Clear();
+
         List<MiniGameData> gameList = new List<MiniGameData>();  //사용가능한 배열생성
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
@@ -208,7 +210,18 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        randomGames.Add(gameList[floor / 5]);
+        if (floor == 0)
+            return;
+
+        int index = floor / 5;
+
+        if (index < gameList.Count)
+        {
+            if (gameList[floor / 5] != null)
+                randomGames.Add(gameList[floor / 5]);
+        }
+        
+        randomGames.AddRange(gameList);
 
         if (randomGames.Count <= 0) //보스게임이 없으면 아무거나라도
             RandomStage();
