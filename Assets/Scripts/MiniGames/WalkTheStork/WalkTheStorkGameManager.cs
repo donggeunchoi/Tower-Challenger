@@ -46,7 +46,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
     private TextMeshProUGUI printText;
 
     private Vector3 manStartPos = new Vector3(-12f, -1.5f, 0f);
-    private Vector3 manEndPos = new Vector3(-5f, -1.5f, 0f);
+    private Vector3 manEndPos = new Vector3(0, -1.5f, 0f);
     private Vector3 manEndPos2 = new Vector3(15f, -1.5f, 0f);
     private float moveDuration = 4f;
     private float moveTimer = 0f;

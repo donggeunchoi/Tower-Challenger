@@ -37,6 +37,7 @@ public class SlimeTower : MonoBehaviour
 
         Slime slime = currentSlime.GetComponent<Slime>();
         slime.towerRoot = towerRoot;
+        
     }
     //떨어지는 메서드(움직이는 물체를 보여줘야하니까)
     public void MoveSlime()

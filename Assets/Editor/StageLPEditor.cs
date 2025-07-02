@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CustomEditor(typeof(StageLP))]
 public class StageLPEditor : Editor
@@ -42,6 +43,28 @@ public class StageManagerEditor : Editor
         {
             stageManager.StartNextMiniGame();
         }
+        EditorGUILayout.Space();
+        DrawDefaultInspector();
+    }
+}
+
+[CustomEditor(typeof(GameManager))]
+public class GameManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        EditorGUILayout.LabelField("테스트 버튼", EditorStyles.boldLabel);
+        GameManager gameManager = (GameManager)target;
+        if (GUILayout.Button("스테미나 추가"))
+        {
+            gameManager.AddStamina();
+        }
+
+        if (GUILayout.Button("스테미나 감소"))
+        {
+            gameManager.UseStamina();
+        }
+
         EditorGUILayout.Space();
         DrawDefaultInspector();
     }

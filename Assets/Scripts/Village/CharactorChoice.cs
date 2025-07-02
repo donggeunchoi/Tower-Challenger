@@ -25,6 +25,12 @@ public class CharactorChoice : MonoBehaviour
         
         TMPro.TMP_Text nameText = newSlot.GetComponentInChildren<TMPro.TMP_Text>();
         Image icon =  newSlot.GetComponent<Image>();
+        CharactorChoiceSlot slotScript = newSlot.GetComponent<CharactorChoiceSlot>();
+
+        if (slotScript != null)
+        {
+            slotScript.CharactorChoice = this;
+        }
 
         if (nameText != null)
         {
@@ -49,6 +55,20 @@ public class CharactorChoice : MonoBehaviour
     {
         CharactorChoicePanel.SetActive(false);
     }
-    
-    
+
+    public void EquipOnly(CharactorChoiceSlot Choiceslot)
+    {
+        foreach (GameObject slotObject in CharactorSlots)
+        {
+            CharactorChoiceSlot slot = slotObject.GetComponent<CharactorChoiceSlot>();
+            if (slot != null)
+            {
+                bool isSelected = (slot == Choiceslot);
+                slot.Equip = isSelected;
+                slot.EquipImage.SetActive(isSelected);
+            }
+        }
+    }
+
+
 }

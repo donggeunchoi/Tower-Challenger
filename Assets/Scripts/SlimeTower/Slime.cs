@@ -4,24 +4,37 @@ public class Slime : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private bool isSettled = false;
+   
 
     [Header("탑")] 
     public Transform towerRoot;
     public float percentClearBar;
-    
-    
+    private Animator _animation;
+
+
+
+    void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _animation = GetComponentInChildren<Animator>();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        if (_animation != null)
+        {
+            _animation.SetBool("IsDrop",false);
+        }
     }
+
+    
 
     //떨어진 곳이 땅이냐 슬라임이냐
     void OnCollisionEnter2D(Collision2D other)
     {
         if (isSettled)
             return;
-
+        
         //슬라임이면 정착단계로 이동하게
         if (other.gameObject.CompareTag("Slime"))
         {
@@ -45,6 +58,7 @@ public class Slime : MonoBehaviour
     //슬라임 정착단계의 메서드
     private void Settle()
     {
+        _animation.SetBool("IsDrop",true);
         isSettled = true;
         
         _rb.linearVelocity = Vector2.zero;
@@ -57,6 +71,8 @@ public class Slime : MonoBehaviour
         {
             transform.SetParent(towerRoot);
         }
+        
+        _animation.SetTrigger("IsDropFinal");
     }
 
     private void CheckOverlapWith(GameObject other)

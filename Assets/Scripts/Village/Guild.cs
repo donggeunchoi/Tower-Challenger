@@ -8,9 +8,17 @@ public class Guild : MonoBehaviour
     public GameObject RadManPanel;
     public GameObject GreenPanel;
     public GameObject NoonaPanel;
+    public GameObject GeunPanel;
+    
+    [Header("이미지")]
     public Image Charactor1Image;
     public Image Charactor2Image;
     public Image Charactor3Image;
+    public Image Charactor4Image;
+    
+    
+    public GameObject[] ClearImage;
+    public Button[] targetButton;
 
     public void OnClickRedMan()
     {
@@ -25,6 +33,11 @@ public class Guild : MonoBehaviour
     public void OnClickNoona()
     {
         NoonaPanel.SetActive(true);
+    }
+
+    public void OnClickGeun()
+    {
+        GeunPanel.SetActive(true);
     }
 
     public void GuildClose()
@@ -46,19 +59,37 @@ public class Guild : MonoBehaviour
     {
         NoonaPanel.SetActive(false);
     }
+
+    public void OnClickGeunClose()
+    {
+        GeunPanel.SetActive(false);
+    }
     
     public void Buy_Luke()
     {
         Debug.Log(Charactor1Image.sprite.name);
         CharactorChoice.instance.AddItem("Luke", Charactor1Image);
+        ClearImage[0].SetActive(true);
+        Destroy(targetButton[0]);
     }
 
     public void Buy_Rin()
     {
         CharactorChoice.instance.AddItem("Rin", Charactor2Image);
+        ClearImage[1].SetActive(true);
+        Destroy(targetButton[1]);
     }
     public void Buy_Mir()
     {
         CharactorChoice.instance.AddItem("Mir",Charactor3Image);
+        ClearImage[2].SetActive(true);
+        Destroy(targetButton[2]);
+    }
+
+    public void Buy_Geun()
+    {
+        CharactorChoice.instance.AddItem("Geun", Charactor4Image);
+        ClearImage[3].SetActive(true);
+        Destroy(targetButton[3]);
     }
 }
