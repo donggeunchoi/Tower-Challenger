@@ -11,7 +11,6 @@ public class StageLP : MonoBehaviour
     public Sprite brokenHeart;
     public Image[] heartIcon;
     private int beforLP;
-    private Coroutine brokenHeartCor;
     
     public void ResetLP()
     {
@@ -25,21 +24,10 @@ public class StageLP : MonoBehaviour
 
     public void LPdown()
     {
-        beforLP = currentLP;
+        beforLP = currentLP; 
         currentLP = Mathf.Max(currentLP - 1, 0);
-
-        if (currentLP <= beforLP)
-        {
-            if (brokenHeartCor != null)
-            {
-                StopCoroutine(brokenHeartCor);
-                heartIcon[currentLP].gameObject.SetActive(false);
-            }
-            else
-            {
-                brokenHeartCor = StartCoroutine(BrokenHeartImage());
-            }
-        }
+        
+        StartCoroutine(BrokenHeartImage(currentLP));
     }
 
     public void HealLP(int amount)
@@ -47,20 +35,18 @@ public class StageLP : MonoBehaviour
         currentLP = Mathf.Min(currentLP + amount, DEFALT_LP + bonusLP);
     }
 
-    private IEnumerator BrokenHeartImage()
+    private IEnumerator BrokenHeartImage(int index)
     {
-        heartIcon[currentLP].sprite = brokenHeart;
-        heartIcon[currentLP].gameObject.SetActive(true);
+        heartIcon[index].sprite = brokenHeart;
+        heartIcon[index].gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.2f);
-        heartIcon[currentLP].gameObject.SetActive(false);
+        heartIcon[index].gameObject.SetActive(false);
 
         yield return new WaitForSeconds(0.2f);
-        heartIcon[currentLP].gameObject.SetActive(true);
+        heartIcon[index].gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.2f);
-        heartIcon[currentLP].gameObject.SetActive(false);
-
-        brokenHeartCor = null;
+        heartIcon[index].gameObject.SetActive(false);
     }
 }

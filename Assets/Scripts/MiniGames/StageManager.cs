@@ -76,6 +76,7 @@ public class StageManager : MonoBehaviour
         infoUI.SetActive(isGameActive);
 
         ResetInfo();
+        
         floor = FIRST_FLOOR;            //현재층 1층
 
         if (isTest) //테스트 코드
@@ -83,6 +84,7 @@ public class StageManager : MonoBehaviour
 
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
+        GetFloorInfo();
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
         LoadRandomMap(); //랜덤 맵
 
@@ -145,14 +147,22 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        if (floor % 5 == 1)  //5층마다 스테이지 갯수증가
-            totalStageCount = Mathf.Min(totalStageCount + 1, 4);
+        GetFloorInfo();
 
-        if (floor % 10 == 0) //10층마다 타이머 1.2배속
-            timerMultiplier *= 1.2f;
+        Debug.Log(timerMultiplier);
 
         RandomStage();
         StartCoroutine(StartGameLoad(false));
+    }
+
+    private void GetFloorInfo()
+    {
+        totalStageCount = Mathf.Clamp((floor - 1) / 5 + 1, 1, 4);
+
+        if (floor < 11)
+            timerMultiplier = 1;
+        else
+            timerMultiplier = Mathf.Pow(1.2f, (floor - 11) / 10 + 1);
     }
     #endregion
     #region MiniGameSet

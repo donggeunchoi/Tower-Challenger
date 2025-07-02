@@ -19,6 +19,8 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public bool isDashing = false;          // 대쉬 중 여부
     public SpriteRenderer spriteRenderer;   // 방향 전환 이미지
 
+
+    [SerializeField] private Animator uiRootAnim;
     private Rigidbody2D rb;                 // Rigidbody2D 컴포넌트
 
     void Start()
@@ -31,21 +33,13 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         {
             spriteRenderer = player.GetComponent<SpriteRenderer>(); //플레이어 스프라이트
 
-            rb = player.GetComponent<Rigidbody2D>();
-            if (rb == null)
-            {
-                rb = player.gameObject.AddComponent<Rigidbody2D>();
-                rb.gravityScale = 0; // 중력 비활성화 (2D 탑뷰 기준)
-                rb.freezeRotation = true; // 회전 고정
-                rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // 연속 충돌 감지
-            }
+            player.TryGetComponent<Rigidbody2D>(out rb);
         }
     }
 
     void FixedUpdate()
     {
-        //플레이어와 리지드바디가 있을 때만 이동 처리
-        if (player != null && rb != null)
+        if (player != null && rb != null) //플레이어와 리지드바디가 있을 때만 이동 처리
         {
             float currentSpeed = isDashing ? DashSpeed : speed; // 대쉬 중이면 대쉬 속도
             rb.linearVelocity = inputDir.normalized * currentSpeed;    // 방향 * 속도
