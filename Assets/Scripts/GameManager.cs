@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     public StageManager stageManager;
     public UIManager uiManager;
 
+    public GameObject stageManagerPrefab;
+    public GameObject uiManagerPrefab;
+
     private void Awake()
     {
         if (Instance == null)
@@ -23,5 +26,17 @@ public class GameManager : MonoBehaviour
     {
         stageManager = StageManager.instance;
         uiManager = UIManager.Instance;
+
+        if (FindAnyObjectByType(typeof(UIManager)) == null)
+        {
+            if (uiManagerPrefab != null)
+                Instantiate(uiManagerPrefab);
+        }
+
+        if (FindAnyObjectByType(typeof(StageManager)) == null)
+        {
+            if (stageManagerPrefab != null)
+                Instantiate(stageManagerPrefab);
+        }
     }
 }

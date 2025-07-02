@@ -23,6 +23,7 @@ public class StageManager : MonoBehaviour
 
     [Header("진행 정보")]
     public const int FIRST_FLOOR = 1;
+    public const int BOSS_FLOOR = 10;
     public int floor = 1;              //현재층
     public int bestFloor = 1;          //최고 기록
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
@@ -135,7 +136,7 @@ public class StageManager : MonoBehaviour
         ResetInfo();
         floor++;
 
-        if (floor % 5 == 0)
+        if (floor % BOSS_FLOOR == 0) //10층마다 보스
         {
             stageTimer.StopTimer();
             totalStageCount = 1;
@@ -163,9 +164,12 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
             MiniGameData game = miniGameDatas[i];
-            if (game.allStage || (floor >= game.minStage && floor <= game.maxStage))
+            if (!game.isBoss)
             {
-                gameList.Add(game);
+                if (game.allStage || (floor >= game.minStage && floor <= game.maxStage))
+                {
+                    gameList.Add(game);
+                }
             }
         }
         
@@ -198,6 +202,8 @@ public class StageManager : MonoBehaviour
 
     public void BossStage()
     {
+        randomGames.Clear();
+
         List<MiniGameData> gameList = new List<MiniGameData>();  //사용가능한 배열생성
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
@@ -208,11 +214,30 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        randomGames.Add(gameList[floor / 5]);
+        if (floor == 0)
+            return;
 
+        int index = floor / BOSS_FLOOR;
+
+        if (index < gameList.Count)
+        {
+            if (gameList[floor / 5] != null)
+                randomGames.Add(gameList[floor / BOSS_FLOOR]);
+        }
+
+        randomGames.AddRange(gameList);
+        
         if (randomGames.Count <= 0) //보스게임이 없으면 아무거나라도
-            RandomStage();
-
+        {
+            if (gameList.Count >= 1)
+            {
+                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+            }
+            else
+            {
+                RandomStage();
+            }
+        }
         StartGameLoad(true);
     }
 
