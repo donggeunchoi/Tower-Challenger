@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     //1800초 30분 마다 1참
     //게임이 꺼져도 차게할 방법.... 시작시간과 끝시간을 계산해서 채워준다..?
     //강종하면 어떻게하지.. 특정행동이나 시간마다 자동 저장을 해준다
+    //추후 저장기능 추가 후 종료시간 ~ 다시킨 시간을 불러와서 staminatimer에 더해준다
 
     private void Awake()
     {
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
         if (staminatimer >= STAMINA_TIME)
         {
             AddStamina();
-            staminatimer = 0;
+            staminatimer -= STAMINA_TIME;
         }
     }
 
