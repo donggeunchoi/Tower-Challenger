@@ -25,6 +25,7 @@ namespace Cainos.PixelArtTopDown_Basic
             if (other.CompareTag("Player")) // 태그로 플레이어 구분
             {
                 other.transform.position = objTarget.position;
+                other.gameObject.layer = 21;
             }
             targetColor.a = 1.0f;
         }

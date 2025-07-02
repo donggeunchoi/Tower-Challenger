@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,6 @@ public class UpAndDownUI : MonoBehaviour
     public TextMeshProUGUI count;
 
     public TMP_InputField numInput;
-    public Slider slider;
 
     public Image[] LP;
     public Sprite fullLP;
@@ -19,6 +19,9 @@ public class UpAndDownUI : MonoBehaviour
 
     public Image up;
     public Image down;
+
+    public Image buttonEnter;
+    public Image buttonExit;
 
     public void InitUi()
     {
@@ -39,6 +42,8 @@ public class UpAndDownUI : MonoBehaviour
         UpAndDownManager.instance.upAndDown.Success();
         UpAndDownManager.instance.upAndDown.Failure();
         count.text = UpAndDownManager.instance.upAndDown.curCount.ToString();
+
+        StartCoroutine(ButtonCorutine());
         
         textAnswer.text = "";
     }
@@ -52,5 +57,17 @@ public class UpAndDownUI : MonoBehaviour
     {
         up.gameObject.SetActive(false);
         down.gameObject.SetActive(false);
+        buttonExit.gameObject.SetActive(false);
+    }
+
+    private IEnumerator ButtonCorutine()
+    {
+        buttonEnter.gameObject.SetActive(false);
+        buttonExit.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        buttonExit.gameObject.SetActive(false);
+        buttonEnter.gameObject.SetActive(true);
     }
 }
