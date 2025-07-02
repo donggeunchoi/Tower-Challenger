@@ -84,20 +84,18 @@ public class SellGameManager : MonoBehaviour
 
     IEnumerator OnButtonClickRoutine(int index)
     {
+        Blocker.SetActive(true);
         Card[index].GetComponent<Animator>().SetTrigger("ThisCard");
-        yield return new WaitForSeconds(1f);
-
-
+        yield return new WaitForSeconds(0.3f);
+        Card[index].GetComponent<Animator>().SetTrigger("Effect");
+        yield return new WaitForSeconds(2);
         if (index == 0)
         {
-            Card[index].GetComponent<Animator>().SetTrigger("Close");
-            yield return new WaitForSeconds(1.5f);
             stageManager.MiniGameResult(true);
+            Blocker.SetActive(false);
         }
         else
         {
-            Card[index].GetComponent<Animator>().SetTrigger("Close");
-            yield return new WaitForSeconds(1.5f);
             stageManager.MiniGameResult(false);
             yield return StartCoroutine(OnWrongAnswer());
         }
