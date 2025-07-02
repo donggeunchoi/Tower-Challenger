@@ -30,8 +30,31 @@ public class Player : MonoBehaviour
         // Touch for jump
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
 
-        //테스트용
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        // //테스트용
+        // if (Input.GetKey(KeyCode.Space) && isGrounded)
+        // {
+        //     Jump();
+        // }
+        // else
+        // {
+        //     StopJump();
+        // }
+        //
+        //
+        // if (Input.GetKey(KeyCode.S) && isGrounded)
+        // {
+        //     Sliding();
+        // }
+        // else
+        // {
+        //     StopSliding();
+        // }
+        
+    }
+
+    public void OnClickJump()
+    {
+        if (isGrounded)
         {
             Jump();
         }
@@ -39,38 +62,13 @@ public class Player : MonoBehaviour
         {
             StopJump();
         }
-        
-        
-        if (Input.GetKey(KeyCode.S) && isGrounded)
-        {
-            Sliding();
-        }
-        else
-        {
-            StopSliding();
-        }
-
-        #region MobileTouch
-        //모바일 터치 내용
-        // if (Input.touchCount > 0)
-        // {
-        //     Touch touch = Input.GetTouch(0);
-        //     float screenHalf = Screen.width / 2;
-        //
-        //     if (touch.phase == TouchPhase.Began && isGrounded)
-        //     {
-        //         if (touch.position.x < screenHalf)
-        //         {
-        //             Sliding();
-        //         }
-        //         else
-        //         {
-        //             Jump();
-        //         }
-        //     }
-        // }
-        #endregion        
     }
+
+    public void OnClickSliding()
+    {
+        Sliding();
+    }
+    
     void LateUpdate()
     {
         // Y값이 -5보다 아래로 떨어졌을 경우
@@ -139,9 +137,12 @@ public class Player : MonoBehaviour
     
     
     
+    
+    
+    
     public void Jump()
     {
-        animation.SetBool("IsJump", true);
+        animation.SetTrigger("Jump");
         playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
     }
 
@@ -152,12 +153,8 @@ public class Player : MonoBehaviour
 
     public void Sliding()
     {
-        animation.SetBool("Sliding",true);
-    }
-
-    public void StopSliding()
-    {
-        animation.SetBool("Sliding", false);
+        Debug.Log("슬라이딩하니?");
+        animation.SetTrigger("IsSliding");
     }
     #endregion
    
