@@ -8,13 +8,15 @@ public class Guild : MonoBehaviour
     public GameObject RadManPanel;
     public GameObject GreenPanel;
     public GameObject NoonaPanel;
-    public GameObject GeunPanel;
+    public GameObject KainPanel;
+    public GameObject MerylPanel;
     
     [Header("이미지")]
     public Image Charactor1Image;
     public Image Charactor2Image;
     public Image Charactor3Image;
     public Image Charactor4Image;
+    public Image Charactor5Image;
     
     
     public GameObject[] ClearImage;
@@ -35,9 +37,14 @@ public class Guild : MonoBehaviour
         NoonaPanel.SetActive(true);
     }
 
-    public void OnClickGeun()
+    public void OnClickKain()
     {
-        GeunPanel.SetActive(true);
+        KainPanel.SetActive(true);
+    }
+
+    public void OnClickMeryl()
+    {
+        MerylPanel.SetActive(true);
     }
 
     public void GuildClose()
@@ -60,9 +67,14 @@ public class Guild : MonoBehaviour
         NoonaPanel.SetActive(false);
     }
 
-    public void OnClickGeunClose()
+    public void OnClickKainClose()
     {
-        GeunPanel.SetActive(false);
+        KainPanel.SetActive(false);
+    }
+
+    public void OnClickMerylClose()
+    {
+        MerylPanel.SetActive(false);
     }
     
     public void Buy_Luke()
@@ -86,10 +98,17 @@ public class Guild : MonoBehaviour
         Destroy(targetButton[2]);
     }
 
-    public void Buy_Geun()
+    public void Buy_Kain()
     {
-        CharactorChoice.instance.AddItem("Geun", Charactor4Image);
+        CharactorChoice.instance.AddItem("Kain", Charactor4Image);
         ClearImage[3].SetActive(true);
         Destroy(targetButton[3]);
+    }
+
+    public void Buy_Meryl()
+    {
+        CharactorChoice.instance.AddItem("Meryl", Charactor5Image);
+        ClearImage[4].SetActive(true);
+        Destroy(targetButton[4]);
     }
 }

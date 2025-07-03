@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class PauseManager : MonoBehaviour
     public void PauseClosePanel()
     {
         PausePanel.SetActive(false);
+    }
+
+    public void OnClickVillageMove()
+    {
+        SceneManager.LoadScene("VillageScene");
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
