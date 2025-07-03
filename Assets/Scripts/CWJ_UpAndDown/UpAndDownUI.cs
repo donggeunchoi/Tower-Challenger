@@ -36,7 +36,7 @@ public class UpAndDownUI : MonoBehaviour
         }
         
     }
-
+     
     public void AnswerButton()
     {
         UpAndDownManager.instance.upAndDown.Success();
