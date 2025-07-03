@@ -18,6 +18,11 @@ public class Items : MonoBehaviour
         input = GetComponent<PlayerInput>();
     }
 
+    public void TopTicketUse()
+    {
+        TopTicket();
+    }
+
     public bool TopTicket()
     {
         if (!topTicket)
