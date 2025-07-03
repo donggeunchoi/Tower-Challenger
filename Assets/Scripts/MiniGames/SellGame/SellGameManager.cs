@@ -24,7 +24,6 @@ public class SellGameManager : MonoBehaviour
     private StageManager stageManager;
 
 
-
     void Start()
     {
         stageManager = StageManager.instance;

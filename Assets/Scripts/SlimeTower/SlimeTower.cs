@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class SlimeTower : MonoBehaviour
 {
@@ -8,14 +9,31 @@ public class SlimeTower : MonoBehaviour
     public Transform towerRoot;     //타워 포지션
     public int clearGameCount;      //몇개 쌓으면 클리어인지
 
+    public Bird bird;
+    public float birdSpeed;
+
     private GameObject currentSlime; //현재슬라임
-    
-    
+
+    int[] speeds = { 30, 40, 50, 50 };
+    int[] clearCount = { 5, 7, 7, 10 };
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //SpawnSlime();
+        if (StageManager.instance != null && bird != null)
+        {
+            int deficult = StageManager.instance.deficult;
+            if (1 <= deficult && deficult >= 4)
+            {
+                bird.birdSpeed = speeds[deficult - 1];
+                clearGameCount = clearCount[deficult - 1];
+            }
+            else
+            {
+                bird.birdSpeed = speeds[0];
+                clearGameCount = clearCount[0];
+            }
+        }
     }
 
     // Update is called once per frame
