@@ -10,11 +10,19 @@ public class Shadow : MonoBehaviour
 
         if (selectedIndex == p.successIndex)
         {
+            if (StageManager.instance != null)
+            {
+                StageManager.instance.MiniGameResult(true);
+            }
             Debug.Log("클리어");
             return;
         }
         else
         {
+            if (StageManager.instance != null)
+            {
+                StageManager.instance.MiniGameResult(false);
+            }
             Debug.Log("잘못 선택 했음");
         }
     }
