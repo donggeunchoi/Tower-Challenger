@@ -4,7 +4,7 @@ public class UpAndDown : MonoBehaviour
 {
     public int failcount;
     public int curLP = 4;
-
+      
     private bool isOver = false;
     public string NumGenration()
     {

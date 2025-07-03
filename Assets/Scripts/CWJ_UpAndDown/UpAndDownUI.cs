@@ -25,7 +25,7 @@ public class UpAndDownUI : MonoBehaviour
             LP[i].sprite = fullLP;
         }
     }
-
+     
     public void AnswerButton()
     {
         UpAndDownManager.instance.upAndDown.Success();

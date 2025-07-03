@@ -6,7 +6,7 @@ public class UpAndDownManager : MonoBehaviour
 
     public UpAndDownUI upAndDownUI;
     public UpAndDown upAndDown;
-
+     
     public float randomNumber;
 
     private void Awake()
