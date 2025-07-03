@@ -53,7 +53,7 @@ public class ShadowUI : MonoBehaviour
 
     public IEnumerator ShadowFalse()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(ShadowManager.instance.shadowData[randomIndex].shadowTime);
 
         shadowImage.gameObject.SetActive(false);
         for (int i = 0; i < choicesImage.Length; i++)

@@ -21,6 +21,11 @@ public class ShadowManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        for (int i = 0; i < shadowData.Length; i++)
+        {
+            shadowData[i].shadowTime = 3f;
+        }
+        
         shadowUI.shadowGameInit();
     }
 
