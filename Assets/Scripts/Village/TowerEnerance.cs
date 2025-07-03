@@ -6,6 +6,7 @@ public class TowerEnerance : MonoBehaviour
 {
     public GameObject InventortyPanel;
     public GameObject MailPanel;
+    public GameObject PausePanel;
 
     public void OnClickVillageMove()
     {
@@ -25,6 +26,11 @@ public class TowerEnerance : MonoBehaviour
     public void OnClickInventorty()
     {
         InventortyPanel.SetActive(true);
+    }
+
+    public void OnClickPause()
+    {
+        PausePanel.SetActive(true);
     }
     
 }
