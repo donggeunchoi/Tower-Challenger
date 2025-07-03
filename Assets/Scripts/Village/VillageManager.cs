@@ -74,7 +74,7 @@ public class VillageManager : MonoBehaviour
             case "Guild":
                 Guild.SetActive(true);
                 break;
-            case "StopPanel":
+            case "PausePanel":
                 StopPanel.SetActive(true);
                 break;
             case "CharactorChoicePanel":
@@ -115,4 +115,6 @@ public class VillageManager : MonoBehaviour
     {
         MailBox.SetActive(false);
     }
+    
+    
 }
