@@ -3,12 +3,18 @@
 public class UpAndDown : MonoBehaviour
 {
     public int failcount;
-    public int curLP = 4;
+
+    public int curCount;
+    //public int curLP = 4;
+    public int maxRandomNum;
+
 
     private bool isOver = false;
     public string NumGenration()
     {
-        float num = Random.Range(0f, 101f);
+
+        int num = Random.Range(1, maxRandomNum + 1);
+
         UpAndDownManager.instance.randomNumber = num;
 
         return UpAndDownManager.instance.randomNumber.ToString("N0");
@@ -20,7 +26,14 @@ public class UpAndDown : MonoBehaviour
 
         if (num == UpAndDownManager.instance.randomNumber.ToString("N0"))
         {
-            Debug.Log("Success");
+
+            if (num == (int)UpAndDownManager.instance.randomNumber)
+            {
+                if (StageManager.instance != null)
+                {
+                    StageManager.instance.MiniGameResult(true);
+                }
+            }
         }
     }
 
@@ -32,7 +45,16 @@ public class UpAndDown : MonoBehaviour
         {
             if (num < (int)UpAndDownManager.instance.randomNumber)
             {
-                Debug.Log("UP");
+
+                if (num < (int)UpAndDownManager.instance.randomNumber)
+                {
+                    StartCoroutine(SetFalse(UpAndDownManager.instance.upAndDownUI.up));
+                }
+                else if (num > (int)UpAndDownManager.instance.randomNumber)
+                {
+                    StartCoroutine(SetFalse(UpAndDownManager.instance.upAndDownUI.down));
+                }
+
             }
             else if (num > (int)UpAndDownManager.instance.randomNumber)
             {
@@ -47,14 +69,15 @@ public class UpAndDown : MonoBehaviour
 
     public void LPDown()
     {
-        if (failcount == 0)
-        {
-            curLP--;
-            UpAndDownManager.instance.upAndDownUI.LP[curLP].sprite = UpAndDownManager.instance.upAndDownUI.emptyLP;
 
-            if (!isOver)
+
+        curCount--;
+        if (curCount < 0)
+        {
+            curCount = Mathf.Max(curCount - 1, 0);
+            if (StageManager.instance != null)
             {
-                failcount = 7;
+                StageManager.instance.MiniGameResult(false);
             }
         }
     }
