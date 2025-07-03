@@ -10,6 +10,8 @@ public class ShadowManager : MonoBehaviour
     public ShadowUI shadowUI;
     public ShadowData[] shadowData;
 
+    public float time;
+
     private void Awake()
     {
         if (instance == null)
@@ -21,6 +23,11 @@ public class ShadowManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        for (int i = 0; i < shadowData.Length; i++)
+        {
+            shadowData[i].shadowTime = time;
+        }
+        
         shadowUI.shadowGameInit();
     }
 

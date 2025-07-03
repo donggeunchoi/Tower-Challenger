@@ -8,11 +8,6 @@ public class ShadowUI : MonoBehaviour
 {
     public Image shadowImage;
     public Image[] choicesImage;
-
-    public Image[] LP;
-    public Sprite fullLP;
-    public Sprite emptyLP;
-
     [HideInInspector] public int randomIndex;
 
 
@@ -20,11 +15,6 @@ public class ShadowUI : MonoBehaviour
     {
         shadowInti();
         shoicesInti();
-
-        for (int i = 0; i < LP.Length; i++)
-        {
-            LP[i].sprite = fullLP;
-        }
     }
 
     public void AnswerButton(int index)
@@ -53,7 +43,7 @@ public class ShadowUI : MonoBehaviour
 
     public IEnumerator ShadowFalse()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(ShadowManager.instance.shadowData[randomIndex].shadowTime);
 
         shadowImage.gameObject.SetActive(false);
         for (int i = 0; i < choicesImage.Length; i++)

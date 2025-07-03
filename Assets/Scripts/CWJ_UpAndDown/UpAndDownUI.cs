@@ -10,9 +10,9 @@ public class UpAndDownUI : MonoBehaviour
 
     public TMP_InputField numInput;
 
-    public Image[] LP;
-    public Sprite fullLP;
-    public Sprite emptyLP;
+    //public Image[] LP;
+    //public Sprite fullLP;
+    //public Sprite emptyLP;
 
     public Button[] answerButton;
     public TextMeshProUGUI textAnswer;
@@ -25,16 +25,21 @@ public class UpAndDownUI : MonoBehaviour
 
     public void InitUi()
     {
-        number.text = UpAndDownManager.instance.upAndDown.NumGenration();
+        number.text = "";
         count.text = UpAndDownManager.instance.upAndDown.curCount.ToString();
 
         SetActiveFalse();
 
-        for (int i = 0; i < LP.Length; i++)
-        {
-            LP[i].sprite = fullLP;
-        }
-        
+        //for (int i = 0; i < LP.Length; i++)
+        //{
+        //    LP[i].sprite = fullLP;
+        //}
+
+    }
+
+    public void OnClearText()
+    {
+        textAnswer.text = "";
     }
 
     public void AnswerButton()
@@ -44,7 +49,7 @@ public class UpAndDownUI : MonoBehaviour
         count.text = UpAndDownManager.instance.upAndDown.curCount.ToString();
 
         StartCoroutine(ButtonCorutine());
-        
+
         textAnswer.text = "";
     }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,13 +7,24 @@ public class UpAndDown : MonoBehaviour
 {
     public int failcount;
     public int curCount;
-    public int curLP = 4;
+    //public int curLP = 4;
+
+    public int max_Num;
+
 
     private bool isOver = false;
 
+    private void Start()
+    {
+        NumGenration();
+    }
+
     public string NumGenration()
     {
-        float num = Random.Range(0f, 31f);
+        int num = Random.Range(1, max_Num + 1);
+
+        Debug.Log(num);
+
         UpAndDownManager.instance.randomNumber = num;
 
         return UpAndDownManager.instance.randomNumber.ToString("N0");
@@ -28,10 +40,9 @@ public class UpAndDown : MonoBehaviour
         {
             if (num == (int)UpAndDownManager.instance.randomNumber)
             {
-                Debug.Log("Success");
+                UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());
             }
         }
-        
     }
 
     public void Failure()
@@ -52,7 +63,7 @@ public class UpAndDown : MonoBehaviour
                 {
                     StartCoroutine(SetFalse(UpAndDownManager.instance.upAndDownUI.down));
                 }
-                curCount = Mathf.Max(curCount - 1, 0);
+                
             }
             LPDown();
         }
@@ -60,10 +71,13 @@ public class UpAndDown : MonoBehaviour
 
     public void LPDown()
     {
-        if (curCount == 0)
-        {  
-            curLP--;
-            UpAndDownManager.instance.upAndDownUI.LP[curLP].sprite = UpAndDownManager.instance.upAndDownUI.emptyLP;
+        curCount--;
+        if (curCount < 0)
+        {
+            curCount = Mathf.Max(curCount - 1, 0);
+
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
         }
     }
 
