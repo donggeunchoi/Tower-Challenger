@@ -3,18 +3,12 @@
 public class UpAndDown : MonoBehaviour
 {
     public int failcount;
-
-    public int curCount;
-    //public int curLP = 4;
-    public int maxRandomNum;
-
+    public int curLP = 4;
 
     private bool isOver = false;
     public string NumGenration()
     {
-
-        int num = Random.Range(1, maxRandomNum + 1);
-
+        float num = Random.Range(0f, 101f);
         UpAndDownManager.instance.randomNumber = num;
 
         return UpAndDownManager.instance.randomNumber.ToString("N0");
@@ -26,14 +20,7 @@ public class UpAndDown : MonoBehaviour
 
         if (num == UpAndDownManager.instance.randomNumber.ToString("N0"))
         {
-
-            if (num == (int)UpAndDownManager.instance.randomNumber)
-            {
-                if (StageManager.instance != null)
-                {
-                    StageManager.instance.MiniGameResult(true);
-                }
-            }
+            Debug.Log("Success");
         }
     }
 
@@ -45,16 +32,7 @@ public class UpAndDown : MonoBehaviour
         {
             if (num < (int)UpAndDownManager.instance.randomNumber)
             {
-
-                if (num < (int)UpAndDownManager.instance.randomNumber)
-                {
-                    StartCoroutine(SetFalse(UpAndDownManager.instance.upAndDownUI.up));
-                }
-                else if (num > (int)UpAndDownManager.instance.randomNumber)
-                {
-                    StartCoroutine(SetFalse(UpAndDownManager.instance.upAndDownUI.down));
-                }
-
+                Debug.Log("UP");
             }
             else if (num > (int)UpAndDownManager.instance.randomNumber)
             {
@@ -69,15 +47,14 @@ public class UpAndDown : MonoBehaviour
 
     public void LPDown()
     {
-
-
-        curCount--;
-        if (curCount < 0)
+        if (failcount == 0)
         {
-            curCount = Mathf.Max(curCount - 1, 0);
-            if (StageManager.instance != null)
+            curLP--;
+            UpAndDownManager.instance.upAndDownUI.LP[curLP].sprite = UpAndDownManager.instance.upAndDownUI.emptyLP;
+
+            if (!isOver)
             {
-                StageManager.instance.MiniGameResult(false);
+                failcount = 7;
             }
         }
     }
