@@ -24,9 +24,4 @@ public class ShadowManager : MonoBehaviour
         shadowUI.shadowGameInit();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

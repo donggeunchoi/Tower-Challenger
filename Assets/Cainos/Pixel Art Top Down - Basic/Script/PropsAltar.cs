@@ -14,6 +14,7 @@ namespace Cainos.PixelArtTopDown_Basic
         private Color curColor;
         private Color targetColor;
 
+        public Transform objTarget;
         private void Awake()
         {
             targetColor = runes[0].color;
@@ -21,6 +22,7 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+
             targetColor.a = 1.0f;
         }
 
