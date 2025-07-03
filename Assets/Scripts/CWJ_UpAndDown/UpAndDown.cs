@@ -1,14 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class UpAndDown : MonoBehaviour
 {
     public int failcount;
-    public int curLP = 4;
-      
+    public int curCount;
+    //public int curLP = 4;
+
+    public int max_Num;
+
+
     private bool isOver = false;
+
+    private void Start()
+    {
+        NumGenration();
+    }
+
     public string NumGenration()
     {
-        float num = Random.Range(0f, 101f);
+        int num = Random.Range(1, max_Num + 1);
+
+        Debug.Log(num);
+
         UpAndDownManager.instance.randomNumber = num;
 
         return UpAndDownManager.instance.randomNumber.ToString("N0");
@@ -16,46 +32,69 @@ public class UpAndDown : MonoBehaviour
 
     public void Success()
     {
-        var num = UpAndDownManager.instance.upAndDownUI.numInput.text;
+        int num;
 
-        if (num == UpAndDownManager.instance.randomNumber.ToString("N0"))
+        bool success = int.TryParse(UpAndDownManager.instance.upAndDownUI.textAnswer.text, out num);
+
+        if (success)
         {
-            Debug.Log("Success");
+            if (num == (int)UpAndDownManager.instance.randomNumber)
+            {
+                UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());
+            }
         }
     }
 
     public void Failure()
     {
-        int.TryParse(UpAndDownManager.instance.upAndDownUI.numInput.text, out int num);
+        int num;
 
-        if (num != UpAndDownManager.instance.randomNumber)
+        bool success = int.TryParse(UpAndDownManager.instance.upAndDownUI.textAnswer.text, out num);
+
+        if (success)
         {
-            if (num < (int)UpAndDownManager.instance.randomNumber)
+            if (num != UpAndDownManager.instance.randomNumber)
             {
-                Debug.Log("UP");
+                if (num < (int)UpAndDownManager.instance.randomNumber)
+                {
+                    StartCoroutine(SetFalse(UpAndDownManager.instance.upAndDownUI.up));
+                }
+                else if (num > (int)UpAndDownManager.instance.randomNumber)
+                {
+                    StartCoroutine(SetFalse(UpAndDownManager.instance.upAndDownUI.down));
+                }
+                
             }
-            else if (num > (int)UpAndDownManager.instance.randomNumber)
-            {
-                Debug.Log("Down");
-            }
-            failcount--;
-            Debug.Log(failcount);
+            LPDown();
         }
-        LPDown();
-       
     }
 
     public void LPDown()
     {
-        if (failcount == 0)
+        curCount--;
+        if (curCount < 0)
         {
-            curLP--;
-            UpAndDownManager.instance.upAndDownUI.LP[curLP].sprite = UpAndDownManager.instance.upAndDownUI.emptyLP;
+            curCount = Mathf.Max(curCount - 1, 0);
 
-            if (!isOver)
-            {
-                failcount = 7;
-            }
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
         }
+    }
+
+    public void InputAnswer(int index)
+    {
+        if (UpAndDownManager.instance.upAndDownUI.textAnswer.text.Length < 2)
+        {
+            UpAndDownManager.instance.upAndDownUI.textAnswer.text += index.ToString();
+        }
+    }
+
+    private IEnumerator SetFalse(Image obj)
+    {
+        obj.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        obj.gameObject.SetActive(false);
     }
 }
