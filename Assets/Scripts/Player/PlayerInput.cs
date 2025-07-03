@@ -42,8 +42,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
             player.TryGetComponent<Rigidbody2D>(out rb);
         }
-        
-        
     }
 
     void FixedUpdate()

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
@@ -40,27 +42,42 @@ public class Inventory : MonoBehaviour
 
     public void OnClickUseButton(GameObject slot)
     {
-        Debug.Log("눌렸니?");
-        inventorySlots.Remove(slot);
-        Destroy(slot);
+        
+        if (Items.Instance.use == false)
+        {
+            Debug.Log("사용안해서 못넘겨요");
+        }
+        else
+        {
+            inventorySlots.Remove(slot);
+            Destroy(slot);
+        }
+        
     }
 
     public void UpdateInventory()
     {
+        foreach (GameObject slot in inventorySlots)
+        {
+            Destroy(slot);
+        }
+        inventorySlots.Clear();
+        
         List<string> names = ItemManager.instance.itemNames;
         List<Sprite> icons = ItemManager.instance.itemIcons;
 
-        if (names.Count == 0 || icons.Count == 0)
-        {
-            return;
-        }
+        // int index = Mathf.Min(names.Count, icons.Count);
 
-        int index = names.Count - 1;
-        
-        GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
-        newSlot.SetActive(true);
+        for (int i = 0; i < names.Count; i++)
+        {
+            GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
+            newSlot.SetActive(true);
+            inventorySlots.Add(newSlot);
+                
+            newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = names[i];
+            newSlot.GetComponent<InventorySlot>().itemName = names[i];
+            newSlot.GetComponent<Image>().sprite = icons[i];
             
-        newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = names[index];
-        newSlot.GetComponent<Image>().sprite = icons[index];
+        }
     }
 }
