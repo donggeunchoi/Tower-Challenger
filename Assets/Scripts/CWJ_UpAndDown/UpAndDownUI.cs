@@ -10,9 +10,9 @@ public class UpAndDownUI : MonoBehaviour
 
     public TMP_InputField numInput;
 
-    public Image[] LP;
-    public Sprite fullLP;
-    public Sprite emptyLP;
+    //public Image[] LP;
+    //public Sprite fullLP;
+    //public Sprite emptyLP;
 
     public Button[] answerButton;
     public TextMeshProUGUI textAnswer;
@@ -30,10 +30,10 @@ public class UpAndDownUI : MonoBehaviour
 
         SetActiveFalse();
 
-        for (int i = 0; i < LP.Length; i++)
-        {
-            LP[i].sprite = fullLP;
-        }
+        //for (int i = 0; i < LP.Length; i++)
+        //{
+        //    LP[i].sprite = fullLP;
+        //}
         
     }
 
