@@ -187,7 +187,6 @@ public class StageManager : MonoBehaviour
         }
         
         List<int> randomNum = new List<int>();
-        
         if (gameList.Count > 0)  //게임리스트에 있는 미니게임의 인덱스값을 재배열
         randomNum.AddRange(Enumerable.Range(0, gameList.Count).OrderBy(x => Random.value).Take(Mathf.Min(gameList.Count, totalStageCount)).ToArray());
         else
@@ -195,12 +194,15 @@ public class StageManager : MonoBehaviour
             Debug.Log("사용가능한 게임이 없습니다/ gameList가 비었습니다");
             return;
         }
+        for (int i = 0;i < randomNum.Count;i++)
+        {
+            Debug.Log("랜덤숫자 : " + randomNum[i]);
+        }
 
 
         if (randomNum.Count < totalStageCount)  //만약에 게임이 모자라다면 모자란만큼 랜덤으로 추가
         {
             int neededGame = totalStageCount - randomNum.Count;
-
             for (int j = 0; j < neededGame; j++)
             {
                 randomNum.Add(Random.Range(0, gameList.Count));
