@@ -30,7 +30,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     private void Start()
     {
-        if (stageManager != null)
+        if (stageManager != null && GameManager.Instance != null)
         {
             int deficult = stageManager.deficult;
 

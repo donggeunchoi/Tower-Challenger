@@ -15,7 +15,7 @@ public class UpAndDown : MonoBehaviour
 
     private void Start()
     {
-        if (StageManager.instance!= null)
+        if (StageManager.instance!= null && GameManager.Instance != null)
         {
             int deficult = StageManager.instance.deficult;
 
