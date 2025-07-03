@@ -2470,6 +2470,12 @@ MonoBehaviour:
   isDashing: 0
   spriteRenderer: {fileID: 0}
   InventoryPanel: {fileID: 6565922014617506718}
+  speedUpSprite: {fileID: 7030114744820723757, guid: e0a00781801bb4742a293ee93952067d,
+    type: 3}
+  sandglassSprite: {fileID: 8882527590889879161, guid: bec6f3574711c462483f9132939cfd05,
+    type: 3}
+  topTicketSprite: {fileID: -6467537029916428044, guid: 2980d329a11e742b88ff82121a79fd11,
+    type: 3}
   uiRootAnim: {fileID: 0}
 --- !u!1 &7465577205520983026
 GameObject:
@@ -2749,6 +2755,7 @@ MonoBehaviour:
   SlotParent: {fileID: 2676134193113402454}
   SlotPrefab: {fileID: 7483103867057294285, guid: 169a795ca2a1143429367ba3ed7c5f57,
     type: 3}
+  saveItems: []
 --- !u!1 &8243511458474008156
 GameObject:
   m_ObjectHideFlags: 0

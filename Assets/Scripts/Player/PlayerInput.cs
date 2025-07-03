@@ -22,6 +22,10 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     [Header("인벤토리")] 
     public GameObject InventoryPanel;
 
+    public Sprite speedUpSprite;
+    public Sprite sandglassSprite;
+    public Sprite topTicketSprite;
+
 
     [SerializeField] private Animator uiRootAnim;
     private Rigidbody2D rb;                 // Rigidbody2D 컴포넌트
@@ -38,6 +42,8 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
             player.TryGetComponent<Rigidbody2D>(out rb);
         }
+        
+        
     }
 
     void FixedUpdate()

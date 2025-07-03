@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class Inventory : MonoBehaviour
     public GameObject SlotPrefab;
 
     private List<GameObject> inventorySlots = new List<GameObject>();
+   
 
     public static Inventory instance;
 
@@ -17,18 +19,17 @@ public class Inventory : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
-    
-    public void AddItme(string itemName, Image itemIcon)
-    {
-        GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
-        newSlot.SetActive(true);
-        inventorySlots.Add(newSlot);
 
-        newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = itemName;
-        newSlot.GetComponent<InventorySlot>().itemName = itemName;
-        newSlot.GetComponent<Image>().sprite = itemIcon.sprite;
+    private void Start()
+    {
+        UpdateInventory();
     }
     
     public void OnClickInventoryClose()
@@ -42,5 +43,24 @@ public class Inventory : MonoBehaviour
         Debug.Log("눌렸니?");
         inventorySlots.Remove(slot);
         Destroy(slot);
+    }
+
+    public void UpdateInventory()
+    {
+        List<string> names = ItemManager.instance.itemNames;
+        List<Sprite> icons = ItemManager.instance.itemIcons;
+
+        if (names.Count == 0 || icons.Count == 0)
+        {
+            return;
+        }
+
+        int index = names.Count - 1;
+        
+        GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
+        newSlot.SetActive(true);
+            
+        newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = names[index];
+        newSlot.GetComponent<Image>().sprite = icons[index];
     }
 }
