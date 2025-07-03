@@ -22,19 +22,22 @@ public class Items : MonoBehaviour
 
     public void TopTicketUse()
     {
-        TopTicket();
+        Debug.Log("맥도날드");
+        TowerusingCheck();
     }
 
-    public bool TopTicket()
+    public void TowerusingCheck()
     {
-        
-        if (!topTicket)
+        if (topTicket)
         {
             topTicket = true;
             use = true;
-            return true;
         }
-        return false;
+        else
+        {
+            use = false;
+            Debug.Log("타워에서 사용해야합니다.");
+        }
     }
     public void Sandglass()
     {

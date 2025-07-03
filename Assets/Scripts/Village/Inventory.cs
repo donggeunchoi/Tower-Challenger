@@ -52,7 +52,29 @@ public class Inventory : MonoBehaviour
             inventorySlots.Remove(slot);
             Destroy(slot);
         }
-        
+    }
+
+    public void RemoveItem(string itemName)
+    {
+        // 1. 아이템 매니저에서 먼저 제거 (첫 번째 것 하나만)
+        int index = ItemManager.instance.itemNames.IndexOf(itemName);
+        if (index >= 0)
+        {
+            ItemManager.instance.itemNames.RemoveAt(index);
+            ItemManager.instance.itemIcons.RemoveAt(index);
+        }
+
+        // 2. 인벤토리 슬롯에서도 동일한 이름 중 하나 제거
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            InventorySlot inv = inventorySlots[i].GetComponent<InventorySlot>();
+            if (inv != null && inv.itemName == itemName)
+            {
+                Destroy(inventorySlots[i]);
+                inventorySlots.RemoveAt(i);
+                break; // 첫 번째 것만 제거하고 탈출
+            }
+        }
     }
 
     public void UpdateInventory()
@@ -80,4 +102,5 @@ public class Inventory : MonoBehaviour
             
         }
     }
+    
 }
