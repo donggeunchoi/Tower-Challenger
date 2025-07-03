@@ -10,8 +10,66 @@ public class JoyStickMove : MonoBehaviour
 
     private Vector2 inputVector;
 
-    private void OnDrag(PointerEventData eventData)
+    public void OnTouchDown(BaseEventData data)
     {
-        //Vector2 pos = 
+        PointerEventData eventData = data as PointerEventData;
+        if (RectTransformUtility.RectangleContainsScreenPoint
+            (joystickBG, eventData.position, eventData.enterEventCamera))
+        {
+            OnDrag(eventData);
+        }
     }
+
+    public void OnDrag(BaseEventData data)
+    {
+        PointerEventData eventData = data as PointerEventData;
+        Vector2 localPos;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle
+            (joystickBG, eventData.position, eventData.enterEventCamera, out localPos);
+
+        localPos = Vector2.ClampMagnitude(localPos, radius);
+
+        joystickHandle.anchoredPosition = localPos;
+
+        inputVector = localPos / radius;
+    }
+
+    public void OnTouchUp(BaseEventData eventData)
+    {
+        inputVector = Vector2.zero;
+        joystickHandle.anchoredPosition = Vector2.zero;
+    }
+    //public RectTransform joystickHandle;
+    //public float handleRange = 100f;
+    //private Vector2 inputVector;
+
+    //public Vector2 Direction => inputVector;
+
+    //public void OnDrag(BaseEventData data)
+    //{
+    //    PointerEventData eventData = data as PointerEventData;
+    //    Vector2 pos;
+    //    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+    //        transform as RectTransform,
+    //        eventData.position,
+    //        eventData.pressEventCamera,
+    //        out pos
+    //    );
+
+    //    pos = Vector2.ClampMagnitude(pos, handleRange);
+    //    joystickHandle.anchoredPosition = pos;
+    //    inputVector = pos / handleRange;
+    //}
+
+    //public void OnPointerDown(BaseEventData eventData)
+    //{
+    //    OnDrag(eventData);
+    //}
+
+    //public void OnPointerUp(BaseEventData eventData)
+    //{
+    //    inputVector = Vector2.zero;
+    //    joystickHandle.anchoredPosition = Vector2.zero;
+    //}
 }
