@@ -10,6 +10,8 @@ public class ShadowManager : MonoBehaviour
     public ShadowUI shadowUI;
     public ShadowData[] shadowData;
 
+    public float time;
+
     private void Awake()
     {
         if (instance == null)
@@ -23,7 +25,7 @@ public class ShadowManager : MonoBehaviour
     {
         for (int i = 0; i < shadowData.Length; i++)
         {
-            shadowData[i].shadowTime = 3f;
+            shadowData[i].shadowTime = time;
         }
         
         shadowUI.shadowGameInit();
