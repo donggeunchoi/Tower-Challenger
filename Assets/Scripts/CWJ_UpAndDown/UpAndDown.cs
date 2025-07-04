@@ -5,17 +5,29 @@ using UnityEngine.UI;
 
 public class UpAndDown : MonoBehaviour
 {
-    public int failcount;
+    public int failCount;
     public int curCount;
     //public int curLP = 4;
 
     public int max_Num;
 
-
     private bool isOver = false;
 
     private void Start()
     {
+        if (StageManager.instance!= null && GameManager.Instance != null)
+        {
+            int deficult = StageManager.instance.deficult;
+
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "Up&down" && x.DifficultyLevel == deficult);
+
+            if (data != null)
+            {
+                max_Num = data.max_Num;
+                failCount = data.FailCount;
+            }
+        }
+
         NumGenration();
     }
 
@@ -23,7 +35,7 @@ public class UpAndDown : MonoBehaviour
     {
         int num = Random.Range(1, max_Num + 1);
 
-        Debug.Log(num);
+        //Debug.Log(num);
 
         UpAndDownManager.instance.randomNumber = num;
 

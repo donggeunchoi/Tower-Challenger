@@ -49,8 +49,8 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            inventorySlots.Remove(slot);
-            Destroy(slot);
+            string itemName = slot.GetComponent<InventorySlot>().itemName;
+            RemoveItem(itemName);
         }
     }
 

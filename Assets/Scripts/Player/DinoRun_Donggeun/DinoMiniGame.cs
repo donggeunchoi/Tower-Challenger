@@ -14,6 +14,7 @@ public class DinoMiniGame : MonoBehaviour
     public static DinoMiniGame instance;
     
     public float baseSpeed = 5f;
+
     public float speedIncreaseRate = 1f;
     public float CurrentSpeed { get;private set; }
 
@@ -29,6 +30,19 @@ public class DinoMiniGame : MonoBehaviour
 
     void Start()
     {
+        if (StageManager.instance != null && GameManager.Instance != null)
+        {
+            int deficult = StageManager.instance.deficult;
+
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeRun" && x.DifficultyLevel == deficult);
+
+            if (data != null)
+            {
+                baseSpeed = data.baseSpeed;
+                gameDuration = data.gameDuration;
+            }
+        }
+        
         gameTimer = gameDuration;
         
         UpdateLpui();

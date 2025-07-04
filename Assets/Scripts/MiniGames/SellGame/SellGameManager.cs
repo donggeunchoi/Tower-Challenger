@@ -18,16 +18,31 @@ public class SellGameManager : MonoBehaviour
     public float shuffleDuration = 0.15f;      //섞이는속도
     public float waitBetweenShuffles = 0.05f;  //딜레이
     public int shuffleCount = 20;              //셔플 횟수
+    public int card;
 
     private RectTransform[] rects;
     private Vector3[] originalPositions;
     private StageManager stageManager;
 
 
-
     void Start()
     {
         stageManager = StageManager.instance;
+
+        if (stageManager != null && GameManager.Instance != null )
+        {
+            int deficult = stageManager.deficult;
+
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "야뱌위" && x.DifficultyLevel == deficult);
+
+            if (data != null)
+            {
+                shuffleCount = data.shuffleCount;
+                shuffleDuration = data.shuffleDuration;
+                card = data.Card;
+            }
+        }
+
         InitializeCards();
         StartCoroutine(GameIntroSequence());
     }

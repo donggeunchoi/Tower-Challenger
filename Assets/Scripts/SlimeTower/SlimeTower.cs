@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class SlimeTower : MonoBehaviour
 {
@@ -10,12 +11,20 @@ public class SlimeTower : MonoBehaviour
 
     private GameObject currentSlime; //현재슬라임
     
-    
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //SpawnSlime();
+        if (StageManager.instance != null && GameManager.Instance)
+        {
+            int deficult = StageManager.instance.deficult;
+
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeTower" && x.DifficultyLevel == deficult);
+
+            if (data != null)
+            {
+                clearGameCount = data.clearGameCount;
+            }
+        }
     }
 
     // Update is called once per frame
