@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
-using NUnit.Framework;
 
 public class MiniGameSpeedTest : MonoBehaviour
 {
@@ -17,11 +16,9 @@ public class MiniGameSpeedTest : MonoBehaviour
     private bool isClick = false;       //클릭했는지 검사
     private bool isFalseEffect = false; //실패임팩트 중복실행 방지
     private Coroutine miniGameCoroutine;
-
+    
     [SerializeField] private Sprite[] sprites;
 
-    [SerializeField] private float delayTime;
-    [SerializeField] private float successTime;
 
     private void Awake()
     {
@@ -30,19 +27,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     private void Start()
     {
-        if (stageManager != null && GameManager.Instance != null)
-        {
-            int difficulty = stageManager.difficulty;
-
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SpeedTest" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
-            {
-                successTime = data.successTime;
-                delayTime = data.delayTime;
-            }
-        }
-
+        //trueOrFalse.text = "";
         StartGame();
     }
 
@@ -115,7 +100,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         //trueOrFalse.text = "Ready?";
         speedUIBtn.interactable = true;
 
-        float randomGameTime = Random.Range(0f, delayTime);                 //랜덤값설정
+        float randomGameTime = Random.Range(0f, 6f);                 //랜덤값설정
         randomGameTime = Mathf.Round(randomGameTime * 100f) / 100f;   //반올림
         Debug.Log(randomGameTime);   //랜덤시간 몇초인지 로그
         yield return new WaitForSeconds(randomGameTime); //랜덤시간동안 기다렸다가
@@ -123,7 +108,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         backGround.sprite = sprites[1];
         isGreen = true;
         //trueOrFalse.text = "Click!!";
-        yield return new WaitForSeconds(successTime); //1초동안 눌러도되는시간
+        yield return new WaitForSeconds(3f); //1초동안 눌러도되는시간
 
         if (isGreen && !isClick)  //클릭했는지 안했는지 검사 안했으면 실패
         {

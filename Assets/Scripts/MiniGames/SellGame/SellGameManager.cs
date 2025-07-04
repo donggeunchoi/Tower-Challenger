@@ -18,40 +18,16 @@ public class SellGameManager : MonoBehaviour
     public float shuffleDuration = 0.15f;      //섞이는속도
     public float waitBetweenShuffles = 0.05f;  //딜레이
     public int shuffleCount = 20;              //셔플 횟수
-    public int card;
 
     private RectTransform[] rects;
     private Vector3[] originalPositions;
     private StageManager stageManager;
 
 
+
     void Start()
     {
         stageManager = StageManager.instance;
-
-        if (stageManager != null && GameManager.Instance != null )
-        {
-            int difficulty = stageManager.difficulty;
-
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "야바위" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
-            {
-                shuffleCount = data.shuffleCount;
-                shuffleDuration = data.shuffleDuration;
-                card = data.Card;
-            }
-        }
-
-        if (card >= Card.Length)
-        {
-            card = Card.Length;
-        }
-        else if (card < 1)
-        {
-            card = 1;
-        }
-            
         InitializeCards();
         StartCoroutine(GameIntroSequence());
     }
@@ -59,27 +35,19 @@ public class SellGameManager : MonoBehaviour
     void InitializeCards()
     {
         int len = Card.Length;
-        rects = new RectTransform[card];
-        originalPositions = new Vector3[card];
+        rects = new RectTransform[len];
+        originalPositions = new Vector3[len];
 
         for (int i = 0; i < len; i++)
         {
             GameObject obj = Card[i];
-            if (i < card)
-            {
-                obj.SetActive(true); // 필요한 카드만 활성화
-                rects[i] = obj.GetComponent<RectTransform>();
-                originalPositions[i] = rects[i].anchoredPosition;
+            rects[i] = obj.GetComponent<RectTransform>();
+            originalPositions[i] = rects[i].anchoredPosition;
 
-                int index = i; // 캡처
-                Button btn = obj.GetComponent<Button>();
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => OnButtonClick(index));
-            }
-            else
-            {
-                obj.SetActive(false); // 나머지 카드는 비활성화
-            }
+            int index = i; // 캡처
+            Button btn = obj.GetComponent<Button>();
+            btn.onClick.RemoveAllListeners(); // 중복 방지
+            btn.onClick.AddListener(() => OnButtonClick(index));
         }
     }
 
@@ -159,7 +127,7 @@ public class SellGameManager : MonoBehaviour
 
     IEnumerator ShuffleOnce()
     {
-        int len = card;
+        int len = Card.Length;
         int[] order = Enumerable.Range(0, len).ToArray();
         int[] original = (int[])order.Clone();
 
