@@ -33,7 +33,7 @@ public class SellGameManager : MonoBehaviour
         {
             int deficult = stageManager.deficult;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "야뱌위" && x.DifficultyLevel == deficult);
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "야바위" && x.DifficultyLevel == deficult);
 
             if (data != null)
             {

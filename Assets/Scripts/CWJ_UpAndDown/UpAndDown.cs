@@ -27,6 +27,8 @@ public class UpAndDown : MonoBehaviour
                 failCount = data.FailCount;
             }
         }
+        
+        curCount = failCount;
 
         NumGenration();
     }
