@@ -12,14 +12,15 @@ public class StageTimer : MonoBehaviour
 
     private void Start()
     {
-        isActive = false;
+        if (StageManager.instance != null)
+            isActive = StageManager.instance.isGameActive;
     }
 
     private void Update()
     {
-        if (isActive)
+        if (isActive && StageManager.instance != null)
         {
-            timer -= Time.deltaTime;
+            timer -= Time.deltaTime * StageManager.instance.timerMultiplier;
             if (timer <= 0)
             {
                 StageManager.instance.GameOver();
@@ -32,12 +33,14 @@ public class StageTimer : MonoBehaviour
 
     public void SetTimer()
     {
+        this.gameObject.SetActive(true);
         timer = MAX_TIME;
         isActive = true;
     }
 
     public void ResetTimer()
     {
+        this.gameObject.SetActive(false);
         timer = MAX_TIME;
         isActive = false;
     }

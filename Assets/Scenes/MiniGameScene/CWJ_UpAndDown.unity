@@ -448,7 +448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -457,8 +457,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 0.02641511, g: 0.02641511, b: 0.02641511, a: 1}
+    rgba: 4288938752
+  m_fontColor: {r: 0, g: 0.011949503, b: 0.6415094, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1486,7 +1486,7 @@ GameObject:
   - component: {fileID: 449703347}
   - component: {fileID: 449703349}
   m_Layer: 5
-  m_Name: Ground
+  m_Name: NumberClearButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2333,9 +2333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bef13caba723e84fb7ad9a120a0f67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  failcount: 7
+  failCount: 7
   curCount: 0
-  max_Num: 100
+  max_Num: 50
 --- !u!1 &1108376509
 GameObject:
   m_ObjectHideFlags: 0
