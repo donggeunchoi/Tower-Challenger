@@ -14,7 +14,7 @@ public class Currency : MonoBehaviour
         UpdateCurrency();
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() 
     {
         if (GameManager.Instance != null)
         {
