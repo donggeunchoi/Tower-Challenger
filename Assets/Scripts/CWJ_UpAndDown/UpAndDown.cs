@@ -30,6 +30,7 @@ public class UpAndDown : MonoBehaviour
         
         curCount = failCount;
 
+        UpAndDownManager.instance.upAndDownUI.count.text = curCount.ToString();
         NumGenration();
     }
 
