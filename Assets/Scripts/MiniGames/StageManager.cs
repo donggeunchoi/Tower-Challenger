@@ -131,8 +131,11 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        MiniGameDatas selectedGame = randomGames[Random.Range(0, randomGames.Count)];  //배열에서도 랜덤
-        SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
+        if (randomGames[stageClearPortal.Count] != null)
+        {
+            MiniGameDatas selectedGame = randomGames[stageClearPortal.Count];  //배열에서도 랜덤
+            SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
+        }
     }
 
     public void NextFloor()  //다음층이 되었을때 시간초기화 및 스테이지 갯수 시간배속 계산
@@ -163,6 +166,7 @@ public class StageManager : MonoBehaviour
         Debug.Log(timerMultiplier);
 
         RandomStage();
+        
         StartCoroutine(StartGameLoad(false));
     }
 
