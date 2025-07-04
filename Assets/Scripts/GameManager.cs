@@ -62,8 +62,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (mainStamina >= MAX_STAMINA)
+        {
+            staminatimer = 0;
             return;
-
+        }
         staminatimer += Time.deltaTime;
 
         if (staminatimer >= STAMINA_TIME)
