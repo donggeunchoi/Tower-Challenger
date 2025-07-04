@@ -32,9 +32,9 @@ public class DinoMiniGame : MonoBehaviour
     {
         if (StageManager.instance != null && GameManager.Instance != null)
         {
-            int deficult = StageManager.instance.deficult;
+            int difficulty = StageManager.instance.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeRun" && x.DifficultyLevel == deficult);
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeRun" && x.DifficultyLevel == difficulty);
 
             if (data != null)
             {

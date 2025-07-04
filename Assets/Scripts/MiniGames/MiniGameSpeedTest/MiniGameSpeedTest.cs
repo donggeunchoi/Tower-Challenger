@@ -32,9 +32,9 @@ public class MiniGameSpeedTest : MonoBehaviour
     {
         if (stageManager != null && GameManager.Instance != null)
         {
-            int deficult = stageManager.deficult;
+            int difficulty = stageManager.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SpeedTest" && x.DifficultyLevel == deficult);
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SpeedTest" && x.DifficultyLevel == difficulty);
 
             if (data != null)
             {
