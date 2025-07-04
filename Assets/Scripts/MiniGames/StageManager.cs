@@ -25,10 +25,11 @@ public class StageManager : MonoBehaviour
     [Header("진행 정보")]
     public const int FIRST_FLOOR = 1;
     public const int BOSS_FLOOR = 10;
+    public const int MAX_FLOOR = 40;
     public int floor = 1;              //현재층
     public int bestFloor = 1;          //최고 기록
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
-    private float timerMultiplier = 1f;//타이머 배속
+    public float timerMultiplier = 1f;//타이머 배속
     private Vector3 playerPosition;    //플레이어 포지션 저장
     private int layerNumber;           //플레이어 레이어 저장
     private string currentSceneName;   //현재 씬 이름
@@ -148,6 +149,15 @@ public class StageManager : MonoBehaviour
             return;
         }
 
+        if (floor >= MAX_FLOOR)
+        {
+            Debug.Log("GameClear");
+            floor = MAX_FLOOR;
+            //임시로 게임오버 판넬
+            GameObject gameOverPanel = Instantiate(gameOver, infoUI.transform);
+            return;
+        }
+
         SetFloorInfo();
 
         Debug.Log(timerMultiplier);
@@ -194,11 +204,6 @@ public class StageManager : MonoBehaviour
             Debug.Log("사용가능한 게임이 없습니다/ gameList가 비었습니다");
             return;
         }
-        for (int i = 0;i < randomNum.Count;i++)
-        {
-            Debug.Log("랜덤숫자 : " + randomNum[i]);
-        }
-
 
         if (randomNum.Count < totalStageCount)  //만약에 게임이 모자라다면 모자란만큼 랜덤으로 추가
         {
@@ -218,6 +223,12 @@ public class StageManager : MonoBehaviour
     public void BossStage()
     {
         randomGames.Clear();
+
+        if (uiManager != null)
+        {
+            if (uiManager.timerUI != null)
+                uiManager.timerUI.ResetTimer();
+        }
 
         List<MiniGameDatas> gameList = new List<MiniGameDatas>();  //사용가능한 배열생성
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
