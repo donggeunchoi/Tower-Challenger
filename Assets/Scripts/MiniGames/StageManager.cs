@@ -15,7 +15,7 @@ public class StageManager : MonoBehaviour
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
     public GameObject infoUI;         //각종 인포메이션이 들어갈 공간 (타이머 LP등)[추후 UI매니저로 이동]
-    public int deficult;              //난이도
+    public int difficulty;              //난이도
 
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
@@ -168,7 +168,7 @@ public class StageManager : MonoBehaviour
 
     private void SetFloorInfo()
     {
-        deficult = Mathf.Clamp((floor - 1) / 10 + 1, 1, 4);
+        difficulty = Mathf.Clamp((floor - 1) / 10 + 1, 1, 4);
 
         totalStageCount = Mathf.Clamp((floor - 1) / 5 + 1, 1, 4);
 
