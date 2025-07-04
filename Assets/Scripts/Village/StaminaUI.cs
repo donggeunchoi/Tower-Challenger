@@ -9,7 +9,10 @@ public class StaminaUI : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        UpdateStaminaUI();
+        if (stamina != gameManager.mainStamina)
+        {
+            UpdateStaminaUI();
+        }
     }
 
     private void Update()
