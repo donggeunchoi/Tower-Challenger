@@ -19,6 +19,13 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public bool isDashing = false;          // 대쉬 중 여부
     public SpriteRenderer spriteRenderer;   // 방향 전환 이미지
 
+    [Header("인벤토리")] 
+    public GameObject InventoryPanel;
+
+    public Sprite speedUpSprite;
+    public Sprite sandglassSprite;
+    public Sprite topTicketSprite;
+
 
     [SerializeField] private Animator uiRootAnim;
     private Rigidbody2D rb;                 // Rigidbody2D 컴포넌트
@@ -132,5 +139,10 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
             spriteRenderer.flipX = false; // 오른쪽
         else if (inputDir.x < -0.1f)
             spriteRenderer.flipX = true;  // 왼쪽
+    }
+
+    public void OnClickInventory()
+    {
+        InventoryPanel.SetActive(true);
     }
 }

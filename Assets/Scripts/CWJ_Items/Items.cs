@@ -7,6 +7,8 @@ public class Items : MonoBehaviour
     PlayerInput input;
     public bool topTicket = false;
 
+    public bool use = false;
+
     private float speedUp = 5;
 
     private void Awake()
@@ -15,30 +17,53 @@ public class Items : MonoBehaviour
         {
             Instance = this;
         }
-        input = GetComponent<PlayerInput>();
+        input = FindObjectOfType<PlayerInput>();
     }
 
     public void TopTicketUse()
     {
-        TopTicket();
+        Debug.Log("맥도날드");
+        TowerusingCheck();
     }
 
-    public bool TopTicket()
+    public void TowerusingCheck()
     {
-        if (!topTicket)
+        if (topTicket)
         {
             topTicket = true;
-            return true;
+            use = true;
         }
-        return false;
+        else
+        {
+            use = false;
+            Debug.Log("타워에서 사용해야합니다.");
+        }
     }
     public void Sandglass()
     {
-        StageManager.instance.stageTimer.timer += 10;
+        if (input != null)
+        {
+            StageManager.instance.stageTimer.timer += 10;
+            use = true;
+        }
+        else
+        {
+            use = false;
+            Debug.Log("인풋이 없어서 패스");
+        }
     }
 
     public void MoveSpeedUp()
     {
-        input.speed += speedUp;
+        if (input != null)
+        {
+            input.speed += speedUp;
+            use = true;
+        }
+        else
+        {
+            use = false;
+            Debug.Log("플레이어 인풋이 없어서 패스합니다.");
+        }
     }
 }
