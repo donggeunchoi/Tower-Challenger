@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -13,6 +13,18 @@ public class Obstacle : MonoBehaviour
 
     void Start()
     {
+        if (StageManager.instance != null && GameManager.Instance != null)
+        {
+            int difficulty = StageManager.instance.difficulty;
+
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeRun" && x.DifficultyLevel == difficulty);
+
+            if (data != null)
+            {
+                spawnInterval = data.spawnInterval;
+            }
+        }
+
         StartCoroutine(SpawnRoutine());
     }
 
