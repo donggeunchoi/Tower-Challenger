@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,6 +13,18 @@ public class Bird : MonoBehaviour
 
    void Start()
    {
+        if (StageManager.instance != null && GameManager.Instance)
+        {
+            int difficulty = StageManager.instance.difficulty;
+
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeTower" && x.DifficultyLevel == difficulty);
+
+            if (data != null)
+            {
+                birdSpeed = data.birdSpeed;
+            }
+        }
+
        direction = Vector3.right;
    }
    void Update()

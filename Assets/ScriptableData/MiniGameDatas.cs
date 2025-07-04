@@ -2,7 +2,7 @@
 
 [CreateAssetMenu(fileName = "MiniGameData", menuName = "New MiniGame")]
 
-public class MiniGameData : ScriptableObject
+public class MiniGameDatas : ScriptableObject
 {
     [Header("씬 이름")] public string sceneName;
     

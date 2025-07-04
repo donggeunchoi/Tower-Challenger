@@ -354,7 +354,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stageTimer
       value: 
-      objectReference: {fileID: 1458229874}
+      objectReference: {fileID: 0}
     - target: {fileID: 7248892444601495334, guid: 7c5d85cb901709c4ea54588d8c30c3f0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -406,6 +406,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2778438971548365594, guid: 474ad5a9fec469b46888b45dad65f285,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778438971548365594, guid: 474ad5a9fec469b46888b45dad65f285,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778438971548365594, guid: 474ad5a9fec469b46888b45dad65f285,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3574710307843413379, guid: 474ad5a9fec469b46888b45dad65f285,
         type: 3}
       propertyPath: m_Name
@@ -415,12 +430,32 @@ PrefabInstance:
         type: 3}
       propertyPath: timerUI
       value: 
-      objectReference: {fileID: 1458229874}
+      objectReference: {fileID: 0}
     - target: {fileID: 3697326153307902571, guid: 474ad5a9fec469b46888b45dad65f285,
         type: 3}
       propertyPath: stageLPUI
       value: 
       objectReference: {fileID: 1458229867}
+    - target: {fileID: 4675064286461739316, guid: 474ad5a9fec469b46888b45dad65f285,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675064286461739316, guid: 474ad5a9fec469b46888b45dad65f285,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675064286461739316, guid: 474ad5a9fec469b46888b45dad65f285,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675064286461739316, guid: 474ad5a9fec469b46888b45dad65f285,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4947150817153813145, guid: 474ad5a9fec469b46888b45dad65f285,
         type: 3}
       propertyPath: currentLP
@@ -600,18 +635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1458229874 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5687271098184343252, guid: 474ad5a9fec469b46888b45dad65f285,
-    type: 3}
-  m_PrefabInstance: {fileID: 1458229866}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aceb870b8215c644481593c152c42bf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1874223411
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,6 +788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883493732411757985, guid: c856b5c9981fbef4a84a27710f1ba8b9,
+        type: 3}
+      propertyPath: card
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3883493732411757985, guid: c856b5c9981fbef4a84a27710f1ba8b9,
         type: 3}
