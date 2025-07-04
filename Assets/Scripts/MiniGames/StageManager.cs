@@ -131,10 +131,10 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        if (randomGames[stageClearPortal.Count] != null)
+        if (stageClearPortal.Count >= 0 && stageClearPortal.Count < randomGames.Count && randomGames[stageClearPortal.Count] != null)
         {
-            MiniGameDatas selectedGame = randomGames[stageClearPortal.Count];  //배열에서도 랜덤
-            SceneManager.LoadScene(selectedGame.sceneName);  //해당배열에 있는 미니게임 실행
+            MiniGameDatas selectedGame = randomGames[stageClearPortal.Count];
+            SceneManager.LoadScene(selectedGame.sceneName);
         }
     }
 
