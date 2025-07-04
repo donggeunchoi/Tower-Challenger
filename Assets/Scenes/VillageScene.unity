@@ -10519,7 +10519,7 @@ GameObject:
   - component: {fileID: 860304239}
   - component: {fileID: 860304238}
   m_Layer: 5
-  m_Name: DiamondText (1)
+  m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11699,6 +11699,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 125760864}
+  - {fileID: 1251177971}
   m_Father: {fileID: 1763374194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -13479,7 +13480,7 @@ RectTransform:
   m_Children:
   - {fileID: 1091433058}
   - {fileID: 1278285932}
-  m_Father: {fileID: 1763374194}
+  m_Father: {fileID: 974985407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17634,6 +17635,7 @@ GameObject:
   - component: {fileID: 1608422674}
   - component: {fileID: 1608422673}
   - component: {fileID: 1608422677}
+  - component: {fileID: 1608422678}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -17753,6 +17755,20 @@ MonoBehaviour:
   Guild: {fileID: 261579164}
   StopPanel: {fileID: 1091433057}
   CharactorChoicePanel: {fileID: 92263442}
+--- !u!114 &1608422678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608422672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243c1829f12a23f42a4e80c16236fad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldText: {fileID: 860304238}
+  diamondText: {fileID: 511993656}
 --- !u!1 &1614899580
 GameObject:
   m_ObjectHideFlags: 0
@@ -19985,7 +20001,6 @@ RectTransform:
   m_Children:
   - {fileID: 1805933706}
   - {fileID: 974985407}
-  - {fileID: 1251177971}
   - {fileID: 1264809316}
   - {fileID: 1803772573}
   - {fileID: 533698655}
