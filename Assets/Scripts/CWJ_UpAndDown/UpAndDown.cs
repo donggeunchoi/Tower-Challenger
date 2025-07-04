@@ -17,9 +17,9 @@ public class UpAndDown : MonoBehaviour
     {
         if (StageManager.instance!= null && GameManager.Instance != null)
         {
-            int deficult = StageManager.instance.deficult;
+            int difficulty = StageManager.instance.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "Up&down" && x.DifficultyLevel == deficult);
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "Up&down" && x.DifficultyLevel == difficulty);
 
             if (data != null)
             {
@@ -27,6 +27,8 @@ public class UpAndDown : MonoBehaviour
                 failCount = data.FailCount;
             }
         }
+        
+        curCount = failCount;
 
         NumGenration();
     }

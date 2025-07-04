@@ -15,7 +15,7 @@ public class StageManager : MonoBehaviour
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
     public GameObject infoUI;         //각종 인포메이션이 들어갈 공간 (타이머 LP등)[추후 UI매니저로 이동]
-    public int deficult;              //난이도
+    public int difficulty;              //난이도
 
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
@@ -168,7 +168,7 @@ public class StageManager : MonoBehaviour
 
     private void SetFloorInfo()
     {
-        deficult = Mathf.Clamp((floor - 1) / 10 + 1, 1, 4);
+        difficulty = Mathf.Clamp((floor - 1) / 10 + 1, 1, 4);
 
         totalStageCount = Mathf.Clamp((floor - 1) / 5 + 1, 1, 4);
 
@@ -195,28 +195,22 @@ public class StageManager : MonoBehaviour
                 }
             }
         }
-        
-        List<int> randomNum = new List<int>();
-        if (gameList.Count > 0)  //게임리스트에 있는 미니게임의 인덱스값을 재배열
-        randomNum.AddRange(Enumerable.Range(0, gameList.Count).OrderBy(x => Random.value).Take(Mathf.Min(gameList.Count, totalStageCount)).ToArray());
-        else
+
+        if (gameList.Count == 0)
         {
             Debug.Log("사용가능한 게임이 없습니다/ gameList가 비었습니다");
             return;
         }
 
-        if (randomNum.Count < totalStageCount)  //만약에 게임이 모자라다면 모자란만큼 랜덤으로 추가
+        gameList = gameList.OrderBy(x => Random.value).ToList();
+        for (int k = 0; k < Mathf.Min(gameList.Count, totalStageCount); k++)
         {
-            int neededGame = totalStageCount - randomNum.Count;
-            for (int j = 0; j < neededGame; j++)
-            {
-                randomNum.Add(Random.Range(0, gameList.Count));
-            }
+            randomGames.Add(gameList[k]);
         }
 
-        for (int k = 0; k < totalStageCount; k++)  //배열에 추가된 인덱스값에 i번째에있는 미니게임을 추가
+        while (randomGames.Count < totalStageCount);
         {
-            randomGames.Add(gameList[randomNum[k]]);
+            randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
         }
     }
 

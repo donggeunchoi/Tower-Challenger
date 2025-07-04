@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour
         stageManager = StageManager.instance;
         uiManager = UIManager.Instance;
 
+        mainStamina = 5; //임시로 다섯개만들어주기
+
+
         if (FindAnyObjectByType(typeof(UIManager)) == null)
         {
             if (uiManagerPrefab != null)
@@ -62,8 +65,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (mainStamina >= MAX_STAMINA)
+        {
+            staminatimer = 0;
             return;
-
+        }
         staminatimer += Time.deltaTime;
 
         if (staminatimer >= STAMINA_TIME)
