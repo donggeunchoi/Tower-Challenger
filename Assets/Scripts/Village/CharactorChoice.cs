@@ -8,6 +8,8 @@ public class CharactorChoice : MonoBehaviour
     public Transform SlotParent;
     public GameObject SlotPrefab;
 
+    public Image equippedCharactorImage;
+
     private List<GameObject> CharactorSlots = new List<GameObject>();
 
     public static CharactorChoice instance;
@@ -30,6 +32,7 @@ public class CharactorChoice : MonoBehaviour
         if (slotScript != null)
         {
             slotScript.CharactorChoice = this;
+            slotScript.IconImage =  CharactorIcon;
         }
 
         if (nameText != null)
@@ -66,8 +69,18 @@ public class CharactorChoice : MonoBehaviour
                 bool isSelected = (slot == Choiceslot);
                 slot.Equip = isSelected;
                 slot.EquipImage.SetActive(isSelected);
+
+                if (isSelected)
+                {
+                    equippedCharactorImage = slot.IconImage;
+                }
             }
         }
+    }
+
+    public Image SandCharactorImage()
+    {
+        return equippedCharactorImage;
     }
 
 

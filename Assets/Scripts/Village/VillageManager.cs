@@ -31,6 +31,7 @@ public class VillageManager : MonoBehaviour
     
     [Header("캐릭터 선택")]
     public GameObject CharactorChoicePanel;
+    public Image CharactorUI;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +40,11 @@ public class VillageManager : MonoBehaviour
         fadePanel.gameObject.SetActive(true);
         fadePanel.color = new Color(0, 0, 0, 1);
         StartCoroutine(FadeOut());
+    }
+
+    void Update()
+    {
+        UpdateCharactor();
     }
 
     IEnumerator FadeOut()
@@ -106,6 +112,7 @@ public class VillageManager : MonoBehaviour
 
     #endregion
 
+    #region 메일
     public void OnClickMailBox()
     {
         MailBox.SetActive(true);
@@ -114,6 +121,17 @@ public class VillageManager : MonoBehaviour
     public void OnClickMailBoxClose()
     {
         MailBox.SetActive(false);
+    }
+    
+    #endregion
+
+    public void UpdateCharactor()
+    {
+        Image selected = CharactorChoice.instance.SandCharactorImage();
+        if (selected != null)
+        {
+            CharactorUI.sprite = selected.sprite;
+        }
     }
     
     
