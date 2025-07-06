@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -81,11 +81,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
-        else if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
+        //if (collision.gameObject.CompareTag("Ground"))
+        //{
+        //    isGrounded = true;
+        //}
+        if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
         {
             DinoMiniGame.instance.HandleHit();
             StartCoroutine(InvencibilityRoutine());
@@ -154,7 +154,12 @@ public class Player : MonoBehaviour
     public void Sliding()
     {
         Debug.Log("슬라이딩하니?");
-        animation.SetTrigger("IsSliding");
+        animation.SetBool("IsSliding", true);
+    }
+
+    public void StopSliding()
+    {
+        animation.SetBool("IsSliding", false);
     }
     #endregion
    
