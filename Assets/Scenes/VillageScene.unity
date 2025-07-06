@@ -1135,10 +1135,10 @@ RectTransform:
   - {fileID: 179801423}
   m_Father: {fileID: 974985407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -89.67445, y: 4.7197266}
-  m_SizeDelta: {x: -1142.1678, y: -292.6216}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.011589, y: 0}
+  m_SizeDelta: {x: 1292.6, y: 787.3784}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &125760865
 MonoBehaviour:
@@ -1582,7 +1582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.0234, y: -6.3697}
+  m_AnchoredPosition: {x: 5, y: -6.3697}
   m_SizeDelta: {x: 1247.0262, y: 467.5246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &179801424
@@ -12051,7 +12051,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1724231698}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.4420137
+  m_Size: 0.5011717
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12452,6 +12452,7 @@ GameObject:
   - component: {fileID: 974985407}
   - component: {fileID: 974985406}
   - component: {fileID: 974985405}
+  - component: {fileID: 974985408}
   m_Layer: 5
   m_Name: MailBoxPanel
   m_TagString: Untagged
@@ -12517,6 +12518,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &974985408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974985404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3748083e3651108418e768e1640c1565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paddingRatio: {x: 0.05, y: 0.05, z: 0.05, w: 0.05}
+  minPaddingRatio: 0.03
+  maxPaddingRatio: 0.08
 --- !u!1 &993305373
 GameObject:
   m_ObjectHideFlags: 0
@@ -14535,6 +14551,7 @@ GameObject:
   - component: {fileID: 1251177971}
   - component: {fileID: 1251177970}
   - component: {fileID: 1251177972}
+  - component: {fileID: 1251177973}
   m_Layer: 5
   m_Name: pausePanel
   m_TagString: Untagged
@@ -14585,6 +14602,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SattingPanel: {fileID: 1278285931}
   PausePanel: {fileID: 1091433057}
+--- !u!114 &1251177973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251177968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3748083e3651108418e768e1640c1565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paddingRatio: {x: 0.05, y: 0.05, z: 0.05, w: 0.05}
+  minPaddingRatio: 0.03
+  maxPaddingRatio: 0.08
 --- !u!1 &1254613691
 GameObject:
   m_ObjectHideFlags: 0
@@ -22225,6 +22257,7 @@ GameObject:
   - component: {fileID: 1805933708}
   - component: {fileID: 1805933707}
   - component: {fileID: 1805933709}
+  - component: {fileID: 1805933710}
   m_Layer: 5
   m_Name: StorePanel
   m_TagString: Untagged
@@ -22252,10 +22285,10 @@ RectTransform:
   - {fileID: 1169387281}
   m_Father: {fileID: 1763374194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 950}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1805933707
 MonoBehaviour:
@@ -22314,6 +22347,21 @@ MonoBehaviour:
   Item1Image: {fileID: 1220568552}
   Item2Image: {fileID: 343355625}
   Item3Image: {fileID: 958191396}
+--- !u!114 &1805933710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805933705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3748083e3651108418e768e1640c1565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paddingRatio: {x: 0.05, y: 0.05, z: 0.05, w: 0.05}
+  minPaddingRatio: 0.03
+  maxPaddingRatio: 0.08
 --- !u!1 &1810820251
 GameObject:
   m_ObjectHideFlags: 0
