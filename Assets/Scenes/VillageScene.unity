@@ -3360,6 +3360,7 @@ MonoBehaviour:
   Equip: 0
   EquipImage: {fileID: 0}
   CharactorChoice: {fileID: 0}
+  data: {fileID: 0}
 --- !u!114 &267754113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11586,11 +11587,11 @@ MonoBehaviour:
   NoonaPanel: {fileID: 1884113645}
   KainPanel: {fileID: 745980213}
   MerylPanel: {fileID: 1744261629}
-  Charactor1Image: {fileID: 2655365825963709895}
-  Charactor2Image: {fileID: 8502818311839250637}
-  Charactor3Image: {fileID: 8502818310506732933}
-  Charactor4Image: {fileID: 1817312600}
-  Charactor5Image: {fileID: 267754113}
+  lukeData: {fileID: 11400000, guid: 88a591746ea214cfcba472dbb764392d, type: 2}
+  rinData: {fileID: 11400000, guid: b7b2ec38d653e492faa9832d82ec5854, type: 2}
+  mirData: {fileID: 11400000, guid: d4c62d21468ac46cc8fe03376c3aa909, type: 2}
+  kainData: {fileID: 11400000, guid: 3eefef68d0b3c468db843e7a4b127b32, type: 2}
+  merylData: {fileID: 11400000, guid: 74cce0f3bf17e4695a4f91dc7df9996f, type: 2}
   ClearImage:
   - {fileID: 551838000}
   - {fileID: 1283412616}
@@ -22750,6 +22751,7 @@ MonoBehaviour:
   Equip: 0
   EquipImage: {fileID: 0}
   CharactorChoice: {fileID: 0}
+  data: {fileID: 0}
 --- !u!114 &1817312600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26111,6 +26113,7 @@ MonoBehaviour:
   Equip: 0
   EquipImage: {fileID: 0}
   CharactorChoice: {fileID: 0}
+  data: {fileID: 0}
 --- !u!114 &1288151146077305302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26126,6 +26129,7 @@ MonoBehaviour:
   Equip: 0
   EquipImage: {fileID: 0}
   CharactorChoice: {fileID: 0}
+  data: {fileID: 0}
 --- !u!114 &2655365825963709895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26192,6 +26196,7 @@ MonoBehaviour:
   Equip: 0
   EquipImage: {fileID: 0}
   CharactorChoice: {fileID: 0}
+  data: {fileID: 0}
 --- !u!224 &5838219496847818847
 RectTransform:
   m_ObjectHideFlags: 0

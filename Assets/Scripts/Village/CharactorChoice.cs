@@ -17,38 +17,30 @@ public class CharactorChoice : MonoBehaviour
         instance = this;
     }
     
-    public void AddItem(string CharactorName, Image CharactorIcon)
+    public void AddItem(CharacterData data)
     {
         GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
         newSlot.SetActive(true);
         CharactorSlots.Add(newSlot);
-        
+
+        CharactorChoiceSlot slotScript = newSlot.GetComponent<CharactorChoiceSlot>();
+        slotScript.CharactorChoice = this;
+        slotScript.data = data;
+            
         TMPro.TMP_Text nameText = newSlot.GetComponentInChildren<TMPro.TMP_Text>();
         Image icon =  newSlot.GetComponent<Image>();
-        CharactorChoiceSlot slotScript = newSlot.GetComponent<CharactorChoiceSlot>();
-
-        if (slotScript != null)
-        {
-            slotScript.CharactorChoice = this;
-        }
 
         if (nameText != null)
         {
-            nameText.text = CharactorName;
-        }
-        else
-        {
-            Debug.LogError("텍스트 컴포넌트 확인해봐라");
+            nameText.text = data.characterName;
         }
 
-        if (icon != null && CharactorIcon != null)
+        if (icon != null)
         {
-            icon.sprite = CharactorIcon.sprite;
+            icon.sprite = data.characterImage;
         }
-        else
-        {
-            Debug.LogError("icon, CharactorIcon 확인해봐라");
-        }
+        
+        
     }
     
     public void OnClickCharactorClose()
