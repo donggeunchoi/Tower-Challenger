@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4b70630a4bd44fd8aa8b141a9e232e, type: 3}
+  m_Name: Cat
+  m_EditorClassIdentifier: 
+  npcName: "\uC790\uCF54\uC591"
+  npcImage: {fileID: -7232521027535748977, guid: bf1e907861d63415784bbe0fbaeaaf3b,
+    type: 3}
+  npcDescription: "\uC548\uB155 \uB098\uB294 \uC790\uCF54\uC591 \uBE60\uC211 \uB514\uC790\uC774\uB108\uC57C
+    \uC637\uAC00\uAC8C\uB294 \uC900\uBE44\uC911\uC774\uC57C \uC7A0\uC2DC\uB9CC \uAE30\uB2E4\uB824\uC918!"
+  MoveSpeed: 20
+  MoveDirection: 100
