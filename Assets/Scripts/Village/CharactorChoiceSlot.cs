@@ -7,12 +7,15 @@ public class CharactorChoiceSlot : MonoBehaviour
     public bool Equip = false;
     public GameObject EquipImage;
     public CharactorChoice CharactorChoice;
+    
+    public CharacterData data;
 
     public void OnClickUse()
     {
         if (CharactorChoice != null)
         {
             CharactorChoice.EquipOnly(this);
+            Debug.Log($"{data.characterName}");
         }
         else
         {

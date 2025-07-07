@@ -10,13 +10,13 @@ public class Guild : MonoBehaviour
     public GameObject NoonaPanel;
     public GameObject KainPanel;
     public GameObject MerylPanel;
-    
-    [Header("이미지")]
-    public Image Charactor1Image;
-    public Image Charactor2Image;
-    public Image Charactor3Image;
-    public Image Charactor4Image;
-    public Image Charactor5Image;
+
+    [Header("캐릭터 데이터")] 
+    public CharacterData lukeData;
+    public CharacterData rinData;
+    public CharacterData mirData;
+    public CharacterData kainData;
+    public CharacterData merylData;
     
     
     public GameObject[] ClearImage;
@@ -79,35 +79,34 @@ public class Guild : MonoBehaviour
     
     public void Buy_Luke()
     {
-        Debug.Log(Charactor1Image.sprite.name);
-        CharactorChoice.instance.AddItem("Luke", Charactor1Image);
+        CharactorChoice.instance.AddItem(lukeData);
         ClearImage[0].SetActive(true);
         Destroy(targetButton[0]);
     }
 
     public void Buy_Rin()
     {
-        CharactorChoice.instance.AddItem("Rin", Charactor2Image);
+        CharactorChoice.instance.AddItem(rinData);
         ClearImage[1].SetActive(true);
         Destroy(targetButton[1]);
     }
     public void Buy_Mir()
     {
-        CharactorChoice.instance.AddItem("Mir",Charactor3Image);
+        CharactorChoice.instance.AddItem(mirData);
         ClearImage[2].SetActive(true);
         Destroy(targetButton[2]);
     }
 
     public void Buy_Kain()
     {
-        CharactorChoice.instance.AddItem("Kain", Charactor4Image);
+        CharactorChoice.instance.AddItem(kainData);
         ClearImage[3].SetActive(true);
         Destroy(targetButton[3]);
     }
 
     public void Buy_Meryl()
     {
-        CharactorChoice.instance.AddItem("Meryl", Charactor5Image);
+        CharactorChoice.instance.AddItem(merylData);
         ClearImage[4].SetActive(true);
         Destroy(targetButton[4]);
     }

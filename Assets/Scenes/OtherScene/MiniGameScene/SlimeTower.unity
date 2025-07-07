@@ -512,6 +512,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 907534405809399075, guid: 6718805056fd7426981173e0f77d33f7,
+        type: 3}
+      propertyPath: coolDown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 907534405809399075, guid: 6718805056fd7426981173e0f77d33f7,
+        type: 3}
+      propertyPath: maxStack
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 907534405809399075, guid: 6718805056fd7426981173e0f77d33f7,
+        type: 3}
+      propertyPath: currentStack
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2460152164511323298, guid: 6718805056fd7426981173e0f77d33f7,
         type: 3}
       propertyPath: m_LocalPosition.x
