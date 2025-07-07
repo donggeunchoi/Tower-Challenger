@@ -42,16 +42,8 @@ public class Inventory : MonoBehaviour
 
     public void OnClickUseButton(GameObject slot)
     {
-        
-        if (Items.Instance.use == false)
-        {
-            Debug.Log("사용안해서 못넘겨요");
-        }
-        else
-        {
-            string itemName = slot.GetComponent<InventorySlot>().itemName;
-            RemoveItem(itemName);
-        }
+        string itemName = slot.GetComponent<InventorySlot>().itemName;
+        RemoveItem(itemName);
     }
 
     public void RemoveItem(string itemName)

@@ -42,8 +42,8 @@ public class ItemManager : MonoBehaviour
       itemNames.Add(item.itemName);
       itemIcons.Add(item.icon);
 
-      newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = name;
-      newSlot.GetComponent<InventorySlot>().itemName = name;
+      newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = item.itemName;
+      newSlot.GetComponent<InventorySlot>().itemName = item.itemName;
       newSlot.GetComponent<Image>().sprite = item.icon;
    }
 }
