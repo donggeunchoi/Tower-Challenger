@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 2afc32e91f8e94bf9b5a8f62dcf8dd4f
+guid: c5fba314f050a40468644ba43e73a354
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2937831384049548367
-    second: StartImage_0
+      213: 4326515288062960928
+    second: GameOverRetryBtn_0
+  - first:
+      213: -3244162199256113862
+    second: GameOverRetryBtn_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +142,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StartImage_0
+      name: GameOverRetryBtn_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1536
-        height: 1024
+        width: 100
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +157,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f4c7448141645c820800000000000000
-      internalID: 2937831384049548367
+      spriteID: 0252a4c4bbeda0c30800000000000000
+      internalID: 4326515288062960928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameOverRetryBtn_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 13
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3dd6970bab6af2d0800000000000000
+      internalID: -3244162199256113862
       vertices: []
       indices: 
       edges: []
@@ -173,8 +198,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      StartImage_0: 2937831384049548367
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
