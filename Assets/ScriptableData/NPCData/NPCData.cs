@@ -8,4 +8,5 @@ public class NPCData : ScriptableObject
     public string npcDescription;
     public float MoveSpeed;
     public float MoveDistance;
+    public float StopDuration;
 }
