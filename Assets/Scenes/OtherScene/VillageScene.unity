@@ -12052,7 +12052,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1724231698}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.4420137
+  m_Size: 0.33333316
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22274,7 +22274,6 @@ GameObject:
   - component: {fileID: 1805933708}
   - component: {fileID: 1805933707}
   - component: {fileID: 1805933709}
-  - component: {fileID: 1805933710}
   m_Layer: 5
   m_Name: StorePanel
   m_TagString: Untagged
@@ -22364,21 +22363,6 @@ MonoBehaviour:
   Item1Image: {fileID: 1220568552}
   Item2Image: {fileID: 343355625}
   Item3Image: {fileID: 958191396}
---- !u!114 &1805933710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805933705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3748083e3651108418e768e1640c1565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  paddingRatio: {x: 0.05, y: 0.05, z: 0.05, w: 0.05}
-  minPaddingRatio: 0.03
-  maxPaddingRatio: 0.08
 --- !u!1 &1810820251
 GameObject:
   m_ObjectHideFlags: 0
