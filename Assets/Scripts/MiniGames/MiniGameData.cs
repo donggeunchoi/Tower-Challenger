@@ -36,7 +36,7 @@ public class CSVLoader : MonoBehaviour
 
     void LoadCSV()
     {
-        TextAsset data = Resources.Load<TextAsset>("파일이름"); // 확장자(.csv)는 빼고 입력
+        TextAsset data = Resources.Load<TextAsset>("Images/Resources/Mini-GameDifficultySettings");
         if (data == null)
         {
             Debug.LogError("CSV 파일을 찾을 수 없습니다.");
