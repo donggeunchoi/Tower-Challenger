@@ -12,6 +12,7 @@ public class ShadowManager : MonoBehaviour
 
     public float time;
 
+
     private void Awake()
     {
         if (instance == null)
