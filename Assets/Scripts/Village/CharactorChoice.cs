@@ -11,6 +11,7 @@ public class CharactorChoice : MonoBehaviour
     private List<GameObject> CharactorSlots = new List<GameObject>();
 
     public static CharactorChoice instance;
+    public Image CharactorIcon;
 
     private void Awake()
     {
@@ -60,7 +61,10 @@ public class CharactorChoice : MonoBehaviour
                 slot.EquipImage.SetActive(isSelected);
             }
         }
+        
+        if (CharactorIcon != null && Choiceslot.data != null)
+        {
+            CharactorIcon.sprite = Choiceslot.data.characterImage;
+        }
     }
-
-
 }
