@@ -5,6 +5,12 @@ using UnityEngine.UI;
 public class Store : MonoBehaviour
 {
     [Header("아이템 상점")] public GameObject StorePanel;
+
+    public ItemData moveSpeed;
+    public ItemData sandGlass;
+    public ItemData topTicket;
+    
+    
     public GameObject Item1;
     public GameObject Item2;
     public GameObject Item3;
@@ -50,18 +56,18 @@ public class Store : MonoBehaviour
     }
     public void BuyItem_SpeedUp()
     {
-        ItemManager.instance.AddItem("이동속도 주문서", Item1Image);
+        ItemManager.instance.AddItem(moveSpeed);
         Inventory.instance.UpdateInventory();
     }
 
     public void BuyItem_Sandglass()
     {
-        ItemManager.instance.AddItem("마법의 모래시계", Item2Image);
+        ItemManager.instance.AddItem(sandGlass);
         Inventory.instance.UpdateInventory();
     }
     public void BuyItem_TopTicket()
     {
-        ItemManager.instance.AddItem("타워 입장권",Item3Image);
+        ItemManager.instance.AddItem(topTicket);
         Inventory.instance.UpdateInventory();
     }
     

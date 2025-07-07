@@ -15,7 +15,7 @@ public class CharactorChoiceSlot : MonoBehaviour
         if (CharactorChoice != null)
         {
             CharactorChoice.EquipOnly(this);
-            Debug.Log($"{data.characterName}");
+            Debug.Log($"{data.characterName}으로 변경했쥬?");
         }
         else
         {
