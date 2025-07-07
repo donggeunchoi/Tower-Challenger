@@ -3,10 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    public Joystick joyStick;
+//    public Joystick joyStick;
 
     private Rigidbody2D _rigid;
-    [SerializeField] private SpriteRenderer playerRenderer;
 
     public Vector2 vecMove;
     public float moveSpeed;
@@ -18,12 +17,21 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 nextMove = vecMove.normalized * moveSpeed * Time.fixedDeltaTime;
-        _rigid.MovePosition(_rigid.position + vecMove * nextMove);
+        Move();
+    }
+
+    private void Move()
+    {
+        vecMove.x = Input.GetAxis("Horizontal");
+        vecMove.y = Input.GetAxis("Vertical");
+
+        // _rigid.AddForce(vecMove);
+        // _rigid.linearVelocity = vecMove;
+        _rigid.MovePosition(_rigid.position + vecMove * moveSpeed * Time.deltaTime);
     }
 
     public void OnMove(InputValue value)
     {
-        vecMove = value.Get<Vector2>();
+       
     }
 }
