@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     void LoadMiniGameCSV()
     {
-        TextAsset data = Resources.Load<TextAsset>("Mini-GameDifficultySettings"); // 확장자 제외
+        TextAsset data = Resources.Load<TextAsset>("Mini-GameDifficultySettings");
         if (data == null)
         {
             Debug.LogError("미니게임 CSV 파일이 없습니다.");
