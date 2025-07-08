@@ -6,14 +6,33 @@ public class MiniGameInfoUI : MonoBehaviour
     public StageTimer stageTimer; 
     void Start()
     {
-        uiManager = UIManager.Instance;
+        if (UIManager.Instance != null)
+        {
+            uiManager = UIManager.Instance;
+        }
+
+        if (uiManager != null)
+        {
+            stageTimer = uiManager.timerUI;
+        }
         
-        stageTimer = uiManager.timerUI;
+        if (stageTimer != null)
+        {
+            stageTimer.StopTimer();
+            Time.timeScale = 0;
+        }
+        
     }
 
     public void OnClickGameStart()
     {
-        stageTimer.StartTimer();
+        if (uiManager != null)
+        {
+            stageTimer.StartTimer();
+            Time.timeScale = 1;
+            Destroy(this.gameObject);
+            
+        }
     }
         
     // Start is called once before the first execution of Update after the MonoBehaviour is created
