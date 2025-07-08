@@ -42,25 +42,27 @@ public class Inventory : MonoBehaviour
 
     public void OnClickUseButton(GameObject slot)
     {
-        string itemName = slot.GetComponent<InventorySlot>().itemName;
-        RemoveItem(itemName);
+        ItemData item = slot.GetComponent<ItemData>();
+        // string itemName = slot.GetComponent<InventorySlot>().itemName;
+        RemoveItem(item);
     }
 
-    public void RemoveItem(string itemName)
+    public void RemoveItem(ItemData item)
     {
         // 1. 아이템 매니저에서 먼저 제거 (첫 번째 것 하나만)
-        int index = ItemManager.instance.itemNames.IndexOf(itemName);
+        int index = ItemManager.instance.items.IndexOf(item);
+        
         if (index >= 0)
         {
-            ItemManager.instance.itemNames.RemoveAt(index);
-            ItemManager.instance.itemIcons.RemoveAt(index);
+            ItemManager.instance.items.RemoveAt(index);
         }
 
         // 2. 인벤토리 슬롯에서도 동일한 이름 중 하나 제거
         for (int i = 0; i < inventorySlots.Count; i++)
         {
             InventorySlot inv = inventorySlots[i].GetComponent<InventorySlot>();
-            if (inv != null && inv.itemName == itemName)
+            
+            if (inv != null && inv.itemName == item.itemName)
             {
                 Destroy(inventorySlots[i]);
                 inventorySlots.RemoveAt(i);
@@ -77,20 +79,26 @@ public class Inventory : MonoBehaviour
         }
         inventorySlots.Clear();
         
-        List<string> names = ItemManager.instance.itemNames;
-        List<Sprite> icons = ItemManager.instance.itemIcons;
+        // List<ItemData> names = ItemManager.instance.items;
+        // List<ItemData> icons = ItemManager.instance.items;
+        
+        List<ItemData> items = ItemManager.instance.items;
 
         // int index = Mathf.Min(names.Count, icons.Count);
 
-        for (int i = 0; i < names.Count; i++)
+        for (int i = 0; i < items.Count; i++)
         {
             GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
             newSlot.SetActive(true);
             inventorySlots.Add(newSlot);
+            
+            newSlot.GetComponentInChildren<TMP_Text>().text = items[i].itemName;
+            newSlot.GetComponent<InventorySlot>().itemName = items[i].itemName;
+            newSlot.GetComponent<Image>().sprite = items[i].icon;
                 
-            newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = names[i];
-            newSlot.GetComponent<InventorySlot>().itemName = names[i];
-            newSlot.GetComponent<Image>().sprite = icons[i];
+            // newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = items[i];
+            // newSlot.GetComponent<InventorySlot>().itemName = items[i];
+            // newSlot.GetComponent<Image>().sprite = items[i];
             
         }
     }
