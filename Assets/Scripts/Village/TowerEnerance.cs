@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -51,9 +51,14 @@ public class TowerEnerance : MonoBehaviour
         else
         {
             SceneManager.LoadScene("GameScene");
-            // //이곳에서 스테미너 사용해서 들어가기
-            // GameManager.Instance.UseStamina();
-            // Debug.Log(GameManager.Instance.mainStamina);
+            if (GameManager.Instance != null)
+            {
+                if (GameManager.Instance.mainStamina > 0)
+                {
+                    GameManager.Instance.UseStamina();
+                }
+                Debug.Log(GameManager.Instance.mainStamina);
+            }
         }
     }
 

@@ -6,9 +6,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public StageManager stageManager;
     public UIManager uiManager;
+    public ItemManager itemManager;
 
     public GameObject stageManagerPrefab;
     public GameObject uiManagerPrefab;
+    public GameObject itemManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
 
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         stageManager = StageManager.instance;
         uiManager = UIManager.Instance;
+        itemManager = ItemManager.instance;
 
         mainStamina = 5; //임시로 다섯개만들어주기
 
@@ -58,6 +61,12 @@ public class GameManager : MonoBehaviour
         {
             if (stageManagerPrefab != null)
                 Instantiate(stageManagerPrefab);
+        }
+
+        if (FindAnyObjectByType(typeof(ItemManager)) == null)
+        {
+            if (itemManagerPrefab != null)
+                Instantiate(itemManagerPrefab);
         }
         LoadMiniGameCSV();
     }
@@ -89,6 +98,26 @@ public class GameManager : MonoBehaviour
             return;
 
         mainStamina = Mathf.Max(mainStamina - 1, 0);
+    }
+
+    public void AddGold(int addGold)
+    {
+        gold += addGold;
+    }
+
+    public void UseGold(int useGold)
+    {
+        gold -= useGold;
+    }
+
+    public void AddDiamond(int addDia)
+    {
+        diamond += addDia;
+    }
+
+    public void UseDiamond(int useDia)
+    {
+        diamond -= useDia;
     }
 
     void LoadMiniGameCSV()
