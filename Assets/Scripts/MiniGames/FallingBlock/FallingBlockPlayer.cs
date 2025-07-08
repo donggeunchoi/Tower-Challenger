@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ public class FallingBlockPlayer : MonoBehaviour
 
     [Header("타이머")]
     [SerializeField] private Image timerBar;
-    private float currentTime;
+    [SerializeField] private float currentTime;
     [SerializeField] private float clearTime = 10f;
     [SerializeField] private TextMeshProUGUI timerText;
 
@@ -38,6 +39,7 @@ public class FallingBlockPlayer : MonoBehaviour
     {
         currentTime = 0f;
         InvokeRepeating(nameof(SpawnObstacle),1f,spawnDelay);
+        StartCoroutine(AddDifficult());
     }
 
     private void Update()
@@ -51,7 +53,7 @@ public class FallingBlockPlayer : MonoBehaviour
                 isInvincible = false; 
             }
         }
-
+        
         UpdateTimer();
         ClearStage();          //클리어 판정여부
         PlayerGroundCollider();//바닥 콜라이더 검사
@@ -76,9 +78,9 @@ public class FallingBlockPlayer : MonoBehaviour
     private void PlayerMove()
     {
         if (isLeft)
-            player.anchoredPosition += Vector2.left * playerSpeed;
+            player.anchoredPosition += Vector2.left * playerSpeed * Time.deltaTime;
         if (isRight)
-            player.anchoredPosition += Vector2.right * playerSpeed;
+            player.anchoredPosition += Vector2.right * playerSpeed * Time.deltaTime;
     }
 
     private void PlayerGroundCollider()
@@ -181,5 +183,15 @@ public class FallingBlockPlayer : MonoBehaviour
     {
         timerText.text = Mathf.Max(0f, (clearTime - currentTime)).ToString("F2");
         timerBar.fillAmount = (clearTime - currentTime) / clearTime;
+    }
+
+    private IEnumerator AddDifficult()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2);
+            spawnDelay -= 0.1f;
+            gravity -= 30f;
+        }
     }
 }
