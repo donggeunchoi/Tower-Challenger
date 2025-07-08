@@ -5468,6 +5468,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
+        type: 3}
+      propertyPath: gold
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
+        type: 3}
+      propertyPath: diamond
+      value: 10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12694,6 +12704,8 @@ MonoBehaviour:
   - {fileID: 1316113926}
   - {fileID: 663802534}
   - {fileID: 22571308}
+  priceKain: 500
+  priceMeryl: 500
 --- !u!1 &884536539
 GameObject:
   m_ObjectHideFlags: 0
