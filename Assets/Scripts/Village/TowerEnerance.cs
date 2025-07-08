@@ -25,6 +25,11 @@ public class TowerEnerance : MonoBehaviour
         MailPanel.SetActive(true);
     }
 
+    public void OnClickMailClose()
+    {
+        MailPanel.SetActive(false);
+    }
+
     public void OnClickInventorty()
     {
         InventortyPanel.SetActive(true);
@@ -83,16 +88,6 @@ public class TowerEnerance : MonoBehaviour
 
         }
         return false;
-        // if (ItemManager.instance.items.Contains(name))
-        // {
-        //     EnterPanel.SetActive(true);
-        //     return true;
-        // }
-        // else
-        // {
-        //     Debug.Log("아이템 없음");
-        //     return false;
-        // }
     }
     
 }
