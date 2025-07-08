@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class MailBox : MonoBehaviour
 {
-    public GameObject mailBox;
-    
+    public GameObject mailPaper;
+
+    public void OnClickMailPaperOpen()
+    {
+        mailPaper.SetActive(true);
+    }
     
     public void OnClickMailBoxClose()
     {
-        mailBox.SetActive(false);
+        mailPaper.SetActive(false);
     }
 }

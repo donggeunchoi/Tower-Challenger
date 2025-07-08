@@ -54,4 +54,9 @@ public class StageTimer : MonoBehaviour
     {
         isActive = false;
     }
+
+    public void StartTimer()
+    {
+        isActive = true;
+    }
 }

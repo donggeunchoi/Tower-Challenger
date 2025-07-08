@@ -64,7 +64,7 @@ public class NPController : MonoBehaviour
         if (!turnToRight)
         {
             talkImage.SetActive(true);
-            talkText.text = npcData.npcDescription;
+            RandomDescription();
         }
         else
         {
@@ -79,5 +79,15 @@ public class NPController : MonoBehaviour
         Flip(!turnToRight);
         _isWaiting = false;
         talkImage.SetActive(false);
+    }
+    
+    private void RandomDescription()
+    {
+        if (npcData.npcDescription != null && npcData.npcDescription.Length > 0)
+        {
+            int randomIndex = Random.Range(0, npcData.npcDescription.Length);
+            talkText.text = npcData.npcDescription[randomIndex];
+            talkImage.SetActive(true);
+        }
     }
 }

@@ -148,6 +148,8 @@ GameObject:
   - component: {fileID: 7008931459719194122}
   - component: {fileID: 7486608585358816689}
   - component: {fileID: 8278660524965634690}
+  - component: {fileID: 936698101893470194}
+  - component: {fileID: 2141943623616140990}
   m_Layer: 5
   m_Name: Titan Souls UI
   m_TagString: Untagged
@@ -172,10 +174,10 @@ RectTransform:
   - {fileID: 220782837783951966}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.4525, y: 11.2636}
-  m_SizeDelta: {x: 1313.6389, y: 851.2899}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7486608585358816689
 CanvasRenderer:
@@ -216,6 +218,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &936698101893470194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346381926787246178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bffb4b5d09d26422aa7b7dd5199eae7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageTimer: {fileID: 0}
+--- !u!114 &2141943623616140990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346381926787246178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3748083e3651108418e768e1640c1565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paddingRatio: {x: 0.05, y: 0.05, z: 0.05, w: 0.05}
+  minPaddingRatio: 0.03
+  maxPaddingRatio: 0.08
 --- !u!1 &708266438971621814
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,11 +281,11 @@ RectTransform:
   - {fileID: 4871310254554864438}
   m_Father: {fileID: 7008931459719194122}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.7923, y: -75.272995}
-  m_SizeDelta: {x: 1178.9124, y: 451.2737}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.0001, y: 158}
+  m_SizeDelta: {x: 1708.2288, y: 567.4652}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &778635337139410408
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -415,7 +445,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6538971888111179466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 936698101893470194}
+        m_TargetAssemblyTypeName: MiniGameInfoUI, Assembly-CSharp
+        m_MethodName: OnClickGameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3566852809284554333
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -4.918, y: -168}
+  m_AnchoredPosition: {x: -4.918, y: -216}
   m_SizeDelta: {x: 1130.5825, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1142084290897205494

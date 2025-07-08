@@ -15,8 +15,10 @@ MonoBehaviour:
   npcName: "\uD1F4\uC5ED\uD55C \uBB38\uC9C0\uAE30"
   npcImage: {fileID: 5207544987158716770, guid: 53ca7a420001d4642aaa0154f04d2e6d,
     type: 3}
-  npcDescription: "\uC548\uB155\uD558\uC2E0\uAC00~ \uB9C8\uC744 \uBC16\uC740 \uC774\uC81C
-    \uC704\uD5D8\uD558\uB124.. \uB098\uB791 \uAC19\uC774 \uD55C\uC794 \uD558\uACA0\uB098?"
+  npcDescription:
+  - "\uC548\uB155\uD558\uC2E0\uAC00~?"
+  - "\uB9C8\uC744 \uBC16\uC740 \uC704\uD5D8\uD558\uB124"
+  - "\uB098\uB294 \uC804\uC5ED\uD55C\uC9C0 10\uB144.. \uC544\uB2C8 15\uB144 \uB418\uC5C8\uB124"
   MoveSpeed: 100
   MoveDistance: 400
   StopDuration: 1

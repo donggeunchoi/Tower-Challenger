@@ -15,8 +15,10 @@ MonoBehaviour:
   npcName: "\uBBF8\uB108"
   npcImage: {fileID: 6047752347147467583, guid: 3954e159b61c54ca68f874ddd64d1827,
     type: 3}
-  npcDescription: "\uC548\uB155? \uB098\uB294 \uAF64\uB098 \uBBF8\uB140\uC9C0\uB9CC
-    \uBBF8\uB140 \uC544\uB2C8\uACE0 \uBBF8\uB108\uC57C"
+  npcDescription:
+  - "\uC548\uB155 \uB098\uB294 \uBBF8\uB108\uC57C"
+  - "\uBBF8\uB140 \uC544\uB2C8\uACE0 \uBBF8\uB108"
+  - "\uC880 \uC608\uC058\uAE34 \uD574 \uB0B4\uAC00"
   MoveSpeed: 100
   MoveDistance: 500
   StopDuration: 6
