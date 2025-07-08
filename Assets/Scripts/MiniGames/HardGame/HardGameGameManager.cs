@@ -21,6 +21,14 @@ public class HardGameGameManager : MonoBehaviour
                 ball.transform.position += ball.transform.forward * moveSpeed * Time.deltaTime;
             }
         }
+        foreach (GameObject ball in TurnBall)
+        {
+            if (ball != null && ball.activeInHierarchy)
+            {
+                // Z축 기준으로 회전 (예: 초당 90도)
+                ball.transform.Rotate(0f, 0f, 90f * Time.deltaTime);
+            }
+        }
     }
 
 
@@ -41,19 +49,26 @@ public class HardGameGameManager : MonoBehaviour
         {
             if (Lv[i].activeSelf)
             {
-                Lv[i].SetActive(false);//기존 스테이지 지우고
+                Lv[i].SetActive(false);
                 Lv[i + 1].SetActive(true);
 
                 if (Player)
                 {
+                    Vector3 newSpawnPos = Vector3.zero;
+
                     switch (i + 1)
                     {
                         case 1: //2스테이지
-                            Player.transform.position = new Vector3(-8f, 4.5f, Player.transform.position.z);//시작위치
-                            moveSpeed = moveSpeed;//속도
+                            newSpawnPos = new Vector3(-8f, 4.5f, Player.transform.position.z);
                             break;
                     }
+
+                    Player.transform.position = newSpawnPos;
+
+                    // 여기가 핵심!
+                    Player.GetComponent<HardGamePlayer>().SetSpawn(newSpawnPos);
                 }
+
                 return;
             }
         }

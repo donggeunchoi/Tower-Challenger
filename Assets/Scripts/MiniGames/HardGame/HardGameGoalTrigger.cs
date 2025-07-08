@@ -40,7 +40,7 @@ public class HardGameGoalTrigger : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("아직 있어");
+            Debug.Log("아직 있어");
         }
     }
 
