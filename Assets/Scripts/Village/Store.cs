@@ -14,9 +14,6 @@ public class Store : MonoBehaviour
     public GameObject Item1;
     public GameObject Item2;
     public GameObject Item3;
-    public Image Item1Image;
-    public Image Item2Image;
-    public Image Item3Image;
 
     
     public void OnClickCloseStore()

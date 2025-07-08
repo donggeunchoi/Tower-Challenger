@@ -2,44 +2,48 @@ using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class NPController : MonoBehaviour
 {
     public NPCData npcData;
+    public GameObject talkImage;
+    public TMPro.TMP_Text talkText;
     
-    private float startPositionX;
-    private bool movingLeft = true;
-    private bool isWaiting = false;
+    private float _startPositionX;
+    private bool _movingLeft = true;
+    private bool _isWaiting = false;
 
     void Start()
     {
-        startPositionX = transform.localPosition.x;
+        _startPositionX = transform.localPosition.x;
     }
 
     void Update()
     {
         //나중에 여기에 대사 집어넣기.
-        if (isWaiting) return;
+        if (_isWaiting)
+        {
+            return;
+        }
         
         float newX = transform.localPosition.x;
 
-        if (movingLeft)
+        if (_movingLeft)
         {
             newX -= npcData.MoveSpeed*Time.deltaTime;
-            if (newX <= startPositionX - npcData.MoveDistance)
+            if (newX <= _startPositionX - npcData.MoveDistance)
             {
-                movingLeft = false;
-                Flip(true);
+                _movingLeft = false;
                 StartCoroutine(WaitBeforeTurn(false));
             }
         }
         else
         {
             newX += npcData.MoveSpeed*Time.deltaTime;
-            if (newX >= startPositionX + npcData.MoveDistance)
+            if (newX >= _startPositionX + npcData.MoveDistance)
             {
-                movingLeft = true;
-                Flip(false);
+                _movingLeft = true;
                 StartCoroutine(WaitBeforeTurn(true));
             }
         }
@@ -51,17 +55,27 @@ public class NPController : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = faceLeft ? -1 : 1;
         transform.localScale = scale;
-        
     }
 
-    private System.Collections.IEnumerator WaitBeforeTurn(bool turnToLeft)
+    private IEnumerator WaitBeforeTurn(bool turnToRight)
     {
-        isWaiting = true;
+        _isWaiting = true;
+
+        if (!turnToRight)
+        {
+            talkImage.SetActive(true);
+            talkText.text = npcData.npcDescription;
+        }
+        else
+        {
+            talkImage.SetActive(false);
+        }
         
         yield return new WaitForSeconds(npcData.StopDuration);
         
-        movingLeft = turnToLeft;
-        Flip(!turnToLeft);
-        isWaiting = false;
+        _movingLeft = turnToRight;
+        Flip(!turnToRight);
+        _isWaiting = false;
+        talkImage.SetActive(false);
     }
 }
