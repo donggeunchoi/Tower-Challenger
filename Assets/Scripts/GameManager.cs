@@ -13,12 +13,17 @@ public class GameManager : MonoBehaviour
     public GameObject itemManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
+    public PlayerData playerData;
 
     [Header("스테미나")]
     public const int MAX_STAMINA = 5;
     public int mainStamina;
     public float staminatimer = 0;
     public const float STAMINA_TIME = 1800f;
+
+    [Header("저장")]
+    public float saveTimer;
+    public const float SAVETIME = 120;
 
     [Header("재화")]
     public int gold;
@@ -48,9 +53,6 @@ public class GameManager : MonoBehaviour
         uiManager = UIManager.Instance;
         itemManager = ItemManager.instance;
 
-        mainStamina = 5; //임시로 다섯개만들어주기
-
-
         if (FindAnyObjectByType(typeof(UIManager)) == null)
         {
             if (uiManagerPrefab != null)
@@ -68,11 +70,42 @@ public class GameManager : MonoBehaviour
             if (itemManagerPrefab != null)
                 Instantiate(itemManagerPrefab);
         }
+
         LoadMiniGameCSV();
+
+        if (playerData != null)
+            playerData = SaveManager.LoadUsers();
+
+        playerData.LoadData();
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+
+    }
+    private void OnApplicationPause(bool pause)
+    {
+        //if (pause)
+        //{
+        //    playerData.SaveData();
+        //}
+
+        //if(!pause)
+        //{
+        //    playerData.SaveData();
+        //}
     }
 
     private void Update()
     {
+        saveTimer += Time.deltaTime;
+
+        if (saveTimer >= SAVETIME)
+        {
+            saveTimer = 0;
+            playerData.SaveData();
+        }
+
         if (mainStamina >= MAX_STAMINA)
         {
             staminatimer = 0;
@@ -90,6 +123,7 @@ public class GameManager : MonoBehaviour
     public void AddStamina()
     {
         mainStamina = Mathf.Min(mainStamina + 1, MAX_STAMINA);
+        playerData.SaveData();
     }
 
     public void UseStamina()
@@ -98,26 +132,31 @@ public class GameManager : MonoBehaviour
             return;
 
         mainStamina = Mathf.Max(mainStamina - 1, 0);
+        playerData.SaveData();
     }
 
     public void AddGold(int addGold)
     {
         gold += addGold;
+        playerData.SaveData();
     }
 
     public void UseGold(int useGold)
     {
         gold -= useGold;
+        playerData.SaveData();
     }
 
     public void AddDiamond(int addDia)
     {
         diamond += addDia;
+        playerData.SaveData();
     }
 
     public void UseDiamond(int useDia)
     {
         diamond -= useDia;
+        playerData.SaveData();
     }
 
     void LoadMiniGameCSV()

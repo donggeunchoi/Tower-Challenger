@@ -150,6 +150,12 @@ public class StageManager : MonoBehaviour
         ResetInfo();
         floor++;
 
+        if (floor >= bestFloor)
+            bestFloor = floor;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.playerData.SaveData();
+
         if (floor % BOSS_FLOOR == 0) //10층마다 보스
         {
             stageTimer.StopTimer();
