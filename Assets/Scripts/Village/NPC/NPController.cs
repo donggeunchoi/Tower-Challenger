@@ -69,10 +69,12 @@ public class NPController : MonoBehaviour
         else
         {
             talkImage.SetActive(false);
+            GetComponent<Image>().enabled = false;
         }
         
         yield return new WaitForSeconds(npcData.StopDuration);
         
+        GetComponent<Image>().enabled = true;
         _movingLeft = turnToRight;
         Flip(!turnToRight);
         _isWaiting = false;
