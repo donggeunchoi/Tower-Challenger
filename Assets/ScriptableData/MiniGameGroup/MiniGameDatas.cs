@@ -15,4 +15,6 @@ public class MiniGameDatas : ScriptableObject
     [Header("만약에 모든 스테이지에서 등장하지 않는다면 최대 최소 스테이지")]
     [Min(1)] public int minStage = 1;
     [Min(1)] public int maxStage= 1;
+
+    [Header("미니게임 설명서 UI")] public GameObject miniGameInfoUI;
 }
