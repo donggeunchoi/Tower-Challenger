@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +12,10 @@ public class ItemManager : MonoBehaviour
    public Transform SlotParent;
    public GameObject SlotPrefab;
    
-   public List<string> itemNames = new List<string>();
-   public List<Sprite> itemIcons = new List<Sprite>();
+   // public List<string> itemNames = new List<string>();
+   // public List<Sprite> itemIcons = new List<Sprite>();
+   
+   public List<ItemData> items = new List<ItemData>();
 
    private void Awake()
    {
@@ -39,8 +42,9 @@ public class ItemManager : MonoBehaviour
       GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
       
       newSlot.SetActive(true);
-      itemNames.Add(item.itemName);
-      itemIcons.Add(item.icon);
+      items.Add(item);
+      // itemNames.Add(item.itemName);
+      // itemIcons.Add(item.icon);
 
       newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = item.itemName;
       newSlot.GetComponent<InventorySlot>().itemName = item.itemName;

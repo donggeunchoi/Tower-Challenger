@@ -13,13 +13,14 @@ public class HardGamePlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       
         if (other.CompareTag("Ball"))
         {
-           // stageManager.MiniGameResult(false);
-            
             transform.position = Spawn;
         }
     }
-}
 
+    public void SetSpawn(Vector3 newSpawn)
+    {
+        Spawn = newSpawn;
+    }
+}

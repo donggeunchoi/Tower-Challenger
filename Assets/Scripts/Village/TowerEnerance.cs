@@ -25,6 +25,11 @@ public class TowerEnerance : MonoBehaviour
         MailPanel.SetActive(true);
     }
 
+    public void OnClickMailClose()
+    {
+        MailPanel.SetActive(false);
+    }
+
     public void OnClickInventorty()
     {
         InventortyPanel.SetActive(true);
@@ -38,13 +43,23 @@ public class TowerEnerance : MonoBehaviour
     public void OnClickUseTicket()
     {
         Items.Instance.use = true;
-        Inventory.instance.RemoveItem("타워 입장권");
-        SceneManager.LoadScene("GameScene");
+
+        ItemData ticketItem = ItemManager.instance.items.Find(x => x.itemName == "타워 입장권 1매");
+        
+        if (ticketItem != null)
+        {
+            ItemManager.instance.items.Remove(ticketItem);
+            SceneManager.LoadScene("GameScene");
+        }
+        else
+        {
+            Debug.Log("타워 입장권이 없습니다.");
+        }
     }
 
     public void OnClickEnter()
     {
-        if (CheckItem("타워 입장권"))
+        if (CheckItem("타워 입장권 1매"))
         {
             EnterPanel.SetActive(true);
         }
@@ -69,17 +84,15 @@ public class TowerEnerance : MonoBehaviour
 
     public bool CheckItem(string name)
     {
-        if (ItemManager.instance.itemNames.Contains(name))
+        foreach (ItemData item in ItemManager.instance.items)
         {
-            EnterPanel.SetActive(true);
-            return true;
+            if (item.itemName == name)
+            {
+                return true;
+            }
+
         }
-        else
-        {
-            Debug.Log("아이템 없음");
-            return false;
-        }
-        
+        return false;
     }
     
 }

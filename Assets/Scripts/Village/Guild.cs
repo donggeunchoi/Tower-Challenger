@@ -102,6 +102,12 @@ public class Guild : MonoBehaviour
         CharactorChoice.instance.AddItem(kainData);
         ClearImage[3].SetActive(true);
         Destroy(targetButton[3]);
+        
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseDiamond(kainData.Price);
+        }
+        
     }
 
     public void Buy_Meryl()
@@ -109,5 +115,11 @@ public class Guild : MonoBehaviour
         CharactorChoice.instance.AddItem(merylData);
         ClearImage[4].SetActive(true);
         Destroy(targetButton[4]);
+        
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseDiamond(merylData.Price);
+        }
+        
     }
 }

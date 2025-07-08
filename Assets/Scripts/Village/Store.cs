@@ -55,17 +55,29 @@ public class Store : MonoBehaviour
     {
         ItemManager.instance.AddItem(moveSpeed);
         Inventory.instance.UpdateInventory();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseGold(moveSpeed.price);
+        }
     }
 
     public void BuyItem_Sandglass()
     {
         ItemManager.instance.AddItem(sandGlass);
         Inventory.instance.UpdateInventory();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseGold(sandGlass.price);
+        }
     }
     public void BuyItem_TopTicket()
     {
         ItemManager.instance.AddItem(topTicket);
         Inventory.instance.UpdateInventory();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseDiamond(topTicket.price);
+        }
     }
     
 
