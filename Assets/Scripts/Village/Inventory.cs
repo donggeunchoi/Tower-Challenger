@@ -1,8 +1,7 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
@@ -21,7 +20,6 @@ public class Inventory : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -31,76 +29,97 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        UpdateInventory();
+        
     }
-    
+
+    private void OnEnable()  //인벤토리가 활성화 될 때
+    {
+        UpdateInventory();
+        Debug.Log("활성화됨");
+    }
+
     public void OnClickInventoryClose()
     {
         Invetory.SetActive(false);
     }
 
 
-    public void OnClickUseButton(GameObject slot)
+    public void OnClickUseButton(ItemData item) //아이템 데이터를 받아오는 것으로 변경!
     {
-        ItemData item = slot.GetComponent<ItemData>();
+        //ItemData item = slot.GetComponent<ItemData>();
         // string itemName = slot.GetComponent<InventorySlot>().itemName;
         RemoveItem(item);
     }
 
     public void RemoveItem(ItemData item)
     {
-        // 1. 아이템 매니저에서 먼저 제거 (첫 번째 것 하나만)
-        int index = ItemManager.instance.items.IndexOf(item);
-        
-        if (index >= 0)
-        {
-            ItemManager.instance.items.RemoveAt(index);
-        }
+        ItemManager.instance.items.Remove(item);  //아이템 매니저에서 아이템 제거!
 
-        // 2. 인벤토리 슬롯에서도 동일한 이름 중 하나 제거
-        for (int i = 0; i < inventorySlots.Count; i++)
+        if (Invetory.activeSelf)                  //이후 인벤토리 업데이트!
         {
-            InventorySlot inv = inventorySlots[i].GetComponent<InventorySlot>();
-            
-            if (inv != null && inv.itemName == item.itemName)
-            {
-                Destroy(inventorySlots[i]);
-                inventorySlots.RemoveAt(i);
-                break; // 첫 번째 것만 제거하고 탈출
-            }
-        }
+            UpdateInventory();
+        }                        
+
+        //// 1. 아이템 매니저에서 먼저 제거 (첫 번째 것 하나만)
+        //int index = ItemManager.instance.items.IndexOf(item);
+
+        //if (index >= 0)
+        //{
+        //    ItemManager.instance.items.RemoveAt(index);
+        //}
+
+        //// 2. 인벤토리 슬롯에서도 동일한 이름 중 하나 제거
+        //for (int i = 0; i < inventorySlots.Count; i++)
+        //{
+        //    InventorySlot inv = inventorySlots[i].GetComponent<InventorySlot>();
+
+        //    if (inv != null && inv.itemData.type == item.type)
+        //    {
+        //        Destroy(inventorySlots[i]);
+        //        inventorySlots.RemoveAt(i);
+        //        break; // 첫 번째 것만 제거하고 탈출
+        //    }
+        //}
     }
 
     public void UpdateInventory()
     {
+
         foreach (GameObject slot in inventorySlots)
         {
             Destroy(slot);
         }
         inventorySlots.Clear();
-        
+
         // List<ItemData> names = ItemManager.instance.items;
         // List<ItemData> icons = ItemManager.instance.items;
         
-        List<ItemData> items = ItemManager.instance.items;
 
+        List<ItemData> items = new List<ItemData>();
+
+        if (ItemManager.instance != null)              //아이템매니저에서 아이템 가져오기!
+        {    
+            items.AddRange(ItemManager.instance.items);
+        }
+        
         // int index = Mathf.Min(names.Count, icons.Count);
 
         for (int i = 0; i < items.Count; i++)
         {
             GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
+
             newSlot.SetActive(true);
             inventorySlots.Add(newSlot);
-            
-            newSlot.GetComponentInChildren<TMP_Text>().text = items[i].itemName;
-            newSlot.GetComponent<InventorySlot>().itemName = items[i].itemName;
-            newSlot.GetComponent<Image>().sprite = items[i].icon;
+
+            InventorySlot slot = newSlot.GetComponent<InventorySlot>();  //일단 인벤토리 슬롯을 가져와서!
+            slot.itemData = items[i];                                    //해당 슬롯의 아이템 데이터를 넣어주고!
+
+            newSlot.GetComponentInChildren<TMP_Text>().text = items[i].itemName; //아이템 이름이랑 이미지!
+            newSlot.GetComponent<Image>().sprite = items[i].icon;                //코드는 동일!
                 
             // newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = items[i];
             // newSlot.GetComponent<InventorySlot>().itemName = items[i];
             // newSlot.GetComponent<Image>().sprite = items[i];
-            
         }
     }
-    
 }
