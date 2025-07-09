@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ReflectOnWall2 : MonoBehaviour
+public class ReflectOnWall3 : MonoBehaviour
 {
     private Animator animator;
 
@@ -13,10 +13,7 @@ public class ReflectOnWall2 : MonoBehaviour
     {
         if (other.CompareTag("Wall"))
         {
-            Vector3 rot = transform.eulerAngles;
-            rot.x += 180f;
-            transform.rotation = Quaternion.Euler(rot);
-            // 회전 이전의 값으로 체크
+
             float currentX = transform.eulerAngles.x;
 
             // x가 85~95도 사이에 있으면 90도로 간주 (애니메이션 트리거 조건)
@@ -28,6 +25,11 @@ public class ReflectOnWall2 : MonoBehaviour
             {
                 animator?.SetTrigger("False");
             }
+            Vector3 rot = transform.eulerAngles;
+            rot.x += 180f;
+            transform.rotation = Quaternion.Euler(rot);
+            // 회전 이전의 값으로 체크
+
 
             // 회전 적용
         }
