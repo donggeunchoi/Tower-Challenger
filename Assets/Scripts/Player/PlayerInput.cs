@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 {
     public Transform player;                // 플레이어 위치
     public RectTransform stick;             // 조이스틱
+    private RectTransform stickBack;        // 조이스틱 백그라운드
     private float radius;                   // 조이스틱 이동 반지름
     private Vector2 inputDir = Vector2.zero;// 입력 방향 벡터
     private float deadZone = 0.15f;         // 민감도 조정
@@ -32,6 +33,8 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     void Start()
     {
+        stickBack = GetComponent<RectTransform>();
+
         radius = stick.sizeDelta.x * 0.5f;     //스틱의 크기의 절반을 반지름으로
         stick.anchoredPosition = Vector2.zero; //중앙 위치
         inputDir = Vector2.zero;               //입력 방향을 초기화
@@ -67,8 +70,14 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         Vector2 localPoint;
         // 스틱의 RectTransform 기준으로 터치 위치를 변환
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            stick, eventData.position, eventData.pressEventCamera, out localPoint))
+            stickBack, eventData.position, eventData.pressEventCamera, out localPoint))
         {
+            Vector2 centerOffset = new Vector2(
+            stickBack.rect.width * 0.5f,
+            stickBack.rect.height * 0.5f);
+
+            localPoint -= centerOffset;
+
             float dist = Mathf.Min(localPoint.magnitude, radius);  //스틱거리제한
             Vector2 dir = localPoint.normalized;  //방향 계산
             if (dist < radius * deadZone) //미세조정값이 들어오면 컨트롤러가 떨리는 것을 방지

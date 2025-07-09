@@ -11,7 +11,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
     [Header("회전 관련")]
     public float rotationSpeed = 1000f;          // 좌우 입력 회전 속도
     public float tiltAmount = 500f;             // 기울기 기본 값
-    private float sensitivity = 25f;             // 민감도 (기울기 보정용)
+    private float sensitivity = 17f;             // 민감도 (기울기 보정용)
 
     [Header("자동 흔들림")]
     public float autoTiltSpeed = 500;                 // 자동 흔들림 속도 (sin 함수 주기)

@@ -85,7 +85,8 @@ public class MiniGameSpeedTest : MonoBehaviour
             if (miniGameCoroutine != null)
                 StopCoroutine(miniGameCoroutine);
 
-            stageManager.MiniGameResult(true);
+            if (stageManager != null)
+                stageManager.MiniGameResult(true);
         }
         else
         {
@@ -107,12 +108,10 @@ public class MiniGameSpeedTest : MonoBehaviour
     {
 
         backGround.sprite = sprites[0];            //시작색 초기화
-        //trueOrFalse.text = "is green Click To display!"; //게임설명
         isGreen = false;
         isClick = false;
         yield return new WaitForSeconds(1f);
 
-        //trueOrFalse.text = "Ready?";
         speedUIBtn.interactable = true;
 
         float randomGameTime = Random.Range(0f, delayTime);                 //랜덤값설정
@@ -122,14 +121,12 @@ public class MiniGameSpeedTest : MonoBehaviour
 
         backGround.sprite = sprites[1];
         isGreen = true;
-        //trueOrFalse.text = "Click!!";
         yield return new WaitForSeconds(successTime); //1초동안 눌러도되는시간
 
         if (isGreen && !isClick)  //클릭했는지 안했는지 검사 안했으면 실패
         {
             speedUIBtn.interactable = false;
             isGreen = false;
-            //trueOrFalse.text = "False!";
             OnClickImg();
             yield break;
         }
@@ -146,13 +143,14 @@ public class MiniGameSpeedTest : MonoBehaviour
 
         backGround.sprite = sprites[2];
         yield return new WaitForSeconds(1f);
-        speedUIBtn.image.color = Color.white;
 
         isFalseEffect = false;
         isClick = false;
         speedUIBtn.interactable = true;
 
+        if (stageManager != null)
         stageManager.MiniGameResult(false);
+
         ResetGameState();
         StartGame();
     }

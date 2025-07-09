@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -25,6 +25,11 @@ public class TowerEnerance : MonoBehaviour
         MailPanel.SetActive(true);
     }
 
+    public void OnClickMailClose()
+    {
+        MailPanel.SetActive(false);
+    }
+
     public void OnClickInventorty()
     {
         InventortyPanel.SetActive(true);
@@ -37,39 +42,57 @@ public class TowerEnerance : MonoBehaviour
 
     public void OnClickUseTicket()
     {
-        Items.Instance.use = true;
-        Inventory.instance.RemoveItem("타워 입장권");
-        SceneManager.LoadScene("GameScene");
+        //Items.Instance.use = true;
+
+        ItemData ticketItem = ItemManager.instance.items.Find(x => x.type == ItemType.TopTicket);
+        
+        if (ticketItem != null)
+        {
+            ItemManager.instance.items.Remove(ticketItem);
+            SceneManager.LoadScene("GameScene");
+        }
+        else
+        {
+            Debug.Log("타워 입장권이 없습니다.");
+        }
     }
 
     public void OnClickEnter()
     {
-        if (CheckItem("타워 입장권"))
+        if (CheckItem())
         {
             EnterPanel.SetActive(true);
         }
         else
         {
+            
+            if (GameManager.Instance != null)
+            {
+                if (GameManager.Instance.mainStamina > 0)
+                {
+                    GameManager.Instance.UseStamina();
+                }
+                else
+                {
+                    return;
+                }
+                Debug.Log(GameManager.Instance.mainStamina);
+            }
             SceneManager.LoadScene("GameScene");
-            // //이곳에서 스테미너 사용해서 들어가기
-            // GameManager.Instance.UseStamina();
-            // Debug.Log(GameManager.Instance.mainStamina);
         }
     }
 
-    public bool CheckItem(string name)
+    public bool CheckItem()
     {
-        if (ItemManager.instance.itemNames.Contains(name))
+        foreach (ItemData item in ItemManager.instance.items)
         {
-            EnterPanel.SetActive(true);
-            return true;
+            if (item.type == ItemType.TopTicket)
+            {
+                return true;
+            }
+
         }
-        else
-        {
-            Debug.Log("아이템 없음");
-            return false;
-        }
-        
+        return false;
     }
     
 }

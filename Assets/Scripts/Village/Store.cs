@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +14,6 @@ public class Store : MonoBehaviour
     public GameObject Item1;
     public GameObject Item2;
     public GameObject Item3;
-    public Image Item1Image;
-    public Image Item2Image;
-    public Image Item3Image;
 
     
     public void OnClickCloseStore()
@@ -57,18 +54,30 @@ public class Store : MonoBehaviour
     public void BuyItem_SpeedUp()
     {
         ItemManager.instance.AddItem(moveSpeed);
-        Inventory.instance.UpdateInventory();
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseGold(moveSpeed.price);
+        }
     }
 
     public void BuyItem_Sandglass()
     {
         ItemManager.instance.AddItem(sandGlass);
-        Inventory.instance.UpdateInventory();
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseGold(sandGlass.price);
+        }
     }
     public void BuyItem_TopTicket()
     {
         ItemManager.instance.AddItem(topTicket);
-        Inventory.instance.UpdateInventory();
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UseDiamond(topTicket.price);
+        }
     }
     
 

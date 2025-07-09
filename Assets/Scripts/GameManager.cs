@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,17 +7,24 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public StageManager stageManager;
     public UIManager uiManager;
+    public ItemManager itemManager;
 
     public GameObject stageManagerPrefab;
     public GameObject uiManagerPrefab;
+    public GameObject itemManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
+    public PlayerData playerData;
 
     [Header("스테미나")]
     public const int MAX_STAMINA = 5;
     public int mainStamina;
     public float staminatimer = 0;
     public const float STAMINA_TIME = 1800f;
+
+    [Header("저장")]
+    public float saveTimer;
+    public const float SAVETIME = 120;
 
     [Header("재화")]
     public int gold;
@@ -44,9 +52,7 @@ public class GameManager : MonoBehaviour
     {
         stageManager = StageManager.instance;
         uiManager = UIManager.Instance;
-
-        mainStamina = 5; //임시로 다섯개만들어주기
-
+        itemManager = ItemManager.instance;
 
         if (FindAnyObjectByType(typeof(UIManager)) == null)
         {
@@ -59,11 +65,48 @@ public class GameManager : MonoBehaviour
             if (stageManagerPrefab != null)
                 Instantiate(stageManagerPrefab);
         }
+
+        if (FindAnyObjectByType(typeof(ItemManager)) == null)
+        {
+            if (itemManagerPrefab != null)
+                Instantiate(itemManagerPrefab);
+        }
+
         LoadMiniGameCSV();
+
+        if (playerData != null)
+            playerData = SaveManager.LoadUsers();
+
+        playerData.LoadData();
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+
+    }
+    private void OnApplicationPause(bool pause)
+    {
+        //if (pause)
+        //{
+        //    playerData.SaveData();
+        //}
+
+        //if(!pause)
+        //{
+        //    playerData.SaveData();
+        //}
     }
 
     private void Update()
     {
+        saveTimer += Time.deltaTime;
+
+        if (saveTimer >= SAVETIME)
+        {
+            saveTimer = 0;
+            SaveLoad();
+        }
+
         if (mainStamina >= MAX_STAMINA)
         {
             staminatimer = 0;
@@ -78,9 +121,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SaveLoad()
+    {
+        playerData.SaveData();
+        playerData.LoadData();
+    }
+        
+
     public void AddStamina()
     {
         mainStamina = Mathf.Min(mainStamina + 1, MAX_STAMINA);
+        SaveLoad();
     }
 
     public void UseStamina()
@@ -89,11 +140,36 @@ public class GameManager : MonoBehaviour
             return;
 
         mainStamina = Mathf.Max(mainStamina - 1, 0);
+        SaveLoad();
+    }
+
+    public void AddGold(int addGold)
+    {
+        gold += addGold;
+        SaveLoad();
+    }
+
+    public void UseGold(int useGold)
+    {
+        gold -= useGold;
+        SaveLoad();
+    }
+
+    public void AddDiamond(int addDia)
+    {
+        diamond += addDia;
+        SaveLoad();
+    }
+
+    public void UseDiamond(int useDia)
+    {
+        diamond -= useDia;
+        SaveLoad();
     }
 
     void LoadMiniGameCSV()
     {
-        TextAsset data = Resources.Load<TextAsset>("Mini-GameDifficultySettings"); // 확장자 제외
+        TextAsset data = Resources.Load<TextAsset>("Mini-GameDifficultySettings");
         if (data == null)
         {
             Debug.LogError("미니게임 CSV 파일이 없습니다.");

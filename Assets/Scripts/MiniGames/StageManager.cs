@@ -134,6 +134,13 @@ public class StageManager : MonoBehaviour
         if (stageClearPortal.Count >= 0 && stageClearPortal.Count < randomGames.Count && randomGames[stageClearPortal.Count] != null)
         {
             MiniGameDatas selectedGame = randomGames[stageClearPortal.Count];
+            if (floor <= 9)
+            {
+                if (uiManager != null)
+                {
+                    uiManager.InstantiateUI(selectedGame.miniGameInfoUI);
+                }
+            }
             SceneManager.LoadScene(selectedGame.sceneName);
         }
     }
@@ -142,6 +149,12 @@ public class StageManager : MonoBehaviour
     {
         ResetInfo();
         floor++;
+
+        if (floor >= bestFloor)
+            bestFloor = floor;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.playerData.SaveData();
 
         if (floor % BOSS_FLOOR == 0) //10층마다 보스
         {
