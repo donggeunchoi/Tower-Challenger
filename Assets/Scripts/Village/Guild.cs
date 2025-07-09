@@ -99,7 +99,12 @@ public class Guild : MonoBehaviour
 
     public void OnClickCharactarBuy(int characterNum)
     {
-        GameManager.Instance.charactors.Add(characterDatas[characterNum]);
+        CharacterData data = characterDatas[characterNum];
+
+        if (!GameManager.Instance.charactors.Contains(data))
+        {
+            GameManager.Instance.charactors.Add(data);
+        }
         ClearImage[characterNum].SetActive(true);
         Destroy(targetButton[characterNum]);
 

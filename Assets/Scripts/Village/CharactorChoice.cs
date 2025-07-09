@@ -91,7 +91,6 @@ public class CharactorChoice : MonoBehaviour
                 }
             }
         }
-
     }
     
     public void OnClickCharactorClose()
