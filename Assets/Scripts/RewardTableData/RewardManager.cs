@@ -4,6 +4,7 @@ using UnityEngine;
 public class RewardManager : MonoBehaviour
 {
     public static RewardManager Instance;
+    public ItemManager itemManager;
 
     private void Awake()
     {
@@ -19,13 +20,24 @@ public class RewardManager : MonoBehaviour
 
     public void GiveReward(RewardTableData reward)
     {
-        switch (reward.name)
+        switch (reward.type)
         {
-            case "gold":
-                GameManager.Instance.AddGold(reward.count);
+            case "Gold":
+                GameManager.Instance.AddGold(reward.goldCount);
                 break;
-            case "dia":
-                GameManager.Instance.AddDiamond(reward.count);
+            case "Dia":
+                GameManager.Instance.AddDiamond(reward.diaCount);
+                break;
+            case "Item":
+                ItemData data = ItemManager.instance.GetItem(reward.name);
+                if (data != null)
+                {
+                    ItemManager.instance.AddItem(data);
+                }
+                else
+                {
+                    Debug.Log($"{reward.name}이 없어요");
+                }
                 break;
             
             default:

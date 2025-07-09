@@ -90,5 +90,6 @@ public class nonSenseGame : MonoBehaviour
     public void WrongAnswer()
     {
         Debug.Log("실패지롱");
+        SettingQuiz();
     }
 }

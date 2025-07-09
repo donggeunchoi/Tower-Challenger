@@ -16,6 +16,7 @@ public class ItemManager : MonoBehaviour
    // public List<Sprite> itemIcons = new List<Sprite>();
    
    public List<ItemData> items = new List<ItemData>();
+   public List<RewardTableData> rewards = new List<RewardTableData>();
 
    private void Awake()
    {
@@ -75,5 +76,10 @@ public class ItemManager : MonoBehaviour
     public void ClearItmes()
     {
         items.Clear();  //초기화 추가!
+    }
+
+    public ItemData GetItem(string name)//아이템데이터에서 아이템 이름 가져오기
+    {
+        return items.Find(item => item.name == name);
     }
 }

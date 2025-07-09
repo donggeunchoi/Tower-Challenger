@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class AllClear : MonoBehaviour
 {
 
     StageManager stageManager;
+    public RewardBase rewardBase;
 
     [SerializeField] private TextMeshProUGUI nextFloorText;
     //아이템 자료형 추가되는 랜덤아이템 관리
@@ -30,6 +32,7 @@ public class AllClear : MonoBehaviour
 
         stageManager = StageManager.instance;
 
+        GiveTowerReward();
         nextFloor.onClick.AddListener(OnClickNextStage);
         returnToTitle.onClick.AddListener(OnclickReturnTitle);
 
@@ -47,5 +50,13 @@ public class AllClear : MonoBehaviour
         SceneManager.LoadScene(_mainSceneName);
         StageManager.instance.infoUI.SetActive(false);
         Destroy(this.gameObject);
+    }
+
+    void GiveTowerReward()
+    {
+        rewardBase = FindObjectOfType<RewardBase>();
+        
+        List<RewardTableData> rewards = rewardBase.rewards;
+        RewardManager.Instance.GiveRewards(rewards);
     }
 }
