@@ -11,5 +11,6 @@ public class RewardTableData
     public bool speedMoveGive;
     public bool sandGlassGive;
     public bool topTicketGive;
+    public int floor;
 }
 

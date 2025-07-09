@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class RewardManager : MonoBehaviour
@@ -50,6 +51,7 @@ public class RewardManager : MonoBehaviour
     {
         foreach (RewardTableData reward in rewards)
         {
+            Debug.Log($"지급된 보상 :  {reward.name}");
             GiveReward(reward);
         }
     }

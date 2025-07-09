@@ -32,8 +32,8 @@ public class RewardBase : MonoBehaviour
                 id = int.Parse(values[0]),
                 name = values[1],
                 type = values[2],
-                goldCount = int.Parse(values[6]),
-                diaCount = int.Parse(values[7]),
+                goldCount = ParseSafeInt(values[6]),
+                diaCount = ParseSafeInt(values[7]),
                 speedMoveGive  = Parsebool(values[8]),
                 sandGlassGive  = Parsebool(values[9]),
                 topTicketGive  = Parsebool(values[10])
@@ -43,6 +43,13 @@ public class RewardBase : MonoBehaviour
             
             rewards.Add(reward);
         }
+    }
+    
+    int ParseSafeInt(string s)
+    {
+        int result = 0;
+        int.TryParse(s.Trim(), out result);
+        return result;
     }
     
     private bool Parsebool(string value)

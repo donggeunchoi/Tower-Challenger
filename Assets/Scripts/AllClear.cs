@@ -32,7 +32,8 @@ public class AllClear : MonoBehaviour
 
         stageManager = StageManager.instance;
 
-        GiveTowerReward();
+        // Debug.Log(RewardManager.Instance.name);
+        // GiveTowerReward();
         nextFloor.onClick.AddListener(OnClickNextStage);
         returnToTitle.onClick.AddListener(OnclickReturnTitle);
 
