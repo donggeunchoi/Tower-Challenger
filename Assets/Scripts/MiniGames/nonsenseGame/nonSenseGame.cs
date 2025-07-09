@@ -33,16 +33,20 @@ public class nonSenseGame : MonoBehaviour
 
     public void SettingQuiz()
     {
+        //선택 퀴즈를 랜덤으로 뽑기
         Quiz selectedQuiz = quizes[Random.Range(0, quizes.Count)];
         
+        //퀴즈텍스트는 선택한 퀴즈로 & 현재 정답은 선택한 답으로
         quizText.text = selectedQuiz.question;
         currentCorrectAnswer = selectedQuiz.answer;
         
+        //모든 답들은 리스트로 받아오기. 거기에 정답 추가시키기
         List<string> allAnswers = new List<string>(selectedQuiz.wroungAnswers);
         allAnswers.Add(selectedQuiz.answer);
         
         Shuffle(allAnswers);
 
+        //하나씩 돌면서 해당 문제의 답을 확인하기
         for (int i = 0; i < answerButtons.Length; i++)
         {
             string answer = allAnswers[i];
@@ -55,6 +59,7 @@ public class nonSenseGame : MonoBehaviour
 
     public void Shuffle(List<string> list)
     {
+        //하나씩 돌면서 답들을 랜덤으로 집어넣기
         for (int i = 0; i < list.Count; i++)
         {
             string temp = list[i];
@@ -66,6 +71,7 @@ public class nonSenseGame : MonoBehaviour
 
     public void CheckAnswer(string answer)
     {
+        // 누른 버튼이 정답이면? 혹은 아니면?
         if (answer == currentCorrectAnswer)
         {
             ClearGame();
