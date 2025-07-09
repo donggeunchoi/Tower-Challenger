@@ -42,9 +42,9 @@ public class TowerEnerance : MonoBehaviour
 
     public void OnClickUseTicket()
     {
-        Items.Instance.use = true;
+        //Items.Instance.use = true;
 
-        ItemData ticketItem = ItemManager.instance.items.Find(x => x.itemName == "타워 입장권 1매");
+        ItemData ticketItem = ItemManager.instance.items.Find(x => x.type == ItemType.TopTicket);
         
         if (ticketItem != null)
         {
@@ -59,7 +59,7 @@ public class TowerEnerance : MonoBehaviour
 
     public void OnClickEnter()
     {
-        if (CheckItem("타워 입장권 1매"))
+        if (CheckItem())
         {
             EnterPanel.SetActive(true);
         }
@@ -82,11 +82,11 @@ public class TowerEnerance : MonoBehaviour
         }
     }
 
-    public bool CheckItem(string name)
+    public bool CheckItem()
     {
         foreach (ItemData item in ItemManager.instance.items)
         {
-            if (item.itemName == name)
+            if (item.type == ItemType.TopTicket)
             {
                 return true;
             }
