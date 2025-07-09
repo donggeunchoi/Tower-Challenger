@@ -44,8 +44,8 @@ public class PlayerData
         {
             for (int i = 0; i < CharactorChoice.instance.CharactorSlots.Count; i++)
             {
-                if (CharactorChoice.instance != null)
-                    characterDatas.AddRange(CharactorChoice.instance.charactors);
+                if (CharactorChoice.instance != null && GameManager.Instance != null)
+                    characterDatas.AddRange(GameManager.Instance.charactors);
             }
         }
 
@@ -85,6 +85,7 @@ public class PlayerData
             GameManager.Instance.gold = gold;
             GameManager.Instance.diamond = diamond;
             GameManager.Instance.mainStamina = stamina;
+            GameManager.Instance.charactors.AddRange(characterDatas);
         }
 
         if (StageManager.instance != null)
@@ -94,12 +95,6 @@ public class PlayerData
         {
             ItemManager.instance.items.Clear();
             ItemManager.instance.items.AddRange(itmeDatas);
-        }
-
-        if (CharactorChoice.instance != null)
-        {
-            if (CharactorChoice.instance != null)
-                CharactorChoice.instance.charactors.AddRange(characterDatas);
         }
     }
 }

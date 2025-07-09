@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [Header("저장")]
     public float saveTimer;
     public const float SAVETIME = 120;
+    public List<CharacterData> charactors = new List<CharacterData>();
+    public CharacterData equimentCharacter;
 
     [Header("재화")]
     public int gold;

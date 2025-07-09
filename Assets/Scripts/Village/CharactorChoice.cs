@@ -9,8 +9,7 @@ public class CharactorChoice : MonoBehaviour
     public GameObject SlotPrefab;
 
     public List<GameObject> CharactorSlots = new List<GameObject>();
-    public List<CharacterData> charactors = new List<CharacterData>();
-    public CharacterData equimentCharacter;
+    
 
     public static CharactorChoice instance;
     public Image CharactorIcon;
@@ -67,11 +66,29 @@ public class CharactorChoice : MonoBehaviour
         }
         CharactorSlots.Clear();
 
-        if (charactors.Count < 0)
+        if (GameManager.Instance.charactors.Count > 0)
         {
-            for (int i = 0; i < charactors.Count; i++)
+            for (int i = 0; i < GameManager.Instance.charactors.Count; i++)
             {
-                AddItem(charactors[i]);
+                AddItem(GameManager.Instance.charactors[i]);
+            }
+        }
+
+        if (GameManager.Instance.equimentCharacter != null)
+        {
+            foreach (GameObject slotObject in CharactorSlots)
+            {
+                CharactorChoiceSlot slot = slotObject.GetComponent<CharactorChoiceSlot>();
+                if (slot != null && slot.data == GameManager.Instance.equimentCharacter)
+                {
+                    slot.Equip = true;
+                    slot.EquipImage.SetActive(true);
+                }
+                else if (slot != null)
+                {
+                    slot.Equip = false;
+                    slot.EquipImage.SetActive(false);
+                }
             }
         }
 
@@ -92,7 +109,7 @@ public class CharactorChoice : MonoBehaviour
                 bool isSelected = (slot == Choiceslot);
                 slot.Equip = isSelected;
                 slot.EquipImage.SetActive(isSelected);
-                equimentCharacter = slot.data;
+                GameManager.Instance.equimentCharacter = slot.data;
             }
         }
         
