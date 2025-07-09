@@ -2065,8 +2065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: bf5e297b0250c974281351064ab60ba3,
-    type: 3}
+  m_Actions: {fileID: 0}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -2182,7 +2181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7847696160561524992
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2469,7 +2468,7 @@ MonoBehaviour:
   canDash: 1
   isDashing: 0
   spriteRenderer: {fileID: 0}
-  InventoryPanel: {fileID: 6565922014617506718}
+  InventoryPanel: {fileID: 8045402199589961553}
   speedUpSprite: {fileID: 7030114744820723757, guid: e0a00781801bb4742a293ee93952067d,
     type: 3}
   sandglassSprite: {fileID: 8882527590889879161, guid: bec6f3574711c462483f9132939cfd05,
@@ -2710,7 +2709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8464745806361653378
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2751,7 +2750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c807fe9ef255e4fbb809203337d13a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invetory: {fileID: 6565922014617506718}
+  Invetory: {fileID: 8045402199589961553}
   SlotParent: {fileID: 2676134193113402454}
   SlotPrefab: {fileID: 7483103867057294285, guid: 169a795ca2a1143429367ba3ed7c5f57,
     type: 3}
