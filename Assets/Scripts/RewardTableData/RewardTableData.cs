@@ -3,14 +3,14 @@ using UnityEngine;
 [System.Serializable]
 public class RewardTableData
 {
-    public int id;
+    public int index;
     public string name;
     public string type;
-    public int goldCount;
-    public int diaCount;
-    public bool speedMoveGive;
-    public bool sandGlassGive;
-    public bool topTicketGive;
+    public int goldReward;
+    public int diaReward;
+    public bool speedMoveReward;
+    public bool sandGlassReward;
+    public bool topTicketReward;
     public int floor;
 }
 

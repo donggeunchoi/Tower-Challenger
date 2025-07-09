@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6815391962811031463}
   - component: {fileID: 5967601459257424144}
+  - component: {fileID: 5210457393305507702}
   m_Layer: 5
   m_Name: AllClearFloor
   m_TagString: Untagged
@@ -51,11 +52,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardBase: {fileID: 1370794954594616511}
+  rewardManager: {fileID: 0}
   nextFloorText: {fileID: 1702244329854356520}
   reward: {fileID: 6861634683927679942, guid: c602ef717ad7df04c8b1bf1e17673af2, type: 3}
   rewardImage: {fileID: 6039589578783751655}
   returnToTitle: {fileID: 2142868960318847552}
   nextFloor: {fileID: 6116372207056767255}
+--- !u!114 &5210457393305507702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059776032637781343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c8796987b0c486b9db3a1e6d336c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemManager: {fileID: 0}
 --- !u!1 &1555477751021808111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,25 +1114,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b34d5a73f0343b2bac2a3bac012b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvFile: {fileID: 4900000, guid: 1507f56c63fe04403bb7d2da1c80a303, type: 3}
-  rewards:
-  - id: 0
-    name: 
-    type: 
-    count: 0
-    give: 0
-  - id: 0
-    name: 
-    type: 
-    count: 0
-    give: 0
-  - id: 0
-    name: 
-    type: 
-    count: 0
-    give: 0
-  - id: 0
-    name: 
-    type: 
-    count: 0
-    give: 0
+  csvFile: {fileID: 4900000, guid: 8f192dd4bf402419487a8f5a4bc619d0, type: 3}
+  rewards: []

@@ -6,6 +6,7 @@ public class RewardManager : MonoBehaviour
 {
     public static RewardManager Instance;
     public ItemManager itemManager;
+    
 
     private void Awake()
     {
@@ -24,10 +25,10 @@ public class RewardManager : MonoBehaviour
         switch (reward.type)
         {
             case "Gold":
-                GameManager.Instance.AddGold(reward.goldCount);
+                GameManager.Instance.AddGold(reward.goldReward);
                 break;
             case "Dia":
-                GameManager.Instance.AddDiamond(reward.diaCount);
+                GameManager.Instance.AddDiamond(reward.diaReward);
                 break;
             case "Item":
                 ItemData data = ItemManager.instance.GetItem(reward.name);
