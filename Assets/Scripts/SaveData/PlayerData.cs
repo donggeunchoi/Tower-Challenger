@@ -29,6 +29,13 @@ public class PlayerData
 
         if (StageManager.instance != null)
             bestFloor = StageManager.instance.bestFloor;
+        
+        if (ItemManager.instance != null)
+        {
+            itmeDatas.Clear();
+            itmeDatas.AddRange(ItemManager.instance.items);
+        }
+            
 
         SaveManager.SaveUsers(this);
     }
@@ -70,5 +77,11 @@ public class PlayerData
 
         if (StageManager.instance != null)
             StageManager.instance.bestFloor = bestFloor;
+
+        if (ItemManager.instance != null)
+        {
+            ItemManager.instance.items.Clear();
+            ItemManager.instance.items.AddRange(itmeDatas);
+        }
     }
 }

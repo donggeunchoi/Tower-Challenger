@@ -13,11 +13,7 @@ public class Items : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        input = FindObjectOfType<PlayerInput>();
+        input = FindAnyObjectByType<PlayerInput>();
     }
 
     public bool TopTicketUse()
@@ -32,7 +28,6 @@ public class Items : MonoBehaviour
             return false;
         }
     }
-
 
     public bool SandGlass()
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
         if (saveTimer >= SAVETIME)
         {
             saveTimer = 0;
-            playerData.SaveData();
+            SaveLoad();
         }
 
         if (mainStamina >= MAX_STAMINA)
@@ -120,10 +121,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SaveLoad()
+    {
+        playerData.SaveData();
+        playerData.LoadData();
+    }
+        
+
     public void AddStamina()
     {
         mainStamina = Mathf.Min(mainStamina + 1, MAX_STAMINA);
-        playerData.SaveData();
+        SaveLoad();
     }
 
     public void UseStamina()
@@ -132,31 +140,31 @@ public class GameManager : MonoBehaviour
             return;
 
         mainStamina = Mathf.Max(mainStamina - 1, 0);
-        playerData.SaveData();
+        SaveLoad();
     }
 
     public void AddGold(int addGold)
     {
         gold += addGold;
-        playerData.SaveData();
+        SaveLoad();
     }
 
     public void UseGold(int useGold)
     {
         gold -= useGold;
-        playerData.SaveData();
+        SaveLoad();
     }
 
     public void AddDiamond(int addDia)
     {
         diamond += addDia;
-        playerData.SaveData();
+        SaveLoad();
     }
 
     public void UseDiamond(int useDia)
     {
         diamond -= useDia;
-        playerData.SaveData();
+        SaveLoad();
     }
 
     void LoadMiniGameCSV()
