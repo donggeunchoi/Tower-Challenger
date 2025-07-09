@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Guild : MonoBehaviour
@@ -11,16 +11,36 @@ public class Guild : MonoBehaviour
     public GameObject KainPanel;
     public GameObject MerylPanel;
 
-    [Header("캐릭터 데이터")] 
-    public CharacterData lukeData;
-    public CharacterData rinData;
-    public CharacterData mirData;
-    public CharacterData kainData;
-    public CharacterData merylData;
+    [Header("캐릭터 데이터")]
+    public CharacterData[] characterDatas;
+
+    //public CharacterData lukeData;
+    //public CharacterData rinData;
+    //public CharacterData mirData;
+    //public CharacterData kainData;
+    //public CharacterData merylData;
     
     
     public GameObject[] ClearImage;
     public Button[] targetButton;
+
+    private void Start()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.SaveLoad();
+
+        for (int i = 0; i < targetButton.Length; i++)
+        {
+            targetButton[i].onClick.RemoveAllListeners();
+        }
+
+        for (int i = 0; i < targetButton.Length; i++)
+        {
+            int index = i;
+            if (targetButton[i] != null && characterDatas[i] != null)
+            targetButton[i].onClick.AddListener(() => OnClickCharactarBuy(index));
+        }
+    }
 
     public void OnClickRedMan()
     {
@@ -76,50 +96,16 @@ public class Guild : MonoBehaviour
     {
         MerylPanel.SetActive(false);
     }
-    
-    public void Buy_Luke()
-    {
-        CharactorChoice.instance.AddItem(lukeData);
-        ClearImage[0].SetActive(true);
-        Destroy(targetButton[0]);
-    }
 
-    public void Buy_Rin()
+    public void OnClickCharactarBuy(int characterNum)
     {
-        CharactorChoice.instance.AddItem(rinData);
-        ClearImage[1].SetActive(true);
-        Destroy(targetButton[1]);
-    }
-    public void Buy_Mir()
-    {
-        CharactorChoice.instance.AddItem(mirData);
-        ClearImage[2].SetActive(true);
-        Destroy(targetButton[2]);
-    }
+        CharactorChoice.instance.AddItem(characterDatas[characterNum]);
+        ClearImage[characterNum].SetActive(true);
+        Destroy(targetButton[characterNum]);
 
-    public void Buy_Kain()
-    {
-        CharactorChoice.instance.AddItem(kainData);
-        ClearImage[3].SetActive(true);
-        Destroy(targetButton[3]);
-        
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.UseDiamond(kainData.Price);
+            GameManager.Instance.SaveLoad();
         }
-        
-    }
-
-    public void Buy_Meryl()
-    {
-        CharactorChoice.instance.AddItem(merylData);
-        ClearImage[4].SetActive(true);
-        Destroy(targetButton[4]);
-        
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.UseDiamond(merylData.Price);
-        }
-        
     }
 }

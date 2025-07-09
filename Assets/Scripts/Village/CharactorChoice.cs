@@ -8,7 +8,9 @@ public class CharactorChoice : MonoBehaviour
     public Transform SlotParent;
     public GameObject SlotPrefab;
 
-    private List<GameObject> CharactorSlots = new List<GameObject>();
+    public List<GameObject> CharactorSlots = new List<GameObject>();
+    public List<CharacterData> charactors = new List<CharacterData>();
+    public CharacterData equimentCharacter;
 
     public static CharactorChoice instance;
     public Image CharactorIcon;
@@ -17,7 +19,20 @@ public class CharactorChoice : MonoBehaviour
     {
         instance = this;
     }
-    
+
+    private void OnEnable()
+    {
+        UpdateCharacterData();
+    }
+
+    private void Start()
+    {
+        if(GameManager.Instance != null)
+            GameManager.Instance.playerData.LoadData();
+
+        UpdateCharacterData();
+    }
+
     public void AddItem(CharacterData data)
     {
         GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
@@ -40,8 +55,26 @@ public class CharactorChoice : MonoBehaviour
         {
             icon.sprite = data.characterImage;
         }
+
         
-        
+    }
+
+    public void UpdateCharacterData()
+    {
+        foreach (GameObject slot in CharactorSlots)
+        {
+            Destroy(slot);
+        }
+        CharactorSlots.Clear();
+
+        if (charactors.Count < 0)
+        {
+            for (int i = 0; i < charactors.Count; i++)
+            {
+                AddItem(charactors[i]);
+            }
+        }
+
     }
     
     public void OnClickCharactorClose()
@@ -59,6 +92,7 @@ public class CharactorChoice : MonoBehaviour
                 bool isSelected = (slot == Choiceslot);
                 slot.Equip = isSelected;
                 slot.EquipImage.SetActive(isSelected);
+                equimentCharacter = slot.data;
             }
         }
         
@@ -66,5 +100,7 @@ public class CharactorChoice : MonoBehaviour
         {
             CharactorIcon.sprite = Choiceslot.data.characterImage;
         }
+
+        UpdateCharacterData();
     }
 }

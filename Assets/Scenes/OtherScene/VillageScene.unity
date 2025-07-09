@@ -3401,7 +3401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &261579165
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3479,7 +3479,7 @@ GameObject:
   - component: {fileID: 267754114}
   - component: {fileID: 267754113}
   - component: {fileID: 267754112}
-  - component: {fileID: 267754111}
+  - component: {fileID: 267754115}
   m_Layer: 5
   m_Name: CharactorSlot (4)
   m_TagString: Untagged
@@ -3508,62 +3508,6 @@ RectTransform:
   m_AnchoredPosition: {x: 771.0596, y: -650}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &267754111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267754109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 267754113}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 882199114}
-        m_TargetAssemblyTypeName: Guild, Assembly-CSharp
-        m_MethodName: OnClickMeryl
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &267754112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3619,6 +3563,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267754109}
   m_CullTransparentMesh: 1
+--- !u!114 &267754115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267754109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 267754113}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &273418705
 GameObject:
   m_ObjectHideFlags: 0
@@ -6912,7 +6900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &533698655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6945,10 +6933,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d59da31409140f09acf81e65e1ea09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharactorChoicePanel: {fileID: 92263442}
+  CharactorChoicePanel: {fileID: 533698654}
   SlotParent: {fileID: 1664474263}
   SlotPrefab: {fileID: 7499701132116666441, guid: 5b731ec6ade904f9b888344688cbb608,
     type: 3}
+  CharactorSlots: []
+  charactors: []
+  equimentCharacter: {fileID: 0}
   CharactorIcon: {fileID: 2083516316}
 --- !u!1 &541600656
 GameObject:
@@ -11982,7 +11973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &882199113
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12015,17 +12006,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e0b093de14d4a37b0ad414928968b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GuildPanel: {fileID: 261579164}
+  GuildPanel: {fileID: 882199111}
   RadManPanel: {fileID: 788403422}
   GreenPanel: {fileID: 1360567935}
   NoonaPanel: {fileID: 1884113645}
   KainPanel: {fileID: 745980213}
   MerylPanel: {fileID: 1744261629}
-  lukeData: {fileID: 11400000, guid: 88a591746ea214cfcba472dbb764392d, type: 2}
-  rinData: {fileID: 11400000, guid: b7b2ec38d653e492faa9832d82ec5854, type: 2}
-  mirData: {fileID: 11400000, guid: d4c62d21468ac46cc8fe03376c3aa909, type: 2}
-  kainData: {fileID: 11400000, guid: 3eefef68d0b3c468db843e7a4b127b32, type: 2}
-  merylData: {fileID: 11400000, guid: 74cce0f3bf17e4695a4f91dc7df9996f, type: 2}
+  characterDatas:
+  - {fileID: 11400000, guid: 88a591746ea214cfcba472dbb764392d, type: 2}
+  - {fileID: 11400000, guid: d4c62d21468ac46cc8fe03376c3aa909, type: 2}
+  - {fileID: 11400000, guid: b7b2ec38d653e492faa9832d82ec5854, type: 2}
+  - {fileID: 11400000, guid: 3eefef68d0b3c468db843e7a4b127b32, type: 2}
+  - {fileID: 11400000, guid: 74cce0f3bf17e4695a4f91dc7df9996f, type: 2}
   ClearImage:
   - {fileID: 551838000}
   - {fileID: 1283412616}
@@ -12033,11 +12025,11 @@ MonoBehaviour:
   - {fileID: 541600656}
   - {fileID: 952676474}
   targetButton:
-  - {fileID: 681366841}
-  - {fileID: 966973953}
-  - {fileID: 1316113926}
-  - {fileID: 663802534}
-  - {fileID: 22571308}
+  - {fileID: 5885693667737804375}
+  - {fileID: 8502818311839250638}
+  - {fileID: 8502818310506732934}
+  - {fileID: 1817312602}
+  - {fileID: 267754115}
 --- !u!1 &884536539
 GameObject:
   m_ObjectHideFlags: 0
@@ -18703,9 +18695,9 @@ MonoBehaviour:
   MailBox: {fileID: 125760863}
   ClothesShopPanel: {fileID: 1519717547}
   ClothesShopItem: {fileID: 1834543761}
-  Guild: {fileID: 261579164}
+  Guild: {fileID: 882199111}
   StopPanel: {fileID: 1091433057}
-  CharactorChoicePanel: {fileID: 92263442}
+  CharactorChoicePanel: {fileID: 533698654}
 --- !u!114 &1608422678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21823,7 +21815,7 @@ GameObject:
   - component: {fileID: 1817312601}
   - component: {fileID: 1817312600}
   - component: {fileID: 1817312599}
-  - component: {fileID: 1817312598}
+  - component: {fileID: 1817312602}
   m_Layer: 5
   m_Name: CharactorSlot (3)
   m_TagString: Untagged
@@ -21852,62 +21844,6 @@ RectTransform:
   m_AnchoredPosition: {x: 221.05957, y: -650}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1817312598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817312596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1817312600}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 882199114}
-        m_TargetAssemblyTypeName: Guild, Assembly-CSharp
-        m_MethodName: OnClickKain
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1817312599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21963,6 +21899,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817312596}
   m_CullTransparentMesh: 1
+--- !u!114 &1817312602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817312596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1817312600}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1826184424
 GameObject:
   m_ObjectHideFlags: 0
@@ -25784,19 +25764,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2655365825963709895}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 882199114}
-        m_TargetAssemblyTypeName: Guild, Assembly-CSharp
-        m_MethodName: OnClickRedMan
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7499701131804483261
 GameObject:
   m_ObjectHideFlags: 0
@@ -26097,19 +26065,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8502818310506732933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 882199114}
-        m_TargetAssemblyTypeName: Guild, Assembly-CSharp
-        m_MethodName: OnClickGreenMan
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &8502818311839250637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26184,19 +26140,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8502818311839250637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 882199114}
-        m_TargetAssemblyTypeName: Guild, Assembly-CSharp
-        m_MethodName: OnClickNoona
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

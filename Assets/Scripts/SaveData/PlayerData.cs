@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class PlayerData
@@ -11,6 +12,9 @@ public class PlayerData
     public float staminaTimer;
     public List<ItemData> itmeDatas = new List<ItemData>();
     public List<CharacterData> characterDatas = new List<CharacterData>();
+
+    //public List<string> chracterId = new List<string>();
+    //public string equimentCharcter = "";
 
     public DateTime lastTime;
 
@@ -36,6 +40,14 @@ public class PlayerData
             itmeDatas.AddRange(ItemManager.instance.items);
         }
             
+        if (CharactorChoice.instance != null)
+        {
+            for (int i = 0; i < CharactorChoice.instance.CharactorSlots.Count; i++)
+            {
+                if (CharactorChoice.instance != null)
+                    characterDatas.AddRange(CharactorChoice.instance.charactors);
+            }
+        }
 
         SaveManager.SaveUsers(this);
     }
@@ -82,6 +94,12 @@ public class PlayerData
         {
             ItemManager.instance.items.Clear();
             ItemManager.instance.items.AddRange(itmeDatas);
+        }
+
+        if (CharactorChoice.instance != null)
+        {
+            if (CharactorChoice.instance != null)
+                CharactorChoice.instance.charactors.AddRange(characterDatas);
         }
     }
 }
