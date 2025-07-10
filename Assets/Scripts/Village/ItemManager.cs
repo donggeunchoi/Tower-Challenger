@@ -37,10 +37,9 @@ public class ItemManager : MonoBehaviour
    private void Start()
    {
       //SlotParent = GameObject.Find("Content").transform;
-        
-        if (GameManager.Instance != null)
+      if (GameManager.Instance != null)
         {
-            GameManager.Instance.SaveLoad();
+            GameManager.Instance.playerData.LoadData();
         }
    }
    

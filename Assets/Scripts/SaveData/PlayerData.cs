@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class PlayerData
@@ -10,7 +11,11 @@ public class PlayerData
     public int stamina;
     public float staminaTimer;
     public List<ItemData> itmeDatas = new List<ItemData>();
-    public List<CharacterData> characterDatas = new List<CharacterData>();
+    public List<string> characterNames = new List<string>(); // 보유 캐릭터 이름 리스트
+    public string equippedCharacterName; // 장착 캐릭터 이름
+
+    //public List<string> chracterId = new List<string>();
+    //public string equimentCharcter = "";
 
     public DateTime lastTime;
 
@@ -25,6 +30,13 @@ public class PlayerData
             diamond = GameManager.Instance.diamond;
             stamina = GameManager.Instance.mainStamina;
             staminaTimer = GameManager.Instance.staminatimer;
+
+            characterNames.Clear();
+            foreach (CharacterData characters in GameManager.Instance.charactors)
+                characterNames.Add(characters.characterName);
+
+            if (GameManager.Instance.equimentCharacter != null)
+                equippedCharacterName = GameManager.Instance.equimentCharacter.characterName;
         }
 
         if (StageManager.instance != null)
@@ -35,7 +47,6 @@ public class PlayerData
             itmeDatas.Clear();
             itmeDatas.AddRange(ItemManager.instance.items);
         }
-            
 
         SaveManager.SaveUsers(this);
     }
@@ -50,8 +61,10 @@ public class PlayerData
         this.stamina = loaded.stamina;
         this.lastTime = loaded.lastTime;
         this.itmeDatas = loaded.itmeDatas;
-        this.characterDatas = loaded.characterDatas;
+        this.characterNames = loaded.characterNames;
+        this.equippedCharacterName = loaded.equippedCharacterName;
         this.staminaTimer = loaded.staminaTimer;
+
 
         if (GameManager.Instance != null)
         {
@@ -73,6 +86,14 @@ public class PlayerData
             GameManager.Instance.gold = gold;
             GameManager.Instance.diamond = diamond;
             GameManager.Instance.mainStamina = stamina;
+
+            GameManager.Instance.charactors.Clear();
+            foreach (string name in characterNames)
+            {
+                CharacterData data = GameManager.Instance.allCharacterData.Find(character => character.characterName == name);
+                if (data != null)
+                    GameManager.Instance.charactors.Add(data);
+            }
         }
 
         if (StageManager.instance != null)

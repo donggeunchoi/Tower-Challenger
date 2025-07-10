@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public StageManager stageManager;
+    public StageManager stageManager;  //이후 주석처리 (타워매니저 상속)
     public UIManager uiManager;
-    public ItemManager itemManager;
+    public ItemManager itemManager;    //이후 주석처리 (플레이어 매니저 상속)
+
 
     public GameObject stageManagerPrefab;
     public GameObject uiManagerPrefab;
@@ -25,6 +27,9 @@ public class GameManager : MonoBehaviour
     [Header("저장")]
     public float saveTimer;
     public const float SAVETIME = 120;
+    public List<CharacterData> allCharacterData = new List<CharacterData>();
+    public List<CharacterData> charactors = new List<CharacterData>();
+    public CharacterData equimentCharacter;
 
     [Header("재화")]
     public int gold;

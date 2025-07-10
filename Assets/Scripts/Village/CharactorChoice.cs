@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,10 @@ public class CharactorChoice : MonoBehaviour
     public Transform SlotParent;
     public GameObject SlotPrefab;
 
-    private List<GameObject> CharactorSlots = new List<GameObject>();
+    public List<GameObject> CharactorSlots = new List<GameObject>();
+    
 
-    public static CharactorChoice instance;
+    public CharactorChoice instance;
     public Image CharactorIcon;
 
     private void Awake()
@@ -18,6 +20,14 @@ public class CharactorChoice : MonoBehaviour
         instance = this;
     }
     
+    private void OnEnable()  //인벤토리가 활성화 될 때
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.playerData.LoadData();
+
+        UpdateCharacterData();
+    }
+
     public void AddItem(CharacterData data)
     {
         GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
@@ -39,9 +49,42 @@ public class CharactorChoice : MonoBehaviour
         if (icon != null)
         {
             icon.sprite = data.characterImage;
+        }    
+    }
+
+    public void UpdateCharacterData()
+    {
+        foreach (GameObject slot in CharactorSlots)
+        {
+            Destroy(slot);
         }
-        
-        
+        CharactorSlots.Clear();
+
+        if (GameManager.Instance.charactors.Count > 0)
+        {
+            for (int i = 0; i < GameManager.Instance.charactors.Count; i++)
+            {
+                AddItem(GameManager.Instance.charactors[i]);
+            }
+        }
+
+        if (GameManager.Instance.equimentCharacter != null)
+        {
+            foreach (GameObject slotObject in CharactorSlots)
+            {
+                CharactorChoiceSlot slot = slotObject.GetComponent<CharactorChoiceSlot>();
+                if (slot != null && slot.data == GameManager.Instance.equimentCharacter)
+                {
+                    slot.Equip = true;
+                    slot.EquipImage.SetActive(true);
+                }
+                else if (slot != null)
+                {
+                    slot.Equip = false;
+                    slot.EquipImage.SetActive(false);
+                }
+            }
+        }
     }
     
     public void OnClickCharactorClose()
@@ -59,6 +102,7 @@ public class CharactorChoice : MonoBehaviour
                 bool isSelected = (slot == Choiceslot);
                 slot.Equip = isSelected;
                 slot.EquipImage.SetActive(isSelected);
+                GameManager.Instance.equimentCharacter = slot.data;
             }
         }
         
@@ -66,5 +110,7 @@ public class CharactorChoice : MonoBehaviour
         {
             CharactorIcon.sprite = Choiceslot.data.characterImage;
         }
+
+        UpdateCharacterData();
     }
 }
