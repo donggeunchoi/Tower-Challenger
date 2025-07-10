@@ -14,7 +14,17 @@ public class AllClear : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nextFloorText;
     //아이템 자료형 추가되는 랜덤아이템 관리
 
-    [SerializeField] private Image reward;
+    [Header("골드")]
+    [SerializeField] private Image goldReward;
+    [SerializeField] private TMP_Text goldRewardText;
+    
+    [Header("다이아")]
+    [SerializeField] private Image diamondReward;
+    [SerializeField] private TMP_Text diamondRewardText;
+
+    [Header("아이템")] 
+    [SerializeField] private Image itemImage;
+    [SerializeField] private TMP_Text itemNameText;
 
     [SerializeField] private Transform rewardImage;
 
@@ -25,9 +35,11 @@ public class AllClear : MonoBehaviour
 
     private void Start()
     {
-        if (reward != null)
-            reward = null;
+        // if (reward != null)
+        //     reward = null;
 
+        UpdateRewardGold();
+        UpdateRewardDia();
         //추가되는 랜덤 아이템을 받아서
         //랜덤아이템 자료형 list + for (int i = 0; i <= 랜덤아이템.length; i++) 인스턴스 이미지
 
@@ -95,4 +107,45 @@ public class AllClear : MonoBehaviour
         rewardManager.GiveRewards(currentRewards);
         
     }
+
+    public void UpdateRewardGold()
+    {
+        rewardBase = FindObjectOfType<RewardBase>();
+        
+        int currentFloor = StageManager.instance.floor;
+        
+        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+        
+        goldReward.sprite = ItemManager.instance.GoldSprite;
+        goldRewardText.text =  currentRewards.Count > 0 ? currentRewards[0].goldReward.ToString() : "0";
+        
+    }
+
+    public void UpdateRewardDia()
+    {
+        rewardBase = FindObjectOfType<RewardBase>();
+        
+        int currentFloor = StageManager.instance.floor;
+        
+        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+
+        if (currentRewards[0].diaReward != 0)
+        {
+            diamondReward.sprite = ItemManager.instance.DiamondSprite;
+            diamondRewardText.text = currentRewards.Count > 0 ? currentRewards[0].diaReward.ToString() : "0";
+        }
+        else
+        {
+            unenalble();
+        }
+        
+        
+    }
+
+    void unenalble()
+    {
+        diamondReward.gameObject.SetActive(false);
+        diamondRewardText.text = "";
+    }
+    
 }

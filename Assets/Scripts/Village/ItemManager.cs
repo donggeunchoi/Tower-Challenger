@@ -17,6 +17,9 @@ public class ItemManager : MonoBehaviour
    
    public List<ItemData> items = new List<ItemData>();
    public List<RewardTableData> rewards = new List<RewardTableData>();
+   
+   public Sprite GoldSprite;
+   public Sprite DiamondSprite;
 
    private void Awake()
    {

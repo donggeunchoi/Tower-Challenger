@@ -22,12 +22,12 @@ public class RewardManager : MonoBehaviour
 
     public void GiveReward(RewardTableData reward)
     {
-        switch (reward.type)
+        switch (reward.name)
         {
-            case "Gold":
+            case "gold":
                 GameManager.Instance.AddGold(reward.goldReward);
                 break;
-            case "Dia":
+            case "dia":
                 GameManager.Instance.AddDiamond(reward.diaReward);
                 break;
             case "Item":
