@@ -120,16 +120,16 @@ public class HardGameGameManager : MonoBehaviour
                     switch (i + 1)
                     {
                         case 1:
-                            newSpawnPos = new Vector3(-3.5f,-2.5f, Player.transform.position.z);
+                            newSpawnPos = new Vector3(-6f, -5f, Player.transform.position.z);
                             break;
                         case 2:
-                            newSpawnPos = new Vector3(-0.5f, -2.5f, Player.transform.position.z);
+                            newSpawnPos = new Vector3(-8f, -4f, Player.transform.position.z);
                             break;
                         case 3:
-                            newSpawnPos = new Vector3(-7, -4, Player.transform.position.z);
+                            newSpawnPos = new Vector3(-7.625f, -3.5f, Player.transform.position.z);
                             break;
                         case 4:
-                            newSpawnPos = new Vector3(-5.5f, 2.5f, Player.transform.position.z);
+                            newSpawnPos = new Vector3(-10f, -5f, Player.transform.position.z);
                             break;
                         case 5:
                             stageManager.MiniGameResult(true);
