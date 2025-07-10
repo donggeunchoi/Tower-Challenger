@@ -46,7 +46,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageManager: {fileID: 0}
   uiManager: {fileID: 0}
+  itemManager: {fileID: 0}
   stageManagerPrefab: {fileID: 5636037218680157365, guid: 7c5d85cb901709c4ea54588d8c30c3f0,
     type: 3}
   uiManagerPrefab: {fileID: 3574710307843413379, guid: 474ad5a9fec469b46888b45dad65f285,
     type: 3}
+  itemManagerPrefab: {fileID: 0}
+  miniGameDataList: []
+  playerData:
+    bestFloor: 0
+    gold: 0
+    diamond: 0
+    stamina: 0
+    staminaTimer: 0
+    itmeDatas: []
+    characterNames: []
+    equippedCharacterName: 
+  mainStamina: 0
+  staminatimer: 0
+  saveTimer: 0
+  allCharacterData: []
+  charactors:
+  - {fileID: 11400000, guid: b7b2ec38d653e492faa9832d82ec5854, type: 2}
+  - {fileID: 11400000, guid: d4c62d21468ac46cc8fe03376c3aa909, type: 2}
+  - {fileID: 11400000, guid: 74cce0f3bf17e4695a4f91dc7df9996f, type: 2}
+  - {fileID: 11400000, guid: 88a591746ea214cfcba472dbb764392d, type: 2}
+  - {fileID: 11400000, guid: 3eefef68d0b3c468db843e7a4b127b32, type: 2}
+  equimentCharacter: {fileID: 0}
+  gold: 10000
+  diamond: 10000
