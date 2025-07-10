@@ -5196,6 +5196,18 @@ PrefabInstance:
       propertyPath: diamond
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
+        type: 3}
+      propertyPath: GoldImage
+      value: 
+      objectReference: {fileID: 1926298015179057345, guid: 42976e4837ba9452a9b73ab682456317,
+        type: 3}
+    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
+        type: 3}
+      propertyPath: DiamondImage
+      value: 
+      objectReference: {fileID: -2771856007786630233, guid: a92dde5d85e164aeba5b3f23128016dd,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25963,6 +25975,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1658725995389534066, guid: 69c294de6fe2c5f4d8d8b0a18e5488fe,
+        type: 3}
+      propertyPath: GoldSprite
+      value: 
+      objectReference: {fileID: 1926298015179057345, guid: 42976e4837ba9452a9b73ab682456317,
+        type: 3}
+    - target: {fileID: 1658725995389534066, guid: 69c294de6fe2c5f4d8d8b0a18e5488fe,
+        type: 3}
+      propertyPath: DiamondSprite
+      value: 
+      objectReference: {fileID: -2771856007786630233, guid: a92dde5d85e164aeba5b3f23128016dd,
+        type: 3}
+    - target: {fileID: 1658725995389534066, guid: 69c294de6fe2c5f4d8d8b0a18e5488fe,
+        type: 3}
+      propertyPath: rewardsItmes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658725995389534066, guid: 69c294de6fe2c5f4d8d8b0a18e5488fe,
+        type: 3}
+      propertyPath: 'rewardsItmes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 75ecfbd63de744226a3db8b308f01fb5,
+        type: 2}
+    - target: {fileID: 1658725995389534066, guid: 69c294de6fe2c5f4d8d8b0a18e5488fe,
+        type: 3}
+      propertyPath: 'rewardsItmes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c6967197d1a54091a54b3e9df92c3b1,
+        type: 2}
+    - target: {fileID: 1658725995389534066, guid: 69c294de6fe2c5f4d8d8b0a18e5488fe,
+        type: 3}
+      propertyPath: 'rewardsItmes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 53274beb3e10d42759d6deacce8778eb,
+        type: 2}
     - target: {fileID: 2575704044998962183, guid: 69c294de6fe2c5f4d8d8b0a18e5488fe,
         type: 3}
       propertyPath: m_Name
