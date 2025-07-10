@@ -10,6 +10,7 @@ public class AllClear : MonoBehaviour
     StageManager stageManager;
     public RewardBase rewardBase;
     private RewardManager rewardManager;
+    private ItemManager itemManager;
 
     [SerializeField] private TextMeshProUGUI nextFloorText;
     //아이템 자료형 추가되는 랜덤아이템 관리
@@ -38,15 +39,17 @@ public class AllClear : MonoBehaviour
         // if (reward != null)
         //     reward = null;
 
-        UpdateRewardGold();
-        UpdateRewardDia();
         //추가되는 랜덤 아이템을 받아서
         //랜덤아이템 자료형 list + for (int i = 0; i <= 랜덤아이템.length; i++) 인스턴스 이미지
 
         stageManager = StageManager.instance;
         rewardManager = this.GetComponent<RewardManager>();
         
-        GiveTowerReward();
+        
+        UpdateRewardGold();
+        UpdateRewardDia();
+        UpdateRewrdItem();
+        
         nextFloor.onClick.AddListener(OnClickNextStage);
         returnToTitle.onClick.AddListener(OnclickReturnTitle);
 
@@ -55,12 +58,14 @@ public class AllClear : MonoBehaviour
     }
     private void OnClickNextStage()
     {
+        GiveTowerReward();
         stageManager.NextFloor();
         Destroy(this.gameObject);
     }
 
     private void OnclickReturnTitle()
     {
+        GiveTowerReward();
         SceneManager.LoadScene(_mainSceneName);
         StageManager.instance.infoUI.SetActive(false);
         Destroy(this.gameObject);
@@ -136,16 +141,61 @@ public class AllClear : MonoBehaviour
         }
         else
         {
-            unenalble();
+            diamondReward.gameObject.SetActive(false);
+            diamondRewardText.text = "";
         }
-        
         
     }
 
-    void unenalble()
+    public void UpdateRewrdItem()
     {
-        diamondReward.gameObject.SetActive(false);
-        diamondRewardText.text = "";
+        rewardBase = FindObjectOfType<RewardBase>();
+        int currentFloor = StageManager.instance.floor;
+
+        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+
+        if (currentRewards.Count == 0) return;
+
+        if (currentRewards[0].speedMoveReward)
+        {
+            ShowItem("이동속도 주문서");
+        }
+        else if (currentRewards[0].sandGlassReward)
+        {
+            ShowItem("마법의 모래시계 +10");
+        }
+        else if (currentRewards[0].topTicketReward)
+        {
+            ShowItem("타워 입장권 1매");
+        }
+        else
+        {
+            itemImage.gameObject.SetActive(false);
+            itemNameText.text = "";
+        }
+
     }
+
+    private void ShowItem(string itemName)
+    {
+        if (itemManager == null)
+        {
+            itemManager = FindObjectOfType<ItemManager>();
+        }
+
+
+        foreach (ItemData item in itemManager.rewardsItmes)
+        {
+            if (item.itemName.Trim() == itemName.Trim())
+            {
+                itemImage.gameObject.SetActive(true);
+                itemImage.sprite = item.icon;
+                itemNameText.text = item.itemName;
+                return; // 찾았으면 종료
+            }
+        }
+    }
+        
+    
     
 }

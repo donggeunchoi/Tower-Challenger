@@ -16,10 +16,10 @@ public class ItemManager : MonoBehaviour
    // public List<Sprite> itemIcons = new List<Sprite>();
    
    public List<ItemData> items = new List<ItemData>();
-   public List<RewardTableData> rewards = new List<RewardTableData>();
    
    public Sprite GoldSprite;
    public Sprite DiamondSprite;
+   public List<ItemData> rewardsItmes = new List<ItemData>();
 
    private void Awake()
    {
@@ -83,6 +83,11 @@ public class ItemManager : MonoBehaviour
 
     public ItemData GetItem(string name)//아이템데이터에서 아이템 이름 가져오기
     {
-        return items.Find(item => item.name == name);
+        foreach (var item in rewardsItmes)
+        {
+            Debug.Log($"[검사] '{item.itemName}' == '{name}' ? {item.itemName == name}");
+        }
+        
+        return items.Find(rewardsItmes => rewardsItmes.itemName.Trim() == name.Trim());
     }
 }
