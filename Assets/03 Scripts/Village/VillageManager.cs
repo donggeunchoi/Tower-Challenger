@@ -66,7 +66,7 @@ public class VillageManager : MonoBehaviour
             case "StorePanel":
                 if (popup != null)
                     Destroy(popup);
-                popup = Instantiate(ClothesShopPanel, popupGroup);
+                popup = Instantiate(StorePanel, popupGroup);
                 break;
             case "Invetory":
                 if (popup != null)
@@ -79,7 +79,7 @@ public class VillageManager : MonoBehaviour
             case "ClothesShopPanel":
                 if (popup != null)
                     Destroy(popup);
-                popup = Instantiate(StorePanel, popupGroup);
+                popup = Instantiate(ClothesShopPanel, popupGroup);
                 break;
             case "Guild":
                 if (popup != null)

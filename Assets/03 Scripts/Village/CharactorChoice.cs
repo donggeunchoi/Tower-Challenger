@@ -8,19 +8,17 @@ public class CharactorChoice : MonoBehaviour
     public GameObject CharactorChoicePanel;
     public Transform SlotParent;
     public GameObject SlotPrefab;
-
-    public List<GameObject> CharactorSlots = new List<GameObject>();
-    
+    public List<CharactorChoiceSlot> CharactorSlots = new List<CharactorChoiceSlot>();
 
     public CharactorChoice instance;
     public Image CharactorIcon;
 
-    private void Awake()
+    private void Awake() 
     {
         instance = this;
     }
     
-    private void OnEnable()  //인벤토리가 활성화 될 때
+    private void Start()  
     {
         if (GameManager.Instance != null)
             GameManager.Instance.playerData.LoadData();
@@ -28,89 +26,36 @@ public class CharactorChoice : MonoBehaviour
         UpdateCharacterData();
     }
 
-    public void AddItem(CharacterData data)
-    {
-        GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
-        newSlot.SetActive(true);
-        CharactorSlots.Add(newSlot);
-
-        CharactorChoiceSlot slotScript = newSlot.GetComponent<CharactorChoiceSlot>();
-        slotScript.CharactorChoice = this;
-        slotScript.data = data;
-            
-        TMPro.TMP_Text nameText = newSlot.GetComponentInChildren<TMPro.TMP_Text>();
-        Image icon =  newSlot.GetComponent<Image>();
-
-        if (nameText != null)
-        {
-            nameText.text = data.characterName;
-        }
-
-        if (icon != null)
-        {
-            icon.sprite = data.characterImage;
-        }    
-    }
-
     public void UpdateCharacterData()
     {
-        foreach (GameObject slot in CharactorSlots)
-        {
-            Destroy(slot);
-        }
+        foreach (CharactorChoiceSlot slot in CharactorSlots)
+            Destroy(slot.gameObject);
         CharactorSlots.Clear();
 
-        if (GameManager.Instance.charactors.Count > 0)
+        foreach (CharacterData data in GameManager.Instance.charactors)
         {
-            for (int i = 0; i < GameManager.Instance.charactors.Count; i++)
-            {
-                AddItem(GameManager.Instance.charactors[i]);
-            }
-        }
+            GameObject slotObj = Instantiate(SlotPrefab, SlotParent);
+            var slot = slotObj.GetComponent<CharactorChoiceSlot>();
+            slot.data = data;
+            slot.CharactorChoice = this;
+            slot.Init(); 
+            CharactorSlots.Add(slot);
 
-        if (GameManager.Instance.equimentCharacter != null)
-        {
-            foreach (GameObject slotObject in CharactorSlots)
-            {
-                CharactorChoiceSlot slot = slotObject.GetComponent<CharactorChoiceSlot>();
-                if (slot != null && slot.data == GameManager.Instance.equimentCharacter)
-                {
-                    slot.Equip = true;
-                    slot.EquipImage.SetActive(true);
-                }
-                else if (slot != null)
-                {
-                    slot.Equip = false;
-                    slot.EquipImage.SetActive(false);
-                }
-            }
+            slot.EquipImage.SetActive(GameManager.Instance.equimentCharacter == data);
         }
     }
-    
+
+    public void OnCharacterEquipped()
+    {
+        foreach (var slot in CharactorSlots)
+        {
+            bool isEquipped = (GameManager.Instance.equimentCharacter == slot.data);
+            slot.EquipImage.SetActive(isEquipped);
+        }
+    }
+
     public void OnClickCharactorClose()
     {
         CharactorChoicePanel.SetActive(false);
-    }
-
-    public void EquipOnly(CharactorChoiceSlot Choiceslot)
-    {
-        foreach (GameObject slotObject in CharactorSlots)
-        {
-            CharactorChoiceSlot slot = slotObject.GetComponent<CharactorChoiceSlot>();
-            if (slot != null)
-            {
-                bool isSelected = (slot == Choiceslot);
-                slot.Equip = isSelected;
-                slot.EquipImage.SetActive(isSelected);
-                GameManager.Instance.equimentCharacter = slot.data;
-            }
-        }
-        
-        if (CharactorIcon != null && Choiceslot.data != null)
-        {
-            CharactorIcon.sprite = Choiceslot.data.characterImage;
-        }
-
-        UpdateCharacterData();
     }
 }

@@ -1,25 +1,36 @@
-using System.ComponentModel.Design.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class CharactorChoiceSlot : MonoBehaviour
 {
     // public string charactorName;
     public bool Equip = false;
+    public Image characterImage;
     public GameObject EquipImage;
     public CharactorChoice CharactorChoice;
     
     public CharacterData data;
 
+    private void Start()
+    {
+        EquipImage.SetActive(false);
+    }
+
+    public void Init()
+    {
+        if (data != null)
+        {
+            characterImage.sprite = data.characterImage;
+        }
+    }
+
     public void OnClickUse()
     {
-        if (CharactorChoice != null)
+        if (GameManager.Instance != null)
         {
-            CharactorChoice.EquipOnly(this);
-            Debug.Log($"{data.characterName}으로 변경했쥬?");
-        }
-        else
-        {
-            Debug.Log("연결안됨요");
+            GameManager.Instance.equimentCharacter = data;
+            CharactorChoice.OnCharacterEquipped();
+            EquipImage.SetActive(true);
         }
     }
 }

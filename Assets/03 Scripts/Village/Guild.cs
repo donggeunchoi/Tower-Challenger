@@ -7,6 +7,7 @@ public class Guild : MonoBehaviour
     [Header("길드")]
     public Transform pannelTransform;
     public GameObject pannel;
+    public GameObject currentPannel;
 
     [Header("캐릭터 데이터")]
     public CharacterData[] characterDatas;
@@ -47,8 +48,11 @@ public class Guild : MonoBehaviour
     {
         CharacterData data = characterDatas[characterNum];
 
-        GameObject Pannel = Instantiate(pannel, pannelTransform);
-        GuildPannel guildPanel = Pannel.GetComponent<GuildPannel>();
+        if (currentPannel != null)
+            Destroy(currentPannel);
+
+        currentPannel = Instantiate(pannel, pannelTransform);
+        GuildPannel guildPanel = currentPannel.GetComponent<GuildPannel>();
         guildPanel.Init(data);
 
         //ClearImage[characterNum].SetActive(true);

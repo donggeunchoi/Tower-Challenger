@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,8 +8,7 @@ public class GameManager : MonoBehaviour
     public StageManager stageManager;  //이후 주석처리 (타워매니저 상속)
     public UIManager uiManager;
     public ItemManager itemManager;    //이후 주석처리 (플레이어 매니저 상속)
-
-
+    
     public GameObject stageManagerPrefab;
     public GameObject uiManagerPrefab;
     public GameObject itemManagerPrefab;
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public List<CharacterData> allCharacterData = new List<CharacterData>();
     public List<CharacterData> charactors = new List<CharacterData>();
     public CharacterData equimentCharacter;
+    public Coroutine saveLoadCor;
 
     [Header("재화")]
     public int gold;
@@ -126,7 +127,15 @@ public class GameManager : MonoBehaviour
 
     public void SaveLoad()
     {
+        if (saveLoadCor != null)
+            StopCoroutine(saveLoadCor);
+        saveLoadCor = StartCoroutine(SaveLoadCor());
+    }
+
+    private IEnumerator SaveLoadCor()
+    {
         playerData.SaveData();
+        yield return null;
         playerData.LoadData();
     }
         
