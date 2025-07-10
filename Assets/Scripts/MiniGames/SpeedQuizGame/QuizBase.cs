@@ -6,7 +6,7 @@ using UnityEngine;
 public class QuizBase : MonoBehaviour
 {
     public TextAsset QuizFile;
-    public List<SpeedQuizData> QuizList = new List<SpeedQuizData>();
+    public static List<SpeedQuizData> QuizList = new List<SpeedQuizData>();
 
     private void Awake()
     {
@@ -32,10 +32,11 @@ public class QuizBase : MonoBehaviour
             
             row.index = GetValue(values,0);
             row.name = GetValue(values,1);
-            row.answer = GetValue(values,3);
-            row.op2 = GetValue(values,4);
-            row.op3 = GetValue(values,5);
-            row.op4 = GetValue(values,6);
+            row.question = GetValue(values,3);
+            row.answer = GetValue(values,4);
+            row.op2 = GetValue(values,5);
+            row.op3 = GetValue(values,6);
+            row.op4 = GetValue(values,7);
            
             
             
