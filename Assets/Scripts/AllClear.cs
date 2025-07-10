@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ public class AllClear : MonoBehaviour
 {
 
     StageManager stageManager;
+    public RewardBase rewardBase;
+    private RewardManager rewardManager;
 
     [SerializeField] private TextMeshProUGUI nextFloorText;
     //아이템 자료형 추가되는 랜덤아이템 관리
@@ -29,7 +32,9 @@ public class AllClear : MonoBehaviour
         //랜덤아이템 자료형 list + for (int i = 0; i <= 랜덤아이템.length; i++) 인스턴스 이미지
 
         stageManager = StageManager.instance;
-
+        rewardManager = this.GetComponent<RewardManager>();
+        
+        GiveTowerReward();
         nextFloor.onClick.AddListener(OnClickNextStage);
         returnToTitle.onClick.AddListener(OnclickReturnTitle);
 
@@ -47,5 +52,47 @@ public class AllClear : MonoBehaviour
         SceneManager.LoadScene(_mainSceneName);
         StageManager.instance.infoUI.SetActive(false);
         Destroy(this.gameObject);
+    }
+
+    void GiveTowerReward()
+    {
+        if (rewardBase == null || rewardBase.rewards.Count == 0)
+        {
+            rewardBase = FindObjectOfType<RewardBase>();
+            if (rewardBase == null)
+            {
+                Debug.LogError("없어요 rewardBase가");
+                return;
+            }
+        }
+
+        if (rewardBase.rewards == null)
+        {
+            Debug.LogError("RewardBase.rewards가 없어요");
+            return;
+        }
+        
+        if (StageManager.instance == null)
+        {
+            Debug.LogError("StageManager.instance가 null입니다. StageManager가 씬에 존재하는지 확인하세요.");
+            return;
+        }
+        
+        int currentFloor = StageManager.instance.floor;
+        
+        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+
+        if (currentRewards.Count == 0)
+        {
+            Debug.Log("해당층에 보상이 없데이");
+            return;
+        }
+
+        if (RewardManager.Instance == null)
+        {
+            Debug.Log("여기구나?");
+        }
+        rewardManager.GiveRewards(currentRewards);
+        
     }
 }
