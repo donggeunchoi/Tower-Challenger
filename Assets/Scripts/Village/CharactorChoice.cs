@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,22 +12,17 @@ public class CharactorChoice : MonoBehaviour
     public List<GameObject> CharactorSlots = new List<GameObject>();
     
 
-    public static CharactorChoice instance;
+    public CharactorChoice instance;
     public Image CharactorIcon;
 
     private void Awake()
     {
         instance = this;
     }
-
-    private void OnEnable()
+    
+    private void OnEnable()  //인벤토리가 활성화 될 때
     {
-        UpdateCharacterData();
-    }
-
-    private void Start()
-    {
-        if(GameManager.Instance != null)
+        if (GameManager.Instance != null)
             GameManager.Instance.playerData.LoadData();
 
         UpdateCharacterData();
@@ -53,9 +49,7 @@ public class CharactorChoice : MonoBehaviour
         if (icon != null)
         {
             icon.sprite = data.characterImage;
-        }
-
-        
+        }    
     }
 
     public void UpdateCharacterData()

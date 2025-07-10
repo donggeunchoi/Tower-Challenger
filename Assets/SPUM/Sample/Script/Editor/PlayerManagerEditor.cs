@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 [CustomEditor(typeof(PlayerManager))]
 public class PlayerManagerEditor : Editor
@@ -7,7 +7,7 @@ public class PlayerManagerEditor : Editor
     {
         DrawDefaultInspector();
 
-        PlayerManager manager = (PlayerManager)target;
+        SpumPlayerManager manager = (SpumPlayerManager)target;
 
         if (GUILayout.Button("CREATE UNIT"))
         {
