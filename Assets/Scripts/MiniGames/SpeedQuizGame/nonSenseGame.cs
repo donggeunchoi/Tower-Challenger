@@ -10,17 +10,10 @@ public class nonSenseGame : MonoBehaviour
     [Header("UI")]
     public TMP_Text quizText;
     public Button[] answerButtons;
-
-    [System.Serializable]
-    public class Quiz
-    {
-        public string question;
-        public string answer;
-        public List<string> wroungAnswers;
-    }
     
-    public List<Quiz> quizes = new List<Quiz>();
+    public List<SpeedQuizData> quizes = new List<SpeedQuizData>();
     private string currentCorrectAnswer;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,14 +27,17 @@ public class nonSenseGame : MonoBehaviour
     public void SettingQuiz()
     {
         //선택 퀴즈를 랜덤으로 뽑기
-        Quiz selectedQuiz = quizes[Random.Range(0, quizes.Count)];
+        SpeedQuizData selectedQuiz = quizes[Random.Range(0, quizes.Count)];
         
         //퀴즈텍스트는 선택한 퀴즈로 & 현재 정답은 선택한 답으로
         quizText.text = selectedQuiz.question;
         currentCorrectAnswer = selectedQuiz.answer;
         
+        List<string> wrongAnswers = new List<string>{selectedQuiz.op2,selectedQuiz.op3,selectedQuiz.op4};
+        
         //모든 답들은 리스트로 받아오기. 거기에 정답 추가시키기
-        List<string> allAnswers = new List<string>(selectedQuiz.wroungAnswers);
+        List<string> allAnswers = new List<string>(wrongAnswers);
+        
         allAnswers.Add(selectedQuiz.answer);
         
         Shuffle(allAnswers);
