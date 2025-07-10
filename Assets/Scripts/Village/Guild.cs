@@ -1,125 +1,67 @@
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Guild : MonoBehaviour
 {
     [Header("길드")]
-    public GameObject GuildPanel;
-    public GameObject RadManPanel;
-    public GameObject GreenPanel;
-    public GameObject NoonaPanel;
-    public GameObject KainPanel;
-    public GameObject MerylPanel;
+    public Transform pannelTransform;
+    public GameObject pannel;
 
-    [Header("캐릭터 데이터")] 
-    public CharacterData lukeData;
-    public CharacterData rinData;
-    public CharacterData mirData;
-    public CharacterData kainData;
-    public CharacterData merylData;
-    
-    
+    [Header("캐릭터 데이터")]
+    public CharacterData[] characterDatas;
     public GameObject[] ClearImage;
     public Button[] targetButton;
+    public Button cancleButton;
 
-    public void OnClickRedMan()
+    private void OnEnable()
     {
-        RadManPanel.SetActive(true);
-    }
+        if (GameManager.Instance != null)
+            GameManager.Instance.SaveLoad();
 
-    public void OnClickGreenMan()
-    {
-        GreenPanel.SetActive(true);
-    }
+        cancleButton.onClick.AddListener(OnCancleButton);
 
-    public void OnClickNoona()
-    {
-        NoonaPanel.SetActive(true);
-    }
+        for (int i = 0; i < targetButton.Length; i++)  //나중에 플레이어 데이터를 넣어서 플레이어 데이터 수만큼 인스턴스하고 그 버튼에 이미지 추가 필요
+        {
+            targetButton[i].onClick.RemoveAllListeners();
+        }
 
-    public void OnClickKain()
-    {
-        KainPanel.SetActive(true);
-    }
+        for (int i = 0; i < targetButton.Length; i++)  //임시 (버튼배열과 코드가 일치해야되는 문제점이있음) 버튼을 인스턴스해주는 방식으로 변경할 예정 지금은 이미지 안맞음
+        {
+            int index = i;
+            if (targetButton[i] != null && characterDatas[i] != null)
+            {
+                targetButton[i].onClick.AddListener(() => OnClickCharactarBuy(index));
 
-    public void OnClickMeryl()
-    {
-        MerylPanel.SetActive(true);
-    }
-
-    public void GuildClose()
-    {
-        GuildPanel.SetActive(false);
-    }
-    
-    public void OnClickRedManClose()
-    {
-        RadManPanel.SetActive(false);
+                if (GameManager.Instance.charactors.Any(c => c == characterDatas[i]))
+                {
+                    ClearImage[i].SetActive(true);
+                    Destroy(targetButton[i]);
+                }
+            }
+            
+        }
     }
 
-    public void OnClickGreenManClose()
+    public void OnClickCharactarBuy(int characterNum)
     {
-        GreenPanel.SetActive(false);
-    }
+        CharacterData data = characterDatas[characterNum];
 
-    public void OnClickNoonaClose()
-    {
-        NoonaPanel.SetActive(false);
-    }
+        GameObject Pannel = Instantiate(pannel, pannelTransform);
+        GuildPannel guildPanel = Pannel.GetComponent<GuildPannel>();
+        guildPanel.Init(data);
 
-    public void OnClickKainClose()
-    {
-        KainPanel.SetActive(false);
-    }
+        //ClearImage[characterNum].SetActive(true);
+        //Destroy(targetButton[characterNum]);
 
-    public void OnClickMerylClose()
-    {
-        MerylPanel.SetActive(false);
-    }
-    
-    public void Buy_Luke()
-    {
-        CharactorChoice.instance.AddItem(lukeData);
-        ClearImage[0].SetActive(true);
-        Destroy(targetButton[0]);
-    }
-
-    public void Buy_Rin()
-    {
-        CharactorChoice.instance.AddItem(rinData);
-        ClearImage[1].SetActive(true);
-        Destroy(targetButton[1]);
-    }
-    public void Buy_Mir()
-    {
-        CharactorChoice.instance.AddItem(mirData);
-        ClearImage[2].SetActive(true);
-        Destroy(targetButton[2]);
-    }
-
-    public void Buy_Kain()
-    {
-        CharactorChoice.instance.AddItem(kainData);
-        ClearImage[3].SetActive(true);
-        Destroy(targetButton[3]);
-        
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.UseDiamond(kainData.Price);
+            GameManager.Instance.SaveLoad();
         }
-        
     }
 
-    public void Buy_Meryl()
+    public void OnCancleButton()
     {
-        CharactorChoice.instance.AddItem(merylData);
-        ClearImage[4].SetActive(true);
-        Destroy(targetButton[4]);
-        
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.UseDiamond(merylData.Price);
-        }
-        
+        this.gameObject.SetActive(false);
     }
 }
