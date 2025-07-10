@@ -1,75 +1,63 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class JoyStickMove : MonoBehaviour
+public class JoyStickMove : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    public RectTransform joystickBG;        // 조이스틱 배경 핸들 위치 제어
-    public RectTransform joystickHandle;    // 캐릭터를 움직이게 하는 조이스틱
+    [SerializeField] private Image joyBgImage;
+    [SerializeField] private Image joyHandleImage;
 
-    public float radius;    // 조이스틱 배경 안에서 핸들 이동 반경 제어 값
+    private double radiusJoy;
+    private float deadZone;
 
-    private Vector2 inputVector;
+    Vector2 touchPos;
 
-    public void OnTouchDown(BaseEventData data)
+    private void Awake()
     {
-        PointerEventData eventData = data as PointerEventData;
-        if (RectTransformUtility.RectangleContainsScreenPoint
-            (joystickBG, eventData.position, eventData.enterEventCamera))
+        joyBgImage = GetComponent<Image>();
+        joyHandleImage = transform.Find("JoyStickHandle").GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        radiusJoy = joyHandleImage.rectTransform.sizeDelta.x * 0.5;
+        deadZone = 0.1f;
+        touchPos = Vector2.zero;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle
+        (
+            joyBgImage.rectTransform,   // 플레이어가 터치할 UI의 좌표
+            eventData.position,         // 플레이어가 터치한 좌표
+            eventData.pressEventCamera, // 플레이어가 터치 했을 때 UI룰 보고 있는 카메라
+            out touchPos                // 화면을 기준으로 터치가 된 좌표값을 UI를 기준의 좌표값으로 바꿔 저장
+        ))
         {
-            OnDrag(eventData);
+            float distance = Mathf.Min(touchPos.magnitude, (float)radiusJoy);
+            Vector2 direction = touchPos.normalized;
+
+            if (distance < radiusJoy * deadZone)
+            {
+                joyHandleImage.rectTransform.anchoredPosition = Vector2.zero;
+            }
+            else
+            {
+                joyHandleImage.rectTransform.anchoredPosition = direction * distance;
+            }
         }
     }
 
-    public void OnDrag(BaseEventData data)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        PointerEventData eventData = data as PointerEventData;
-        Vector2 localPos;
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle
-            (joystickBG, eventData.position, eventData.enterEventCamera, out localPos);
-
-        localPos = Vector2.ClampMagnitude(localPos, radius);
-
-        joystickHandle.anchoredPosition = localPos;
-
-        inputVector = localPos / radius;
+        OnDrag(eventData);
     }
 
-    public void OnTouchUp(BaseEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
-        inputVector = Vector2.zero;
-        joystickHandle.anchoredPosition = Vector2.zero;
+        joyHandleImage.rectTransform.anchoredPosition = Vector2.zero;
+        touchPos = Vector2.zero;
     }
-    //public RectTransform joystickHandle;
-    //public float handleRange = 100f;
-    //private Vector2 inputVector;
-
-    //public Vector2 Direction => inputVector;
-
-    //public void OnDrag(BaseEventData data)
-    //{
-    //    PointerEventData eventData = data as PointerEventData;
-    //    Vector2 pos;
-    //    RectTransformUtility.ScreenPointToLocalPointInRectangle(
-    //        transform as RectTransform,
-    //        eventData.position,
-    //        eventData.pressEventCamera,
-    //        out pos
-    //    );
-
-    //    pos = Vector2.ClampMagnitude(pos, handleRange);
-    //    joystickHandle.anchoredPosition = pos;
-    //    inputVector = pos / handleRange;
-    //}
-
-    //public void OnPointerDown(BaseEventData eventData)
-    //{
-    //    OnDrag(eventData);
-    //}
-
-    //public void OnPointerUp(BaseEventData eventData)
-    //{
-    //    inputVector = Vector2.zero;
-    //    joystickHandle.anchoredPosition = Vector2.zero;
-    //}
 }

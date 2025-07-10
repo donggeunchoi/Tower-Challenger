@@ -53,30 +53,51 @@ public class Store : MonoBehaviour
     }
     public void BuyItem_SpeedUp()
     {
-        ItemManager.instance.AddItem(moveSpeed);
-
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.UseGold(moveSpeed.price);
+            if (moveSpeed.price > GameManager.Instance.gold)
+            {
+                Debug.Log("돈 부족이요");
+            }
+            else
+            {
+                ItemManager.instance.AddItem(moveSpeed);
+                Inventory.instance.UpdateInventory();
+                GameManager.Instance.UseGold(moveSpeed.price);
+            }
         }
     }
 
     public void BuyItem_Sandglass()
     {
-        ItemManager.instance.AddItem(sandGlass);
-
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.UseGold(sandGlass.price);
+            if (sandGlass.price > GameManager.Instance.gold)
+            {
+                Debug.Log("골드 부족이요");
+            }
+            else
+            {
+                ItemManager.instance.AddItem(sandGlass);
+                Inventory.instance.UpdateInventory();
+                GameManager.Instance.UseGold(sandGlass.price);
+            }
         }
     }
     public void BuyItem_TopTicket()
     {
-        ItemManager.instance.AddItem(topTicket);
-
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.UseDiamond(topTicket.price);
+            if (topTicket.price > GameManager.Instance.diamond)
+            {
+                Debug.Log("다이아 부족이요");
+            }
+            else
+            {
+                ItemManager.instance.AddItem(topTicket);
+                Inventory.instance.UpdateInventory();
+                GameManager.Instance.UseDiamond(topTicket.price);
+            }
         }
     }
     

@@ -3,17 +3,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-//    public Joystick joyStick;
+    [SerializeField] private float moveSpeed;
 
-    private Rigidbody2D _rigid;
+    private Rigidbody2D rd;
+    private SpriteRenderer sr;
 
-    public Vector2 vecMove;
-    public float moveSpeed;
+    private Vector2 moveInput;
 
     private void Awake()
     {
-        _rigid = GetComponent<Rigidbody2D>();
-    }  
+        rd = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+    }
 
     private void FixedUpdate()
     {
@@ -22,16 +23,21 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        vecMove.x = Input.GetAxis("Horizontal");
-        vecMove.y = Input.GetAxis("Vertical");
+        rd.MovePosition(rd.position + moveInput * moveSpeed * Time.deltaTime);
 
-        // _rigid.AddForce(vecMove);
-        // _rigid.linearVelocity = vecMove;
-        _rigid.MovePosition(_rigid.position + vecMove * moveSpeed * Time.deltaTime);
+        if (moveInput.x < 0)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
     }
 
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
-       
+        moveInput = context.ReadValue<Vector2>();
     }
+
 }

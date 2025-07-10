@@ -116,7 +116,8 @@ public class Inventory : MonoBehaviour
 
             newSlot.GetComponentInChildren<TMP_Text>().text = items[i].itemName; //아이템 이름이랑 이미지!
             newSlot.GetComponent<Image>().sprite = items[i].icon;                //코드는 동일!
-                
+            
+            
             // newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = items[i];
             // newSlot.GetComponent<InventorySlot>().itemName = items[i];
             // newSlot.GetComponent<Image>().sprite = items[i];
