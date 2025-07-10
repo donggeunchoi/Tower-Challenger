@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundTileSpawner : MonoBehaviour
@@ -10,9 +10,9 @@ public class GroundTileSpawner : MonoBehaviour
     public float tileY = -3.5f;
     public Transform groundsContainer;
     private bool lastHole = false;
-    
-    
-    
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +21,12 @@ public class GroundTileSpawner : MonoBehaviour
         {
             bool isHole;
 
-            if (lastHole)
+            if (i == 0)
+            {
+                isHole = false;
+                lastHole = false;
+            }
+            else if (lastHole)
             {
                 Debug.Log("연속구덩이 안나오게 해야쥬?");
                 isHole = false;
@@ -32,11 +37,10 @@ public class GroundTileSpawner : MonoBehaviour
                 isHole = Random.value < 0.1f;
                 lastHole = isHole;
             }
-            
+
             GameObject prefab = isHole ? holeTilePrefab : groundTilePrefab;
-            GameObject tile = Instantiate(prefab, new Vector3(spawnX, tileY, 0), Quaternion.identity,groundsContainer);
+            GameObject tile = Instantiate(prefab, new Vector3(spawnX, tileY, 0), Quaternion.identity, groundsContainer);
             spawnX += tileWidth;
         }
     }
-    
 }

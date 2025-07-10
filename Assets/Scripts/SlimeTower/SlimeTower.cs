@@ -15,6 +15,10 @@ public class SlimeTower : MonoBehaviour
     [SerializeField] private int currentStack; //현재 던질 수 있는 스택
     [SerializeField] private float stackTimer; //쿨타임을 측정해주는 타이머
 
+    private bool canClick = true;
+    private float clickCooldown = 0.2f;
+    private float clickCooldownTimer = 0f;
+
     private GameObject currentSlime; //현재슬라임
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,7 +43,17 @@ public class SlimeTower : MonoBehaviour
     // Update is called once per frame
     void Update()// 온클릭으로 바꿔야함
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!canClick)
+        {
+            clickCooldownTimer += Time.deltaTime;
+            if (clickCooldownTimer >= clickCooldown)
+            {
+                canClick = true;
+                clickCooldownTimer = 0f;
+            }
+        }
+
+        if (canClick && Input.GetMouseButtonDown(0))
         {
             MoveSlime();
             SpawnSlime();
