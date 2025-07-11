@@ -10,6 +10,7 @@ public class ItemManager : MonoBehaviour
    // public List<string> itemNames = new List<string>();
    // public List<Sprite> itemIcons = new List<Sprite>();
    
+    public List<ItemData> allItemList = new List<ItemData>();
    public List<ItemData> items = new List<ItemData>();
    
    public Sprite GoldSprite;

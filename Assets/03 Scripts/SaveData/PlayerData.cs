@@ -10,7 +10,7 @@ public class PlayerData
     public int diamond;
     public int stamina;
     public float staminaTimer;
-    public List<ItemData> itmeDatas = new List<ItemData>();
+    public List<string> itmeDataName = new List<string>();
     public List<string> characterNames = new List<string>(); // 보유 캐릭터 이름 리스트
     public string equippedCharacterName; // 장착 캐릭터 이름
 
@@ -44,8 +44,9 @@ public class PlayerData
 
         if (ItemManager.instance != null)
         {
-            itmeDatas.Clear();
-            itmeDatas.AddRange(ItemManager.instance.items);
+            itmeDataName.Clear();
+            foreach (ItemData itemData in ItemManager.instance.items)
+                itmeDataName.Add(itemData.itemName);
         }
 
         SaveManager.SaveUsers(this);
@@ -60,11 +61,11 @@ public class PlayerData
         this.diamond = loaded.diamond;
         this.stamina = loaded.stamina;
         this.lastTime = loaded.lastTime;
-        this.itmeDatas = loaded.itmeDatas;
+        this.itmeDataName = loaded.itmeDataName;
         this.characterNames = loaded.characterNames;
         this.equippedCharacterName = loaded.equippedCharacterName;
         this.staminaTimer = loaded.staminaTimer;
-
+        this.itmeDataName = loaded.itmeDataName;
 
         if (GameManager.Instance != null)
         {
@@ -93,12 +94,14 @@ public class PlayerData
                     GameManager.Instance.charactors.Add(data);
             }
             if (characterNames != null)
+            {
                 if (equippedCharacterName != null)
                 {
                     CharacterData data = GameManager.Instance.allCharacterData.Find(character => character.characterName == equippedCharacterName);
                     if (data != null)
                         GameManager.Instance.equimentCharacter = data;
                 }
+            }
         }
 
         if (StageManager.instance != null)
@@ -107,7 +110,12 @@ public class PlayerData
         if (ItemManager.instance != null)
         {
             ItemManager.instance.items.Clear();
-            ItemManager.instance.items.AddRange(itmeDatas);
+            foreach (string name in itmeDataName)
+            {
+                ItemData item = ItemManager.instance.allItemList.Find(item => item.name == name);
+                if (item != null)
+                    ItemManager.instance.items.Add(item);
+            }
         }
     }
 }
