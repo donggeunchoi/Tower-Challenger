@@ -126,7 +126,7 @@ public class HardGameGameManager : MonoBehaviour
                             newSpawnPos = new Vector3(-8f, -4f, Player.transform.position.z);
                             break;
                         case 3:
-                            newSpawnPos = new Vector3(-7.625f, -3.5f, Player.transform.position.z);
+                            newSpawnPos = new Vector3(-8f, -3f, Player.transform.position.z);
                             break;
                         case 4:
                             newSpawnPos = new Vector3(-10f, -5f, Player.transform.position.z);
