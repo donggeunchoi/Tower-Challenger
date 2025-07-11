@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         if (saveTimer >= SAVETIME)
         {
             saveTimer = 0;
-            SaveLoad();
+            playerData.SaveData();
         }
 
         if (mainStamina >= MAX_STAMINA)
@@ -120,30 +120,16 @@ public class GameManager : MonoBehaviour
 
         if (staminatimer >= STAMINA_TIME)
         {
+            Debug.Log("시간이 돌았습니다");
             AddStamina();
             staminatimer -= STAMINA_TIME;
         }
-    }
-
-    public void SaveLoad()
-    {
-        if (saveLoadCor != null)
-            StopCoroutine(saveLoadCor);
-        saveLoadCor = StartCoroutine(SaveLoadCor());
-    }
-
-    private IEnumerator SaveLoadCor()
-    {
-        playerData.SaveData();
-        yield return null;
-        playerData.LoadData();
-    }
-        
+    }   
 
     public void AddStamina()
     {
         mainStamina = Mathf.Min(mainStamina + 1, MAX_STAMINA);
-        SaveLoad();
+        playerData.SaveData();
     }
 
     public void UseStamina()
@@ -152,31 +138,31 @@ public class GameManager : MonoBehaviour
             return;
 
         mainStamina = Mathf.Max(mainStamina - 1, 0);
-        SaveLoad();
+        playerData.SaveData();
     }
 
     public void AddGold(int addGold)
     {
         gold += addGold;
-        SaveLoad();
+        playerData.SaveData();
     }
 
     public void UseGold(int useGold)
     {
         gold -= useGold;
-        SaveLoad();
+        playerData.SaveData();
     }
 
     public void AddDiamond(int addDia)
     {
         diamond += addDia;
-        SaveLoad();
+        playerData.SaveData();
     }
 
     public void UseDiamond(int useDia)
     {
         diamond -= useDia;
-        SaveLoad();
+        playerData.SaveData();
     }
 
     void LoadMiniGameCSV()

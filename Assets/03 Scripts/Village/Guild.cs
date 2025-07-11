@@ -17,9 +17,6 @@ public class Guild : MonoBehaviour
 
     private void OnEnable()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.SaveLoad();
-
         cancleButton.onClick.AddListener(OnCancleButton);
 
         for (int i = 0; i < targetButton.Length; i++)  //나중에 플레이어 데이터를 넣어서 플레이어 데이터 수만큼 인스턴스하고 그 버튼에 이미지 추가 필요
@@ -57,11 +54,6 @@ public class Guild : MonoBehaviour
 
         //ClearImage[characterNum].SetActive(true);
         //Destroy(targetButton[characterNum]);
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.SaveLoad();
-        }
     }
 
     public void OnCancleButton()
