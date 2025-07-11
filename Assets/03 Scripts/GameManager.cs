@@ -51,10 +51,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-    }
 
-    private void Start()
-    {
         stageManager = StageManager.instance;
         uiManager = UIManager.Instance;
         itemManager = ItemManager.instance;
@@ -76,12 +73,16 @@ public class GameManager : MonoBehaviour
             if (itemManagerPrefab != null)
                 Instantiate(itemManagerPrefab);
         }
+    }
 
+    private void Start()
+    {
         LoadMiniGameCSV();
 
         if (playerData != null)
+        {
             playerData = SaveManager.LoadUsers();
-
+        }
         playerData.LoadData();
     }
 

@@ -65,7 +65,6 @@ public class PlayerData
         this.equippedCharacterName = loaded.equippedCharacterName;
         this.staminaTimer = loaded.staminaTimer;
 
-
         if (GameManager.Instance != null)
         {
             GameManager.Instance.staminatimer = staminaTimer;

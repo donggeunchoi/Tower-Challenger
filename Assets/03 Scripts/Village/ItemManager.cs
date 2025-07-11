@@ -8,41 +8,46 @@ using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
-   public static ItemManager instance;
-   //public Transform SlotParent;
-   //public GameObject SlotPrefab;
-   
-   // public List<string> itemNames = new List<string>();
-   // public List<Sprite> itemIcons = new List<Sprite>();
-   
-   public List<ItemData> items = new List<ItemData>();
-   
-   public Sprite GoldSprite;
-   public Sprite DiamondSprite;
-   public List<ItemData> rewardsItmes = new List<ItemData>();
 
-   private void Awake()
-   {
-      if (instance == null)
-      {
-         instance = this;
-         DontDestroyOnLoad(this);
-      }
-      else
-      {
-         Destroy(gameObject);
-      }
-   }
+    public static ItemManager instance;
+    //public Transform SlotParent;
+    //public GameObject SlotPrefab;
 
-   private void Start()
-   {
-      //SlotParent = GameObject.Find("Content").transform;
-   }
-   
-   
+    // public List<string> itemNames = new List<string>();
+    // public List<Sprite> itemIcons = new List<Sprite>();
+    public Sprite GoldSprite;
+    public Sprite DiamondSprite;
+    public List<ItemData> rewardsItmes = new List<ItemData>();
+    public List<ItemData> allItemList = new List<ItemData>();
+    public List<ItemData> items = new List<ItemData>();
 
-   public void AddItem(ItemData item)
-   {
+
+    public Sprite GoldSprite;
+    public Sprite DiamondSprite;
+    public List<ItemData> rewardsItmes = new List<ItemData>();
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        //SlotParent = GameObject.Find("Content").transform;
+    }
+
+
+
+    public void AddItem(ItemData item)
+    {
         items.Add(item);
 
         if (GameManager.Instance != null)
@@ -70,7 +75,7 @@ public class ItemManager : MonoBehaviour
             GameManager.Instance.playerData.SaveData();
         }
     }
-    
+
     public void ClearItmes()
     {
         items.Clear();  //초기화 추가!
@@ -82,7 +87,7 @@ public class ItemManager : MonoBehaviour
         {
             Debug.Log($"[검사] '{item.itemName}' == '{name}' ? {item.itemName == name}");
         }
-        
+
         return items.Find(rewardsItmes => rewardsItmes.itemName.Trim() == name.Trim());
     }
 }
