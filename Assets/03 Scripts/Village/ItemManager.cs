@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.UIElements;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
@@ -37,10 +32,6 @@ public class ItemManager : MonoBehaviour
    private void Start()
    {
       //SlotParent = GameObject.Find("Content").transform;
-      if (GameManager.Instance != null)
-        {
-            GameManager.Instance.playerData.LoadData();
-        }
    }
    
    
@@ -51,7 +42,7 @@ public class ItemManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.SaveLoad();
+            GameManager.Instance.playerData.SaveData();
         }
         //GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
 
@@ -71,7 +62,7 @@ public class ItemManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.SaveLoad();
+            GameManager.Instance.playerData.SaveData();
         }
     }
     

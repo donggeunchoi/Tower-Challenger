@@ -14,14 +14,14 @@ public class PlayerData
     public List<string> characterNames = new List<string>(); // 보유 캐릭터 이름 리스트
     public string equippedCharacterName; // 장착 캐릭터 이름
 
-    //public List<string> chracterId = new List<string>();
-    //public string equimentCharcter = "";
+    public string lastTimeString;
 
+    [NonSerialized]
     public DateTime lastTime;
-
     public void SaveData()
     {
         lastTime = DateTime.Now;
+        lastTimeString = lastTime.ToString("yyyy-MM-ddTHH:mm:ss.fffK");
 
         //TimeSpan time 밀리초로 환산을해서 밀리초로 가지고있다가 분으로 환산해서
         if (GameManager.Instance != null)
@@ -70,22 +70,20 @@ public class PlayerData
         {
             GameManager.Instance.staminatimer = staminaTimer;
 
-            TimeSpan diff = DateTime.Now - lastTime;
-            float secondsPassed = (float)diff.TotalSeconds;
+            if (!string.IsNullOrEmpty(lastTimeString))
+                lastTime = DateTime.Parse(lastTimeString, null, System.Globalization.DateTimeStyles.RoundtripKind);
+            else
+                lastTime = DateTime.Now;
 
-            float totalTimer = staminaTimer + secondsPassed;
+            float secondsPassed = (float)(DateTime.Now - lastTime).TotalSeconds;
+            GameManager.Instance.staminatimer = staminaTimer + secondsPassed;
 
-            int recoverInterval = (int)GameManager.STAMINA_TIME;
-            int maxStamina = GameManager.MAX_STAMINA;
-            int recovered = (int)(totalTimer / recoverInterval);
-            int newStamina = Math.Min(stamina + recovered, maxStamina);
+            if (this.stamina <= 0)  //테스트용 코드
+                this.stamina = 5;
 
-            float remainTimer = totalTimer % recoverInterval;
-
-            GameManager.Instance.mainStamina = newStamina;
+            GameManager.Instance.mainStamina = this.stamina;
             GameManager.Instance.gold = gold;
             GameManager.Instance.diamond = diamond;
-            GameManager.Instance.mainStamina = stamina;
 
             GameManager.Instance.charactors.Clear();
             foreach (string name in characterNames)
