@@ -41,7 +41,7 @@ public class PlayerData
 
         if (StageManager.instance != null)
             bestFloor = StageManager.instance.bestFloor;
-        
+
         if (ItemManager.instance != null)
         {
             itmeDatas.Clear();
@@ -94,6 +94,13 @@ public class PlayerData
                 if (data != null)
                     GameManager.Instance.charactors.Add(data);
             }
+            if (characterNames != null)
+                if (equippedCharacterName != null)
+                {
+                    CharacterData data = GameManager.Instance.allCharacterData.Find(character => character.characterName == equippedCharacterName);
+                    if (data != null)
+                        GameManager.Instance.equimentCharacter = data;
+                }
         }
 
         if (StageManager.instance != null)

@@ -10,7 +10,16 @@ public class CharacterUI : MonoBehaviour
         if (GameManager.Instance != null)
         {
             if (GameManager.Instance.equimentCharacter != null)
-            characterImage.sprite = GameManager.Instance.equimentCharacter.characterImage;
+                characterImage.sprite = GameManager.Instance.equimentCharacter.characterImage;
+        }
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance != null)
+        { 
+            if (GameManager.Instance.equimentCharacter != null)
+                characterImage.sprite = GameManager.Instance.equimentCharacter.characterImage;
         }
     }
 }
