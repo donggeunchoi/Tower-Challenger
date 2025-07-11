@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HardGameGameManager : MonoBehaviour
+public class HardGameGameManager : MonoBehaviour 
 {
     public GameObject[] StraightBall;
     public GameObject[] TurnBall;
