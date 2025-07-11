@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,12 @@ public class ShadowUI : MonoBehaviour
 {
     public Image shadowImage;
     public Image[] choicesImage;
-    [HideInInspector] public int randomIndex;
-
 
     public void shadowGameInit()
     {
+        
+        ShadowManager.instance.randomIndex = Random.Range(0, ShadowManager.instance.shadowData.Length);
+
         shadowInti();
         shoicesInti();
     }
@@ -24,11 +26,10 @@ public class ShadowUI : MonoBehaviour
     
     private void shadowInti()
     {
-        randomIndex = Random.Range(0, ShadowManager.instance.shadowData.Length);
-        var p = ShadowManager.instance.shadowData[randomIndex];// 랜덤으로 문제를 생성
+        var p = ShadowManager.instance.shadowData[ShadowManager.instance.randomIndex];// 랜덤으로 문제를 생성
 
         shadowImage.sprite = p.shadowSprite;
-
+        
         StartCoroutine(ShadowFalse());
     }
 
@@ -36,14 +37,14 @@ public class ShadowUI : MonoBehaviour
     {
         for (int i = 0; i < choicesImage.Length; i++)
         {
-            choicesImage[i].sprite = ShadowManager.instance.shadowData[randomIndex].choices[i];
+            choicesImage[i].sprite = ShadowManager.instance.shadowData[ShadowManager.instance.randomIndex].choices[i];
             choicesImage[i].gameObject.SetActive(false);
         }
     }
 
     public IEnumerator ShadowFalse()
     {
-        yield return new WaitForSeconds(ShadowManager.instance.shadowData[randomIndex].shadowTime);
+        yield return new WaitForSeconds(ShadowManager.instance.shadowData[ShadowManager.instance.randomIndex].shadowTime);
 
         shadowImage.gameObject.SetActive(false);
         for (int i = 0; i < choicesImage.Length; i++)

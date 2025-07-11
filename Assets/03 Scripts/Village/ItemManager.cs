@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.UIElements;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
@@ -15,6 +10,7 @@ public class ItemManager : MonoBehaviour
    // public List<string> itemNames = new List<string>();
    // public List<Sprite> itemIcons = new List<Sprite>();
    
+    public List<ItemData> allItemList = new List<ItemData>();
    public List<ItemData> items = new List<ItemData>();
    
    public Sprite GoldSprite;
