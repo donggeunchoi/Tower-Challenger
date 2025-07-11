@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     public int mainStamina;
     public float staminatimer = 0;
     public const float STAMINA_TIME = 1800f;
-    public GameObject timeText;
 
     [Header("저장")]
     public float saveTimer;
@@ -124,9 +123,6 @@ public class GameManager : MonoBehaviour
             AddStamina();
             staminatimer -= STAMINA_TIME;
         }
-
-        string Show = $"{(staminatimer * 1/60f).ToString("N0")} / 30";
-        timeText.GetComponent<TMPro.TMP_Text>().text = Show;
 
     }
 
