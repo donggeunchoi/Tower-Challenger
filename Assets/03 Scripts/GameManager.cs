@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public int mainStamina;
     public float staminatimer = 0;
     public const float STAMINA_TIME = 1800f;
+    public GameObject timeText;
 
     [Header("저장")]
     public float saveTimer;
@@ -124,7 +125,7 @@ public class GameManager : MonoBehaviour
             AddStamina();
             staminatimer -= STAMINA_TIME;
         }
-    }   
+    }
 
     public void AddStamina()
     {
