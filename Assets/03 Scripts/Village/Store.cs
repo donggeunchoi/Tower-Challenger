@@ -62,7 +62,6 @@ public class Store : MonoBehaviour
             else
             {
                 ItemManager.instance.AddItem(moveSpeed);
-                Inventory.instance.UpdateInventory();
                 GameManager.Instance.UseGold(moveSpeed.price);
             }
         }
@@ -79,7 +78,6 @@ public class Store : MonoBehaviour
             else
             {
                 ItemManager.instance.AddItem(sandGlass);
-                Inventory.instance.UpdateInventory();
                 GameManager.Instance.UseGold(sandGlass.price);
             }
         }
@@ -95,7 +93,6 @@ public class Store : MonoBehaviour
             else
             {
                 ItemManager.instance.AddItem(topTicket);
-                Inventory.instance.UpdateInventory();
                 GameManager.Instance.UseDiamond(topTicket.price);
             }
         }

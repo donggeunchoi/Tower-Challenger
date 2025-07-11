@@ -20,9 +20,6 @@ public class CharactorChoice : MonoBehaviour
     
     private void Start()  
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.playerData.LoadData();
-
         UpdateCharacterData();
     }
 
