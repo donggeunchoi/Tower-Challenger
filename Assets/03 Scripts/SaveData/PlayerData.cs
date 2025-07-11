@@ -14,9 +14,6 @@ public class PlayerData
     public List<string> characterNames = new List<string>(); // 보유 캐릭터 이름 리스트
     public string equippedCharacterName; // 장착 캐릭터 이름
 
-    //public List<string> chracterId = new List<string>();
-    //public string equimentCharcter = "";
-
     public DateTime lastTime;
 
     public void SaveData()
@@ -83,9 +80,10 @@ public class PlayerData
             float remainTimer = totalTimer % recoverInterval;
 
             GameManager.Instance.mainStamina = newStamina;
+            GameManager.Instance.staminatimer = remainTimer;
+
             GameManager.Instance.gold = gold;
             GameManager.Instance.diamond = diamond;
-            GameManager.Instance.mainStamina = stamina;
 
             GameManager.Instance.charactors.Clear();
             foreach (string name in characterNames)
