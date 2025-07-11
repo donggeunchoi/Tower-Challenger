@@ -11,6 +11,9 @@ public class ShadowManager : MonoBehaviour
     public Shadow shadow;
     public ShadowUI shadowUI;
     public ShadowData[] shadowData;
+
+    public int randomIndex;
+
     private void Awake()
     {
         if (instance == null)
