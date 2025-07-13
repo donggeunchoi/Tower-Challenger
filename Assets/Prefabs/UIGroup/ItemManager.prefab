@@ -44,8 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1525313df4be4e77ae7fe872e22f966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotParent: {fileID: 0}
-  SlotPrefab: {fileID: 7483103867057294285, guid: 169a795ca2a1143429367ba3ed7c5f57,
+  allItemList:
+  - {fileID: 11400000, guid: 75ecfbd63de744226a3db8b308f01fb5, type: 2}
+  - {fileID: 11400000, guid: 4c6967197d1a54091a54b3e9df92c3b1, type: 2}
+  - {fileID: 11400000, guid: 53274beb3e10d42759d6deacce8778eb, type: 2}
+  items: []
+  GoldSprite: {fileID: 1926298015179057345, guid: 42976e4837ba9452a9b73ab682456317,
     type: 3}
-  itemNames: []
-  itemIcons: []
+  DiamondSprite: {fileID: -2771856007786630233, guid: a92dde5d85e164aeba5b3f23128016dd,
+    type: 3}
+  rewardsItmes: []

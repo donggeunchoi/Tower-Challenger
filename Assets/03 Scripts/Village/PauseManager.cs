@@ -25,15 +25,14 @@ public class PauseManager : MonoBehaviour
     {
         SceneManager.LoadScene("VillageScene");
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public void QuitGame()
     {
-        
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_ANDROID || UNITY_IOS
+            Application.Quit();
+#endif
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

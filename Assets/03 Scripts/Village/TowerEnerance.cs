@@ -45,7 +45,7 @@ public class TowerEnerance : MonoBehaviour
         //Items.Instance.use = true;
 
         ItemData ticketItem = ItemManager.instance.items.Find(x => x.type == ItemType.TopTicket);
-        
+
         if (ticketItem != null)
         {
             ItemManager.instance.items.Remove(ticketItem);
@@ -65,7 +65,7 @@ public class TowerEnerance : MonoBehaviour
         }
         else
         {
-            
+
             if (GameManager.Instance != null)
             {
                 if (GameManager.Instance.mainStamina > 0)
@@ -74,7 +74,7 @@ public class TowerEnerance : MonoBehaviour
                 }
                 else
                 {
-                    return;
+                    //return;
                 }
                 Debug.Log(GameManager.Instance.mainStamina);
             }
@@ -94,5 +94,5 @@ public class TowerEnerance : MonoBehaviour
         }
         return false;
     }
-    
+
 }
