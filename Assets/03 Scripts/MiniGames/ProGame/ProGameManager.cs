@@ -86,9 +86,6 @@ public class ProGameManager : MonoBehaviour
 
         while (GameStart)
         {
-            if (TeleportPoint.Length == 0 || Boss == null || Player == null || BallPreFab.Length == 0)
-                yield break;
-
             // 새로운 한 바퀴가 시작될 때 무작위 발사체 선택
             currentBallPrefab = BallPreFab[Random.Range(0, BallPreFab.Length)];
 
@@ -101,7 +98,7 @@ public class ProGameManager : MonoBehaviour
                 Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
 
                 // 보스2 활성화 및 순간이동
-                if (tiltTimer >= 50 && Boss2 != null)
+                if (tiltTimer >= 50 && Boss2)
                 {
                     Boss2.SetActive(true);
                     Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;
@@ -125,9 +122,6 @@ public class ProGameManager : MonoBehaviour
 
     private void BossShootAtPlayer(GameObject boss)
     {
-        if (currentBallPrefab == null || boss == null || Player == null || PoolManager.Instance == null)
-            return;
-
         Vector3 direction = (Player.transform.position - boss.transform.position).normalized;
         Quaternion rotation = Quaternion.LookRotation(direction);
 
