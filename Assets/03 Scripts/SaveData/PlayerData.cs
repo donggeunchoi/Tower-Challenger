@@ -10,7 +10,7 @@ public class PlayerData
     public int diamond;
     public int stamina;
     public float staminaTimer;
-    public List<string> itmeDataName = new List<string>();
+    public List<string> itmeDataID = new List<string>();
     public List<string> characterNames = new List<string>(); // 보유 캐릭터 이름 리스트
     public string equippedCharacterName; // 장착 캐릭터 이름
 
@@ -44,9 +44,9 @@ public class PlayerData
 
         if (ItemManager.instance != null)
         {
-            itmeDataName.Clear();
+            itmeDataID.Clear();
             foreach (ItemData itemData in ItemManager.instance.items)
-                itmeDataName.Add(itemData.itemName);
+                itmeDataID.Add(itemData.itemID);
         }
 
         SaveManager.SaveUsers(this);
@@ -61,11 +61,11 @@ public class PlayerData
         this.diamond = loaded.diamond;
         this.stamina = loaded.stamina;
         this.lastTime = loaded.lastTime;
-        this.itmeDataName = loaded.itmeDataName;
+        this.itmeDataID = loaded.itmeDataID;
         this.characterNames = loaded.characterNames;
         this.equippedCharacterName = loaded.equippedCharacterName;
         this.staminaTimer = loaded.staminaTimer;
-        this.itmeDataName = loaded.itmeDataName;
+        this.itmeDataID = loaded.itmeDataID;
 
         if (GameManager.Instance != null)
         {
@@ -110,9 +110,9 @@ public class PlayerData
         if (ItemManager.instance != null)
         {
             ItemManager.instance.items.Clear();
-            foreach (string name in itmeDataName)
+            foreach (string name in itmeDataID)
             {
-                ItemData item = ItemManager.instance.allItemList.Find(item => item.name == name);
+                ItemData item = ItemManager.instance.allItemList.Find(item => item.itemID == name);
                 if (item != null)
                     ItemManager.instance.items.Add(item);
             }
