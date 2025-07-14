@@ -62,7 +62,7 @@ public class ProGameManager : MonoBehaviour
             // 속도 증가
             if (tiltTimer >= 50)
             {
-                moveSpeed = 3.5f;
+                moveSpeed = 4f;
             }
             else if (tiltTimer >= 40)
             {
