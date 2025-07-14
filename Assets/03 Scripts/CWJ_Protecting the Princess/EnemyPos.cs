@@ -3,62 +3,81 @@ using UnityEngine;
 
 public class EnemyPos : MonoBehaviour
 {
-    // 프리펩을 넣는 변수
     [SerializeField] private GameObject[] enemyPrefabs;
+    private SpriteRenderer spriteRenderer;
 
-    // 프리펩이 들어있는 
-    private List<GameObject>[] pools;
+    private int randomEnemy; // 프리펩을 랜덤으로
+    private float cameraHeight;
+    private float cameraWidth;
+    private int side;
 
-    private int randomEnemy;
-    
+    private Camera cam;
+    private Vector2 camPos;
 
     private void Start()
     {
-        PrefabInit();
+        cam = Camera.main;
+        camPos = cam.transform.position;
+
+        CameraPos();
     }
 
     private void Update()
     {
-       
-
         if (Input.GetButtonDown("Jump"))
         {
+            if (enemyPrefabs.Length == 0)
+            {
+                return;
+            }
             randomEnemy = Random.Range(0, enemyPrefabs.Length);
-            GetEnemy(randomEnemy);
+            PrefabInit();
         }
     }
 
     private void PrefabInit()
     {
-        pools = new List<GameObject>[enemyPrefabs.Length + 1];
+        Vector3 enemyPos = SpawnPos();
+        GameObject enemySprite = Instantiate(enemyPrefabs[randomEnemy], enemyPos, Quaternion.identity);
+        spriteRenderer = enemySprite.GetComponentInChildren<SpriteRenderer>();
 
-        for (int i = 0; i < pools.Length; i++)
+        // 왼쪽이거나 x축 절반을 기준으로 0보다 작은 위치에서 생성된다면
+        if (side == 0 || (side == 2 && enemyPos.x < camPos.x))
         {
-            pools[i] = new List<GameObject>();
+            spriteRenderer.flipX = true;
         }
     }
 
-    private GameObject GetEnemy(int index)
+    private void CameraPos()
     {
-        GameObject select = null;
-        foreach (GameObject enemy in pools[index])
-        {
-            if (!enemy.activeSelf)
-            {
-                select = enemy;
-                select.SetActive(true);
+        cameraHeight = cam.orthographicSize;
+        cameraWidth = (cameraHeight * 2) * cam.aspect;
+    }
 
-                break;
-            }
+    private Vector3 SpawnPos()
+    {
+        float xMin = camPos.x - cameraWidth / 2;
+        float xMax = camPos.x + cameraWidth / 2;
+        float yMin = camPos.y;
+        float yMax = camPos.y + cameraHeight;
+
+        float randomX = Random.Range(xMin, xMax);
+        float randomY = Random.Range(yMin, yMax);
+
+        side = Random.Range(0, 3); // 3방향만 왼 , 오 , 위
+
+        switch(side)
+        {
+            case 0: // 0이면 왼쪽에서 랜덤 위치에 생성
+                return new Vector3(xMin - 1, randomY, 0f);
+
+            case 1: // 1이면 오른쪽에서 랜덤 위치에 생성
+                return new Vector3(xMax + 1, randomY, 0f);
+
+            case 2: // 2라면 위에서 랜덤 위치에 생성
+                return new Vector3(randomX, yMax + 1, 0f);
         }
 
-        if (select == null)
-        {
-            // 원본 오브젝트를 복사해서 생성하는 함수
-            select = Instantiate(enemyPrefabs[index], transform);
-            pools[index].Add(select);
-        }
-
-        return select;
+        return Vector3.zero;
     }
 }
