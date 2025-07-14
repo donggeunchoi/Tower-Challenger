@@ -7,7 +7,8 @@ public class CatController : MonoBehaviour
     public float jumpForce = 10f;         // 점프 힘
     public float moveSpeed = 2f;          // 좌우 이동 속도
     public float wallBounceForce = 5f;    // 벽에 닿았을 때 튕기는 힘
-    public float stopTime = 2f;
+    public float stopTime = 2f;           // 멈춰있는 시간
+    public int jumpCount = 3;             // 점프 횟수
 
     private Rigidbody2D _rigidbody;
     private bool _isJumping = false;

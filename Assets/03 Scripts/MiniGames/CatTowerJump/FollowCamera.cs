@@ -4,7 +4,7 @@ public class FollowCamera : MonoBehaviour
 {
     public Transform target;      // 따라갈 대상 (고양이)
     public float smoothSpeed = 5f;
-    public float yOffset = 2f;    // 약간 위에서 보이도록
+    public float yOffset = 10f;    // 약간 위에서 보이도록
 
     private float highestY;       // 지금까지 도달한 가장 높은 y
 
