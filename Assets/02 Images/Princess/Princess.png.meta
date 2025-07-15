@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 1902788136624674735
     second: Princess_0
+  - first:
+      213: 1991205611930870894
+    second: Princess_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -142,10 +145,10 @@ TextureImporter:
       name: Princess_0
       rect:
         serializedVersion: 2
-        x: 153
-        y: 3
-        width: 644
-        height: 1006
+        x: 175
+        y: 295
+        width: 158
+        height: 158
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,6 +159,28 @@ TextureImporter:
       bones: []
       spriteID: fa757569abf086a10800000000000000
       internalID: 1902788136624674735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Princess_1
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 35
+        width: 174
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6467e544fe22ab10800000000000000
+      internalID: 1991205611930870894
       vertices: []
       indices: 
       edges: []
@@ -173,8 +198,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Princess_0: 1902788136624674735
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
