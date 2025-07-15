@@ -57,7 +57,7 @@ public class GuildPannel : MonoBehaviour
                 {
                     GameManager.Instance.UseDiamond(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
-                    GameManager.Instance.playerData.SaveData();
+                    GameManager.Instance.SaveData();
                     Destroy(this.gameObject);
                 }
                 else
@@ -71,7 +71,7 @@ public class GuildPannel : MonoBehaviour
                 {
                     GameManager.Instance.UseGold(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
-                    GameManager.Instance.playerData.SaveData();
+                    GameManager.Instance.SaveData();
                     Destroy(this.gameObject);
                 }
                 else

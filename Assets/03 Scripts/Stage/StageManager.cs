@@ -154,7 +154,7 @@ public class StageManager : MonoBehaviour
             bestFloor = floor;
 
         if (GameManager.Instance != null)
-            GameManager.Instance.playerData.SaveData();
+            GameManager.Instance.SaveData();
 
         if (floor % BOSS_FLOOR == 0) //10층마다 보스
         {
