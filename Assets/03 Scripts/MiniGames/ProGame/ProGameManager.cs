@@ -2,159 +2,135 @@
 using TMPro;
 using UnityEngine;
 
+
 public class ProGameManager : MonoBehaviour
 {
-    public GameObject[] BallSpwun;
+    public GameObject Boss;
+    public GameObject Boss2;
+    public GameObject[] TeleportPoint;
     public GameObject SpeedInput;
 
     [Header("속도")]
     public float moveSpeed = 5f;
-    [Header("다음 패턴")]
-    public float PatternSpeed = 3f;
 
-    public GameObject BallPreFab;
+    [Header("다음 패턴")]
+    public float PatternSpeed = 1.5f; // 1.5초 간격
+
+    [Header("공 패턴")]
+    public GameObject[] BallPreFab;
 
     [Header("플레이어")]
     public GameObject Player;
 
-    private TMP_InputField speedInputField;
+    [Header("출력 UI")]
+    public GameObject PrintOut;
 
+    private TextMeshProUGUI printText;
+    private TMP_InputField speedInputField;
     private bool GameStart;
+    private float tiltTimer;
+    private float end = 60;
+
+    // 현재 사용 중인 발사체 프리팹
+    private GameObject currentBallPrefab;
 
     void Start()
     {
+        printText = PrintOut.GetComponent<TextMeshProUGUI>();
         GameStart = false;
 
-        if (SpeedInput != null)
+        if (SpeedInput)
         {
             speedInputField = SpeedInput.GetComponent<TMP_InputField>();
         }
 
-        // 시작 시 코루틴 실행
+        if (Boss2 != null)
+        {
+            Boss2.SetActive(false); // 시작 시 숨김
+        }
+
         StartCoroutine(GameRoutine());
+    }
+
+    private void Update()
+    {
+        if (GameStart)
+        {
+            tiltTimer += Time.deltaTime;
+            UpdateUI();
+
+            // 속도 증가
+            if (tiltTimer >= 50)
+            {
+                moveSpeed = 4f;
+            }
+            else if (tiltTimer >= 40)
+            {
+                moveSpeed = 7f;
+            }
+            else
+            {
+                moveSpeed = 6f;
+            }
+        }
+    }
+
+    private void UpdateUI()
+    {
+        printText.text = $"{tiltTimer:F1}/{end}";
     }
 
     private IEnumerator GameRoutine()
     {
-        yield return new WaitForSeconds(3f);
         GameStart = true;
 
         while (GameStart)
         {
-            int i = Random.Range(0, 3); // 0 또는 1
+            // 새로운 한 바퀴가 시작될 때 무작위 발사체 선택
+            currentBallPrefab = BallPreFab[Random.Range(0, BallPreFab.Length)];
 
-            if (i == 0)
+            for (int i = 0; i < TeleportPoint.Length; i++)
             {
-                StartCoroutine(AllBallCoroutine_StagePattern());
-            }
-            else if (i == 1)
-            {
-                StartCoroutine(AllBallCoroutine());
-            }
-            else if (i == 2) 
-            {
-               AllBall();
-            }
-            else
-            {
-                yield return null;
-            }
+                int randomIndex1 = Random.Range(0, TeleportPoint.Length);
+                int randomIndex2 = Random.Range(0, TeleportPoint.Length);
 
-            yield return new WaitForSeconds(PatternSpeed);
-        }
-    }
+                // 보스1 순간이동
+                Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
 
-    private void AllBall()
-    {
-        foreach (GameObject spawnPoint in BallSpwun)
-        {
-            if (spawnPoint != null && Player != null)
-            {
-                Vector3 direction = (Player.transform.position - spawnPoint.transform.position).normalized;
-                Quaternion rotation = Quaternion.LookRotation(direction);
-
-                // Instantiate 대신 풀에서 가져오기
-                GameObject spawnedBall = PoolManager.Instance.GetObject(BallPreFab, spawnPoint.transform.position, rotation);
-
-                Ball moveScript = spawnedBall.GetComponent<Ball>();
-                if (moveScript != null)
+                // 보스2 활성화 및 순간이동
+                if (tiltTimer >= 50 && Boss2)
                 {
-                    moveScript.SetSpeed(moveSpeed);
-                }
-            }
-        }
-    }
-    private IEnumerator AllBallCoroutine()
-    {
-        foreach (GameObject spawnPoint in BallSpwun)
-        {
-            if (spawnPoint != null && Player != null)
-            {
-                Vector3 direction = (Player.transform.position - spawnPoint.transform.position).normalized;
-                Quaternion rotation = Quaternion.LookRotation(direction);
-
-                GameObject spawnedBall = PoolManager.Instance.GetObject(BallPreFab, spawnPoint.transform.position, rotation);
-
-                Ball moveScript = spawnedBall.GetComponent<Ball>();
-                if (moveScript != null)
-                {
-                    moveScript.SetSpeed(moveSpeed);
+                    Boss2.SetActive(true);
+                    Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;
                 }
 
-                yield return new WaitForSeconds(0.5f); // 각 공을 0.5초 간격으로 발사
-            }
-        }
-    }
-    private IEnumerator AllBallCoroutine_StagePattern()
-    {
-        // 1단계: 0, 1, 2
-        yield return StartCoroutine(FireBallsByIndices(new int[] { 0, 1, 2 }));
-        yield return new WaitForSeconds(0.5f);
+                // 0.5초 대기 후 발사
+                yield return new WaitForSeconds(0.5f);
 
-        // 2단계: 3, 8
-        yield return StartCoroutine(FireBallsByIndices(new int[] { 3, 7 }));
-        yield return new WaitForSeconds(0.5f);
+                BossShootAtPlayer(Boss);
 
-        // 3단계: 4, 5, 6
-        yield return StartCoroutine(FireBallsByIndices(new int[] { 4, 5, 6 }));
-    }
-    private IEnumerator FireBallsByIndices(int[] indices)
-    {
-        foreach (int index in indices)
-        {
-            if (index >= 0 && index < BallSpwun.Length)
-            {
-                GameObject spawnPoint = BallSpwun[index];
-
-                if (spawnPoint != null && Player != null)
+                if (tiltTimer >= 50 && Boss2 != null)
                 {
-                    Vector3 direction = (Player.transform.position - spawnPoint.transform.position).normalized;
-                    Quaternion rotation = Quaternion.LookRotation(direction);
-
-                    GameObject spawnedBall = PoolManager.Instance.GetObject(BallPreFab, spawnPoint.transform.position, rotation);
-
-                    Ball moveScript = spawnedBall.GetComponent<Ball>();
-                    if (moveScript != null)
-                    {
-                        moveScript.SetSpeed(moveSpeed);
-                    }
+                    BossShootAtPlayer(Boss2);
                 }
+
+                // 나머지 대기 시간
+                yield return new WaitForSeconds(PatternSpeed - 0.5f);
             }
         }
-
-        yield return null; // 코루틴이므로 최소 1프레임 대기
     }
-    void Update() //입력창
-    {
-        if (speedInputField != null)
-        {
-            float parsedSpeed;
-            if (float.TryParse(speedInputField.text, out parsedSpeed))
-            {
-                moveSpeed = parsedSpeed;
-            }
-        }
 
-       
+    private void BossShootAtPlayer(GameObject boss)
+    {
+        Vector3 direction = (Player.transform.position - boss.transform.position).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        GameObject ball = PoolManager.Instance.GetObject(currentBallPrefab, boss.transform.position, rotation);
+
+        Ball ballScript = ball.GetComponent<Ball>();
+        if (ballScript != null)
+        {
+            ballScript.SetSpeed(moveSpeed);
+        }
     }
 }

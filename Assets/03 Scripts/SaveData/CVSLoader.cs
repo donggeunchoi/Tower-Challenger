@@ -4,6 +4,7 @@ using UnityEngine;
 public static class CVSLoader
 {
     public static List<MiniGameData> miniGameDataList = new List<MiniGameData>();
+    public static List<RewardTableData>  rewardTableDataList = new List<RewardTableData>();
 
     public static void LoadMiniGameCSV()
     {
@@ -60,6 +61,40 @@ public static class CVSLoader
         }
     }
 
+    public static void LoadRewardCVS()
+    {
+        TextAsset data = Resources.Load<TextAsset>("TowerRewardTable");
+        
+        if (data == null)
+        {
+            Debug.LogError("미니게임 CSV 파일이 없습니다.");
+            return;
+        }
+        
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++) // 헤더 제외
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            
+            string[] values = lines[i].Split(',');
+            
+            RewardTableData row = new RewardTableData();
+            row.index = ParseInt(GetValue(values,0));
+            row.name = GetValue(values,1);
+            row.type = GetValue(values,2);
+            row.floor = ParseInt(GetValue(values,4));
+            row.goldReward =  ParseInt(GetValue(values,5));
+            row.diaReward =  ParseInt(GetValue(values,6));
+            row.speedMoveReward = ParseBool(GetValue(values,7));
+            row.sandGlassReward =  ParseBool(GetValue(values,8));
+            row.topTicketReward =  ParseBool(GetValue(values,9));
+            
+            
+            rewardTableDataList.Add(row);
+        }
+        
+    }
+
     private static string GetValue(string[] arr, int idx)
     {
         if (idx < arr.Length) return arr[idx];
@@ -76,5 +111,16 @@ public static class CVSLoader
         float v = 0;
         float.TryParse(s, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out v);
         return v;
+    }
+    
+    private static bool ParseBool(string s)
+    {
+        if(string.IsNullOrWhiteSpace(s)) return false;
+        s = s.Trim().ToLower();
+        if(s == "true" || s == "1")
+            return true;
+        if (s == "false" || s == "0")
+            return false;
+        return false;
     }
 }
