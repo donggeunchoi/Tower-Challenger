@@ -134,13 +134,13 @@ public class StageManager : MonoBehaviour
         if (stageClearPortal.Count >= 0 && stageClearPortal.Count < randomGames.Count && randomGames[stageClearPortal.Count] != null)
         {
             MiniGameDatas selectedGame = randomGames[stageClearPortal.Count];
-            // if (floor <= 9)
-            // {
-            //     if (uiManager != null)
-            //     {
-            //         uiManager.InstantiateUI(selectedGame.miniGameInfoUI);
-            //     }
-            // }
+            if (floor <= 9)
+            {
+                if (uiManager != null)
+                {
+                    uiManager.InstantiateUI(selectedGame.miniGameInfoUI);
+                }
+            }
             SceneManager.LoadScene(selectedGame.sceneName);
         }
     }
