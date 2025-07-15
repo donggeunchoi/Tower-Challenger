@@ -30,12 +30,14 @@ public class ProGameManager : MonoBehaviour
     private bool GameStart = false;
     private float tiltTimer;
     private float end = 60;
+    private StageManager stageManager;
 
     // 현재 사용 중인 발사체 프리팹
     private GameObject currentBallPrefab;
 
     void Start()
     {
+        stageManager = StageManager.instance;
         printText = PrintOut.GetComponent<TextMeshProUGUI>();
 
         if(speedInputField)
@@ -44,7 +46,6 @@ public class ProGameManager : MonoBehaviour
         }
             Boss2.SetActive(false);
             StartCoroutine(GameRoutine());
-
     }
 
     private void Update()
@@ -55,7 +56,12 @@ public class ProGameManager : MonoBehaviour
             UpdateUI();
 
             // 속도 증가
-            if (tiltTimer >= 50)
+            if (tiltTimer >= 60)
+            {
+                stageManager.MiniGameResult(true);
+                GameStart = false;
+            }
+            else if (tiltTimer >= 50)
             {
                 moveSpeed = 4f;
             }
