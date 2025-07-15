@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject itemManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
-    public PlayerData playerData;
+    public PlayerData playerData;  //private
 
     [Header("스테미나")]
     public const int MAX_STAMINA = 5;

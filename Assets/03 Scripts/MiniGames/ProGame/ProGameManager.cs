@@ -27,7 +27,7 @@ public class ProGameManager : MonoBehaviour
 
     private TextMeshProUGUI printText;
     private TMP_InputField speedInputField;
-    private bool GameStart;
+    private bool GameStart = false;
     private float tiltTimer;
     private float end = 60;
 
@@ -37,19 +37,14 @@ public class ProGameManager : MonoBehaviour
     void Start()
     {
         printText = PrintOut.GetComponent<TextMeshProUGUI>();
-        GameStart = false;
 
-        if (SpeedInput)
+        if(speedInputField)
         {
             speedInputField = SpeedInput.GetComponent<TMP_InputField>();
         }
+            Boss2.SetActive(false);
+            StartCoroutine(GameRoutine());
 
-        if (Boss2 != null)
-        {
-            Boss2.SetActive(false); // 시작 시 숨김
-        }
-
-        StartCoroutine(GameRoutine());
     }
 
     private void Update()
@@ -82,6 +77,7 @@ public class ProGameManager : MonoBehaviour
 
     private IEnumerator GameRoutine()
     {
+        yield return new WaitForSeconds(3f);
         GameStart = true;
 
         while (GameStart)
@@ -98,7 +94,7 @@ public class ProGameManager : MonoBehaviour
                 Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
 
                 // 보스2 활성화 및 순간이동
-                if (tiltTimer >= 50 && Boss2)
+                if (tiltTimer >= 50)
                 {
                     Boss2.SetActive(true);
                     Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;
@@ -109,7 +105,7 @@ public class ProGameManager : MonoBehaviour
 
                 BossShootAtPlayer(Boss);
 
-                if (tiltTimer >= 50 && Boss2 != null)
+                if (tiltTimer >= 50)
                 {
                     BossShootAtPlayer(Boss2);
                 }
@@ -128,7 +124,7 @@ public class ProGameManager : MonoBehaviour
         GameObject ball = PoolManager.Instance.GetObject(currentBallPrefab, boss.transform.position, rotation);
 
         Ball ballScript = ball.GetComponent<Ball>();
-        if (ballScript != null)
+        if (ballScript)
         {
             ballScript.SetSpeed(moveSpeed);
         }
