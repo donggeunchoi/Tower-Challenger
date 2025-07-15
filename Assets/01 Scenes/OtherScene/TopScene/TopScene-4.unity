@@ -14492,74 +14492,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5841362848481907712}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6097251457871092977
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6494710182871518909}
-    m_Modifications:
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.5820305
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -12.167756
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.03648679
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8971048589144481898, guid: 63cea43937cd4674b9bd47d18a1756b9,
-        type: 3}
-      propertyPath: m_Name
-      value: PF Props - Wooden Gate 01
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 63cea43937cd4674b9bd47d18a1756b9, type: 3}
 --- !u!4 &6494710182871518909
 Transform:
   m_ObjectHideFlags: 0
@@ -14588,7 +14520,6 @@ Transform:
   - {fileID: 4990858950649125434}
   - {fileID: 1410845488199993728}
   - {fileID: 5378286844888637607}
-  - {fileID: 9124604753972382616}
   - {fileID: 1522504955}
   - {fileID: 275117802}
   - {fileID: 388172002}
@@ -17357,12 +17288,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!4 &9124604753972382616 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8705980594976036038, guid: 63cea43937cd4674b9bd47d18a1756b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 6097251457871092977}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9192170560933905218
 Transform:
   m_ObjectHideFlags: 0
