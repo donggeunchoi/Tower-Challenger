@@ -8,9 +8,10 @@ public class AllClear : MonoBehaviour
 {
 
     StageManager stageManager;
-    public RewardBase rewardBase;
+    // public RewardBase rewardBase;
     private RewardManager rewardManager;
     private ItemManager itemManager;
+    
 
     [SerializeField] private TextMeshProUGUI nextFloorText;
     //아이템 자료형 추가되는 랜덤아이템 관리
@@ -36,11 +37,6 @@ public class AllClear : MonoBehaviour
 
     private void Start()
     {
-        // if (reward != null)
-        //     reward = null;
-
-        //추가되는 랜덤 아이템을 받아서
-        //랜덤아이템 자료형 list + for (int i = 0; i <= 랜덤아이템.length; i++) 인스턴스 이미지
 
         stageManager = StageManager.instance;
         rewardManager = this.GetComponent<RewardManager>();
@@ -73,17 +69,13 @@ public class AllClear : MonoBehaviour
 
     void GiveTowerReward()
     {
-        if (rewardBase == null || rewardBase.rewards.Count == 0)
+        if (CVSLoader.rewardTableDataList == null || CVSLoader.rewardTableDataList.Count == 0)
         {
-            rewardBase = FindObjectOfType<RewardBase>();
-            if (rewardBase == null)
-            {
-                Debug.LogError("없어요 rewardBase가");
-                return;
-            }
+            CVSLoader.LoadRewardCVS();
+            
         }
 
-        if (rewardBase.rewards == null)
+        if (CVSLoader.rewardTableDataList == null)
         {
             Debug.LogError("RewardBase.rewards가 없어요");
             return;
@@ -97,7 +89,7 @@ public class AllClear : MonoBehaviour
         
         int currentFloor = StageManager.instance.floor;
         
-        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+        List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
 
         if (currentRewards.Count == 0)
         {
@@ -115,11 +107,11 @@ public class AllClear : MonoBehaviour
 
     public void UpdateRewardGold()
     {
-        rewardBase = FindObjectOfType<RewardBase>();
+        CVSLoader.LoadRewardCVS();
         
         int currentFloor = StageManager.instance.floor;
         
-        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+        List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
         
         goldReward.sprite = ItemManager.instance.GoldSprite;
         goldRewardText.text =  currentRewards.Count > 0 ? currentRewards[0].goldReward.ToString() : "0";
@@ -128,11 +120,11 @@ public class AllClear : MonoBehaviour
 
     public void UpdateRewardDia()
     {
-        rewardBase = FindObjectOfType<RewardBase>();
+        CVSLoader.LoadRewardCVS();
         
         int currentFloor = StageManager.instance.floor;
         
-        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+        List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
 
         if (currentRewards[0].diaReward != 0)
         {
@@ -149,10 +141,11 @@ public class AllClear : MonoBehaviour
 
     public void UpdateRewrdItem()
     {
-        rewardBase = FindObjectOfType<RewardBase>();
+        CVSLoader.LoadRewardCVS();
+        
         int currentFloor = StageManager.instance.floor;
 
-        List<RewardTableData> currentRewards = rewardBase.rewards.FindAll(r => r.floor == currentFloor);
+        List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
 
         if (currentRewards.Count == 0) return;
 
