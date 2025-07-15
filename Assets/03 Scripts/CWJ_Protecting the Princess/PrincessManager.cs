@@ -6,8 +6,10 @@ public class PrincessManager : MonoBehaviour
 
     [SerializeField] private ShieldMove shieldMove;
     [SerializeField] private EnemyPos enemyPos;
+    public SpriteRenderer spriteRenderer;
 
     public float moveSpeed;
+    public float enemyTime;
 
     private void Awake()
     {
@@ -15,5 +17,10 @@ public class PrincessManager : MonoBehaviour
         {
             princessInstance = this;
         }
+    }
+
+    private void Start()
+    {
+        spriteRenderer.gameObject.SetActive(false);
     }
 }

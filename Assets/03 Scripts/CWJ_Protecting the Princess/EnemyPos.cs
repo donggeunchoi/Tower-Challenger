@@ -7,10 +7,11 @@ public class EnemyPos : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private int randomEnemy; // 프리펩을 랜덤으로
+    private int side;
     private float cameraHeight;
     private float cameraWidth;
-    private int side;
 
+    public float time;
     private Camera cam;
     private Vector2 camPos;
 
@@ -24,7 +25,8 @@ public class EnemyPos : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+       time += Time.deltaTime;
+        if (time >= PrincessManager.princessInstance.enemyTime)
         {
             if (enemyPrefabs.Length == 0)
             {
@@ -32,6 +34,8 @@ public class EnemyPos : MonoBehaviour
             }
             randomEnemy = Random.Range(0, enemyPrefabs.Length);
             PrefabInit();
+
+           time = 0f;
         }
     }
 

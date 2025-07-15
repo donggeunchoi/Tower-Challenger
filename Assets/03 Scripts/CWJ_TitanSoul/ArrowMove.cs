@@ -26,14 +26,16 @@ public class ArrowMove : MonoBehaviour
     {
         if (context.started)
         {
-
+            Debug.Log("시작");
         }
         if (context.performed)
         {
+            Debug.Log("하는중");
 
         }
         if (context.canceled)
         {
+            Debug.Log("끝");
 
         }
     }
