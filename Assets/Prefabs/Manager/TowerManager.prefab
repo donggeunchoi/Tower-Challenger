@@ -53,22 +53,14 @@ MonoBehaviour:
   infoUI: {fileID: 0}
   difficulty: 0
   isGameActive: 0
-  isTest: 0
   floor: 1
   bestFloor: 1
   totalStageCount: 10
   timerMultiplier: 1
+  playerPosition: {x: 0, y: 0, z: 0}
+  layerNumber: 0
+  currentSceneName: 
   stageClearPortal: 
-  miniGameDatas:
-  - {fileID: 11400000, guid: da224f2646da1d74fa94ab8e8c1dba93, type: 2}
-  - {fileID: 11400000, guid: 3c2e5b03cc437894782861f0f60e6411, type: 2}
-  - {fileID: 11400000, guid: 8173f0fb966e361478856b23248ae992, type: 2}
-  - {fileID: 11400000, guid: b87c27edaffe4463f92bbe79286a3817, type: 2}
-  - {fileID: 11400000, guid: 3abf8373dda52414a9c72fd1753c7159, type: 2}
-  - {fileID: 11400000, guid: 8469368ffead7374e8ba17c3f4a7b457, type: 2}
-  - {fileID: 11400000, guid: 9407a0df7f6879e4aa870d4cce06f84f, type: 2}
-  - {fileID: 11400000, guid: 84dccacee0f693543876af7f3b24b20f, type: 2}
-  - {fileID: 11400000, guid: 380a1e3a64433ec4a84d91d4267b3898, type: 2}
   mapScenes:
   - TopScene-1
   - TopScene-2
@@ -88,6 +80,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageManager: {fileID: 0}
   miniGameManager: {fileID: 0}
+  mapScenes:
+  - TopScene-1
+  - TopScene-2
+  - TopScene-3
+  - TopScene-4
 --- !u!114 &8634761608726602802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,3 +107,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9407a0df7f6879e4aa870d4cce06f84f, type: 2}
   - {fileID: 11400000, guid: 84dccacee0f693543876af7f3b24b20f, type: 2}
   - {fileID: 11400000, guid: 380a1e3a64433ec4a84d91d4267b3898, type: 2}
+  randomGames: []
