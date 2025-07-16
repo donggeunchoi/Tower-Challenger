@@ -12,6 +12,7 @@ public class TutorialManager : MonoBehaviour
     private int currentTutorial = 0;
     private bool isWaitingForInput = false;
 
+    
     private void Start()
     {
         foreach (GameObject obj in tutorialTextUI)
@@ -29,12 +30,25 @@ public class TutorialManager : MonoBehaviour
         isWaitingForInput = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ShowOnlyPanel(int index)
     {
-        if (isWaitingForInput && Input.GetKeyDown(KeyCode.Space))
+        for (int i = 0; i < tutorialTextUI.Count; i++)
         {
-            isWaitingForInput = true;
+            tutorialTextUI[i].SetActive(i == index);
+        }
+    }
+
+    IEnumerator EndTutorial()
+    {
+        yield return StartCoroutine(FadeIn());
+    }
+    
+    
+    public void TriggerNextPanel()
+    {
+        if (isWaitingForInput)
+        {
+            isWaitingForInput = false;
             currentTutorial++;
 
             if (currentTutorial < tutorialTextUI.Count)
@@ -49,19 +63,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void ShowOnlyPanel(int index)
-    {
-        for (int i = 0; i < tutorialTextUI.Count; i++)
-        {
-            tutorialTextUI[i].SetActive(i == index);
-        }
-    }
-
-    IEnumerator EndTutoreal()
-    {
-        yield return StartCoroutine(FadeIn());
-    }
-    
+    #region Fade
     
     IEnumerator FadeIn()//투명에서 검은거로 
     {
@@ -90,4 +92,6 @@ public class TutorialManager : MonoBehaviour
         }
         fadeImage.color = new Color(0, 0, 0, 0);
     }
+
+        #endregion
 }
