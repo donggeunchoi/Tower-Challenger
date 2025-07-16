@@ -23,7 +23,7 @@ public class StageManager : MonoBehaviour
     [Header("진행 정보")]
     public const int FIRST_FLOOR = 1;
     public const int BOSS_FLOOR = 10;
-    public const int MAX_FLOOR = 40;
+    public const int MAX_FLOOR = 30;
     public int floor = 1;              //현재층
     public int bestFloor = 1;          //최고 기록
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
