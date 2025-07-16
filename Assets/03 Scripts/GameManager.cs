@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,24 +16,24 @@ public class GameManager : MonoBehaviour
     public GameObject itemManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
-    private PlayerData playerData;  //private
+    public PlayerData playerData { get; private set; }
 
     [Header("스테미나")]
     public const int MAX_STAMINA = 5;
-    public int mainStamina;
-    public float staminatimer = 0;
+    public int mainStamina { get; private set; }
+    public float staminatimer { get; private set; }
     public const float STAMINA_TIME = 1800f;
 
     [Header("저장")]
     public float saveTimer;
     public const float SAVETIME = 120;
-    public List<CharacterData> allCharacterData = new List<CharacterData>();
+    public List<CharacterData> allCharacterData { get; private set; } = new List<CharacterData>();
     public List<CharacterData> charactors = new List<CharacterData>();
     public CharacterData equimentCharacter;
 
     [Header("재화")]
-    public int gold;
-    public int diamond;
+    public int gold { get; private set; }
+    public int diamond { get; private set; }
 
     //1800초 30분 마다 1참
     //게임이 꺼져도 차게할 방법.... 시작시간과 끝시간을 계산해서 채워준다..?
@@ -122,6 +124,47 @@ public class GameManager : MonoBehaviour
             staminatimer -= STAMINA_TIME;
         }
     }
+
+    public void LoadInfo()
+    {
+        if (!string.IsNullOrEmpty(playerData.lastTimeString))
+        {
+            playerData.lastTime = DateTime.Parse(playerData.lastTimeString, null,
+                System.Globalization.DateTimeStyles.RoundtripKind);
+        }
+        else
+        {
+            playerData.lastTime = DateTime.Now;
+        }
+
+        float secondsPassed = (float)(DateTime.Now - playerData.lastTime).TotalSeconds;
+        staminatimer = playerData.staminaTimer + secondsPassed;
+
+        if (mainStamina <= 0)  //테스트용 코드
+            mainStamina = 5;
+
+        mainStamina = playerData.stamina;
+        gold = playerData.gold;
+        diamond = playerData .diamond;
+
+        charactors.Clear();
+        foreach (string name in playerData.characterNames)
+        {
+            CharacterData data = allCharacterData.Find(character => character.characterName == name);
+            if (data != null)
+                charactors.Add(data);
+        }
+        if (playerData.characterNames != null)
+        {
+            if (playerData.equippedCharacterName != null)
+            {
+                CharacterData data = allCharacterData.Find(character => character.characterName == playerData.equippedCharacterName);
+                if (data != null)
+                    equimentCharacter = data;
+            }
+        }
+    }
+
     public void LoadData()
     {
         playerData.LoadData();

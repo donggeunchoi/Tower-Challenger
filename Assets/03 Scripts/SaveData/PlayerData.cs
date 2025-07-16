@@ -69,39 +69,7 @@ public class PlayerData
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.staminatimer = staminaTimer;
-
-            if (!string.IsNullOrEmpty(lastTimeString))
-                lastTime = DateTime.Parse(lastTimeString, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            else
-                lastTime = DateTime.Now;
-
-            float secondsPassed = (float)(DateTime.Now - lastTime).TotalSeconds;
-            GameManager.Instance.staminatimer = staminaTimer + secondsPassed;
-
-            if (this.stamina <= 0)  //테스트용 코드
-                this.stamina = 5;
-
-            GameManager.Instance.mainStamina = this.stamina;
-            GameManager.Instance.gold = gold;
-            GameManager.Instance.diamond = diamond;
-
-            GameManager.Instance.charactors.Clear();
-            foreach (string name in characterNames)
-            {
-                CharacterData data = GameManager.Instance.allCharacterData.Find(character => character.characterName == name);
-                if (data != null)
-                    GameManager.Instance.charactors.Add(data);
-            }
-            if (characterNames != null)
-            {
-                if (equippedCharacterName != null)
-                {
-                    CharacterData data = GameManager.Instance.allCharacterData.Find(character => character.characterName == equippedCharacterName);
-                    if (data != null)
-                        GameManager.Instance.equimentCharacter = data;
-                }
-            }
+            GameManager.Instance.LoadInfo();
         }
 
         if (StageManager.instance != null)
@@ -109,13 +77,7 @@ public class PlayerData
 
         if (ItemManager.instance != null)
         {
-            ItemManager.instance.items.Clear();
-            foreach (string name in itmeDataID)
-            {
-                ItemData item = ItemManager.instance.allItemList.Find(item => item.itemID == name);
-                if (item != null)
-                    ItemManager.instance.items.Add(item);
-            }
+            ItemManager.instance.LoadItem();
         }
     }
 }
