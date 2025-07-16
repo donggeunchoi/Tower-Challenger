@@ -36,6 +36,10 @@ public class Guild : MonoBehaviour
                     ClearImage[i].SetActive(true);
                     Destroy(targetButton[i]);
                 }
+                else
+                {
+                    ClearImage[i].SetActive(false);
+                }
             }
             
         }
