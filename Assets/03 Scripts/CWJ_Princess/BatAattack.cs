@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyAattack : MonoBehaviour
+public class BatAattack : MonoBehaviour
 {
     private Transform princess;
     private float rangeVetical;
