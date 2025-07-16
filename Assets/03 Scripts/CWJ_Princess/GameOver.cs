@@ -44,17 +44,17 @@ public class GameOver : MonoBehaviour
 
     private IEnumerator Hit()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             color.a = 0;
             spriteRenderer.color = color;
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.15f);
 
             color.a = 1;
             spriteRenderer.color = color;
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 }

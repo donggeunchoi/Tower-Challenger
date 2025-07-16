@@ -8,7 +8,15 @@ public class PrincessManager : MonoBehaviour
     [SerializeField] private EnemyPos enemyPos;
     public SpriteRenderer spriteRenderer;
 
-    public float moveSpeed;
+    [Header("박쥐 이동속도")]
+    public float batSpeed;
+    [Header("박쥐가 최대로 올라가는 y값")]
+    public float maxY;
+    [Header("박쥐다 최대로 내려가는 y값")]
+    public float minY;
+    [Header("박쥐의 y값 이동의 속도")]
+    public float veticalSpeed;
+    [Header("몬스터가 생성되는 주기")]
     public float enemyTime;
 
     private void Awake()

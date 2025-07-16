@@ -25,7 +25,7 @@ public class EnemyPos : MonoBehaviour
 
     private void Update()
     {
-       time += Time.deltaTime;
+        time += Time.deltaTime;
         if (time >= PrincessManager.princessInstance.enemyTime)
         {
             if (enemyPrefabs.Length == 0)
@@ -68,7 +68,7 @@ public class EnemyPos : MonoBehaviour
         float randomX = Random.Range(xMin, xMax);
         float randomY = Random.Range(yMin, yMax);
 
-        side = Random.Range(0, 3); // 3방향만 왼 , 오 , 위
+        side = Random.Range(0, 2); // 2방향만 왼 , 오 , 위
 
         switch(side)
         {
@@ -77,9 +77,6 @@ public class EnemyPos : MonoBehaviour
 
             case 1: // 1이면 오른쪽에서 랜덤 위치에 생성
                 return new Vector3(xMax + 1, randomY, 0f);
-
-            case 2: // 2라면 위에서 랜덤 위치에 생성
-                return new Vector3(randomX, yMax + 1, 0f);
         }
 
         return Vector3.zero;
