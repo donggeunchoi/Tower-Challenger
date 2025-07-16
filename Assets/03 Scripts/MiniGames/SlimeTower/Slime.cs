@@ -47,7 +47,8 @@ public class Slime : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Ground"))
         {
-            StageManager.instance.MiniGameResult(false);
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
             //이후에 LPDown으로 연결
             Debug.Log("땅에 착지");
             Destroy(gameObject);
