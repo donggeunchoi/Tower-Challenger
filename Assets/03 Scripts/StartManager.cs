@@ -52,7 +52,7 @@ public class StartManager : MonoBehaviour
         
         videoPanel.SetActive(false);
         
-        SceneManager.LoadScene("VillageScene");
+        SceneManager.LoadScene("TutorialScene");
     }
 
     IEnumerator FadeIn()//투명에서 검은거로 

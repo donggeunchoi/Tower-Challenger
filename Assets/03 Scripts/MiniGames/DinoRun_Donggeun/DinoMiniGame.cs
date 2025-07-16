@@ -83,13 +83,15 @@ public class DinoMiniGame : MonoBehaviour
 
     void GameClear()
     {
-        StageManager.instance.MiniGameResult(true);
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(true);
     }
     
     
     public void HandleHit()
     {
-        StageManager.instance.MiniGameResult(false);
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(false);
         UpdateLpui();
     }
 }
