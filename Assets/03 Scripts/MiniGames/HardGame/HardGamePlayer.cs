@@ -3,11 +3,9 @@
 public class HardGamePlayer : MonoBehaviour
 {
     private Vector3 Spawn;
-    private StageManager stageManager;
 
     private void Start()
     {
-        stageManager = StageManager.instance;
         Spawn = this.gameObject.transform.position;
     }
 
@@ -15,7 +13,9 @@ public class HardGamePlayer : MonoBehaviour
     {
         if (other.CompareTag("Ball"))
         {
-            stageManager.MiniGameResult(false);
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
+
             transform.position = Spawn;
         }
     }

@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class ProGamePlayer : MonoBehaviour
 {
-    private StageManager stageManager;
     private Animator animator;
 
     private bool isInvincible = false;
 
     private void Start()
     {
-        stageManager = StageManager.instance;
         animator = GetComponent<Animator>();
     }
 
@@ -18,7 +16,9 @@ public class ProGamePlayer : MonoBehaviour
     {
         if (other.CompareTag("Ball") && !isInvincible)
         {
-            stageManager.MiniGameResult(false);
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
+
             animator.SetTrigger("Hit");
             StartCoroutine(InvincibleRoutine());
         }
