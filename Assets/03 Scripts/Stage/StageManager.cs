@@ -29,8 +29,6 @@ public class StageManager : MonoBehaviour
     public int layerNumber;           //플레이어 레이어 저장
     public string currentSceneName;   //현재 씬 이름
     public List<int> stageClearPortal = new List<int>(); //여기에 활성화 되는 포탈 인덱스 값만 저장
-    
-    [SerializeField] string[] mapScenes;  //맵씬 모음
 
     private void Awake()
     {
