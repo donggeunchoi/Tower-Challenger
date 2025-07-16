@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -86,11 +86,19 @@ public class nonSenseGame : MonoBehaviour
     public void ClearGame()
     {
         Debug.Log("성공");
+        if (StageManager.instance != null)
+        {
+            StageManager.instance.MiniGameResult(true);
+        }
     }
 
     public void WrongAnswer()
     {
         Debug.Log("실패지롱");
+        if (StageManager.instance != null)
+        {
+            StageManager.instance.MiniGameResult(false);
+        }
         SettingQuiz();
     }
 }
