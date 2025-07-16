@@ -27,9 +27,13 @@ public class Map : MonoBehaviour
         {
             nextStagePortal[i].GetComponent<InteractionPortal>().portalNumber = i;
             nextStagePortal[i].gameObject.SetActive(false);
-            TutorialPortal.SetActive(true);
         }
         // stageManager = StageManager.instance;  //스테이지 매니저에서 정보를 받아서
+
+        if (TutorialPortal != null)
+        {
+            TutorialPortal.SetActive(true);
+        }
 
         StartCoroutine(RandomPortal());
     }
