@@ -8,6 +8,7 @@ public class Map : MonoBehaviour
     [SerializeField] private InteractionPortal[] nextStagePortal;
     [SerializeField] private GameObject startPlayerPosition;
     [SerializeField] private GameObject nextFloorPortal;
+    [SerializeField] private GameObject TutorialPortal;
     Vector3 playerPosition;
 
     StageManager stageManager;
@@ -26,6 +27,7 @@ public class Map : MonoBehaviour
         {
             nextStagePortal[i].GetComponent<InteractionPortal>().portalNumber = i;
             nextStagePortal[i].gameObject.SetActive(false);
+            TutorialPortal.SetActive(true);
         }
         // stageManager = StageManager.instance;  //스테이지 매니저에서 정보를 받아서
 
