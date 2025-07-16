@@ -21,11 +21,8 @@ public class HardGameGameManager : MonoBehaviour
 
     private TMP_InputField speedInputField;
 
-    private StageManager stageManager;
-
     void Start()
     {
-        stageManager = StageManager.instance;
         if (SpeedInput)
         {
             speedInputField = SpeedInput.GetComponent<TMP_InputField>();
@@ -132,7 +129,8 @@ public class HardGameGameManager : MonoBehaviour
                             newSpawnPos = new Vector3(-10f, -5f, Player.transform.position.z);
                             break;
                         case 5:
-                            stageManager.MiniGameResult(true);
+                            if (StageManager.instance != null)
+                                StageManager.instance.MiniGameResult(true);
                             break;
                     }
 

@@ -231,24 +231,21 @@ public class WalkTheStorkGameManager : MonoBehaviour
         // 앞뒤로 넘어졌을 때의 처리
         if (currentAngle <= -95f)
         {
-            if (StageManager.instance != null)
+            if (StageManager.instance != null && StageManager.instance.stageLP != null && StageManager.instance.stageLP.currentLP == 1)
             {
-                if (StageManager.instance.stageLP.currentLP == 1)
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
+
+                if (Leg) StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 1f));
+                if (High) StartCoroutine(SmoothRotate(High, new Vector3(0f, 0f, -140), 1f));
+                if (Man)
                 {
-                    stageManager.MiniGameResult(false);
-                    currentState = GameState.Ended;
-
-                    if (LF) LF.GetComponent<Animator>().enabled = false;
-                    if (RF) RF.GetComponent<Animator>().enabled = false;
-
-                    if (Leg) StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, -70f), 1f));
-                    if (High) StartCoroutine(SmoothRotate(High, new Vector3(0f, 0f, -140), 1f));
-                    if (Man)
-                    {
-                        Vector3 targetEuler = new Vector3(0f, 0f, -140f);
-                        Vector3 targetPos = new Vector3(Man.transform.position.x + 4, Man.transform.position.y - 1.5f, Man.transform.position.z);
-                        StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 1f));
-                    }
+                    Vector3 targetEuler = new Vector3(0f, 0f, -140f);
+                    Vector3 targetPos = new Vector3(Man.transform.position.x + 4, Man.transform.position.y - 1.5f, Man.transform.position.z);
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 1f));
                 }
             }
             else
@@ -265,25 +262,23 @@ public class WalkTheStorkGameManager : MonoBehaviour
 
         if (currentAngle >= 95f)
         {
-            if (StageManager.instance != null)
+            if (StageManager.instance != null && StageManager.instance.stageLP != null && StageManager.instance.stageLP.currentLP == 1)
             {
-                if (StageManager.instance.stageLP.currentLP == 1)
+                stageManager.MiniGameResult(false);
+                currentState = GameState.Ended;
+
+                if (LF) LF.GetComponent<Animator>().enabled = false;
+                if (RF) RF.GetComponent<Animator>().enabled = false;
+
+                if (Leg) StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, 90), 1f));
+                if (Head) StartCoroutine(SmoothRotate(Head, new Vector3(0f, 0f, 90), 1f));
+                if (Man)
                 {
-                    stageManager.MiniGameResult(false);
-                    currentState = GameState.Ended;
-
-                    if (LF) LF.GetComponent<Animator>().enabled = false;
-                    if (RF) RF.GetComponent<Animator>().enabled = false;
-
-                    if (Leg) StartCoroutine(SmoothRotate(Leg, new Vector3(0f, 0f, 90), 1f));
-                    if (Head) StartCoroutine(SmoothRotate(Head, new Vector3(0f, 0f, 90), 1f));
-                    if (Man)
-                    {
-                        Vector3 targetEuler = new Vector3(0f, 0f, 0);
-                        Vector3 targetPos = new Vector3(Man.transform.position.x - 3, Man.transform.position.y - 2.5f, Man.transform.position.z);
-                        StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 1f));
-                    }
+                    Vector3 targetEuler = new Vector3(0f, 0f, 0);
+                    Vector3 targetPos = new Vector3(Man.transform.position.x - 3, Man.transform.position.y - 2.5f, Man.transform.position.z);
+                    StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 1f));
                 }
+
             }
             else
             {

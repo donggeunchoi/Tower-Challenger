@@ -51,7 +51,6 @@ MonoBehaviour:
   stageTimer: {fileID: 0}
   stageLP: {fileID: 0}
   infoUI: {fileID: 0}
-  difficulty: 0
   isGameActive: 0
   floor: 1
   bestFloor: 1
@@ -61,11 +60,6 @@ MonoBehaviour:
   layerNumber: 0
   currentSceneName: 
   stageClearPortal: 
-  mapScenes:
-  - TopScene-1
-  - TopScene-2
-  - TopScene-3
-  - TopScene-4
 --- !u!114 &6458399170951497763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,4 +101,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9407a0df7f6879e4aa870d4cce06f84f, type: 2}
   - {fileID: 11400000, guid: 84dccacee0f693543876af7f3b24b20f, type: 2}
   - {fileID: 11400000, guid: 380a1e3a64433ec4a84d91d4267b3898, type: 2}
+  - {fileID: 11400000, guid: c67975b1771db7742a039d8626e96ba8, type: 2}
+  - {fileID: 11400000, guid: 40a3dac87b6402344bb82e99b10d10fd, type: 2}
   randomGames: []
