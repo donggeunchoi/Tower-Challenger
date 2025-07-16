@@ -43,7 +43,7 @@ public class ItemManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.playerData.SaveData();
+            GameManager.Instance.SaveData();
         }
         //GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
 
@@ -63,7 +63,7 @@ public class ItemManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.playerData.SaveData();
+            GameManager.Instance.SaveData();
         }
     }
     
