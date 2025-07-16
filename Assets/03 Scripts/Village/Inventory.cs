@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     public GameObject Invetory;
     public Transform SlotParent;
     public GameObject SlotPrefab;
-    public bool isTuto;
+    public bool isTuto = false;
 
     private List<GameObject> inventorySlots = new List<GameObject>();
    

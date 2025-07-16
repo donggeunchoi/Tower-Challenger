@@ -7,11 +7,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public StageManager stageManager;  //이후 주석처리 (타워매니저 상속)
+    public StageManager towerManager;
     public UIManager uiManager;
-    public ItemManager itemManager;    //이후 주석처리 (플레이어 매니저 상속)
-
-    public GameObject stageManagerPrefab;
+    public ItemManager itemManager;
+    
+    public GameObject towerManagerPrefab;
     public GameObject uiManagerPrefab;
     public GameObject itemManagerPrefab;
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
 
-        stageManager = StageManager.instance;
+        towerManager = StageManager.instance;
         uiManager = UIManager.Instance;
         itemManager = ItemManager.instance;
 
@@ -63,10 +63,10 @@ public class GameManager : MonoBehaviour
                 Instantiate(uiManagerPrefab);
         }
 
-        if (FindAnyObjectByType(typeof(StageManager)) == null)
+        if (FindAnyObjectByType(typeof(TowerManager)) == null)
         {
-            if (stageManagerPrefab != null)
-                Instantiate(stageManagerPrefab);
+            if (towerManagerPrefab != null)
+                Instantiate(towerManagerPrefab);
         }
 
         if (FindAnyObjectByType(typeof(ItemManager)) == null)
