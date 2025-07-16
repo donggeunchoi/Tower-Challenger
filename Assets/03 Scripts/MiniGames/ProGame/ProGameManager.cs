@@ -67,7 +67,7 @@ public class ProGameManager : MonoBehaviour
             }
             else if (tiltTimer >= 50)
             {
-                moveSpeed = 7f;
+                moveSpeed = 4f;
             }
             else if (tiltTimer >= 40)
             {
@@ -75,7 +75,7 @@ public class ProGameManager : MonoBehaviour
             }
             else
             {
-                moveSpeed = 4f;
+                moveSpeed = 5f;
             }
         }
     }
