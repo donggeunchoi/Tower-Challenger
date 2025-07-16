@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,24 +16,25 @@ public class GameManager : MonoBehaviour
     public GameObject itemManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
-    private PlayerData playerData;  //private
+    public PlayerData playerData { get; private set; }
 
     [Header("스테미나")]
     public const int MAX_STAMINA = 5;
-    public int mainStamina;
-    public float staminatimer = 0;
+    public int mainStamina { get; private set; }
+    public float staminatimer { get; private set; }
     public const float STAMINA_TIME = 1800f;
 
     [Header("저장")]
+    private bool isLoad = false;
     public float saveTimer;
     public const float SAVETIME = 120;
-    public List<CharacterData> allCharacterData = new List<CharacterData>();
+    public List<CharacterData> allCharacterData { get; private set; } = new List<CharacterData>();
     public List<CharacterData> charactors = new List<CharacterData>();
     public CharacterData equimentCharacter;
 
     [Header("재화")]
-    public int gold;
-    public int diamond;
+    public int gold { get; private set; }
+    public int diamond { get; private set; }
 
     //1800초 30분 마다 1참
     //게임이 꺼져도 차게할 방법.... 시작시간과 끝시간을 계산해서 채워준다..?
@@ -79,35 +82,41 @@ public class GameManager : MonoBehaviour
 
         playerData = SaveManager.LoadUsers();
         playerData.LoadData();
+        isLoad = true;
     }
 
     private void OnApplicationFocus(bool focus)
     {
-
+        if (isLoad && !focus)
+        {
+            SaveData();
+        }
     }
     private void OnApplicationPause(bool pause)
     {
-        //if (pause)
-        //{
-        //    playerData.SaveData();
-        //}
-
-        //if(!pause)
-        //{
-        //    playerData.SaveData();
-        //}
+        if (isLoad && pause)
+            SaveData();
     }
 
     private void Update()
+    {
+        AutoSave();
+        UpdateStaminaTimer();
+    }
+
+    private void AutoSave()
     {
         saveTimer += Time.deltaTime;
 
         if (saveTimer >= SAVETIME)
         {
             saveTimer = 0;
-            playerData.SaveData();
+            SaveData();
         }
+    }
 
+    private void UpdateStaminaTimer()
+    {
         if (mainStamina >= MAX_STAMINA)
         {
             staminatimer = 0;
@@ -122,6 +131,7 @@ public class GameManager : MonoBehaviour
             staminatimer -= STAMINA_TIME;
         }
     }
+
     public void LoadData()
     {
         playerData.LoadData();
@@ -175,5 +185,51 @@ public class GameManager : MonoBehaviour
     {
         CVSLoader.LoadMiniGameCSV();
         miniGameDataList = CVSLoader.miniGameDataList;
+    }
+
+    public void LoadResource()
+    {
+        mainStamina = playerData.stamina;
+        gold = playerData.gold;
+        diamond = playerData.diamond;
+    }
+
+    public void LoadStaminaTimer()
+    {
+        if (!string.IsNullOrEmpty(playerData.lastTimeString))
+        {
+            playerData.lastTime = DateTime.Parse(playerData.lastTimeString, null,
+                System.Globalization.DateTimeStyles.RoundtripKind);
+        }
+        else
+        {
+            playerData.lastTime = DateTime.Now;
+        }
+
+        float secondsPassed = (float)(DateTime.Now - playerData.lastTime).TotalSeconds;
+        staminatimer = playerData.staminaTimer + secondsPassed;
+
+        if (mainStamina <= 0)  //테스트용 코드
+            mainStamina = 5;
+    }
+
+    public void LoadCharacter()
+    {
+        charactors.Clear();
+        foreach (string name in playerData.characterNames)
+        {
+            CharacterData data = allCharacterData.Find(character => character.characterName == name);
+            if (data != null)
+                charactors.Add(data);
+        }
+        if (playerData.characterNames != null)
+        {
+            if (playerData.equippedCharacterName != null)
+            {
+                CharacterData data = allCharacterData.Find(character => character.characterName == playerData.equippedCharacterName);
+                if (data != null)
+                    equimentCharacter = data;
+            }
+        }
     }
 }

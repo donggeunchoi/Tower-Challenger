@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class StageLP : MonoBehaviour
 {
     public const int DEFALT_LP = 4;
-    public int bonusLP;
-    public int currentLP;
-    public Sprite nomalHeart;
-    public Sprite brokenHeart;
-    public Image[] heartIcon;
+    [SerializeField] private int bonusLP;
+    public int currentLP { get; private set; }
+    [SerializeField] private Sprite nomalHeart;
+    [SerializeField] private Sprite brokenHeart;
+    [SerializeField] private Image[] heartIcon;
     private int beforLP;
     
     public void ResetLP()
