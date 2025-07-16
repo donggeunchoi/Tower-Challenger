@@ -138,6 +138,7 @@ public class StageManager : MonoBehaviour
             {
                 if (uiManager != null)
                 {
+                    if (selectedGame.miniGameInfoUI != null)
                     uiManager.InstantiateUI(selectedGame.miniGameInfoUI);
                 }
             }
