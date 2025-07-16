@@ -50,12 +50,6 @@ public class ProGameManager : MonoBehaviour
 
         Boss2.SetActive(false);
 
-        if (TeleportPoint.Length < 4)
-        {
-            Debug.LogError("TeleportPoint 배열 길이가 4 이상이어야 합니다.");
-            return;
-        }
-
         StartCoroutine(GameRoutine());
     }
 
@@ -98,11 +92,11 @@ public class ProGameManager : MonoBehaviour
 
         while (GameStart)
         {
-            int randomIndex1 = Random.Range(0, TeleportPoint.Length);
+            int randomIndex1 = Random.Range(0, TeleportPoint.Length);// 보스가 렌텀 위치값 가져옴
             int randomIndex2 = Random.Range(0, TeleportPoint.Length);
 
-            // 보스1 애니메이션
-            TriggerBossAnimation(animator, randomIndex1);
+
+            TriggerBossAnimation(animator, randomIndex1); 
             Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
 
             if (tiltTimer >= 50)
@@ -110,22 +104,18 @@ public class ProGameManager : MonoBehaviour
                 Boss2.SetActive(true);
                 yield return null;
 
-                if (randomIndex1 == randomIndex2)
-                    randomIndex2 = (randomIndex2 + 1) % TeleportPoint.Length;
-    
+                if (randomIndex1 == randomIndex2)///같은 자리일 경우 배열 1칸 위로 이동 마지막 배열칸 이였다면 0배열칸으로
+                {
+                    randomIndex2 = (randomIndex2 + 1) % TeleportPoint.Length; 
+                }
+                    
                 TriggerBossAnimation(animator2, randomIndex2);
-                Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;
-
-               
-               
-
+                Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;                   
             }
 
             yield return new WaitForSeconds(0.5f);
-
             currentBallPrefab = BallPreFab[Random.Range(0, BallPreFab.Length)];
             BossShootAtPlayer(Boss);
-
             if (tiltTimer >= 50)
             {
                 if (i)
@@ -166,7 +156,7 @@ public class ProGameManager : MonoBehaviour
         GameObject ball = PoolManager.Instance.GetObject(currentBallPrefab, boss.transform.position, rotation);
 
         Ball ballScript = ball.GetComponent<Ball>();
-        if (ballScript != null)
+        if (ballScript)
         {
             ballScript.SetSpeed(moveSpeed);
         }
