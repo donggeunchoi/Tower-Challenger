@@ -69,7 +69,9 @@ public class PlayerData
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.LoadInfo();
+            GameManager.Instance.LoadResource();
+            GameManager.Instance.LoadStaminaTimer();
+            GameManager.Instance.LoadCharacter();
         }
 
         if (StageManager.instance != null)
