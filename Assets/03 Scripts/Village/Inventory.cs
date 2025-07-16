@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +8,7 @@ public class Inventory : MonoBehaviour
     public GameObject Invetory;
     public Transform SlotParent;
     public GameObject SlotPrefab;
+    public bool isTuto = false;
 
     private List<GameObject> inventorySlots = new List<GameObject>();
    
@@ -34,6 +34,12 @@ public class Inventory : MonoBehaviour
 
     private void OnEnable()  //인벤토리가 활성화 될 때
     {
+        if (isTuto)
+        {
+            UpdateTutoInven();
+            return;
+        }
+
         UpdateInventory();
         Debug.Log("활성화됨");
     }
@@ -121,6 +127,36 @@ public class Inventory : MonoBehaviour
             // newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = items[i];
             // newSlot.GetComponent<InventorySlot>().itemName = items[i];
             // newSlot.GetComponent<Image>().sprite = items[i];
+        }
+    }
+
+    private void UpdateTutoInven()
+    {
+        foreach (GameObject slot in inventorySlots)
+        {
+            Destroy(slot);
+        }
+        inventorySlots.Clear();
+
+        List<ItemData> items = new List<ItemData>();
+
+        if (ItemManager.instance != null)              //아이템매니저에서 아이템 가져오기!
+        {
+            items.AddRange(ItemManager.instance.allItemList);
+        }
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
+
+            newSlot.SetActive(true);
+            inventorySlots.Add(newSlot);
+
+            InventorySlot slot = newSlot.GetComponent<InventorySlot>();  //일단 인벤토리 슬롯을 가져와서!
+            slot.itemData = items[i];                                    //해당 슬롯의 아이템 데이터를 넣어주고!
+
+            newSlot.GetComponentInChildren<TMP_Text>().text = items[i].itemName; //아이템 이름이랑 이미지!
+            newSlot.GetComponent<Image>().sprite = items[i].icon;                //코드는 동일!
         }
     }
 }

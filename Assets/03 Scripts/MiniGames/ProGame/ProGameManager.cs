@@ -4,34 +4,85 @@ using UnityEngine;
 
 public class ProGameManager : MonoBehaviour
 {
-    public GameObject[] BallSpwun;
+    public GameObject Boss;
+    public GameObject Boss2;
+    public GameObject[] TeleportPoint;
     public GameObject SpeedInput;
 
     [Header("속도")]
     public float moveSpeed = 5f;
-    [Header("다음 패턴")]
-    public float PatternSpeed = 3f;
 
-    public GameObject BallPreFab;
+    [Header("다음 패턴")]
+    public float PatternSpeed = 1.5f;
+
+    [Header("공 패턴")]
+    public GameObject[] BallPreFab;
 
     [Header("플레이어")]
     public GameObject Player;
 
-    private TMP_InputField speedInputField;
+    [Header("출력 UI")]
+    public GameObject PrintOut;
 
-    private bool GameStart;
+    private TextMeshProUGUI printText;
+    private TMP_InputField speedInputField;
+    private bool GameStart = false;
+    private float tiltTimer;
+    private float end = 60;
+    private StageManager stageManager;
+    private Animator animator;
+    private Animator animator2;
+
+    private GameObject currentBallPrefab;
+    bool i = false;
 
     void Start()
     {
-        GameStart = false;
+        animator = Boss.GetComponent<Animator>();
+        animator2 = Boss2.GetComponent<Animator>();
 
-        if (SpeedInput != null)
+        stageManager = StageManager.instance;
+        printText = PrintOut.GetComponent<TextMeshProUGUI>();
+        if (speedInputField)
         {
             speedInputField = SpeedInput.GetComponent<TMP_InputField>();
         }
 
-        // 시작 시 코루틴 실행
+        Boss2.SetActive(false);
+
         StartCoroutine(GameRoutine());
+    }
+
+    private void Update()
+    {
+        if (GameStart)
+        {
+            tiltTimer += Time.deltaTime;
+            UpdateUI();
+
+            if (tiltTimer >= 60)
+            {
+                stageManager.MiniGameResult(true);
+                GameStart = false;
+            }
+            else if (tiltTimer >= 50)
+            {
+                moveSpeed = 4f;
+            }
+            else if (tiltTimer >= 40)
+            {
+                moveSpeed = 6f;
+            }
+            else
+            {
+                moveSpeed = 5f;
+            }
+        }
+    }
+
+    private void UpdateUI()
+    {
+        printText.text = $"{tiltTimer:F1}/{end}";
     }
 
     private IEnumerator GameRoutine()
@@ -41,120 +92,73 @@ public class ProGameManager : MonoBehaviour
 
         while (GameStart)
         {
-            int i = Random.Range(0, 3); // 0 또는 1
+            int randomIndex1 = Random.Range(0, TeleportPoint.Length);// 보스가 렌텀 위치값 가져옴
+            int randomIndex2 = Random.Range(0, TeleportPoint.Length);
 
-            if (i == 0)
+
+            TriggerBossAnimation(animator, randomIndex1); 
+            Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
+
+            if (tiltTimer >= 50)
             {
-                StartCoroutine(AllBallCoroutine_StagePattern());
-            }
-            else if (i == 1)
-            {
-                StartCoroutine(AllBallCoroutine());
-            }
-            else if (i == 2) 
-            {
-               AllBall();
-            }
-            else
-            {
+                Boss2.SetActive(true);
                 yield return null;
+
+                if (randomIndex1 == randomIndex2)///같은 자리일 경우 배열 1칸 위로 이동 마지막 배열칸 이였다면 0배열칸으로
+                {
+                    randomIndex2 = (randomIndex2 + 1) % TeleportPoint.Length; 
+                }
+                    
+                TriggerBossAnimation(animator2, randomIndex2);
+                Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;                   
             }
 
-            yield return new WaitForSeconds(PatternSpeed);
-        }
-    }
-
-    private void AllBall()
-    {
-        foreach (GameObject spawnPoint in BallSpwun)
-        {
-            if (spawnPoint != null && Player != null)
+            yield return new WaitForSeconds(0.5f);
+            currentBallPrefab = BallPreFab[Random.Range(0, BallPreFab.Length)];
+            BossShootAtPlayer(Boss);
+            if (tiltTimer >= 50)
             {
-                Vector3 direction = (Player.transform.position - spawnPoint.transform.position).normalized;
-                Quaternion rotation = Quaternion.LookRotation(direction);
-
-                // Instantiate 대신 풀에서 가져오기
-                GameObject spawnedBall = PoolManager.Instance.GetObject(BallPreFab, spawnPoint.transform.position, rotation);
-
-                Ball moveScript = spawnedBall.GetComponent<Ball>();
-                if (moveScript != null)
+                if (i)
                 {
-                    moveScript.SetSpeed(moveSpeed);
+                    BossShootAtPlayer(Boss2);
+                }
+                else
+                {
+                    i = true;
                 }
             }
+
+            yield return new WaitForSeconds(PatternSpeed - 0.5f);
         }
     }
-    private IEnumerator AllBallCoroutine()
+
+    private void TriggerBossAnimation(Animator anim, int index)
     {
-        foreach (GameObject spawnPoint in BallSpwun)
+        anim.ResetTrigger("BossT");
+        anim.ResetTrigger("BossR");
+        anim.ResetTrigger("BossD");
+        anim.ResetTrigger("BossL");
+
+        switch (index)
         {
-            if (spawnPoint != null && Player != null)
-            {
-                Vector3 direction = (Player.transform.position - spawnPoint.transform.position).normalized;
-                Quaternion rotation = Quaternion.LookRotation(direction);
-
-                GameObject spawnedBall = PoolManager.Instance.GetObject(BallPreFab, spawnPoint.transform.position, rotation);
-
-                Ball moveScript = spawnedBall.GetComponent<Ball>();
-                if (moveScript != null)
-                {
-                    moveScript.SetSpeed(moveSpeed);
-                }
-
-                yield return new WaitForSeconds(0.5f); // 각 공을 0.5초 간격으로 발사
-            }
+            case 0: anim.SetTrigger("BossT"); break;
+            case 1: anim.SetTrigger("BossR"); break;
+            case 2: anim.SetTrigger("BossD"); break;
+            case 3: anim.SetTrigger("BossL"); break;
         }
     }
-    private IEnumerator AllBallCoroutine_StagePattern()
-    {
-        // 1단계: 0, 1, 2
-        yield return StartCoroutine(FireBallsByIndices(new int[] { 0, 1, 2 }));
-        yield return new WaitForSeconds(0.5f);
 
-        // 2단계: 3, 8
-        yield return StartCoroutine(FireBallsByIndices(new int[] { 3, 7 }));
-        yield return new WaitForSeconds(0.5f);
-
-        // 3단계: 4, 5, 6
-        yield return StartCoroutine(FireBallsByIndices(new int[] { 4, 5, 6 }));
-    }
-    private IEnumerator FireBallsByIndices(int[] indices)
+    private void BossShootAtPlayer(GameObject boss)
     {
-        foreach (int index in indices)
+        Vector3 direction = (Player.transform.position - boss.transform.position).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        GameObject ball = PoolManager.Instance.GetObject(currentBallPrefab, boss.transform.position, rotation);
+
+        Ball ballScript = ball.GetComponent<Ball>();
+        if (ballScript)
         {
-            if (index >= 0 && index < BallSpwun.Length)
-            {
-                GameObject spawnPoint = BallSpwun[index];
-
-                if (spawnPoint != null && Player != null)
-                {
-                    Vector3 direction = (Player.transform.position - spawnPoint.transform.position).normalized;
-                    Quaternion rotation = Quaternion.LookRotation(direction);
-
-                    GameObject spawnedBall = PoolManager.Instance.GetObject(BallPreFab, spawnPoint.transform.position, rotation);
-
-                    Ball moveScript = spawnedBall.GetComponent<Ball>();
-                    if (moveScript != null)
-                    {
-                        moveScript.SetSpeed(moveSpeed);
-                    }
-                }
-            }
+            ballScript.SetSpeed(moveSpeed);
         }
-
-        yield return null; // 코루틴이므로 최소 1프레임 대기
-    }
-    void Update() //입력창
-    {
-        if (speedInputField != null)
-        {
-            float parsedSpeed;
-            if (float.TryParse(speedInputField.text, out parsedSpeed))
-            {
-                moveSpeed = parsedSpeed;
-            }
-        }
-
-       
     }
 }

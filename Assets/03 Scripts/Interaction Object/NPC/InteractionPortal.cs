@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public enum PortalType { StartGame, NextGame, NextFloor }  //우선 포탈 타입을 나눠놓기
+public enum PortalType { StartGame, NextGame, NextFloor, Tutorial }  //우선 포탈 타입을 나눠놓기
 
 public class InteractionPortal : MonoBehaviour, IInteractable
 {
@@ -25,6 +26,9 @@ public class InteractionPortal : MonoBehaviour, IInteractable
                 break;
             case PortalType.NextFloor:
                 UIManager.Instance.InstantiateUI(UIManager.Instance.allClearUI);  //다음 층으로 이동하는 UI를 띄워줍니다
+                break;
+            case PortalType.Tutorial:
+                SceneManager.LoadScene("VillageScene");
                 break;
         }
     }

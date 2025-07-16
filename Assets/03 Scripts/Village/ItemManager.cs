@@ -3,47 +3,56 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-   public static ItemManager instance;
-   //public Transform SlotParent;
-   //public GameObject SlotPrefab;
-   
-   // public List<string> itemNames = new List<string>();
-   // public List<Sprite> itemIcons = new List<Sprite>();
-   
-    public List<ItemData> allItemList = new List<ItemData>();
-   public List<ItemData> items = new List<ItemData>();
-   
-   public Sprite GoldSprite;
-   public Sprite DiamondSprite;
-   public List<ItemData> rewardsItmes = new List<ItemData>();
+    public static ItemManager instance;
+    //public Transform SlotParent;
+    //public GameObject SlotPrefab;
 
-   private void Awake()
-   {
-      if (instance == null)
-      {
-         instance = this;
-         DontDestroyOnLoad(this);
-      }
-      else
-      {
-         Destroy(gameObject);
-      }
-   }
+    // public List<string> itemNames = new List<string>();
+    // public List<Sprite> itemIcons = new List<Sprite>();
 
-   private void Start()
-   {
-      //SlotParent = GameObject.Find("Content").transform;
-   }
-   
-   
+    public List<ItemData> allItemList { get; private set; } = new List<ItemData>();
+    public List<ItemData> items { get; private set; } = new List<ItemData>();
 
-   public void AddItem(ItemData item)
-   {
+    public Sprite GoldSprite;
+    public Sprite DiamondSprite;
+    public List<ItemData> rewardsItmes = new List<ItemData>();
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        //SlotParent = GameObject.Find("Content").transform;
+    }
+
+    public void LoadItem()
+    {
+        items.Clear();
+        foreach (string name in GameManager.Instance.playerData.itmeDataID)
+        {
+            ItemData item = allItemList.Find(item => item.itemID == name);
+            if (item != null)
+                items.Add(item);
+        }
+    }
+
+    public void AddItem(ItemData item)
+    {
         items.Add(item);
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.playerData.SaveData();
+            GameManager.Instance.SaveData();
         }
         //GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
 
@@ -63,10 +72,10 @@ public class ItemManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.playerData.SaveData();
+            GameManager.Instance.SaveData();
         }
     }
-    
+
     public void ClearItmes()
     {
         items.Clear();  //초기화 추가!
@@ -78,7 +87,7 @@ public class ItemManager : MonoBehaviour
         {
             Debug.Log($"[검사] '{item.itemName}' == '{name}' ? {item.itemName == name}");
         }
-        
+
         return items.Find(rewardsItmes => rewardsItmes.itemName.Trim() == name.Trim());
     }
 }

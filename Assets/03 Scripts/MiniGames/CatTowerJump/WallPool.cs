@@ -6,9 +6,15 @@ public class WallPool : MonoBehaviour
     public static WallPool Instance;
     
     public GameObject wallPrefab;
-    public int poolSize = 10;
+    public Transform wallContainer;
+    public int poolSize;
+
+    public GameObject backGroundPrefab;
+    public Transform backGroundContainer;
+    public int backGroundPoolSize;
     
     private Queue<GameObject> wallPool = new Queue<GameObject>();
+    private Queue<GameObject> backGroundPool = new Queue<GameObject>();
 
     private void Awake()
     {
@@ -20,9 +26,13 @@ public class WallPool : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject wall = Instantiate(wallPrefab);
+            GameObject wall = Instantiate(wallPrefab, wallContainer);
+            GameObject backGround = Instantiate(backGroundPrefab, backGroundContainer);
             wall.SetActive(false);
+            backGround.SetActive(false);
             wallPool.Enqueue(wall);
+            backGroundPool.Enqueue(backGround);
+            
         }
     }
 
@@ -36,7 +46,7 @@ public class WallPool : MonoBehaviour
         }
         else
         {
-            GameObject wall = Instantiate(wallPrefab);
+            GameObject wall = Instantiate(wallPrefab, wallContainer);
             return wall;
         }
     }
