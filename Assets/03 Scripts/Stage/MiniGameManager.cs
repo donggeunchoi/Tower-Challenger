@@ -62,34 +62,32 @@ public class MiniGameManager : MonoBehaviour
                 UIManager.Instance.timerUI.ResetTimer();
         }
 
-        List<MiniGameDatas> gameList = new List<MiniGameDatas>();  //사용가능한 배열생성
+        List<MiniGameDatas> bossGameList = new List<MiniGameDatas>();  //사용가능한 배열생성
         for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
         {
             MiniGameDatas game = miniGameDatas[i];
             if (game.isBoss)
             {
-                gameList.Add(game);
+                bossGameList.Add(game);
             }
         }
 
         if (StageManager.instance.floor == 0)
             return;
 
-        int index = StageManager.instance.floor / StageManager.BOSS_FLOOR;
+        int bossIndex = (StageManager.instance.floor / StageManager.BOSS_FLOOR) - 1;
 
-        if (index < gameList.Count)
+
+        if (bossIndex >= 0 && bossIndex < bossGameList.Count)
         {
-            if (gameList[StageManager.instance.floor / 5] != null)
-                randomGames.Add(gameList[StageManager.instance.floor / StageManager.BOSS_FLOOR]);
+            randomGames.Add(bossGameList[bossIndex]);
         }
-
-        randomGames.AddRange(gameList);
-
-        if (randomGames.Count <= 0) //보스게임이 없으면 아무거나라도
+        else
         {
-            if (gameList.Count >= 1)
+            if (bossGameList.Count > 0)
             {
-                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+                var randomBoss = bossGameList[Random.Range(0, bossGameList.Count)];
+                randomGames.Add(randomBoss);
             }
             else
             {
