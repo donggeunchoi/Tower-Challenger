@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour
     public StageManager stageManager;  //이후 주석처리 (타워매니저 상속)
     public UIManager uiManager;
     public ItemManager itemManager;    //이후 주석처리 (플레이어 매니저 상속)
-    
+
     public GameObject stageManagerPrefab;
     public GameObject uiManagerPrefab;
     public GameObject itemManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
-    public PlayerData playerData;  //private
+    private PlayerData playerData;  //private
 
     [Header("스테미나")]
     public const int MAX_STAMINA = 5;
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public List<CharacterData> allCharacterData = new List<CharacterData>();
     public List<CharacterData> charactors = new List<CharacterData>();
     public CharacterData equimentCharacter;
-    
+
     [Header("재화")]
     public int gold;
     public int diamond;
@@ -77,10 +77,7 @@ public class GameManager : MonoBehaviour
     {
         LoadMiniGameCSV();
 
-        if (playerData != null)
-        {
-            playerData = SaveManager.LoadUsers();
-        }
+        playerData = SaveManager.LoadUsers();
         playerData.LoadData();
     }
 
@@ -124,6 +121,15 @@ public class GameManager : MonoBehaviour
             AddStamina();
             staminatimer -= STAMINA_TIME;
         }
+    }
+    public void LoadData()
+    {
+        playerData.LoadData();
+    }
+
+    public void SaveData()
+    {
+        playerData.SaveData();
     }
 
     public void AddStamina()

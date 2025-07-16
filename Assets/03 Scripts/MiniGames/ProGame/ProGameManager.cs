@@ -2,7 +2,6 @@
 using TMPro;
 using UnityEngine;
 
-
 public class ProGameManager : MonoBehaviour
 {
     public GameObject Boss;
@@ -14,7 +13,7 @@ public class ProGameManager : MonoBehaviour
     public float moveSpeed = 5f;
 
     [Header("다음 패턴")]
-    public float PatternSpeed = 1.5f; // 1.5초 간격
+    public float PatternSpeed = 1.5f;
 
     [Header("공 패턴")]
     public GameObject[] BallPreFab;
@@ -31,21 +30,33 @@ public class ProGameManager : MonoBehaviour
     private float tiltTimer;
     private float end = 60;
     private StageManager stageManager;
+    private Animator animator;
+    private Animator animator2;
 
-    // 현재 사용 중인 발사체 프리팹
     private GameObject currentBallPrefab;
+    bool i = false;
 
     void Start()
     {
+        animator = Boss.GetComponent<Animator>();
+        animator2 = Boss2.GetComponent<Animator>();
+
         stageManager = StageManager.instance;
         printText = PrintOut.GetComponent<TextMeshProUGUI>();
-
-        if(speedInputField)
+        if (speedInputField)
         {
             speedInputField = SpeedInput.GetComponent<TMP_InputField>();
         }
-            Boss2.SetActive(false);
-            StartCoroutine(GameRoutine());
+
+        Boss2.SetActive(false);
+
+        if (TeleportPoint.Length < 4)
+        {
+            Debug.LogError("TeleportPoint 배열 길이가 4 이상이어야 합니다.");
+            return;
+        }
+
+        StartCoroutine(GameRoutine());
     }
 
     private void Update()
@@ -55,7 +66,6 @@ public class ProGameManager : MonoBehaviour
             tiltTimer += Time.deltaTime;
             UpdateUI();
 
-            // 속도 증가
             if (tiltTimer >= 60)
             {
                 stageManager.MiniGameResult(true);
@@ -63,15 +73,15 @@ public class ProGameManager : MonoBehaviour
             }
             else if (tiltTimer >= 50)
             {
-                moveSpeed = 4f;
+                moveSpeed = 7f;
             }
             else if (tiltTimer >= 40)
             {
-                moveSpeed = 7f;
+                moveSpeed = 6f;
             }
             else
             {
-                moveSpeed = 6f;
+                moveSpeed = 4f;
             }
         }
     }
@@ -88,37 +98,63 @@ public class ProGameManager : MonoBehaviour
 
         while (GameStart)
         {
-            // 새로운 한 바퀴가 시작될 때 무작위 발사체 선택
-            currentBallPrefab = BallPreFab[Random.Range(0, BallPreFab.Length)];
+            int randomIndex1 = Random.Range(0, TeleportPoint.Length);
+            int randomIndex2 = Random.Range(0, TeleportPoint.Length);
 
-            for (int i = 0; i < TeleportPoint.Length; i++)
+            // 보스1 애니메이션
+            TriggerBossAnimation(animator, randomIndex1);
+            Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
+
+            if (tiltTimer >= 50)
             {
-                int randomIndex1 = Random.Range(0, TeleportPoint.Length);
-                int randomIndex2 = Random.Range(0, TeleportPoint.Length);
+                Boss2.SetActive(true);
+                yield return null;
 
-                // 보스1 순간이동
-                Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
+                if (randomIndex1 == randomIndex2)
+                    randomIndex2 = (randomIndex2 + 1) % TeleportPoint.Length;
+    
+                TriggerBossAnimation(animator2, randomIndex2);
+                Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;
 
-                // 보스2 활성화 및 순간이동
-                if (tiltTimer >= 50)
-                {
-                    Boss2.SetActive(true);
-                    Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;
-                }
+               
+               
 
-                // 0.5초 대기 후 발사
-                yield return new WaitForSeconds(0.5f);
+            }
 
-                BossShootAtPlayer(Boss);
+            yield return new WaitForSeconds(0.5f);
 
-                if (tiltTimer >= 50)
+            currentBallPrefab = BallPreFab[Random.Range(0, BallPreFab.Length)];
+            BossShootAtPlayer(Boss);
+
+            if (tiltTimer >= 50)
+            {
+                if (i)
                 {
                     BossShootAtPlayer(Boss2);
                 }
-
-                // 나머지 대기 시간
-                yield return new WaitForSeconds(PatternSpeed - 0.5f);
+                else
+                {
+                    i = true;
+                }
             }
+
+            yield return new WaitForSeconds(PatternSpeed - 0.5f);
+        }
+    }
+
+    private void TriggerBossAnimation(Animator anim, int index)
+    {
+        anim.ResetTrigger("BossT");
+        anim.ResetTrigger("BossR");
+        anim.ResetTrigger("BossD");
+        anim.ResetTrigger("BossL");
+
+        switch (index)
+        {
+            case 0: anim.SetTrigger("BossT"); break;
+            case 1: anim.SetTrigger("BossR"); break;
+            case 2: anim.SetTrigger("BossD"); break;
+            case 3: anim.SetTrigger("BossL"); break;
         }
     }
 
@@ -130,7 +166,7 @@ public class ProGameManager : MonoBehaviour
         GameObject ball = PoolManager.Instance.GetObject(currentBallPrefab, boss.transform.position, rotation);
 
         Ball ballScript = ball.GetComponent<Ball>();
-        if (ballScript)
+        if (ballScript != null)
         {
             ballScript.SetSpeed(moveSpeed);
         }
