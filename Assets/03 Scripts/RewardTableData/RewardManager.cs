@@ -1,6 +1,7 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class RewardManager : MonoBehaviour
 {
@@ -51,12 +52,9 @@ public class RewardManager : MonoBehaviour
         // }
     }
 
-    public void GiveRewards(List<RewardTableData> rewards)
+    public void GiveRewards(RewardTableData rewards)
     {
-        foreach (RewardTableData reward in rewards)
-        {
-            Debug.Log($"지급된 보상 :  {reward.goldReward}, {reward.diaReward},{reward.speedMoveReward},{reward.sandGlassReward},{reward.topTicketReward}");
-            GiveReward(reward);
-        }
+        GiveReward(rewards);
+        Debug.Log($"지급된 보상 :  {rewards.goldReward}, {rewards.diaReward},{rewards.speedMoveReward},{rewards.sandGlassReward},{rewards.topTicketReward}");
     }
 }

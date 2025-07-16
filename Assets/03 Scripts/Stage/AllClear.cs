@@ -37,11 +37,11 @@ public class AllClear : MonoBehaviour
 
     private void Start()
     {
-
         stageManager = StageManager.instance;
         rewardManager = this.GetComponent<RewardManager>();
-        
-        
+
+        CVSLoader.LoadRewardCVS();
+
         UpdateRewardGold();
         UpdateRewardDia();
         UpdateRewrdItem();
@@ -68,13 +68,7 @@ public class AllClear : MonoBehaviour
     }
 
     void GiveTowerReward()
-    {
-        if (CVSLoader.rewardTableDataList == null || CVSLoader.rewardTableDataList.Count == 0)
-        {
-            CVSLoader.LoadRewardCVS();
-            
-        }
-
+    { 
         if (CVSLoader.rewardTableDataList == null)
         {
             Debug.LogError("RewardBase.rewards가 없어요");
@@ -89,26 +83,18 @@ public class AllClear : MonoBehaviour
         
         int currentFloor = StageManager.instance.floor;
         
-        List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
-
-        if (currentRewards.Count == 0)
-        {
-            Debug.Log("해당층에 보상이 없데이");
-            return;
-        }
+        RewardTableData currentReward = CVSLoader.rewardTableDataList.Find(r => r.floor == currentFloor);
 
         if (RewardManager.Instance == null)
         {
             Debug.Log("여기구나?");
         }
-        rewardManager.GiveRewards(currentRewards);
+        rewardManager.GiveRewards(currentReward);
         
     }
 
     public void UpdateRewardGold()
-    {
-        CVSLoader.LoadRewardCVS();
-        
+    {   
         int currentFloor = StageManager.instance.floor;
         
         List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
@@ -119,9 +105,7 @@ public class AllClear : MonoBehaviour
     }
 
     public void UpdateRewardDia()
-    {
-        CVSLoader.LoadRewardCVS();
-        
+    {   
         int currentFloor = StageManager.instance.floor;
         
         List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
@@ -140,9 +124,7 @@ public class AllClear : MonoBehaviour
     }
 
     public void UpdateRewrdItem()
-    {
-        CVSLoader.LoadRewardCVS();
-        
+    {   
         int currentFloor = StageManager.instance.floor;
 
         List<RewardTableData> currentRewards = CVSLoader.rewardTableDataList.FindAll(r => r.floor == currentFloor);
@@ -188,7 +170,4 @@ public class AllClear : MonoBehaviour
             }
         }
     }
-        
-    
-    
 }

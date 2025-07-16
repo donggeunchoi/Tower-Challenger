@@ -231,7 +231,7 @@ public class WalkTheStorkGameManager : MonoBehaviour
         // 앞뒤로 넘어졌을 때의 처리
         if (currentAngle <= -95f)
         {
-            if (StageManager.instance.stageLP.currentLP == 1)
+            if (StageManager.instance != null && StageManager.instance.stageLP != null && StageManager.instance.stageLP.currentLP == 1)
             {
                 stageManager.MiniGameResult(false);
                 currentState = GameState.Ended;
@@ -253,13 +253,16 @@ public class WalkTheStorkGameManager : MonoBehaviour
                 Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
                 currentAngle = 0f;
                 angularVelocity = 0f;
-                stageManager.MiniGameResult(false);
+                if (StageManager.instance != null)
+                {
+                    stageManager.MiniGameResult(false);
+                }
             }
         }
 
         if (currentAngle >= 95f)
         {
-            if (StageManager.instance.stageLP.currentLP == 1)
+            if (StageManager.instance != null && StageManager.instance.stageLP != null && StageManager.instance.stageLP.currentLP == 1)
             {
                 stageManager.MiniGameResult(false);
                 currentState = GameState.Ended;
@@ -275,13 +278,17 @@ public class WalkTheStorkGameManager : MonoBehaviour
                     Vector3 targetPos = new Vector3(Man.transform.position.x - 3, Man.transform.position.y - 2.5f, Man.transform.position.z);
                     StartCoroutine(SmoothRotateAndMove(Man, targetEuler, targetPos, 1f));
                 }
+
             }
             else
             {
                 Vector3 targetPos = new Vector3(Man.transform.position.x, -3f, Man.transform.position.z);
                 currentAngle = 0f;
                 angularVelocity = 0f;
-                stageManager.MiniGameResult(false);
+                if (StageManager.instance != null)
+                {
+                    StageManager.instance.MiniGameResult(false);
+                }
             }
         }
     }

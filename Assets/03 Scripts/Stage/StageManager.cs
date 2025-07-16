@@ -12,7 +12,10 @@ public class StageManager : MonoBehaviour
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
     public GameObject infoUI;         //각종 인포메이션이 들어갈 공간 (타이머 LP등)[추후 UI매니저로 이동]
-    public int difficulty;              //난이도
+
+    private HashSet<string> shownMiniGameUIs = new HashSet<string>();
+
+    public int difficulty { get; private set; }              //난이도
 
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
@@ -20,7 +23,7 @@ public class StageManager : MonoBehaviour
     [Header("진행 정보")]
     public const int FIRST_FLOOR = 1;
     public const int BOSS_FLOOR = 10;
-    public const int MAX_FLOOR = 40;
+    public const int MAX_FLOOR = 30;
     public int floor = 1;              //현재층
     public int bestFloor = 1;          //최고 기록
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
@@ -101,12 +104,18 @@ public class StageManager : MonoBehaviour
         if (stageClearPortal.Count >= 0 && stageClearPortal.Count < MiniGameManager.instance.randomGames.Count && MiniGameManager.instance.randomGames[stageClearPortal.Count] != null)
         {
             MiniGameDatas selectedGame = MiniGameManager.instance.randomGames[stageClearPortal.Count];
-            if (floor <= 9)
+            if (UIManager.Instance != null && selectedGame.miniGameInfoUI != null)
             {
-                if (UIManager.Instance != null)
+                string miniGameID = selectedGame.name; // 또는 selectedGame.sceneName;
+
+                if (!shownMiniGameUIs.Contains(miniGameID))
                 {
-                    if (selectedGame.miniGameInfoUI != null)
+                    shownMiniGameUIs.Add(miniGameID);
                     UIManager.Instance.InstantiateUI(selectedGame.miniGameInfoUI);
+                }
+                else
+                {
+                    Debug.Log($"[MiniGame UI] 이미 본 UI입니다: {miniGameID}, 다시 띄우지 않음.");
                 }
             }
             SceneManager.LoadScene(selectedGame.sceneName);

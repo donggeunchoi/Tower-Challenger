@@ -8,7 +8,8 @@ public class Map : MonoBehaviour
     [SerializeField] private InteractionPortal[] nextStagePortal;
     [SerializeField] private GameObject startPlayerPosition;
     [SerializeField] private GameObject nextFloorPortal;
-    [SerializeField] private GameObject TutorialPortal;
+    [SerializeField] private GameObject tutorialPortal;
+    [SerializeField] private GameObject tutorialBox;
     Vector3 playerPosition;
 
     StageManager stageManager;
@@ -30,10 +31,7 @@ public class Map : MonoBehaviour
         }
         // stageManager = StageManager.instance;  //스테이지 매니저에서 정보를 받아서
 
-        if (TutorialPortal != null)
-        {
-            TutorialPortal.SetActive(true);
-        }
+        TutorialPortalClose();
 
         StartCoroutine(RandomPortal());
     }
@@ -79,4 +77,16 @@ public class Map : MonoBehaviour
     {
         nextFloorPortal.SetActive(true);
     }
+
+
+    public void TutorialPortalClose()
+    {
+        if (tutorialPortal != null)
+        {
+            tutorialPortal.SetActive(false);
+        }
+    }
+
+    
+    
 }

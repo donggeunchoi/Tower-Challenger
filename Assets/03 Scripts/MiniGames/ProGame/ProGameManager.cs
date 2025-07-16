@@ -29,7 +29,6 @@ public class ProGameManager : MonoBehaviour
     private bool GameStart = false;
     private float tiltTimer;
     private float end = 60;
-    private StageManager stageManager;
     private Animator animator;
     private Animator animator2;
 
@@ -41,7 +40,6 @@ public class ProGameManager : MonoBehaviour
         animator = Boss.GetComponent<Animator>();
         animator2 = Boss2.GetComponent<Animator>();
 
-        stageManager = StageManager.instance;
         printText = PrintOut.GetComponent<TextMeshProUGUI>();
         if (speedInputField)
         {
@@ -62,20 +60,25 @@ public class ProGameManager : MonoBehaviour
 
             if (tiltTimer >= 60)
             {
-                stageManager.MiniGameResult(true);
+                if (StageManager.instance != null)
+                    StageManager.instance.MiniGameResult(true);
                 GameStart = false;
             }
             else if (tiltTimer >= 50)
             {
-                moveSpeed = 4f;
+                moveSpeed = 5f;
             }
             else if (tiltTimer >= 40)
             {
-                moveSpeed = 6f;
+                moveSpeed = 9f;
+            }
+            else if (tiltTimer >= 30)
+            {
+                moveSpeed = 8f;
             }
             else
             {
-                moveSpeed = 5f;
+                moveSpeed = 7f;
             }
         }
     }

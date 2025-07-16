@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -28,6 +26,9 @@ public class GameManager : MonoBehaviour
     private bool isLoad = false;
     public float saveTimer;
     public const float SAVETIME = 120;
+    public bool isSaving = false;
+    public float saveCoolDown;
+    public const float SAVECOOLDOWN = 0.5f;
     public List<CharacterData> allCharacterData { get; private set; } = new List<CharacterData>();
     public List<CharacterData> charactors = new List<CharacterData>();
     public CharacterData equimentCharacter;
@@ -35,6 +36,9 @@ public class GameManager : MonoBehaviour
     [Header("재화")]
     public int gold { get; private set; }
     public int diamond { get; private set; }
+
+    public int Gold;
+    public int Dia;
 
     //1800초 30분 마다 1참
     //게임이 꺼져도 차게할 방법.... 시작시간과 끝시간을 계산해서 채워준다..?
@@ -100,8 +104,20 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Gold = gold;
+        Dia = diamond;
+
         AutoSave();
         UpdateStaminaTimer();
+
+        if (isSaving)
+        {
+            saveCoolDown += Time.deltaTime;
+            if (saveCoolDown >= SAVECOOLDOWN)
+            {
+                isSaving = false;
+            }
+        }
     }
 
     private void AutoSave()
@@ -139,13 +155,18 @@ public class GameManager : MonoBehaviour
 
     public void SaveData()
     {
+        if (isSaving)
+            return;
+
         playerData.SaveData();
+        isSaving = true;
+        saveCoolDown = 0f;
     }
 
     public void AddStamina()
     {
         mainStamina = Mathf.Min(mainStamina + 1, MAX_STAMINA);
-        playerData.SaveData();
+        SaveData();
     }
 
     public void UseStamina()
@@ -154,31 +175,32 @@ public class GameManager : MonoBehaviour
             return;
 
         mainStamina = Mathf.Max(mainStamina - 1, 0);
-        playerData.SaveData();
+        SaveData();
     }
 
     public void AddGold(int addGold)
     {
         gold += addGold;
-        playerData.SaveData();
+        Debug.Log("획득한 골드 :" + addGold);
+        SaveData();
     }
 
     public void UseGold(int useGold)
     {
         gold -= useGold;
-        playerData.SaveData();
+        SaveData();
     }
 
     public void AddDiamond(int addDia)
     {
         diamond += addDia;
-        playerData.SaveData();
+        SaveData();
     }
 
     public void UseDiamond(int useDia)
     {
         diamond -= useDia;
-        playerData.SaveData();
+        SaveData();
     }
 
     void LoadMiniGameCSV()

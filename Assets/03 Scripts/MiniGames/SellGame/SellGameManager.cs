@@ -123,12 +123,14 @@ public class SellGameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (index == 0)
         {
-            stageManager.MiniGameResult(true);
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(true);
             Blocker.SetActive(false);
         }
         else
         {
-            stageManager.MiniGameResult(false);
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
             yield return StartCoroutine(OnWrongAnswer());
         }
     }
