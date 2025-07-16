@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,7 +13,7 @@ public class StageManager : MonoBehaviour
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
     public GameObject infoUI;         //각종 인포메이션이 들어갈 공간 (타이머 LP등)[추후 UI매니저로 이동]
-    public int difficulty;              //난이도
+    public int difficulty { get; private set; }              //난이도
 
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
@@ -21,9 +22,9 @@ public class StageManager : MonoBehaviour
     public const int FIRST_FLOOR = 1;
     public const int BOSS_FLOOR = 10;
     public const int MAX_FLOOR = 40;
-    public int floor = 1;              //현재층
+    public int floor { get; private set; }              //현재층
     public int bestFloor = 1;          //최고 기록
-    public int totalStageCount = 1;    //현재 깨야하는 스테이지
+    public int totalStageCount { get; private set; }    //현재 깨야하는 스테이지
     public float timerMultiplier = 1f;//타이머 배속
     public Vector3 playerPosition;    //플레이어 포지션 저장
     public int layerNumber;           //플레이어 레이어 저장
@@ -53,6 +54,17 @@ public class StageManager : MonoBehaviour
     }
 
     #region MiniGameCall
+    //public T GetMiniGameValue<T>(string gameName, int difficulty, Func<MiniGameData, T> selector)
+    //{
+    //    if (GameManager.Instance == null)
+    //        return default;
+
+    //    MiniGameData data = GameManager.Instance.miniGameDataList.Find(
+    //        x => x.name == gameName && x.DifficultyLevel == difficulty);
+
+    //    return data != null ? selector(data) : default;
+    //}
+
     public void StartGame()
     {
         isGameActive = true;  //현재 게임 시작

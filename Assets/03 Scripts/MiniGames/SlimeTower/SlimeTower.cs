@@ -53,7 +53,7 @@ public class SlimeTower : MonoBehaviour
             }
         }
 
-        if (canClick && Input.GetMouseButtonDown(0))
+        if (canClick && Input.GetMouseButtonDown(0)) 
         {
             MoveSlime();
             SpawnSlime();
@@ -100,7 +100,8 @@ public class SlimeTower : MonoBehaviour
         int slimeCount = towerRoot.childCount;
         if (slimeCount == clearGameCount)
         {
-            StageManager.instance.MiniGameResult(true);
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(true);
         }
     }
 }
