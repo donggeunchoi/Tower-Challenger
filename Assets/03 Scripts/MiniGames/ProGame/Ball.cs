@@ -11,8 +11,6 @@ public class Ball : MonoBehaviour
     {
         speed = moveSpeed;
 
-        // 중복 실행 방지
-        StopAllCoroutines();
         StartCoroutine(ReturnToPoolAfterSeconds(10f));
     }
 
@@ -25,15 +23,7 @@ public class Ball : MonoBehaviour
     private IEnumerator ReturnToPoolAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-
-        if (PoolManager.Instance != null)
-        {
-            PoolManager.Instance.ReturnObject(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject); // 예외 처리
-        }
+        PoolManager.Instance.ReturnObject(this.gameObject);  
     }
 }
 
