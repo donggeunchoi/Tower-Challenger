@@ -15,7 +15,7 @@ public class SlimeTower : MonoBehaviour
     [SerializeField] private int currentStack; //현재 던질 수 있는 스택
     [SerializeField] private float stackTimer; //쿨타임을 측정해주는 타이머
 
-    private bool canClick = true;
+    private bool canClick = false;
     private float clickCooldown = 0.2f;
     private float clickCooldownTimer = 0f;
 
@@ -51,6 +51,7 @@ public class SlimeTower : MonoBehaviour
                 canClick = true;
                 clickCooldownTimer = 0f;
             }
+            return;
         }
 
         if (canClick && Input.GetMouseButtonDown(0)) 
