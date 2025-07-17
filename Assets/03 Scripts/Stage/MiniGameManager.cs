@@ -41,15 +41,30 @@ public class MiniGameManager : MonoBehaviour
             return;
         }
 
-        gameList = gameList.OrderBy(x => Random.value).ToList();
-        for (int k = 0; k < Mathf.Min(gameList.Count, StageManager.instance.totalStageCount); k++)
+        if (StageManager.instance.totalStageCount == 1)
         {
-            randomGames.Add(gameList[k]);
-        }
+            List<MiniGameDatas> shuffledList = gameList.OrderBy(x => Random.value).ToList();
 
-        while (randomGames.Count < StageManager.instance.totalStageCount)
+            for (int i = 0; i < StageManager.instance.floor; i++)
+            {
+                if (i < shuffledList.Count)
+                    randomGames.Add(shuffledList[i]);
+                else
+                    randomGames.Add(shuffledList[Random.Range(0, shuffledList.Count)]);
+            }
+        }
+        else
         {
-            randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+            gameList = gameList.OrderBy(x => Random.value).ToList();
+            for (int k = 0; k < Mathf.Min(gameList.Count, StageManager.instance.totalStageCount); k++)
+            {
+                randomGames.Add(gameList[k]);
+            }
+
+            while (randomGames.Count < StageManager.instance.totalStageCount)
+            {
+                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+            }
         }
     }
     public void BossStage()
