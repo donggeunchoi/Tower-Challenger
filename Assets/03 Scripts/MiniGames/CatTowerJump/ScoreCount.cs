@@ -5,7 +5,8 @@ public class ScoreCount : MonoBehaviour
 {
     [Header("References")]
     public Transform playerTransform;
-    public TextMeshProUGUI heightText;
+    public TextMeshProUGUI TargetText;
+    public TextMeshProUGUI CurrnetText;
 
     private float startY;
     [SerializeField]private float TargetY;
@@ -15,7 +16,7 @@ public class ScoreCount : MonoBehaviour
     void Start()
     {
         startY =playerTransform.position.y;
-        UpdateText(0);
+        UpdateText(100);
     }
 
     // Update is called once per frame
@@ -26,11 +27,13 @@ public class ScoreCount : MonoBehaviour
         {
             Debug.Log("게임 클리어");
         }
+        
+        CurrnetText.text = $"{currentY.ToString("N0")}m";
+        
     }
     private void UpdateText(float value)
     {
-        // 소수점 없이 정수로만 표시하고 싶으면 Mathf.FloorToInt 사용
-        int meters = Mathf.FloorToInt(value);
-        heightText.text = $"Height: {meters} m";
+        int currentY = Mathf.FloorToInt(value);
+        TargetText.text = $"{currentY.ToString()}m";
     }
 }
