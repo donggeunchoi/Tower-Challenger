@@ -8,8 +8,8 @@ public class MiniGameData
 {
     public string index;
     public string name;
-    public string Desc;
     public string Type;
+    public string Desc;
     public int DifficultyLevel;
     public int Card;
     public float shuffleDuration;
@@ -23,6 +23,9 @@ public class MiniGameData
     public float baseSpeed;
     public float gameDuration;
     public float spawnInterval;
+    public float clearTime;
+    public float gravity;
+    public float spawnDelay;
 }
 
 public class CSVLoader : MonoBehaviour

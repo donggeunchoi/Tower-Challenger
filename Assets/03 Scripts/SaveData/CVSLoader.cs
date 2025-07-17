@@ -37,6 +37,9 @@ public static class CVSLoader
             row.baseSpeed = ParseFloat(GetValue(values, 14));
             row.gameDuration = ParseFloat(GetValue(values, 15));
             row.spawnInterval = ParseFloat(GetValue(values, 16));
+            row.clearTime = ParseFloat(GetValue(values, 17));
+            row.gravity = ParseFloat(GetValue(values, 18));
+            row.spawnDelay = ParseFloat(GetValue(values, 19));
             miniGameDataList.Add(row);
         }
     }
