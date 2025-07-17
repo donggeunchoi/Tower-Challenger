@@ -9,7 +9,7 @@ public class MiniGameManager : MonoBehaviour
     [Header("미니게임 데이터")]
     public MiniGameDatas[] miniGameDatas;    //미니게임 데이터
     public List<MiniGameDatas> randomGames = new List<MiniGameDatas>();
-    private List<MiniGameDatas> unUsedGames = new List<MiniGameDatas>();
+    [SerializeField] private List<MiniGameDatas> unUsedGames = new List<MiniGameDatas>();
 
     private void Start()
     {
@@ -17,8 +17,6 @@ public class MiniGameManager : MonoBehaviour
         {
             instance = this;
         }
-
-        
     }
     public void UnUsedGames()
     {
@@ -28,7 +26,7 @@ public class MiniGameManager : MonoBehaviour
             MiniGameDatas game = miniGameDatas[i];
             if (!game.isBoss)
             {
-                if (game.allStage || (StageManager.instance.floor >= game.minStage && StageManager.instance.floor <= game.maxStage))
+                if (game.allStage)
                 {
                     unUsedGames.Add(game);
                 }
@@ -63,39 +61,36 @@ public class MiniGameManager : MonoBehaviour
         {
             if (unUsedGames.Count >= StageManager.instance.totalStageCount)
             {
-                unUsedGames = gameList.OrderBy(x => Random.value).ToList();
-                for (int i = 0;i < StageManager.instance.totalStageCount; i++)
+                unUsedGames = unUsedGames.OrderBy(x => Random.value).ToList();
+                for (int i = 0; i < StageManager.instance.totalStageCount; i++)
                 {
-                    randomGames.Add(unUsedGames[i]);
-                    unUsedGames.Remove(unUsedGames[i]);
+                    randomGames.Add(unUsedGames[0]);
+                    unUsedGames.RemoveAt(0);
                 }
             }
             else
             {
-                randomGames.AddRange(unUsedGames);
+                randomGames.AddRange(unUsedGames);  //남은거 다 추가하고
                 if (randomGames.Count < StageManager.instance.totalStageCount)
                 {
-                    gameList = gameList.OrderBy(x => Random.value).ToList();
+                    gameList = gameList.OrderBy(x => Random.value).ToList();  //랜덤으로 돌려놓고  
 
-                    foreach (MiniGameDatas unused in unUsedGames)
+                    foreach (MiniGameDatas unused in unUsedGames)  //썻던게임은 뒤로보내고
                     {
                         if (gameList.Remove(unused))
                         {
                             gameList.Add(unused);
                         }
                     }
-                    randomGames.AddRange(gameList.Take(Mathf.Min(gameList.Count, StageManager.instance.totalStageCount)));
+                    randomGames.AddRange(gameList.Take(Mathf.Min(gameList.Count, StageManager.instance.totalStageCount - randomGames.Count)));  //남은거만큼 추가
 
-            for (int i = 0; i < StageManager.instance.floor && shuffledList.Count > 0; i++)
-            {
-                int rand = Random.Range(0, shuffledList.Count);
-                randomGames.Add(shuffledList[rand]);
-                shuffledList.RemoveAt(rand);
-            }
-            while (randomGames.Count < StageManager.instance.floor)
-            {
-                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
-            }
+                    while (randomGames.Count < StageManager.instance.totalStageCount)  //그래도 모잘라면 중복허용
+                    {
+                        randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+                    }
+                    unUsedGames.Clear();
+                }
+            } 
         }
         else
         {
