@@ -45,12 +45,15 @@ public class MiniGameManager : MonoBehaviour
         {
             List<MiniGameDatas> shuffledList = gameList.OrderBy(x => Random.value).ToList();
 
-            for (int i = 0; i < StageManager.instance.floor; i++)
+            for (int i = 0; i < StageManager.instance.floor && shuffledList.Count > 0; i++)
             {
-                if (i < shuffledList.Count)
-                    randomGames.Add(shuffledList[i]);
-                else
-                    randomGames.Add(shuffledList[Random.Range(0, shuffledList.Count)]);
+                int rand = Random.Range(0, shuffledList.Count);
+                randomGames.Add(shuffledList[rand]);
+                shuffledList.RemoveAt(rand);
+            }
+            while (randomGames.Count < StageManager.instance.floor)
+            {
+                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
             }
         }
         else
