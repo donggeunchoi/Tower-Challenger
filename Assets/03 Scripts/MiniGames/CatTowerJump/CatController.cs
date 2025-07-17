@@ -4,56 +4,50 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CatController : MonoBehaviour
 {
+    [Header("점프 세팅")]
     public float jumpForce = 10f;         // 점프 힘
-    public float moveSpeed = 2f;          // 좌우 이동 속도
     public float wallBounceForce = 5f;    // 벽에 닿았을 때 튕기는 힘
     public float stopTime = 2f;           // 멈춰있는 시간
-    public int jumpCount = 3;             // 점프 횟수
-
+    
+    [Header("멀티 점프")]
+    public int maxJumpCount = 3;             // 점프 횟수
+    private int jumpLeft;                 // 남은 점프 홧수
+    
     private Rigidbody2D _rigidbody;
-    private bool _isJumping = false;
     private bool _isTouchingWall = false;
     private int _moveDirection = 1;        // 1이면 오른쪽, -1이면 왼쪽
-    private bool _isWaitingForInput = true;
+    // private bool _isWaitingForInput = true;
     
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.gravityScale = 0;
+        jumpLeft = maxJumpCount;
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (_isTouchingWall || _isWaitingForInput)
-            {
-                Jump();
-            }
-        }
-    }
-
-    void Move()
-    {
-        if (!_isTouchingWall)
-        {
-            _rigidbody.linearVelocity = new Vector2(moveSpeed * _moveDirection, _rigidbody.linearVelocity.y);
+            Jump();
         }
     }
 
     void Jump()
     {
-        _rigidbody.gravityScale = 1; // 중력 적용 시작
-        _isTouchingWall = false;
-        _isWaitingForInput = false;
+        if (_isTouchingWall || jumpLeft > 0)
+        {
+            JumpCount();
+            
+            Debug.Log(jumpLeft);
+            _rigidbody.linearVelocity = new Vector2(wallBounceForce * _moveDirection, jumpForce);
 
-        // 반사 방향으로 튕겨 올라감
-        _rigidbody.linearVelocity = new Vector2(wallBounceForce * _moveDirection, jumpForce);
-
-        // 고양이 방향 반전
-        Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * _moveDirection;
-        transform.localScale = scale;
+            // 고양이 방향 반전
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x) * _moveDirection;
+            transform.localScale = scale;
+            
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,8 +74,25 @@ public class CatController : MonoBehaviour
     public IEnumerator Falling(float time)
     {
         yield return new WaitForSeconds(time);
-
         _rigidbody.gravityScale = 1;
+    }
+
+    public void JumpCount()
+    {
+        if (_rigidbody.gravityScale == 0)
+        {
+            _rigidbody.gravityScale = 1f;
+        }
+
+        if (_isTouchingWall)
+        {
+            _isTouchingWall = false;
+            jumpLeft = maxJumpCount;
+        }
+        else
+        {
+            jumpLeft--;
+        }
     }
 }
   

@@ -19,5 +19,6 @@ public class RemoveWall : MonoBehaviour
             WallPool.Instance.ReturnWall(this.gameObject);
             BackGroundPool.Instance.ReturnBackGround(this.gameObject);
         }
+        
     }
 }
