@@ -33,12 +33,29 @@ public class FallingBlockPlayer : MonoBehaviour
     [Header("장애물")]
     [SerializeField] private GameObject[] obstacle;  //장애물 종류
     [SerializeField] private float spawnDelay = 2f;  //장애물이 스폰되는 시간
+    [SerializeField] private float spawnDiffcultDelay = 2f;  //난이도가 증가하는 딜레이시간
+    [SerializeField] private float gravityScale;
+
     private List<RectTransform> obstacleList = new List<RectTransform>();  //스폰된 장애물이 보관되는 리스트
 
     private void Start()
     {
+        if (StageManager.instance != null && GameManager.Instance)
+        {
+            int difficulty = StageManager.instance.difficulty;
+
+            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "FaillingBlock" && x.DifficultyLevel == difficulty);
+
+            if (data != null)
+            {
+                clearTime = data.clearTime;
+                gravity = data.gravity;
+                spawnDelay = data.spawnDelay;
+            }
+        }
+
         currentTime = 0f;
-        InvokeRepeating(nameof(SpawnObstacle),1f,spawnDelay);
+        StartCoroutine(ObstacleSpawnRoutine());
         StartCoroutine(AddDifficult());
     }
 
@@ -61,6 +78,15 @@ public class FallingBlockPlayer : MonoBehaviour
         PlayerWindowCollider();//좌우측 콜라이더 검사
         DestroyObstacle();     //범위밖 장애물 파괴
         CheckCollision();      //충돌검사
+    }
+    private IEnumerator ObstacleSpawnRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            SpawnObstacle();
+            yield return new WaitForSeconds(spawnDelay);
+        }
     }
 
     public void OnEventLeft(bool left)
@@ -189,9 +215,8 @@ public class FallingBlockPlayer : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2);
-            spawnDelay -= 0.1f;
-            gravity -= 30f;
+            yield return new WaitForSeconds(spawnDiffcultDelay);
+            gravity -= gravityScale;
         }
     }
 }

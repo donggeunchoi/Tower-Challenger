@@ -9,12 +9,30 @@ public class MiniGameManager : MonoBehaviour
     [Header("미니게임 데이터")]
     public MiniGameDatas[] miniGameDatas;    //미니게임 데이터
     public List<MiniGameDatas> randomGames = new List<MiniGameDatas>();
+    private List<MiniGameDatas> unUsedGames = new List<MiniGameDatas>();
 
     private void Start()
     {
         if (instance == null)
         {
             instance = this;
+        }
+
+        
+    }
+    public void UnUsedGames()
+    {
+        unUsedGames.Clear();
+        for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
+        {
+            MiniGameDatas game = miniGameDatas[i];
+            if (!game.isBoss)
+            {
+                if (game.allStage || (StageManager.instance.floor >= game.minStage && StageManager.instance.floor <= game.maxStage))
+                {
+                    unUsedGames.Add(game);
+                }
+            }
         }
     }
 
@@ -41,9 +59,32 @@ public class MiniGameManager : MonoBehaviour
             return;
         }
 
-        if (StageManager.instance.totalStageCount == 1)
+        if (unUsedGames.Count > 0)
         {
-            List<MiniGameDatas> shuffledList = gameList.OrderBy(x => Random.value).ToList();
+            if (unUsedGames.Count >= StageManager.instance.totalStageCount)
+            {
+                unUsedGames = gameList.OrderBy(x => Random.value).ToList();
+                for (int i = 0;i < StageManager.instance.totalStageCount; i++)
+                {
+                    randomGames.Add(unUsedGames[i]);
+                    unUsedGames.Remove(unUsedGames[i]);
+                }
+            }
+            else
+            {
+                randomGames.AddRange(unUsedGames);
+                if (randomGames.Count < StageManager.instance.totalStageCount)
+                {
+                    gameList = gameList.OrderBy(x => Random.value).ToList();
+
+                    foreach (MiniGameDatas unused in unUsedGames)
+                    {
+                        if (gameList.Remove(unused))
+                        {
+                            gameList.Add(unused);
+                        }
+                    }
+                    randomGames.AddRange(gameList.Take(Mathf.Min(gameList.Count, StageManager.instance.totalStageCount)));
 
             for (int i = 0; i < StageManager.instance.floor && shuffledList.Count > 0; i++)
             {
@@ -104,7 +145,7 @@ public class MiniGameManager : MonoBehaviour
         {
             if (bossGameList.Count > 0)
             {
-                var randomBoss = bossGameList[Random.Range(0, bossGameList.Count)];
+                MiniGameDatas randomBoss = bossGameList[Random.Range(0, bossGameList.Count)];
                 randomGames.Add(randomBoss);
             }
             else
