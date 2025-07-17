@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using static StageTable;
 
 public static class CVSLoader
 {
     public static List<MiniGameData> miniGameDataList = new List<MiniGameData>();
     public static List<RewardTableData>  rewardTableDataList = new List<RewardTableData>();
-
+    public static List<PotalStageData> potalStageDataList = new List<PotalStageData>();
     public static void LoadMiniGameCSV()
     {
         TextAsset data = Resources.Load<TextAsset>("Mini-GameDifficultySettings");
@@ -49,21 +50,6 @@ public static class CVSLoader
     //4. 스크립터블 오브젝트로 변환 unity-excel-importer활용
     //https://github.com/mikito/unity-excel-importer
 
-    public static void LoadPotalCVS()
-    {
-        TextAsset data = Resources.Load<TextAsset>("//여기에 경로를 입력!");
-        if (data == null)
-        {
-            Debug.LogError("미니게임 CSV 파일이 없습니다.");
-            return;
-        }
-        string[] lines = data.text.Split('\n');
-        for (int i = 1; i < lines.Length; i++)
-        {
-            //여기에 항목 추가!
-        }
-    }
-
     public static void LoadRewardCVS()
     {
         TextAsset data = Resources.Load<TextAsset>("TowerRewardTable");
@@ -96,6 +82,52 @@ public static class CVSLoader
             rewardTableDataList.Add(row);
         }
         
+    }
+
+    public static void LoadPotalCVS()
+    {
+        TextAsset data = Resources.Load<TextAsset>("floorTable(Sheet1)"); // 경로/파일명 파일명만(확장자없음), 실제 CSV명에 맞추기!
+        if (data == null)
+        {
+            Debug.LogError("포탈 스테이지 CSV 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            string line = lines[i].Trim();
+            if (string.IsNullOrEmpty(line)) continue;
+
+            string[] values = line.Split(',');
+
+            if (values.Length < 7) continue;
+
+            PotalStageData row = new PotalStageData();
+
+            row.index = GetValue(values, 0);
+            row.floor = ParseInt(GetValue(values, 1));
+            row.desc = GetValue(values, 2);
+            row.type = GetValue(values, 3);
+
+            // potal: "1", "1 ~ 2", "2 ~ 3" 등 처리
+            string potalRaw = GetValue(values, 4).Replace(" ", "");
+            if (potalRaw.Contains("~"))
+            {
+                string[] arr = potalRaw.Split('~');
+                row.potalMin = ParseInt(arr[0]);
+                row.potalMax = ParseInt(arr[1]);
+            }
+            else
+            {
+                row.potalMin = ParseInt(potalRaw);
+                row.potalMax = row.potalMin;
+            }
+
+            row.boss = ParseBool(GetValue(values, 5));
+            row.LpRealse = ParseBool(GetValue(values, 6));
+
+            potalStageDataList.Add(row);
+        }
     }
 
     private static string GetValue(string[] arr, int idx)

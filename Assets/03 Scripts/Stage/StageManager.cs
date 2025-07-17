@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static StageTable;
 
 public class StageManager : MonoBehaviour
 {
@@ -161,7 +162,16 @@ public class StageManager : MonoBehaviour
     {
         difficulty = Mathf.Clamp((floor - 1) / 10 + 1, 1, 4);
 
-        totalStageCount = Mathf.Clamp((floor - 1) / 5 + 1, 1, 4);
+        PotalStageData portalData = CVSLoader.potalStageDataList.Find(d => d.floor == floor);
+        if (portalData != null)
+        {
+            int randStage = Random.Range(portalData.potalMin, portalData.potalMax + 1);
+            totalStageCount = Mathf.Clamp(randStage + 1, 1, 4);
+        }
+        else
+        {
+            totalStageCount = Mathf.Clamp((floor - 1) / 5 + 1, 1, 4);
+        }
 
         if (floor < 11)
             timerMultiplier = 1;
