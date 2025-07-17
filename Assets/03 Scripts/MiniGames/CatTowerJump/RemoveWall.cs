@@ -17,6 +17,7 @@ public class RemoveWall : MonoBehaviour
         if (transform.position.y < cameraTransfrom.position.y - distanceCamera)
         {
             WallPool.Instance.ReturnWall(this.gameObject);
+            BackGroundPool.Instance.ReturnBackGround(this.gameObject);
         }
     }
 }

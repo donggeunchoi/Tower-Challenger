@@ -8,14 +8,8 @@ public class WallPool : MonoBehaviour
     public GameObject wallPrefab;
     public Transform wallContainer;
     public int poolSize;
-
-    public GameObject backGroundPrefab;
-    public Transform backGroundContainer;
-    public int backGroundPoolSize;
     
     private Queue<GameObject> wallPool = new Queue<GameObject>();
-    private Queue<GameObject> backGroundPool = new Queue<GameObject>();
-
     private void Awake()
     {
         Instance = this;
@@ -27,11 +21,8 @@ public class WallPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject wall = Instantiate(wallPrefab, wallContainer);
-            GameObject backGround = Instantiate(backGroundPrefab, backGroundContainer);
             wall.SetActive(false);
-            backGround.SetActive(false);
             wallPool.Enqueue(wall);
-            backGroundPool.Enqueue(backGround);
             
         }
     }
@@ -56,15 +47,5 @@ public class WallPool : MonoBehaviour
         wall.SetActive(false);
         wallPool.Enqueue(wall);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
