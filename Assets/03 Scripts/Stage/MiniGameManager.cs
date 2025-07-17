@@ -9,12 +9,28 @@ public class MiniGameManager : MonoBehaviour
     [Header("미니게임 데이터")]
     public MiniGameDatas[] miniGameDatas;    //미니게임 데이터
     public List<MiniGameDatas> randomGames = new List<MiniGameDatas>();
+    [SerializeField] private List<MiniGameDatas> unUsedGames = new List<MiniGameDatas>();
 
     private void Start()
     {
         if (instance == null)
         {
             instance = this;
+        }
+    }
+    public void UnUsedGames()
+    {
+        unUsedGames.Clear();
+        for (int i = 0; i < miniGameDatas.Length; i++)  //사용가능 한 미니게임 리스트 생성
+        {
+            MiniGameDatas game = miniGameDatas[i];
+            if (!game.isBoss)
+            {
+                if (game.allStage)
+                {
+                    unUsedGames.Add(game);
+                }
+            }
         }
     }
 
@@ -41,20 +57,40 @@ public class MiniGameManager : MonoBehaviour
             return;
         }
 
-        if (StageManager.instance.totalStageCount == 1)
+        if (unUsedGames.Count > 0)
         {
-            List<MiniGameDatas> shuffledList = gameList.OrderBy(x => Random.value).ToList();
+            if (unUsedGames.Count >= StageManager.instance.totalStageCount)
+            {
+                unUsedGames = unUsedGames.OrderBy(x => Random.value).ToList();
+                for (int i = 0; i < StageManager.instance.totalStageCount; i++)
+                {
+                    randomGames.Add(unUsedGames[0]);
+                    unUsedGames.RemoveAt(0);
+                }
+            }
+            else
+            {
+                randomGames.AddRange(unUsedGames);  //남은거 다 추가하고
+                if (randomGames.Count < StageManager.instance.totalStageCount)
+                {
+                    gameList = gameList.OrderBy(x => Random.value).ToList();  //랜덤으로 돌려놓고  
 
-            for (int i = 0; i < StageManager.instance.floor && shuffledList.Count > 0; i++)
-            {
-                int rand = Random.Range(0, shuffledList.Count);
-                randomGames.Add(shuffledList[rand]);
-                shuffledList.RemoveAt(rand);
-            }
-            while (randomGames.Count < StageManager.instance.floor)
-            {
-                randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
-            }
+                    foreach (MiniGameDatas unused in unUsedGames)  //썻던게임은 뒤로보내고
+                    {
+                        if (gameList.Remove(unused))
+                        {
+                            gameList.Add(unused);
+                        }
+                    }
+                    randomGames.AddRange(gameList.Take(Mathf.Min(gameList.Count, StageManager.instance.totalStageCount - randomGames.Count)));  //남은거만큼 추가
+
+                    while (randomGames.Count < StageManager.instance.totalStageCount)  //그래도 모잘라면 중복허용
+                    {
+                        randomGames.Add(gameList[Random.Range(0, gameList.Count)]);
+                    }
+                    unUsedGames.Clear();
+                }
+            } 
         }
         else
         {
@@ -104,7 +140,7 @@ public class MiniGameManager : MonoBehaviour
         {
             if (bossGameList.Count > 0)
             {
-                var randomBoss = bossGameList[Random.Range(0, bossGameList.Count)];
+                MiniGameDatas randomBoss = bossGameList[Random.Range(0, bossGameList.Count)];
                 randomGames.Add(randomBoss);
             }
             else
