@@ -54,6 +54,7 @@ public class StageManager : MonoBehaviour
             stageTimer = UIManager.Instance.timerUI;
             stageLP = UIManager.Instance.stageLPUI;
         }
+        CVSLoader.LoadPotalCVS();
     }
 
     #region MiniGameCall
@@ -166,7 +167,7 @@ public class StageManager : MonoBehaviour
         if (portalData != null)
         {
             int randStage = Random.Range(portalData.potalMin, portalData.potalMax + 1);
-            totalStageCount = Mathf.Clamp(randStage + 1, 1, 4);
+            totalStageCount = Mathf.Clamp(randStage, 1, 4);
         }
         else
         {
