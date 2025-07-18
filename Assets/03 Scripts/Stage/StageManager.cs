@@ -94,7 +94,7 @@ public class StageManager : MonoBehaviour
         StartCoroutine(StartGameLoad(false));
     }
 
-    private IEnumerator StartGameLoad(bool isBoss)
+    public IEnumerator StartGameLoad(bool isBoss)
     {
         AsyncOperation ansynLoad;
 

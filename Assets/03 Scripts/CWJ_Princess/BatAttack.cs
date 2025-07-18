@@ -37,6 +37,12 @@ public class BatAttack : MonoBehaviour
         Attack();
     }
 
+    private void RandomAttck()
+    {
+        int random = Random.Range(0, 2);
+    }
+
+
     private void Attack()
     {
         //
