@@ -22,5 +22,11 @@ public class StageInfo : MonoBehaviour
 
         if (stageText != null && stageManager != null)
             stageText.text = "Stage Count : " + stageManager.stageClearPortal.Count;
+
+        if (stageText != null && stageManager != null )
+        {
+            if (stageManager.floor % StageManager.BOSS_FLOOR == 0)
+                stageText.text = "Boss";
+        }
     }
 }
