@@ -16,20 +16,14 @@ public class Currency : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance != null)
-        {
-            if (gold != GameManager.Instance.gold || diamond != GameManager.Instance.diamond)
-                UpdateCurrency();
-        }
+        if (gold != Save.playerData.gold || diamond != Save.playerData.diamond)
+            UpdateCurrency();
     }
 
     private void UpdateCurrency()
     {
-        if (GameManager.Instance != null)
-        {
-            gold = GameManager.Instance.gold;
-            diamond = GameManager.Instance.diamond;
-        }
+        gold = Save.playerData.gold;
+        diamond = Save.playerData.diamond;
 
         if (goldText != null && diamondText != null)
         {

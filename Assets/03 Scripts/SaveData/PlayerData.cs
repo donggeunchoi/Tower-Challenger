@@ -26,11 +26,18 @@ public class PlayerData
         //TimeSpan time 밀리초로 환산을해서 밀리초로 가지고있다가 분으로 환산해서
         if (GameManager.Instance != null)
         {
-            gold = GameManager.Instance.gold;
-            diamond = GameManager.Instance.diamond;
-            stamina = GameManager.Instance.mainStamina;
-            staminaTimer = GameManager.Instance.staminatimer;
+            if (GameManager.Instance.resource != null)
+            {
+                gold = GameManager.Instance.resource.gold;
+                diamond = GameManager.Instance.resource.diamond;
+            }
 
+            if (GameManager.Instance.stamina != null)
+            {
+                stamina = GameManager.Instance.stamina.mainStamina;
+                staminaTimer = GameManager.Instance.stamina.staminatimer;
+            }
+            //여기까지 해결
             characterNames.Clear();
             foreach (CharacterData characters in GameManager.Instance.charactors)
                 characterNames.Add(characters.characterName);
@@ -69,8 +76,7 @@ public class PlayerData
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.LoadResource();
-            GameManager.Instance.LoadStaminaTimer();
+            GameManager.Instance.LoadResourceData();
             GameManager.Instance.LoadCharacter();
         }
 

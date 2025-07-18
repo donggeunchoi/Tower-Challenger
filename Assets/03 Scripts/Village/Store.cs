@@ -55,7 +55,7 @@ public class Store : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            if (moveSpeed.price > GameManager.Instance.gold)
+            if (moveSpeed.price > Save.playerData.gold)
             {
                 Debug.Log("돈 부족이요");
             }
@@ -71,7 +71,7 @@ public class Store : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            if (sandGlass.price > GameManager.Instance.gold)
+            if (sandGlass.price > Save.playerData.gold)
             {
                 Debug.Log("골드 부족이요");
             }
@@ -86,7 +86,7 @@ public class Store : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            if (topTicket.price > GameManager.Instance.diamond)
+            if (topTicket.price > Save.playerData.diamond)
             {
                 Debug.Log("다이아 부족이요");
             }

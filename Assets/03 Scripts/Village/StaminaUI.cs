@@ -17,7 +17,7 @@ public class StaminaUI : MonoBehaviour
 
     private void Update()
     {
-        if (stamina != gameManager.mainStamina)
+        if (stamina != GameManager.Instance.stamina.mainStamina)
         {
             UpdateStaminaUI();
         }
@@ -25,19 +25,19 @@ public class StaminaUI : MonoBehaviour
 
     private void UpdateStaminaUI()
     {
-        if (staminaUI.Length >= gameManager.mainStamina)
+        if (staminaUI.Length >= GameManager.Instance.stamina.mainStamina)
         {
             for (int i = 0; i < staminaUI.Length; i++)
             {
                 staminaUI[i].gameObject.SetActive(false);
             }
 
-            for (int j = 0; j < Mathf.Min(gameManager.mainStamina, staminaUI.Length); j++)
+            for (int j = 0; j < Mathf.Min(GameManager.Instance.stamina.mainStamina, staminaUI.Length); j++)
             {
                 staminaUI[j].gameObject.SetActive(true);
             }
 
-            stamina = gameManager.mainStamina;
+            stamina = GameManager.Instance.stamina.mainStamina;
         }
     }
 }

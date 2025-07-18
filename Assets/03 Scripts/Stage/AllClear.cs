@@ -155,7 +155,7 @@ public class AllClear : MonoBehaviour
     {
         if (itemManager == null)
         {
-            itemManager = FindObjectOfType<ItemManager>();
+            itemManager = Object.FindAnyObjectByType<ItemManager>();
         }
 
 
