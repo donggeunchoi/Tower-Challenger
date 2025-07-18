@@ -1128,10 +1128,11 @@ MonoBehaviour:
   enemyPos: {fileID: 2003439947}
   spriteRenderer: {fileID: 1758026338}
   batSpeed: 5
-  maxY: 0.5
-  minY: 0.1
-  veticalSpeed: 7
+  maxY: 3
+  minY: 0.5
+  frequency: 7
   enemyTime: 3
+  fireSpeed: 10
 --- !u!1 &2003439945
 GameObject:
   m_ObjectHideFlags: 0

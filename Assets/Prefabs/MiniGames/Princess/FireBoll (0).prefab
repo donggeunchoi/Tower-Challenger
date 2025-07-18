@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 3482732457576806702}
   - component: {fileID: 1651960881680994792}
   - component: {fileID: 5050263804449503753}
-  - component: {fileID: 5127758071986654544}
-  - component: {fileID: -3817176997336724760}
+  - component: {fileID: -3536140092579060932}
+  - component: {fileID: 8948841298592098177}
   m_Layer: 0
   m_Name: FireBoll (0)
-  m_TagString: Enemy
+  m_TagString: Fire
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5127758071986654544
+--- !u!114 &-3536140092579060932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226896530266349484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e654c69eb0c1acb4cb7f218339a57f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8948841298592098177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,15 +190,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs: []
---- !u!114 &-3817176997336724760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226896530266349484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72a4f9ee0025724f9dceb69d1e40951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  time: 0
