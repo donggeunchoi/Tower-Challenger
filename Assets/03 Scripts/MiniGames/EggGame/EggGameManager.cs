@@ -7,16 +7,20 @@ public class EggGameManager : MonoBehaviour
 {
     [Header("알")]
     public GameObject[] Eggs;
+
     [Header("HP 관련")]
     public GameObject HPBar,HPText; // HP 바 (Image 오브젝트)
+
     [Header("출력 UI")]
     public GameObject PrintOut;
     public GameObject ClickBlocker;
+
     [Header("난이도")]
     public int Lv = 2;
     public int HitDamage = 3;
     public int EndTime = 10;
     public int healHP = 2;
+
     [Header("HP")]
     public int Egg0 = 100;
     public int Egg1 = 200;
@@ -153,7 +157,7 @@ public class EggGameManager : MonoBehaviour
         tiltTimer = 0;
         if (isHealing) yield break;
         isHealing = true;
-        GameStart = false; // 힐 중에는 게임 시작 안 함
+        GameStart = false; 
 
         while (HP < MaxHP)
         {
@@ -168,6 +172,6 @@ public class EggGameManager : MonoBehaviour
 
         isHealing = false;
         ClickBlocker.SetActive(false);
-        GameStart = true; // 힐 끝나고 게임 시작
+        GameStart = true; 
     }
 }
