@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CatController : MonoBehaviour
@@ -16,13 +17,16 @@ public class CatController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private bool _isTouchingWall = false;
     private int _moveDirection = 1;        // 1이면 오른쪽, -1이면 왼쪽
-    // private bool _isWaitingForInput = true;
+    
+    private Vector3 startPos;
     
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.gravityScale = 0;
         jumpLeft = maxJumpCount;
+        
+        startPos = transform.position;
     }
 
     void Update()
@@ -58,9 +62,12 @@ public class CatController : MonoBehaviour
             _rigidbody.linearVelocity = Vector2.zero;         // 완전히 멈춤
             _rigidbody.gravityScale = 0;                // 중력 제거
             _moveDirection *= -1;                // 반대 방향으로 준비
+            StartCoroutine(Falling(stopTime));
         }
-
-        StartCoroutine(Falling(stopTime));
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            ResetPosition();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -93,6 +100,15 @@ public class CatController : MonoBehaviour
         {
             jumpLeft--;
         }
+    }
+
+    private void ResetPosition()
+    {
+        transform.position = startPos;
+        _rigidbody.linearVelocity = Vector2.zero;
+        _rigidbody.gravityScale = 0;
+        jumpLeft = maxJumpCount;
+        _isTouchingWall = true;
     }
 }
   
