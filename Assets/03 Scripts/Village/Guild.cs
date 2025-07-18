@@ -45,6 +45,25 @@ public class Guild : MonoBehaviour
         }
     }
 
+    public void RefreshCharacterButton()
+    {
+        for (int i = 0; i < targetButton.Length; i++)
+        {
+            if (targetButton[i] != null && characterDatas[i] != null)
+            {
+                if (GameManager.Instance.charactors.Any(c => c == characterDatas[i]))
+                {
+                    ClearImage[i].SetActive(true);
+                    Destroy(targetButton[i]);
+                }
+                else
+                {
+                    ClearImage[i].SetActive(false);
+                }
+            }
+        }
+    }
+
     public void OnClickCharactarBuy(int characterNum)
     {
         CharacterData data = characterDatas[characterNum];
@@ -54,7 +73,7 @@ public class Guild : MonoBehaviour
 
         currentPannel = Instantiate(pannel, pannelTransform);
         GuildPannel guildPanel = currentPannel.GetComponent<GuildPannel>();
-        guildPanel.Init(data);
+        guildPanel.Init(data, this);
 
         //ClearImage[characterNum].SetActive(true);
         //Destroy(targetButton[characterNum]);

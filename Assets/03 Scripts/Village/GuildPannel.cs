@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GuildPannel : MonoBehaviour
 {
     [SerializeField] public CharacterData characterData;
+    private Guild guild;
 
     [SerializeField] private Image characterSprite;
     [SerializeField] private Image currencySprite;
@@ -18,9 +19,10 @@ public class GuildPannel : MonoBehaviour
     [SerializeField] private Sprite gold;
     [SerializeField] private Sprite diamond;
 
-    public void Init(CharacterData data)
+    public void Init(CharacterData data, Guild parentGuild)
     {
         characterData = data;
+        guild = parentGuild;
 
         if (characterSprite != null && characterData.inGameImage != null)
             characterSprite.sprite = characterData.inGameImage;
@@ -50,6 +52,8 @@ public class GuildPannel : MonoBehaviour
             return;
         }
 
+        bool purchased = false;
+
         switch (characterData.priceType)
         {
             case PriceType.dia:
@@ -58,7 +62,7 @@ public class GuildPannel : MonoBehaviour
                     GameManager.Instance.UseDiamond(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
                     GameManager.Instance.SaveData();
-                    Destroy(this.gameObject);
+                    purchased = true;
                 }
                 else
                 {
@@ -72,7 +76,7 @@ public class GuildPannel : MonoBehaviour
                     GameManager.Instance.UseGold(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
                     GameManager.Instance.SaveData();
-                    Destroy(this.gameObject);
+                    purchased = true;
                 }
                 else
                 {
@@ -83,6 +87,15 @@ public class GuildPannel : MonoBehaviour
                 break;
         }
 
+        if (purchased)
+        {
+            Guild guild = FindAnyObjectByType<Guild>();
+            if (guild != null)
+            {
+                guild.RefreshCharacterButton();
+            }
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnClickCancle()

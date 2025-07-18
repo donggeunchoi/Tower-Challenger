@@ -25,7 +25,6 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        stageManager = StageManager.instance;
         notDestroyCanvus.gameObject.SetActive(false);
     }
 
