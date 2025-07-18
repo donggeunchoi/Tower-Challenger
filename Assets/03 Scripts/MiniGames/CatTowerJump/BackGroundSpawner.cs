@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BackGroundPool))]
-public class BackGroundSpawner : MonoBehaviour, ResetTable
+public class BackGroundSpawner : MonoBehaviour
 {
     [Header("References")]
     public Transform cameraTransform;
@@ -24,15 +24,6 @@ public class BackGroundSpawner : MonoBehaviour, ResetTable
 
     private void Start()
     {
-        for (int i = 0; i < initialCount; i++)
-        {
-            float yPos = i * spawnIntervalY;
-            GameObject tile = pool.GetBackGround();
-            tile.transform.position = new Vector3(0f, yPos, 0f);
-            tileQueue.Enqueue(tile);
-            lastSpawnY = yPos;
-        }
-
         InitializeLoop();
     }
     // Update is called once per frame
@@ -50,7 +41,6 @@ public class BackGroundSpawner : MonoBehaviour, ResetTable
 
     private void InitializeLoop()
     {
-        // tileQueue.Clear();
         lastSpawnY = 0f;
 
         for (int i = 0; i < initialCount; i++)
@@ -68,8 +58,8 @@ public class BackGroundSpawner : MonoBehaviour, ResetTable
     {
         while (tileQueue.Count > 0)
         {
-            var t = tileQueue.Dequeue();
-            pool.ReturnBackGround(t);
+            var tile = tileQueue.Dequeue();
+            pool.ReturnBackGround(tile);
         }
         // 2) 다시 초기화
         InitializeLoop();

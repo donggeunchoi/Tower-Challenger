@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
@@ -11,17 +12,20 @@ public class ObstacleSpawner : MonoBehaviour
     public float positionY;
     
     private float lastSpawny = 0f;
+    private List<GameObject> activeObstacles = new List<GameObject>();
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        for (int i = 0; i < initialCount; i++)
-        {
-            float y = i * spawnIntervalY;
-            SpawnRandom(y);
-            lastSpawny = y;
-        }
+        // for (int i = 0; i < initialCount; i++)
+        // {
+        //     float y = i * spawnIntervalY;
+        //     SpawnRandom(y);
+        //     lastSpawny = y;
+        // }
+
+        InitializeLoop();
     }
 
     // Update is called once per frame
@@ -30,6 +34,25 @@ public class ObstacleSpawner : MonoBehaviour
         if (cameraTransform.position.y > lastSpawny + spawnIntervalY)
         {
             float y = lastSpawny + spawnIntervalY;
+            SpawnRandom(y);
+            lastSpawny = y;
+        }
+    }
+
+    private void InitializeLoop()
+    {
+        foreach (GameObject obstacles in activeObstacles)
+        {
+            ObstaclePoolManager.Instance.ReturnObstacle(obstacles);
+        }
+
+        activeObstacles.Clear();
+
+        lastSpawny = 0f;
+
+        for (int i = 0; i < initialCount; i++)
+        {
+            float y = i * spawnIntervalY;
             SpawnRandom(y);
             lastSpawny = y;
         }
@@ -53,5 +76,10 @@ public class ObstacleSpawner : MonoBehaviour
         float ySetting = yPositon + positionY;
         float randomX = Random.Range(minX, maxX);
         obstacle.transform.position = new Vector3(randomX, ySetting, 0);
+    }
+
+    public void ResetTable()
+    {
+        InitializeLoop();
     }
 }

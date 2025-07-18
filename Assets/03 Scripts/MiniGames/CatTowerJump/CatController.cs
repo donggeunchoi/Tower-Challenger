@@ -13,6 +13,15 @@ public class CatController : MonoBehaviour
     [Header("멀티 점프")]
     public int maxJumpCount = 3;             // 점프 횟수
     private int jumpLeft;                 // 남은 점프 홧수
+
+    [Header("무적 기능")] 
+    public int coollingDuration;
+    public int blinkInterval;
+    private Collider2D _collider;
+    private SpriteRenderer _spriteRenderer;
+    private bool _isInvincible;
+    private Color _originalColor;
+    
     
     private Rigidbody2D _rigidbody;
     private bool _isTouchingWall = false;
@@ -23,10 +32,13 @@ public class CatController : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody.gravityScale = 0;
         jumpLeft = maxJumpCount;
         
         startPos = transform.position;
+        _originalColor = _spriteRenderer.color;
     }
 
     void Update()
@@ -54,27 +66,23 @@ public class CatController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+          StartCoroutine(Invincibility());
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
         {
             _isTouchingWall = true;
             _rigidbody.linearVelocity = Vector2.zero;         // 완전히 멈춤
             _rigidbody.gravityScale = 0;                // 중력 제거
             _moveDirection *= -1;                // 반대 방향으로 준비
             StartCoroutine(Falling(stopTime));
-        }
-        else if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            ResetPosition();
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            _isTouchingWall = false;
         }
     }
 
@@ -102,13 +110,24 @@ public class CatController : MonoBehaviour
         }
     }
 
-    private void ResetPosition()
+    IEnumerator Invincibility()
     {
-        transform.position = startPos;
-        _rigidbody.linearVelocity = Vector2.zero;
-        _rigidbody.gravityScale = 0;
-        jumpLeft = maxJumpCount;
-        _isTouchingWall = true;
+        _isInvincible = true;
+        
+        float timer = 0f;
+        while (timer < coollingDuration)
+        {
+            // 깜빡임 효과
+            if (_spriteRenderer != null)
+                _spriteRenderer.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time * 5, 1f));
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        
+        _spriteRenderer.color = _originalColor;
+        _spriteRenderer.enabled = true;
+        _isInvincible = false;
     }
 }
   

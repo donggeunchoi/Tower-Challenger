@@ -12,10 +12,10 @@ public class WallSpawner : MonoBehaviour
     public Transform cameraTransform;
 
     [Header("Looper Settings")] 
-    public int initialCount = 12;
+    public int initialCount;
     public float spawnIntervaly;
-    public float leftX = -4f;
-    public float rightX = 4f;
+    public float leftX;
+    public float rightX;
 
     [Header("벽 장애물 설정")] 
     [Range(0f, 1f)]
@@ -47,24 +47,26 @@ public class WallSpawner : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < initialCount; i++)
-        {
-            float y = i *  spawnIntervaly;
-            GameObject leftWall = pool.GetWall();
-            GameObject rightWall = pool.GetWall();
+        // for (int i = 0; i < initialCount; i++)
+        // {
+        //     float y = i *  spawnIntervaly;
+        //     GameObject leftWall = pool.GetWall();
+        //     GameObject rightWall = pool.GetWall();
+        //
+        //
+        //     GameObject wallObstacle = null;
+        //     if (Random.value < obstacleChance)
+        //     {
+        //         wallObstacle = ObstaclePoolManager.Instance.GetWall();
+        //     }
+        //     
+        //     PositionWall(leftWall, rightWall, wallObstacle, y);
+        //     spawnQueue.Enqueue(new WallRow(leftWall, rightWall, wallObstacle));
+        //     lastSpawnY = y;
+        //     
+        // }
 
-
-            GameObject wallObstacle = null;
-            if (Random.value < obstacleChance)
-            {
-                wallObstacle = ObstaclePoolManager.Instance.GetWall();
-            }
-            
-            PositionWall(leftWall, rightWall, wallObstacle, y);
-            spawnQueue.Enqueue(new WallRow(leftWall, rightWall, wallObstacle));
-            lastSpawnY = y;
-            
-        }
+        InitializeLoop();
     }
     
     // Update is called once per frame
@@ -87,6 +89,30 @@ public class WallSpawner : MonoBehaviour
         }
     }
 
+    private void InitializeLoop()
+    {
+        while (spawnQueue.Count > 0)
+        {
+            GameObject leftWall = spawnQueue.Dequeue().leftWall;
+            GameObject rightWall = spawnQueue.Dequeue().rightWall;
+            GameObject obstacleWall = spawnQueue.Dequeue().obstacleWall;
+            WallPool.Instance.ReturnWall(leftWall);
+            WallPool.Instance.ReturnWall(rightWall);
+            WallPool.Instance.ReturnWall(obstacleWall);
+        }
+        lastSpawnY = -20f;
+        for (int i = 0; i < initialCount; i++)
+        {
+            float y = i *  spawnIntervaly;
+            GameObject leftWall = pool.GetWall();
+            GameObject rightWall = pool.GetWall();
+            GameObject obstacleWall = pool.GetWall();
+            PositionWall(leftWall, rightWall, leftWall, y);
+            spawnQueue.Enqueue(new WallRow(leftWall, rightWall, obstacleWall));
+            lastSpawnY = y;
+        }
+    }
+
     private void PositionWall(GameObject leftWall, GameObject rightWall, GameObject wallObstacle, float y)
     {
         leftWall.transform.position  = new Vector3(leftX,  y, 0f);
@@ -100,5 +126,10 @@ public class WallSpawner : MonoBehaviour
             wallObstacle.transform.position = new Vector3(leftX,  y, 0f);
             wallObstacle.SetActive(true);
         }
+    }
+
+    public void ResetTable()
+    {
+        InitializeLoop();
     }
 }

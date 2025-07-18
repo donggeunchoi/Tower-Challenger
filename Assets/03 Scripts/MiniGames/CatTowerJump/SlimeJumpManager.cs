@@ -1,26 +1,35 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SlimeJumpManager : MonoBehaviour
 {
-    public ResetTable[] resetters;
+    public static SlimeJumpManager Instance;
+    
+    public BackGroundSpawner BackGroundspawner;
+    public WallSpawner wallSpawner;
+    public ObstacleSpawner obstacleSpawner;
 
-    public void ResetAll()
+    private void Awake()
     {
-        foreach (var r in resetters)
+        if (Instance == null)
         {
-            r.ResetTable();
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void ClearGame()
     {
-        
+        //이쪽에 다시 씬으로 넘기기
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameOver()
     {
-        
+        //여기에 패널 열어뿌지뭐
     }
 }
