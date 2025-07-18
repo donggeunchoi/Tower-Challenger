@@ -37,8 +37,8 @@ public class HardGameGoalTrigger : MonoBehaviour
 
         if (goal == null)
         {
-            HardGameGameManager Next = FindObjectOfType<HardGameGameManager>();
-            if (Next)Next.NextLv();
+            HardGameGameManager next = Object.FindFirstObjectByType<HardGameGameManager>();
+            if (next) next.NextLv();
         }
         else
         {
