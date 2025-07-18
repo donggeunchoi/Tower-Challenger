@@ -32,9 +32,19 @@ public class Slime : MonoBehaviour
     //떨어진 곳이 땅이냐 슬라임이냐
     void OnCollisionEnter2D(Collision2D other)
     {
+        
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
+            //이후에 LPDown으로 연결
+            Debug.Log("땅에 착지");
+            Destroy(gameObject);
+        }
+
         if (isSettled)
             return;
-        
+
         //슬라임이면 정착단계로 이동하게
         if (other.gameObject.CompareTag("Slime"))
         {
@@ -45,14 +55,6 @@ public class Slime : MonoBehaviour
                 Settle();
             }
         }
-        else if (other.gameObject.CompareTag("Ground"))
-        {
-            StageManager.instance.MiniGameResult(false);
-            //이후에 LPDown으로 연결
-            Debug.Log("땅에 착지");
-            Destroy(gameObject);
-        }
-        
     }
 
     //슬라임 정착단계의 메서드

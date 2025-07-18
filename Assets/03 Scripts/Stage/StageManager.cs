@@ -87,6 +87,7 @@ public class StageManager : MonoBehaviour
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
         SetFloorInfo();
+        MiniGameManager.instance.UnUsedGames();
         RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
         LoadRandomMap(); //랜덤 맵
 

@@ -11,9 +11,13 @@ public class SlimeTower : MonoBehaviour
 
     [Header("쿨타임")]
     [SerializeField] private int maxStack = 3;  //슬라임을 던질 수 있는 최대 스택갯수
-    [SerializeField] private float coolDown = 2f; //스택이 차는 쿨타임
-    [SerializeField] private int currentStack; //현재 던질 수 있는 스택
-    [SerializeField] private float stackTimer; //쿨타임을 측정해주는 타이머
+    [SerializeField] public float coolDown = 2f; //스택이 차는 쿨타임
+    [SerializeField] public int currentStack; //현재 던질 수 있는 스택
+    [SerializeField] public float stackTimer; //쿨타임을 측정해주는 타이머
+
+    private bool canClick = false;
+    private float clickCooldown = 0.2f;
+    private float clickCooldownTimer = 0f;
 
     private GameObject currentSlime; //현재슬라임
     
@@ -39,7 +43,18 @@ public class SlimeTower : MonoBehaviour
     // Update is called once per frame
     void Update()// 온클릭으로 바꿔야함
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!canClick)
+        {
+            clickCooldownTimer += Time.deltaTime;
+            if (clickCooldownTimer >= clickCooldown)
+            {
+                canClick = true;
+                clickCooldownTimer = 0f;
+            }
+            return;
+        }
+
+        if (canClick && Input.GetMouseButtonDown(0)) 
         {
             MoveSlime();
             SpawnSlime();
@@ -86,7 +101,8 @@ public class SlimeTower : MonoBehaviour
         int slimeCount = towerRoot.childCount;
         if (slimeCount == clearGameCount)
         {
-            StageManager.instance.MiniGameResult(true);
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(true);
         }
     }
 }

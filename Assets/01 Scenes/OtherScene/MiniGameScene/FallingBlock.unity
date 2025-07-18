@@ -1103,7 +1103,7 @@ MonoBehaviour:
   timerText: {fileID: 5086940746494645868}
   player: {fileID: 381915972964180480}
   ground: {fileID: 740898747072166867}
-  playerSpeed: 500
+  playerSpeed: 400
   gravity: -600
   backGround: {fileID: 5236327420248183316}
   obstacle:
@@ -1111,6 +1111,8 @@ MonoBehaviour:
   - {fileID: 6133079612978933671, guid: 48504afba0746154b96a5d08f9381691, type: 3}
   - {fileID: 1552206633312033680, guid: 1ae2fd0ff3d96da4d8dbbc70d8b6a778, type: 3}
   spawnDelay: 1
+  spawnDiffcultDelay: 2
+  gravityScale: 30
 --- !u!1 &4287172927135042153
 GameObject:
   m_ObjectHideFlags: 0

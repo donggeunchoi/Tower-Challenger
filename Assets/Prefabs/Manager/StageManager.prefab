@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4575202848962160002}
   - component: {fileID: 6643242492226335990}
+  - component: {fileID: 6458399170951497763}
+  - component: {fileID: 8634761608726602802}
   m_Layer: 0
-  m_Name: StageManager
+  m_Name: TowerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,24 +51,56 @@ MonoBehaviour:
   stageTimer: {fileID: 0}
   stageLP: {fileID: 0}
   infoUI: {fileID: 0}
-  difficulty: 0
   isGameActive: 0
-  isTest: 0
   floor: 1
   bestFloor: 1
   totalStageCount: 10
   timerMultiplier: 1
+  playerPosition: {x: 0, y: 0, z: 0}
+  layerNumber: 0
+  currentSceneName: 
   stageClearPortal: 
+--- !u!114 &6458399170951497763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636037218680157365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024388680e1ea6c40b835c7340fd090f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageManager: {fileID: 0}
+  miniGameManager: {fileID: 0}
+  mapScenes:
+  - TopScene-1
+  - TopScene-2
+  - TopScene-3
+  - TopScene-4
+--- !u!114 &8634761608726602802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636037218680157365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025b637e19aa2d74c93f105678d7f971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   miniGameDatas:
   - {fileID: 11400000, guid: da224f2646da1d74fa94ab8e8c1dba93, type: 2}
   - {fileID: 11400000, guid: 3c2e5b03cc437894782861f0f60e6411, type: 2}
   - {fileID: 11400000, guid: 8173f0fb966e361478856b23248ae992, type: 2}
   - {fileID: 11400000, guid: b87c27edaffe4463f92bbe79286a3817, type: 2}
   - {fileID: 11400000, guid: 3abf8373dda52414a9c72fd1753c7159, type: 2}
-  - {fileID: 11400000, guid: 8469368ffead7374e8ba17c3f4a7b457, type: 2}
   - {fileID: 11400000, guid: 9407a0df7f6879e4aa870d4cce06f84f, type: 2}
-  mapScenes:
-  - TopScene-1
-  - TopScene-2
-  - TopScene-3
-  - TopScene-4
+  - {fileID: 11400000, guid: 84dccacee0f693543876af7f3b24b20f, type: 2}
+  - {fileID: 11400000, guid: 380a1e3a64433ec4a84d91d4267b3898, type: 2}
+  - {fileID: 11400000, guid: 8469368ffead7374e8ba17c3f4a7b457, type: 2}
+  - {fileID: 11400000, guid: c67975b1771db7742a039d8626e96ba8, type: 2}
+  - {fileID: 11400000, guid: 40a3dac87b6402344bb82e99b10d10fd, type: 2}
+  randomGames: []
