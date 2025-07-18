@@ -12,44 +12,56 @@ public class EggGameManager : MonoBehaviour
     [Header("출력 UI")]
     public GameObject PrintOut;
     public GameObject ClickBlocker;
-
+    [Header("난이도")]
+    public int Lv = 2;
+    public int HitDamage = 3;
+    public int EndTime = 10;
+    public int healHP = 2;
+    [Header("HP")]
+    public int Egg0 = 100;
+    public int Egg1 = 200;
+    public int Egg2 = 300;
 
     private bool isHealing = false;
-    private int healHP = 2;
-    private int Lv = 3;
-    private int HP;
+    private int HP =1;
     private int MaxHP;
-    private int HitDamage = 3;
-    private int EndTime = 10;
     private bool GameStart = false;
     private float tiltTimer;
     private float originalWidth;
     private TextMeshProUGUI hpTextUI;
     private TextMeshProUGUI printOutUI;
-   private RectTransform hpRect;
+    private RectTransform hpRect;
+    private Animator animator;
 
+    void Set()
+    {
+        animator = Eggs[Lv].GetComponent<Animator>();
+        printOutUI = PrintOut.GetComponent<TextMeshProUGUI>();
+        hpTextUI = HPText.GetComponent<TextMeshProUGUI>();
+        hpRect = HPBar.GetComponent<RectTransform>();
+    }
     void Start()
     {
-        printOutUI = PrintOut.GetComponent<TextMeshProUGUI>();
-        UpdateTime();
-        InitHP(); //난이도별 HP 설정
-        StartCoroutine(HealTime());
         foreach (GameObject egg in Eggs)
         {
             Button btn = egg.GetComponent<Button>();
             if (btn) btn.onClick.AddListener(EggClick);
+            egg.SetActive(false);
         }
+        Eggs[Lv].SetActive(true);
+        Set();
+        InitHP();
+        UpdateTime();
+        StartCoroutine(HealTime());
     }
     void InitHP()
     {
-        hpTextUI = HPText.GetComponent<TextMeshProUGUI>();   
-        hpRect = HPBar.GetComponent<RectTransform>();
         originalWidth = hpRect.sizeDelta.x;
         switch (Lv)
         {
-            case 3: MaxHP = 300; break;
-            case 2: MaxHP = 200; break;
-            default: MaxHP = 100; break;
+            case 2: MaxHP = Egg2; break;
+            case 1: MaxHP = Egg1; break;
+            default: MaxHP = Egg0; break;
         }
     }
     void Update()
@@ -76,13 +88,47 @@ public class EggGameManager : MonoBehaviour
 
             UpdateHPBar();
             UpdateHPText();
+            EggBreak();
 
             if (HP == 0)
             {
                 ClickBlocker.SetActive(true);
                 GameStart = false;
-                Debug.Log("클리어");
+                StartCoroutine(PlayClearAnimation());
             }
+        }
+    }
+    IEnumerator PlayClearAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        animator.SetTrigger("Clear");
+        yield return new WaitForSeconds(1f);
+        animator.SetTrigger("Clear");
+        yield return new WaitForSeconds(2f);
+    }
+    public void EggBreak()
+    { 
+        float hpRatio = (float)HP / MaxHP;
+
+        if (hpRatio <= 0.1f)
+        {
+            animator.SetTrigger("4");
+        }
+        else if (hpRatio <= 0.25f)
+        {
+            animator.SetTrigger("3");
+        }
+        else if (hpRatio <= 0.5f)
+        {
+            animator.SetTrigger("2");
+        }
+        else if (hpRatio <= 0.75f)
+        {
+            animator.SetTrigger("1");
+        }
+        else if (hpRatio <= 1f)
+        {
+            animator.SetTrigger("Full");
         }
     }
 
@@ -102,6 +148,7 @@ public class EggGameManager : MonoBehaviour
     }
     IEnumerator HealTime()
     {
+        
         ClickBlocker.SetActive(true);
         tiltTimer = 0;
         if (isHealing) yield break;
@@ -115,7 +162,7 @@ public class EggGameManager : MonoBehaviour
 
             UpdateHPBar();
             UpdateHPText();
-
+            EggBreak();
             yield return new WaitForSeconds(0.1f);
         }
 
