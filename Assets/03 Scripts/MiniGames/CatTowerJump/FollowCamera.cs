@@ -14,6 +14,10 @@ public class FollowCamera : MonoBehaviour
         {
             highestY = target.position.y;
         }
+        else
+        {
+            highestY = transform.position.y;
+        }
     }
 
     void LateUpdate()
@@ -23,8 +27,10 @@ public class FollowCamera : MonoBehaviour
         float targetY = target.position.y + yOffset;
 
         // 오직 높아질 때만 따라감 (아래로는 안 내려옴)
-        
+        if (targetY > highestY)
+        {
             highestY = targetY;
+        }
             Vector3 newPosition = new Vector3(transform.position.x, highestY, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
         

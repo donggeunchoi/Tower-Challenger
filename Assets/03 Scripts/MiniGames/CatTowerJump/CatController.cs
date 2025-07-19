@@ -16,8 +16,6 @@ public class CatController : MonoBehaviour
 
     [Header("무적 기능")] 
     public int coollingDuration;
-    public int blinkInterval;
-    private Collider2D _collider;
     private SpriteRenderer _spriteRenderer;
     private bool _isInvincible;
     private Color _originalColor;
@@ -32,7 +30,6 @@ public class CatController : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _collider = GetComponent<Collider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody.gravityScale = 0;
         jumpLeft = maxJumpCount;
@@ -128,6 +125,16 @@ public class CatController : MonoBehaviour
         _spriteRenderer.color = _originalColor;
         _spriteRenderer.enabled = true;
         _isInvincible = false;
+    }
+
+    public void ResetJump()
+    {
+        jumpLeft = maxJumpCount;
+        // 필요하면 중력/벽접촉 상태 초기화
+        _isTouchingWall = false;
+        _rigidbody.gravityScale = 0f;
+        
+        StartCoroutine(Invincibility());
     }
 }
   
