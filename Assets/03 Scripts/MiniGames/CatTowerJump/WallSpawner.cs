@@ -16,24 +16,19 @@ public class WallSpawner : MonoBehaviour
     public float spawnIntervaly;
     public float leftX;
     public float rightX;
-
-    [Header("벽 장애물 설정")] 
-    [Range(0f, 1f)]
-    public float obstacleChance;
-    public bool obstacleLeft = true;
     
     
     private struct WallRow
     {
         public GameObject leftWall;
         public GameObject rightWall;
-        public GameObject obstacleWall;
+       
 
-        public WallRow(GameObject left, GameObject right,  GameObject obstacle)
+        public WallRow(GameObject left, GameObject right)
         {
             leftWall = left; 
             rightWall = right;
-            obstacleWall= obstacle;
+            
         }
     }
 
@@ -47,25 +42,6 @@ public class WallSpawner : MonoBehaviour
 
     private void Start()
     {
-        // for (int i = 0; i < initialCount; i++)
-        // {
-        //     float y = i *  spawnIntervaly;
-        //     GameObject leftWall = pool.GetWall();
-        //     GameObject rightWall = pool.GetWall();
-        //
-        //
-        //     GameObject wallObstacle = null;
-        //     if (Random.value < obstacleChance)
-        //     {
-        //         wallObstacle = ObstaclePoolManager.Instance.GetWall();
-        //     }
-        //     
-        //     PositionWall(leftWall, rightWall, wallObstacle, y);
-        //     spawnQueue.Enqueue(new WallRow(leftWall, rightWall, wallObstacle));
-        //     lastSpawnY = y;
-        //     
-        // }
-
         InitializeLoop();
     }
     
@@ -77,13 +53,10 @@ public class WallSpawner : MonoBehaviour
         {
             // 큐에서 제거
             spawnQueue.Dequeue();
-
             // 새로운 Y 계산
             lastSpawnY += spawnIntervaly;
-
             // 같은 쌍을 가장 위로 재배치
-            PositionWall(front.leftWall, front.rightWall, front.obstacleWall,lastSpawnY);
-
+            PositionWall(front.leftWall, front.rightWall,lastSpawnY);
             // 다시 큐에 넣어 순환 유지
             spawnQueue.Enqueue(front);
         }
@@ -93,39 +66,32 @@ public class WallSpawner : MonoBehaviour
     {
         while (spawnQueue.Count > 0)
         {
-            GameObject leftWall = spawnQueue.Dequeue().leftWall;
-            GameObject rightWall = spawnQueue.Dequeue().rightWall;
-            GameObject obstacleWall = spawnQueue.Dequeue().obstacleWall;
-            WallPool.Instance.ReturnWall(leftWall);
-            WallPool.Instance.ReturnWall(rightWall);
-            WallPool.Instance.ReturnWall(obstacleWall);
+            var wall = spawnQueue.Dequeue();
+            WallPool.Instance.ReturnWall(wall.leftWall);
+            WallPool.Instance.ReturnWall(wall.rightWall);
         }
         lastSpawnY = -20f;
+        
+        
         for (int i = 0; i < initialCount; i++)
         {
+            
+            
             float y = i *  spawnIntervaly;
             GameObject leftWall = pool.GetWall();
             GameObject rightWall = pool.GetWall();
-            GameObject obstacleWall = pool.GetWall();
-            PositionWall(leftWall, rightWall, leftWall, y);
-            spawnQueue.Enqueue(new WallRow(leftWall, rightWall, obstacleWall));
+            PositionWall(leftWall, rightWall, y);
+            spawnQueue.Enqueue(new WallRow(leftWall, rightWall));
             lastSpawnY = y;
         }
     }
 
-    private void PositionWall(GameObject leftWall, GameObject rightWall, GameObject wallObstacle, float y)
+    private void PositionWall(GameObject leftWall, GameObject rightWall, float y)
     {
         leftWall.transform.position  = new Vector3(leftX,  y, 0f);
         rightWall.transform.position = new Vector3(rightX, y, 0f);
         leftWall.SetActive(true);
         rightWall.SetActive(true);
-
-        if (wallObstacle != null)
-        {
-            float x = obstacleLeft ?  leftX : rightX;
-            wallObstacle.transform.position = new Vector3(leftX,  y, 0f);
-            wallObstacle.SetActive(true);
-        }
     }
 
     public void ResetTable()

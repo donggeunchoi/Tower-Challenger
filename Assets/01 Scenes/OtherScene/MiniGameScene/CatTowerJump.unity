@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 10
   wallBounceForce: 5
-  stopTime: 2
+  stopTime: 0
   maxJumpCount: 2
   coollingDuration: 2
 --- !u!1 &225056056
@@ -787,10 +787,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 1171780007}
   initialCount: 3
-  spawnIntervaly: 20
+  spawnIntervaly: 10
   leftX: -5
   rightX: 5
-  obstacleChance: 0.536
+  obstacleChance: 0
   obstacleLeft: 1
 --- !u!4 &663071866
 Transform:
@@ -822,7 +822,7 @@ MonoBehaviour:
   wallPrefab: {fileID: 404805873354103215, guid: 71cbf4c8f547b48918dbb6c82cb97660,
     type: 3}
   wallContainer: {fileID: 30222374}
-  poolSize: 6
+  poolSize: 12
 --- !u!1 &677131925
 GameObject:
   m_ObjectHideFlags: 0

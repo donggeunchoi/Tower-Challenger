@@ -18,13 +18,6 @@ public class ObstacleSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // for (int i = 0; i < initialCount; i++)
-        // {
-        //     float y = i * spawnIntervalY;
-        //     SpawnRandom(y);
-        //     lastSpawny = y;
-        // }
-
         InitializeLoop();
     }
 
