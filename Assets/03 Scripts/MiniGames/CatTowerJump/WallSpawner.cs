@@ -28,7 +28,6 @@ public class WallSpawner : MonoBehaviour
         {
             leftWall = left; 
             rightWall = right;
-            
         }
     }
 
@@ -51,13 +50,9 @@ public class WallSpawner : MonoBehaviour
         WallRow front = spawnQueue.Peek();
         if (front.leftWall.transform.position.y < cameraTransform.position.y - spawnIntervaly)
         {
-            // 큐에서 제거
             spawnQueue.Dequeue();
-            // 새로운 Y 계산
             lastSpawnY += spawnIntervaly;
-            // 같은 쌍을 가장 위로 재배치
             PositionWall(front.leftWall, front.rightWall,lastSpawnY);
-            // 다시 큐에 넣어 순환 유지
             spawnQueue.Enqueue(front);
         }
     }
@@ -75,8 +70,6 @@ public class WallSpawner : MonoBehaviour
         
         for (int i = 0; i < initialCount; i++)
         {
-            
-            
             float y = i *  spawnIntervaly;
             GameObject leftWall = pool.GetWall();
             GameObject rightWall = pool.GetWall();

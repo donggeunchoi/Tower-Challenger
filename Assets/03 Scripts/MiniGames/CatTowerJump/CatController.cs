@@ -73,14 +73,29 @@ public class CatController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (!other.gameObject.CompareTag("Wall")) return;
+        
+        _rigidbody.linearVelocity = Vector2.zero;
+        _rigidbody.gravityScale = 0;
+        _isTouchingWall = true;
+
+        ContactPoint2D contect = other.GetContact(0);
+
+        if (contect.normal.x > 0f)
         {
-            _isTouchingWall = true;
-            _rigidbody.linearVelocity = Vector2.zero;         // 완전히 멈춤
-            _rigidbody.gravityScale = 0;                // 중력 제거
-            _moveDirection *= -1;                // 반대 방향으로 준비
-            StartCoroutine(Falling(stopTime));
+            _moveDirection = 1;
         }
+        else if (contect.normal.x < 0f)
+        {
+            _moveDirection = -1;
+        }
+        
+        Vector3 sprite = transform.localScale;
+        sprite.x = Mathf.Abs(sprite.x) * _moveDirection;
+        transform.localScale = sprite;
+        
+        StartCoroutine(Falling(stopTime));
+        
     }
 
     public IEnumerator Falling(float time)

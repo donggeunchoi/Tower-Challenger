@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 10
   wallBounceForce: 5
-  stopTime: 0
+  stopTime: 1
   maxJumpCount: 2
   coollingDuration: 2
 --- !u!1 &225056056
@@ -786,12 +786,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 1171780007}
-  initialCount: 3
-  spawnIntervaly: 10
+  initialCount: 6
+  spawnIntervaly: 20
   leftX: -5
   rightX: 5
-  obstacleChance: 0
-  obstacleLeft: 1
 --- !u!4 &663071866
 Transform:
   m_ObjectHideFlags: 0
