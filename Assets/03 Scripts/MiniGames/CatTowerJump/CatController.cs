@@ -52,10 +52,9 @@ public class CatController : MonoBehaviour
         {
             JumpCount();
             
-            Debug.Log(jumpLeft);
             _rigidbody.linearVelocity = new Vector2(wallBounceForce * _moveDirection, jumpForce);
 
-            // 고양이 방향 반전
+            // 고양이 방향 반전 점프할때 전환해야한다면
             Vector3 scale = transform.localScale;
             scale.x = Mathf.Abs(scale.x) * _moveDirection;
             transform.localScale = scale;
@@ -89,10 +88,6 @@ public class CatController : MonoBehaviour
         {
             _moveDirection = -1;
         }
-        
-        Vector3 sprite = transform.localScale;
-        sprite.x = Mathf.Abs(sprite.x) * _moveDirection;
-        transform.localScale = sprite;
         
         StartCoroutine(Falling(stopTime));
         
