@@ -90,6 +90,14 @@ public class ObstaclePoolManager : MonoBehaviour
         {
             spinPool.Enqueue(obstacle);
         }
+        else if(obstacle.GetComponent<HorizontalMoverObstacle>() != null)
+        {
+            movePool.Enqueue(obstacle);
+        }
+        else if(obstacle.GetComponent<DamageTile>() != null)
+        {
+            wallPool.Enqueue(obstacle);
+        }
         else
         {
             movePool.Enqueue(obstacle);

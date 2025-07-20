@@ -13,6 +13,13 @@ public class ObstacleSpawner : MonoBehaviour
     
     private float lastSpawny = 0f;
     private List<GameObject> activeObstacles = new List<GameObject>();
+
+    [Header("벽 장애물 설정")] 
+    public float wallLeft;
+    public float wallRight;
+
+    [Range(0f, 1f)] 
+    public float wallObstacleChance = 0.1f;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -55,20 +62,33 @@ public class ObstacleSpawner : MonoBehaviour
     {
         bool chooseSpinner = Random.value < 0.5f;
         GameObject obstacle;
-        
-        
-        if (chooseSpinner)
+        float ySetting = yPositon + positionY;
+
+        if (Random.value < wallObstacleChance)
         {
-            obstacle = ObstaclePoolManager.Instance.GetSine();
+            obstacle = ObstaclePoolManager.Instance.GetWall();
+            float randomX = (Random.value < 0.5f) ? wallLeft : wallRight;
+            obstacle.transform.position = new Vector3(randomX, ySetting, 0);
         }
         else
         {
-            obstacle = ObstaclePoolManager.Instance.GetMove();
+            if (chooseSpinner)
+            {
+                obstacle = ObstaclePoolManager.Instance.GetSine();
+            }
+            else
+            {
+                obstacle = ObstaclePoolManager.Instance.GetMove();
+            }
+            
+           
+            float randomX = Random.Range(minX, maxX);
+            obstacle.transform.position = new Vector3(randomX, ySetting, 0);
+            
         }
         
-        float ySetting = yPositon + positionY;
-        float randomX = Random.Range(minX, maxX);
-        obstacle.transform.position = new Vector3(randomX, ySetting, 0);
+        obstacle.SetActive(true);
+        activeObstacles.Add(obstacle);
     }
 
     public void ResetTable()
