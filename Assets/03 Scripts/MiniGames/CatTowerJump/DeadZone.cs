@@ -34,6 +34,8 @@ public class DeadZone : MonoBehaviour
     {
         if (!other.CompareTag(playerTag)) return;
         
+        Debug.Log("떨어짐 여기도 LP 다운");
+        
         float zDist = Mathf.Abs(target.transform.position.z - other.transform.position.z);
         Vector3 bottomWorld = target.ViewportToWorldPoint(
             new Vector3(0.5f, 0f, zDist)
