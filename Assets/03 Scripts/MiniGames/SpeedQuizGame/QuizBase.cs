@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -15,7 +15,7 @@ public class QuizBase : MonoBehaviour
 
     public void LoadQuiz()
     {
-        QuizFile = Resources.Load<TextAsset>("SpeedQuizData");
+        QuizFile = UnityEngine.Resources.Load<TextAsset>("SpeedQuizData");
         if (QuizFile == null)
         {
             Debug.LogError("csvFile이 없는디요?");
