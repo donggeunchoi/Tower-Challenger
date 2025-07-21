@@ -39,7 +39,7 @@ public class CSVLoader : MonoBehaviour
 
     void LoadCSV()
     {
-        TextAsset data = UnityEngine.Resources.Load<TextAsset>("Images/Resources/Mini-GameDifficultySettings");
+        TextAsset data = Resources.Load<TextAsset>("Images/Resources/Mini-GameDifficultySettings");
         if (data == null)
         {
             Debug.LogError("CSV 파일을 찾을 수 없습니다.");

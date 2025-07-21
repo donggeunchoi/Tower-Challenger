@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Resources : MonoBehaviour
+public class Account : MonoBehaviour
 {
     public int gold { get; private set; }
     public int diamond { get; private set; }

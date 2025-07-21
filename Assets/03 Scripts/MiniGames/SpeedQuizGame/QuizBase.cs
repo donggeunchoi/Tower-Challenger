@@ -15,7 +15,7 @@ public class QuizBase : MonoBehaviour
 
     public void LoadQuiz()
     {
-        QuizFile = UnityEngine.Resources.Load<TextAsset>("SpeedQuizData");
+        QuizFile = Resources.Load<TextAsset>("SpeedQuizData");
         if (QuizFile == null)
         {
             Debug.LogError("csvFile이 없는디요?");
