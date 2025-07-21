@@ -7,6 +7,9 @@ public class EggGameManager : MonoBehaviour
     [Header("알")]
     public GameObject[] Eggs;
 
+    [Header("부스러기")]
+    public GameObject[] Particle;
+
     [Header("HP 관련")]
     public GameObject HPBar, HPText;
 
@@ -36,6 +39,9 @@ public class EggGameManager : MonoBehaviour
     private TextMeshProUGUI printOutUI;
     private RectTransform hpRect;
     private Animator animator;
+    private bool Heal = false;
+
+    private string currentState = "";
 
     void Start()
     {
@@ -43,6 +49,10 @@ public class EggGameManager : MonoBehaviour
         {
             Eggs[i].SetActive(false);
 
+        }
+        for (int i = 0;i < Eggs.Length; i++)
+        {
+            Particle[i].SetActive(false);
         }
         Eggs[Lv].SetActive(true);
         Set();
@@ -119,27 +129,57 @@ public class EggGameManager : MonoBehaviour
     void EggBreak()
     {
         float hpRatio = (float)HP / MaxHP;
+        string newState;
 
         if (hpRatio <= 0.1f)
         {
-            animator.SetTrigger("4");
+            newState = "4";
         }
         else if (hpRatio <= 0.25f)
         {
-            animator.SetTrigger("3");
+            newState = "3";
         }
         else if (hpRatio <= 0.5f)
         {
-            animator.SetTrigger("2");
+            newState = "2";
         }
         else if (hpRatio <= 0.75f)
         {
-            animator.SetTrigger("1");
+            newState = "1";
         }
         else
         {
-            animator.SetTrigger("Full");
+            newState = "Full";
         }
+
+        if (newState != currentState)
+        {
+            animator.SetTrigger(newState);
+            currentState = newState;
+
+            // 금이 갈 때마다 파티클 재생
+           
+            if(!Heal)         
+            {
+                StartCoroutine(PlayCrackParticleOnce(Lv));
+            }
+        }
+    }
+    IEnumerator PlayCrackParticleOnce(int index)
+    {
+        GameObject particle = Particle[index];
+        particle.SetActive(true);
+
+        ParticleSystem ps = particle.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            ps.Play();
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        particle.SetActive(false);
     }
 
     void UpdateHPBar()
@@ -161,6 +201,7 @@ public class EggGameManager : MonoBehaviour
 
     IEnumerator HealTime()
     {
+        Heal = true;
         ClickBlocker.SetActive(true);
         tiltTimer = 0;
 
@@ -182,6 +223,7 @@ public class EggGameManager : MonoBehaviour
 
         isHealing = false;
         ClickBlocker.SetActive(false);
+        Heal = false;
         GameStart = true;
     }
 }
