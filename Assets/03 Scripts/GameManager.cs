@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public StageManager towerManager;
     public UIManager uiManager;
     public ItemManager itemManager;
-    
+
     public GameObject towerManagerPrefab;
     public GameObject uiManagerPrefab;
     public GameObject itemManagerPrefab;
@@ -16,29 +16,15 @@ public class GameManager : MonoBehaviour
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
     public PlayerData playerData { get; private set; }
 
-    [Header("스테미나")]
-    public const int MAX_STAMINA = 5;
-    public int mainStamina { get; private set; }
-    public float staminatimer { get; private set; }
-    public const float STAMINA_TIME = 1800f;
+    [Header("데이터 관리")]
+    public Stamina stamina;
+    public Resource resource;
 
-    [Header("저장")]
-    private bool isLoad = false;
-    public float saveTimer;
-    public const float SAVETIME = 120;
-    public bool isSaving = false;
-    public float saveCoolDown;
-    public const float SAVECOOLDOWN = 0.5f;
+    [Header("캐릭터")]
     public List<CharacterData> allCharacterData { get; private set; } = new List<CharacterData>();
     public List<CharacterData> charactors = new List<CharacterData>();
     public CharacterData equimentCharacter;
 
-    [Header("재화")]
-    public int gold { get; private set; }
-    public int diamond { get; private set; }
-
-    public int Gold;
-    public int Dia;
 
     //1800초 30분 마다 1참
     //게임이 꺼져도 차게할 방법.... 시작시간과 끝시간을 계산해서 채워준다..?
@@ -82,125 +68,79 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        TryGetComponent(out stamina);
+        TryGetComponent(out resource);
+        //stamina = this.GetComponent<Stamina>();
+        //resource = this.GetComponent<Resource>();
+
         LoadMiniGameCSV();
-
-        playerData = SaveManager.LoadUsers();
-        playerData.LoadData();
-        isLoad = true;
+        Save.LoadData();
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if (isLoad && !focus)
-        {
-            SaveData();
-        }
-    }
-    private void OnApplicationPause(bool pause)
-    {
-        if (isLoad && pause)
-            SaveData();
-    }
+
 
     private void Update()
     {
-        Gold = gold;
-        Dia = diamond;
-
-        AutoSave();
-        UpdateStaminaTimer();
-
-        if (isSaving)
-        {
-            saveCoolDown += Time.deltaTime;
-            if (saveCoolDown >= SAVECOOLDOWN)
-            {
-                isSaving = false;
-            }
-        }
+        Save.SaveUpdate();
     }
 
-    private void AutoSave()
+    private static void OnApplicationFocus(bool focus)
     {
-        saveTimer += Time.deltaTime;
-
-        if (saveTimer >= SAVETIME)
+        if (Save.isLoad && !focus)
         {
-            saveTimer = 0;
-            SaveData();
+            Save.SaveData();
         }
     }
-
-    private void UpdateStaminaTimer()
+    private static void OnApplicationPause(bool pause)
     {
-        if (mainStamina >= MAX_STAMINA)
-        {
-            staminatimer = 0;
-            return;
-        }
-        staminatimer += Time.deltaTime;
-
-        if (staminatimer >= STAMINA_TIME)
-        {
-            Debug.Log("시간이 돌았습니다");
-            AddStamina();
-            staminatimer -= STAMINA_TIME;
-        }
+        if (Save.isLoad && pause)
+            Save.SaveData();
     }
 
     public void LoadData()
     {
-        playerData.LoadData();
+        Save.LoadData();
     }
 
     public void SaveData()
     {
-        if (isSaving)
-            return;
-
-        playerData.SaveData();
-        isSaving = true;
-        saveCoolDown = 0f;
+        Save.SaveData();
     }
 
     public void AddStamina()
     {
-        mainStamina = Mathf.Min(mainStamina + 1, MAX_STAMINA);
-        SaveData();
+        if (stamina != null)
+            stamina.AddStamina();
     }
 
     public void UseStamina()
     {
-        if (mainStamina < 0)
-            return;
-
-        mainStamina = Mathf.Max(mainStamina - 1, 0);
-        SaveData();
+        if (stamina != null)
+            stamina.UseStamina();
     }
 
     public void AddGold(int addGold)
     {
-        gold += addGold;
-        Debug.Log("획득한 골드 :" + addGold);
-        SaveData();
+        if (resource != null)
+            resource.AddGold(addGold);
     }
 
     public void UseGold(int useGold)
     {
-        gold -= useGold;
-        SaveData();
+        if (resource != null)
+            resource.UseGold(useGold);
     }
 
     public void AddDiamond(int addDia)
     {
-        diamond += addDia;
-        SaveData();
+        if (resource != null)
+            resource.AddDiamond(addDia);
     }
 
     public void UseDiamond(int useDia)
     {
-        diamond -= useDia;
-        SaveData();
+        if (resource != null)
+            resource.UseDiamond(useDia);
     }
 
     void LoadMiniGameCSV()
@@ -209,30 +149,15 @@ public class GameManager : MonoBehaviour
         miniGameDataList = CVSLoader.miniGameDataList;
     }
 
-    public void LoadResource()
+
+
+    public void LoadResourceData()
     {
-        mainStamina = playerData.stamina;
-        gold = playerData.gold;
-        diamond = playerData.diamond;
-    }
+        if (stamina != null)
+            stamina.LoadStamina();
 
-    public void LoadStaminaTimer()
-    {
-        if (!string.IsNullOrEmpty(playerData.lastTimeString))
-        {
-            playerData.lastTime = DateTime.Parse(playerData.lastTimeString, null,
-                System.Globalization.DateTimeStyles.RoundtripKind);
-        }
-        else
-        {
-            playerData.lastTime = DateTime.Now;
-        }
-
-        float secondsPassed = (float)(DateTime.Now - playerData.lastTime).TotalSeconds;
-        staminatimer = playerData.staminaTimer + secondsPassed;
-
-        if (mainStamina <= 0)  //테스트용 코드
-            mainStamina = 5;
+        if (resource != null)
+            resource.LoadResource();
     }
 
     public void LoadCharacter()
