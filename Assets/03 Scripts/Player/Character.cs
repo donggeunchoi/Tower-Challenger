@@ -36,6 +36,15 @@ public class Character : MonoBehaviour
 
         if (defaltCharater != null)
         {
+            if (Save.playerData.characterNames != null)
+            {
+                CharacterData data = charaters.Find(c => c.characterName == defaltCharater.characterName);
+                if (data == null)
+                {
+                    charaters.Add(defaltCharater);
+                }
+            }
+
             if (equippedCharacter == null)
                 equippedCharacter = defaltCharater;
         }
