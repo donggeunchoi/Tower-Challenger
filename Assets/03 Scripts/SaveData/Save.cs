@@ -4,7 +4,6 @@ public static class Save
 {
     public static PlayerData playerData { get; private set; }
     
-
     public static bool isLoad = false;
     public static float saveTimer;
     public const float SAVETIME = 120;

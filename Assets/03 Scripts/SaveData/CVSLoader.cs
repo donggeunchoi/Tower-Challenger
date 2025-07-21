@@ -9,7 +9,7 @@ public static class CVSLoader
     public static List<PotalStageData> potalStageDataList = new List<PotalStageData>();
     public static void LoadMiniGameCSV()
     {
-        TextAsset data = Resources.Load<TextAsset>("Mini-GameDifficultySettings");
+        TextAsset data = UnityEngine.Resources.Load<TextAsset>("Mini-GameDifficultySettings");
         if (data == null)
         {
             Debug.LogError("미니게임 CSV 파일이 없습니다.");
@@ -52,7 +52,7 @@ public static class CVSLoader
 
     public static void LoadRewardCVS()
     {
-        TextAsset data = Resources.Load<TextAsset>("TowerRewardTable");
+        TextAsset data = UnityEngine.Resources.Load<TextAsset>("TowerRewardTable");
 
         if (data == null)
         {
@@ -86,7 +86,7 @@ public static class CVSLoader
 
     public static void LoadPotalCVS()
     {
-        TextAsset data = Resources.Load<TextAsset>("floorTable(Sheet1)"); // 경로/파일명 파일명만(확장자없음), 실제 CSV명에 맞추기!
+        TextAsset data = UnityEngine.Resources.Load<TextAsset>("floorTable(Sheet1)"); // 경로/파일명 파일명만(확장자없음), 실제 CSV명에 맞추기!
         if (data == null)
         {
             Debug.LogError("포탈 스테이지 CSV 파일이 없습니다.");

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("데이터 관리")]
     public Stamina stamina;
-    public Resource resource;
+    public Resources resource;
 
     [Header("캐릭터")]
     public List<CharacterData> allCharacterData { get; private set; } = new List<CharacterData>();

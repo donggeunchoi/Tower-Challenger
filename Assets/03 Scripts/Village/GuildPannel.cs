@@ -53,7 +53,7 @@ public class GuildPannel : MonoBehaviour
         switch (characterData.priceType)
         {
             case PriceType.dia:
-                if (characterData.Price <= GameManager.Instance.diamond)
+                if (characterData.Price <= GameManager.Instance.resource.diamond)
                 {
                     GameManager.Instance.UseDiamond(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
@@ -67,7 +67,7 @@ public class GuildPannel : MonoBehaviour
                 break;
 
             case PriceType.gold:
-                if (characterData.Price <= GameManager.Instance.gold)
+                if (characterData.Price <= GameManager.Instance.resource.gold)
                 {
                     GameManager.Instance.UseGold(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
