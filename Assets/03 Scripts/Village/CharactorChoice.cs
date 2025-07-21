@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +28,7 @@ public class CharactorChoice : MonoBehaviour
             Destroy(slot.gameObject);
         CharactorSlots.Clear();
 
-        foreach (CharacterData data in GameManager.Instance.charactors)
+        foreach (CharacterData data in GameManager.Instance.character.charaters)
         {
             GameObject slotObj = Instantiate(SlotPrefab, SlotParent);
             var slot = slotObj.GetComponent<CharactorChoiceSlot>();
@@ -38,7 +37,9 @@ public class CharactorChoice : MonoBehaviour
             slot.Init(); 
             CharactorSlots.Add(slot);
 
-            slot.EquipImage.SetActive(GameManager.Instance.equimentCharacter == data);
+            bool isEquipped = (GameManager.Instance.character.equippedCharacter != null &&
+                               GameManager.Instance.character.equippedCharacter.characterName == data.characterName);
+            slot.EquipImage.SetActive(isEquipped);
         }
     }
 
@@ -46,7 +47,8 @@ public class CharactorChoice : MonoBehaviour
     {
         foreach (var slot in CharactorSlots)
         {
-            bool isEquipped = (GameManager.Instance.equimentCharacter == slot.data);
+            bool isEquipped = (GameManager.Instance.character.equippedCharacter != null &&
+                               GameManager.Instance.character.equippedCharacter.characterName == slot.data.characterName);
             slot.EquipImage.SetActive(isEquipped);
         }
     }

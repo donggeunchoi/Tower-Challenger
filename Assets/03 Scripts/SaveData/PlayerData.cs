@@ -26,17 +26,27 @@ public class PlayerData
         //TimeSpan time 밀리초로 환산을해서 밀리초로 가지고있다가 분으로 환산해서
         if (GameManager.Instance != null)
         {
-            gold = GameManager.Instance.gold;
-            diamond = GameManager.Instance.diamond;
-            stamina = GameManager.Instance.mainStamina;
-            staminaTimer = GameManager.Instance.staminatimer;
+            if (GameManager.Instance.account != null)
+            {
+                gold = GameManager.Instance.account.gold;
+                diamond = GameManager.Instance.account.diamond;
+            }
 
-            characterNames.Clear();
-            foreach (CharacterData characters in GameManager.Instance.charactors)
-                characterNames.Add(characters.characterName);
+            if (GameManager.Instance.stamina != null)
+            {
+                stamina = GameManager.Instance.stamina.mainStamina;
+                staminaTimer = GameManager.Instance.stamina.staminatimer;
+            }
+            
+            if (GameManager.Instance.character != null)
+            {
+                characterNames.Clear();
+                foreach (CharacterData characters in GameManager.Instance.character.charaters)
+                    characterNames.Add(characters.characterName);
 
-            if (GameManager.Instance.equimentCharacter != null)
-                equippedCharacterName = GameManager.Instance.equimentCharacter.characterName;
+                if (GameManager.Instance.character.equippedCharacter != null)
+                    equippedCharacterName = GameManager.Instance.character.equippedCharacter.characterName;
+            }
         }
 
         if (StageManager.instance != null)
@@ -69,9 +79,7 @@ public class PlayerData
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.LoadResource();
-            GameManager.Instance.LoadStaminaTimer();
-            GameManager.Instance.LoadCharacter();
+            GameManager.Instance.LoadResourceData();
         }
 
         if (StageManager.instance != null)

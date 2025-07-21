@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GuildPannel : MonoBehaviour
 {
     [SerializeField] public CharacterData characterData;
+    private Guild guild;
 
     [SerializeField] private Image characterSprite;
     [SerializeField] private Image currencySprite;
@@ -18,9 +19,10 @@ public class GuildPannel : MonoBehaviour
     [SerializeField] private Sprite gold;
     [SerializeField] private Sprite diamond;
 
-    public void Init(CharacterData data)
+    public void Init(CharacterData data, Guild parentGuild)
     {
         characterData = data;
+        guild = parentGuild;
 
         if (characterSprite != null && characterData.inGameImage != null)
             characterSprite.sprite = characterData.inGameImage;
@@ -43,22 +45,24 @@ public class GuildPannel : MonoBehaviour
         if (GameManager.Instance == null)
             return;
 
-        if (GameManager.Instance.charactors.Any(c => c == characterData))
+        if (GameManager.Instance.character.charaters.Any(c => c.characterName == characterData.characterName))
         {
             Debug.Log("이미 구매한 캐릭터입니다");
             Destroy(this.gameObject);
             return;
         }
 
+        bool purchased = false;
+
         switch (characterData.priceType)
         {
             case PriceType.dia:
-                if (characterData.Price <= GameManager.Instance.diamond)
+                if (characterData.Price <= Save.playerData.diamond)
                 {
                     GameManager.Instance.UseDiamond(characterData.Price);
-                    GameManager.Instance.charactors.Add(characterData);
+                    GameManager.Instance.character.AddCharacter(characterData.characterName);
                     GameManager.Instance.SaveData();
-                    Destroy(this.gameObject);
+                    purchased = true;
                 }
                 else
                 {
@@ -67,22 +71,31 @@ public class GuildPannel : MonoBehaviour
                 break;
 
             case PriceType.gold:
-                if (characterData.Price <= GameManager.Instance.gold)
+                if (characterData.Price <= Save.playerData.gold)
                 {
                     GameManager.Instance.UseGold(characterData.Price);
-                    GameManager.Instance.charactors.Add(characterData);
+                    GameManager.Instance.character.AddCharacter(characterData.characterName);
                     GameManager.Instance.SaveData();
-                    Destroy(this.gameObject);
+                    purchased = true;
                 }
                 else
                 {
                     Debug.Log("골드가 부족합니다");
                 }
                 break;
-            default: 
+            default:
                 break;
         }
 
+        if (purchased)
+        {
+            Guild guild = FindAnyObjectByType<Guild>();
+            if (guild != null)
+            {
+                guild.RefreshCharacterButton();
+            }
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnClickCancle()
