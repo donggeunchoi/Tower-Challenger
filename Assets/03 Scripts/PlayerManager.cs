@@ -2,21 +2,13 @@
 
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager playerInstance;
-
-    public StageLP stageLP;
-    public Inventory inventory;
-    public ItemManager itemManager;
-    public MailBox mailBox;
-    public PlayerInput playerInput;
-    public PlayerInteraction playerInteraction;
-    public PlayerCamera playerCamera;
+    public static PlayerManager Instance;
     
     private void Awake()
     {
-        if (playerInstance == null)
+        if (Instance == null)
         {
-            playerInstance = this;
+            Instance = this;
         }
         else
         {

@@ -11,8 +11,6 @@ public class UpAndDown : MonoBehaviour
 
     public int max_Num;
 
-    private bool isOver = false;
-
     private void Start()
     {
         if (StageManager.instance!= null && GameManager.Instance != null)
