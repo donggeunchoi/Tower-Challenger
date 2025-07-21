@@ -18,7 +18,7 @@ public class Currency : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            if (gold != GameManager.Instance.resource.gold || diamond != GameManager.Instance.resource.diamond)
+            if (gold != GameManager.Instance.account.gold || diamond != GameManager.Instance.account.diamond)
                 UpdateCurrency();
         }
     }
@@ -27,8 +27,8 @@ public class Currency : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            gold = GameManager.Instance.resource.gold;
-            diamond = GameManager.Instance.resource.diamond;
+            gold = GameManager.Instance.account.gold;
+            diamond = GameManager.Instance.account.diamond;
         }
 
         if (goldText != null && diamondText != null)

@@ -26,10 +26,10 @@ public class PlayerData
         //TimeSpan time 밀리초로 환산을해서 밀리초로 가지고있다가 분으로 환산해서
         if (GameManager.Instance != null)
         {
-            if (GameManager.Instance.resource != null)
+            if (GameManager.Instance.account != null)
             {
-                gold = GameManager.Instance.resource.gold;
-                diamond = GameManager.Instance.resource.diamond;
+                gold = GameManager.Instance.account.gold;
+                diamond = GameManager.Instance.account.diamond;
             }
 
             if (GameManager.Instance.stamina != null)

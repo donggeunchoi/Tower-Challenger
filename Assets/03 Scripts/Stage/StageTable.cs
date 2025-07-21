@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class StageTable : MonoBehaviour
+public class StageTable
 {
     [System.Serializable]
     public class PotalStageData

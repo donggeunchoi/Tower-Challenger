@@ -53,6 +53,7 @@ public class StageManager : MonoBehaviour
             stageTimer = UIManager.Instance.timerUI;
             stageLP = UIManager.Instance.stageLPUI;
         }
+        CVSLoader.LoadPotalCVS();
     }
 
     #region MiniGameCall
@@ -60,11 +61,11 @@ public class StageManager : MonoBehaviour
     {
         isGameActive = true;  //현재 게임 시작
 
-        if(infoUI != null)
-        infoUI.SetActive(isGameActive);
+        if (infoUI != null)
+            infoUI.SetActive(isGameActive);
 
         ResetInfo();
-        
+
         floor = FIRST_FLOOR;            //현재층 1층
 
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
@@ -153,7 +154,7 @@ public class StageManager : MonoBehaviour
         SetFloorInfo();
 
         RandomStage();
-        
+
         StartGameLoad(false);
     }
 
@@ -161,7 +162,17 @@ public class StageManager : MonoBehaviour
     {
         difficulty = Mathf.Clamp((floor - 1) / 10 + 1, 1, 4);
 
-        totalStageCount = Mathf.Clamp((floor - 1) / 5 + 1, 1, 4);
+        StageTable.PotalStageData data = new StageTable.PotalStageData();
+        StageTable.PotalStageData portalData = CVSLoader.potalStageDataList.Find(d => d.floor == floor);
+        if (portalData != null)
+        {
+            int randStage = Random.Range(portalData.potalMin, portalData.potalMax + 1);
+            totalStageCount = Mathf.Clamp(randStage, 1, 4);
+        }
+        else
+        {
+            totalStageCount = Mathf.Clamp((floor - 1) / 5 + 1, 1, 4);
+        }
 
         if (floor < 11)
             timerMultiplier = 1;
@@ -221,7 +232,7 @@ public class StageManager : MonoBehaviour
         else  //성공
         {
             if (isGameActive)
-            LatePlayerData();  //플레이어를 원레 위치로
+                LatePlayerData();  //플레이어를 원레 위치로
         }
     }
     public void GameOver()  //게임오버가 되면 로비씬으로 이동

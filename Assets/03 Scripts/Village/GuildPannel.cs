@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GuildPannel : MonoBehaviour
 {
     [SerializeField] public CharacterData characterData;
+    private Guild guild;
 
     [SerializeField] private Image characterSprite;
     [SerializeField] private Image currencySprite;
@@ -18,9 +19,10 @@ public class GuildPannel : MonoBehaviour
     [SerializeField] private Sprite gold;
     [SerializeField] private Sprite diamond;
 
-    public void Init(CharacterData data)
+    public void Init(CharacterData data, Guild parentGuild)
     {
         characterData = data;
+        guild = parentGuild;
 
         if (characterSprite != null && characterData.inGameImage != null)
             characterSprite.sprite = characterData.inGameImage;
@@ -50,15 +52,17 @@ public class GuildPannel : MonoBehaviour
             return;
         }
 
+        bool purchased = false;
+
         switch (characterData.priceType)
         {
             case PriceType.dia:
-                if (characterData.Price <= GameManager.Instance.resource.diamond)
+                if (characterData.Price <= Save.playerData.diamond)
                 {
                     GameManager.Instance.UseDiamond(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
                     GameManager.Instance.SaveData();
-                    Destroy(this.gameObject);
+                    purchased = true;
                 }
                 else
                 {
@@ -67,22 +71,31 @@ public class GuildPannel : MonoBehaviour
                 break;
 
             case PriceType.gold:
-                if (characterData.Price <= GameManager.Instance.resource.gold)
+                if (characterData.Price <= Save.playerData.gold)
                 {
                     GameManager.Instance.UseGold(characterData.Price);
                     GameManager.Instance.charactors.Add(characterData);
                     GameManager.Instance.SaveData();
-                    Destroy(this.gameObject);
+                    purchased = true;
                 }
                 else
                 {
                     Debug.Log("골드가 부족합니다");
                 }
                 break;
-            default: 
+            default:
                 break;
         }
 
+        if (purchased)
+        {
+            Guild guild = FindAnyObjectByType<Guild>();
+            if (guild != null)
+            {
+                guild.RefreshCharacterButton();
+            }
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnClickCancle()

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("데이터 관리")]
     public Stamina stamina;
-    public Account resource;
+    public Account account;
 
     [Header("캐릭터")]
     public List<CharacterData> allCharacterData { get; private set; } = new List<CharacterData>();
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         TryGetComponent(out stamina);
-        TryGetComponent(out resource);
+        TryGetComponent(out account);
 
         playerData = new PlayerData();
         Save.SetPlayerData(playerData);
@@ -122,26 +122,26 @@ public class GameManager : MonoBehaviour
 
     public void AddGold(int addGold)
     {
-        if (resource != null)
-            resource.AddGold(addGold);
+        if (account != null)
+            account.AddGold(addGold);
     }
 
     public void UseGold(int useGold)
     {
-        if (resource != null)
-            resource.UseGold(useGold);
+        if (account != null)
+            account.UseGold(useGold);
     }
 
     public void AddDiamond(int addDia)
     {
-        if (resource != null)
-            resource.AddDiamond(addDia);
+        if (account != null)
+            account.AddDiamond(addDia);
     }
 
     public void UseDiamond(int useDia)
     {
-        if (resource != null)
-            resource.UseDiamond(useDia);
+        if (account != null)
+            account.UseDiamond(useDia);
     }
 
     void LoadMiniGameCSV()
@@ -157,8 +157,8 @@ public class GameManager : MonoBehaviour
         if (stamina != null)
             stamina.LoadStamina();
 
-        if (resource != null)
-            resource.LoadResource();
+        if (account != null)
+            account.LoadResource();
     }
 
     public void LoadCharacter()
