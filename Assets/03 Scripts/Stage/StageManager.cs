@@ -227,7 +227,8 @@ public class StageManager : MonoBehaviour
         else  //성공
         {
             if (isGameActive)
-                LatePlayerData();  //플레이어를 원레 위치로
+                if (PlayerManager.Instance != null)
+                    PlayerManager.Instance.AfterLoadData();  //플레이어를 원레 위치로
         }
     }
     public void GameOver()  //게임오버가 되면 로비씬으로 이동
@@ -245,16 +246,5 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    #endregion
-    #region Player
-    public void SavePlayerPosition(Vector3 position, int layer)
-    {
-        layerNumber = layer;
-        playerPosition = position;
-    }
-    private void LatePlayerData() //플레이어를 찾아 해당 포지션으로 이동 (오류나서 코루틴으로 변경)
-    {
-        StartCoroutine(TowerManager.Instance.LatePlayerData());
-    }
     #endregion
 }

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject towerManagerPrefab;
     public GameObject uiManagerPrefab;
     public GameObject itemManagerPrefab;
+    public GameObject playerManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
     public PlayerData playerData { get; private set; }
@@ -53,6 +54,12 @@ public class GameManager : MonoBehaviour
         {
             if (itemManagerPrefab != null)
                 Instantiate(itemManagerPrefab);
+        }
+
+        if (FindAnyObjectByType(typeof(PlayerManager)) == null)
+        {
+            if (playerManagerPrefab != null)
+                Instantiate(playerManagerPrefab);
         }
     }
 
