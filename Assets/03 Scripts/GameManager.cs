@@ -70,8 +70,9 @@ public class GameManager : MonoBehaviour
     {
         TryGetComponent(out stamina);
         TryGetComponent(out resource);
-        //stamina = this.GetComponent<Stamina>();
-        //resource = this.GetComponent<Resource>();
+
+        playerData = new PlayerData();
+        Save.SetPlayerData(playerData);
 
         LoadMiniGameCSV();
         Save.LoadData();

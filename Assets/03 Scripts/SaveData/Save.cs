@@ -3,6 +3,7 @@
 public static class Save
 {
     public static PlayerData playerData { get; private set; }
+    
 
     public static bool isLoad = false;
     public static float saveTimer;
@@ -10,6 +11,12 @@ public static class Save
     public static bool isSaving = false;
     public static float saveCoolDown;
     public const float SAVECOOLDOWN = 0.5f;
+
+
+    public static void SetPlayerData(PlayerData data)
+    {
+        playerData = data;
+    }
 
     public static void SaveUpdate()
     {
