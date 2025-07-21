@@ -6,6 +6,7 @@ public class BatAttack : MonoBehaviour
 
     private float amplitude;
     private float curAmplitude;
+    private int random;
 
     float time = 0f;
     float rangeTime = 0.5f;
@@ -22,6 +23,8 @@ public class BatAttack : MonoBehaviour
     {
         amplitude = Random.Range(PrincessManager.princessInstance.minY, PrincessManager.princessInstance.maxY);
         curAmplitude = amplitude;
+
+        RandomAttck();
     }
 
     // Update is called once per frame
@@ -34,16 +37,35 @@ public class BatAttack : MonoBehaviour
             time = 0f;
         }
         curAmplitude = Mathf.Lerp(curAmplitude, amplitude, Time.deltaTime);
-        Attack();
+
+        switch (random)
+        {
+            case 0:
+                AmplitudeAttack();
+                break;
+            case 1:
+                StraightAttack();
+                break;
+        }
     }
 
     private void RandomAttck()
     {
-        int random = Random.Range(0, 2);
+        random = Random.Range(0, 2);
+
+        switch(random)
+        {
+            case 0:
+                AmplitudeAttack();
+                break;
+            case 1:
+                StraightAttack();
+                break;
+        }
     }
 
 
-    private void Attack()
+    private void AmplitudeAttack()
     {
         //
         float wave = Mathf.Sin(Time.time * PrincessManager.princessInstance.frequency) * curAmplitude;
@@ -60,5 +82,12 @@ public class BatAttack : MonoBehaviour
         newPos.y = wave;
 
         transform.position = newPos;
+    }
+
+    private void StraightAttack()
+    {
+        Vector3 dir = (princess.position - transform.position).normalized;
+        // 
+        transform.position += dir * (PrincessManager.princessInstance.batSpeed + 5f) * Time.deltaTime;
     }
 }
