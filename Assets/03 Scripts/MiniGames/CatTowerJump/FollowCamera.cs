@@ -3,8 +3,8 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     public Transform target;      // 따라갈 대상 (고양이)
-    public float smoothSpeed = 5f;
-    public float yOffset = 10f;    // 약간 위에서 보이도록
+    public float smoothSpeed;
+    public float yOffset;    // 약간 위에서 보이도록
 
     private float highestY;       // 지금까지 도달한 가장 높은 y
 
@@ -13,6 +13,10 @@ public class FollowCamera : MonoBehaviour
         if (target != null)
         {
             highestY = target.position.y;
+        }
+        else
+        {
+            highestY = transform.position.y;
         }
     }
 
@@ -26,8 +30,9 @@ public class FollowCamera : MonoBehaviour
         if (targetY > highestY)
         {
             highestY = targetY;
+        }
             Vector3 newPosition = new Vector3(transform.position.x, highestY, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
-        }
+        
     }
 }

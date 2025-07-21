@@ -13,23 +13,21 @@ public class DamageTile : ObstacleBase
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!useTrigger) return;
-        TryDamage(other.gameObject);
+        // TryDamage(other.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (useTrigger) return;
-        TryDamage(collision.gameObject);
+        // TryDamage(collision.gameObject);
     }
 
-    private void TryDamage(GameObject target)
-    {
-        if (target.CompareTag("Player"))
-        {
-            // var health = target.GetComponent<PlayerHealth>();
-            // if (health != null) health.TakeDamage(damageAmount);
-            // else GameManager.Instance.GameOver();
-            Debug.Log("충돌됨. 여기서 LP를 깎아야지");
-        }
-    }
+    // private void TryDamage(GameObject target)
+    // {
+    //     if (target.CompareTag("Player"))
+    //     {
+    //         Debug.Log("충돌됨. 여기서 LP를 깎아야지");
+    //         // SlimeJumpManager.Instance.SlimeHit();
+    //     }
+    // }
 }
