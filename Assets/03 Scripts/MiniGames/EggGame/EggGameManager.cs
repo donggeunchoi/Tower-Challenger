@@ -43,20 +43,8 @@ public class EggGameManager : MonoBehaviour
         {
             Eggs[i].SetActive(false);
 
-            // 딱 현재 Lv의 알에만 클릭 핸들러 붙이기
-            if (i == Lv)
-            {
-                Eggs[i].SetActive(true);
-
-                EggClickHandler handler = Eggs[i].GetComponent<EggClickHandler>();
-                if (handler == null)
-                {
-                    handler = Eggs[i].AddComponent<EggClickHandler>();
-                }
-                handler.gameManager = this;
-            }
         }
-
+        Eggs[Lv].SetActive(true);
         Set();
         InitHP();
         UpdateTime();
@@ -100,7 +88,6 @@ public class EggGameManager : MonoBehaviour
             }
         }
     }
-
     public void EggClick()
     {
         if (!GameStart || HP <= 0) return;
