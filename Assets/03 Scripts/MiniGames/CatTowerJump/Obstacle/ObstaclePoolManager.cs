@@ -8,6 +8,7 @@ public class ObstaclePoolManager : MonoBehaviour
     [Header("장애물 종류")] 
     public GameObject spinObstacle;
     public GameObject moveObstacle;
+    public GameObject wallObstacle;
 
     [Header("장애물 세팅")] 
     public Transform ObstacleContainer;
@@ -15,6 +16,7 @@ public class ObstaclePoolManager : MonoBehaviour
 
     private Queue<GameObject> spinPool;
     private Queue<GameObject> movePool;
+    private Queue<GameObject> wallPool;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class ObstaclePoolManager : MonoBehaviour
         
         spinPool = new Queue<GameObject>();
         movePool = new Queue<GameObject>();
+        wallPool = new Queue<GameObject>();
 
         for (int i = 0; i < initialSize; i++)
         {
@@ -35,6 +38,13 @@ public class ObstaclePoolManager : MonoBehaviour
             GameObject obstacle = Instantiate(moveObstacle, ObstacleContainer);
             obstacle.SetActive(false);
             movePool.Enqueue(obstacle);
+        }
+
+        for (int i = 0; i < initialSize; i++)
+        {
+            GameObject obstacle = Instantiate(wallObstacle, ObstacleContainer);
+            obstacle.SetActive(false);
+            wallPool.Enqueue(obstacle);
         }
     }
 
@@ -61,13 +71,32 @@ public class ObstaclePoolManager : MonoBehaviour
         return Instantiate(moveObstacle, ObstacleContainer);
     }
 
-    public void ReturnPool(GameObject obstacle)
+    public GameObject GetWall()
+    {
+        if (wallPool.Count > 0)
+        {
+            GameObject wallObject = wallPool.Dequeue();
+            wallObject.SetActive(true);
+            return wallObject;
+        }
+        return Instantiate(wallObstacle, ObstacleContainer);
+    }
+
+    public void ReturnObstacle(GameObject obstacle)
     {
         obstacle.SetActive(false);
 
         if (obstacle.GetComponent<SpinnerObstacle>() != null)
         {
             spinPool.Enqueue(obstacle);
+        }
+        else if(obstacle.GetComponent<HorizontalMoverObstacle>() != null)
+        {
+            movePool.Enqueue(obstacle);
+        }
+        else if(obstacle.GetComponent<DamageTile>() != null)
+        {
+            wallPool.Enqueue(obstacle);
         }
         else
         {
