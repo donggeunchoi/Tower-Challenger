@@ -67,7 +67,7 @@ public class Character : MonoBehaviour
         charaters.Add(data);
 
         if (GameManager.Instance != null)
-            GameManager.Instance.SaveData();
+            Save.SaveData();
 
         return true;
     }
@@ -85,7 +85,7 @@ public class Character : MonoBehaviour
         Save.playerData.characterNames.Remove(characterName);
 
         if (GameManager.Instance != null)
-            GameManager.Instance.SaveData();
+            Save.SaveData();
 
         return true;
     }
@@ -100,7 +100,7 @@ public class Character : MonoBehaviour
         Save.playerData.equippedCharacterName = characterName;
 
         if (GameManager.Instance != null)
-            GameManager.Instance.SaveData();
+            Save.SaveData();
 
         return true;
     }

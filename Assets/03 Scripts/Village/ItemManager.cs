@@ -10,7 +10,7 @@ public class ItemManager : MonoBehaviour
     // public List<string> itemNames = new List<string>();
     // public List<Sprite> itemIcons = new List<Sprite>();
 
-    public List<ItemData> allItemList { get; private set; } = new List<ItemData>();
+    public List<ItemData> allItemList = new List<ItemData>();
     public List<ItemData> items { get; private set; } = new List<ItemData>();
 
     public Sprite GoldSprite;
@@ -52,7 +52,7 @@ public class ItemManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.SaveData();
+            Save.SaveData();
         }
         //GameObject newSlot = Instantiate(SlotPrefab, SlotParent);
 
@@ -72,7 +72,7 @@ public class ItemManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.SaveData();
+            Save.SaveData();
         }
     }
 

@@ -10,6 +10,7 @@ public class TowerManager : MonoBehaviour
     public MiniGameManager miniGameManager;
 
     [SerializeField] private string[] mapScenes;
+    public string currentSceneName;   //현재 씬 이름
     private void Awake()
     {
         if (Instance == null)
@@ -81,9 +82,9 @@ public class TowerManager : MonoBehaviour
         map.SetRandomPortal();
     }
 
-    public IEnumerator LatePlayerData()
+    public IEnumerator AfterLoadData()
     {
-        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(StageManager.instance.currentSceneName); //어씬크
+        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(currentSceneName); //어씬크
         while (!ansynLoad.isDone)
         {
             yield return null;
@@ -95,40 +96,12 @@ public class TowerManager : MonoBehaviour
             map.AllClearFloor();
         }
 
-        PlayerSetting();  //플레이어 놓기
+        PlayerManager.Instance.PlayerSetting();  //플레이어 놓기
 
         if (StageManager.instance.isGameActive)
         {
             if (StageManager.instance.stageClearPortal.Count == 0)
                 StageManager.instance.ResetClearPortal();
-        }
-    }
-    public void PlayerSetting()
-    {
-        GameObject player = null;
-        while (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾아서 
-        }
-
-        if (player != null)
-        {
-            player.layer = StageManager.instance.layerNumber;
-            string LayerName;
-            switch (StageManager.instance.layerNumber)
-            {
-                case 20:
-                    LayerName = "Layer 1";
-                    break;
-                case 21:
-                    LayerName = "Layer 2";
-                    break;
-                default:
-                    LayerName = "Layer 3";
-                    break;
-            }
-            player.GetComponent<SpriteRenderer>().sortingLayerName = LayerName;
-            player.transform.position = StageManager.instance.playerPosition;   //플레이어 위치를 수정
         }
     }
 }

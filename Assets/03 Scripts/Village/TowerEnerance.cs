@@ -70,7 +70,7 @@ public class TowerEnerance : MonoBehaviour
             {
                 if (GameManager.Instance.stamina.mainStamina > 0)
                 {
-                    GameManager.Instance.UseStamina();
+                    GameManager.Instance.stamina.UseStamina();
                 }
                 else
                 {

@@ -57,12 +57,12 @@ public class GameManagerEditor : Editor
         GameManager gameManager = (GameManager)target;
         if (GUILayout.Button("스테미나 추가"))
         {
-            gameManager.AddStamina();
+            gameManager.stamina.AddStamina();
         }
 
         if (GUILayout.Button("스테미나 감소"))
         {
-            gameManager.UseStamina();
+            gameManager.stamina.UseStamina();
         }
 
         EditorGUILayout.Space();
