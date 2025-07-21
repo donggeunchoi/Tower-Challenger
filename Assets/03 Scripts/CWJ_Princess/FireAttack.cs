@@ -1,16 +1,34 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireAttack : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Transform princess;
+
+    private int side;
+
+    private void OnEnable()
     {
-        
+        GameObject obj = GameObject.Find("Princess");
+        if (obj != null)
+        {
+            princess = obj.GetComponent<Transform>();
+        }
+        else
+        {
+            Debug.Log("princess is null");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Attack();
+    }
+
+    private void Attack()
+    {
+        Vector3 dir = (princess.position - transform.position).normalized;
+
+        transform.position += dir * PrincessManager.princessInstance.fireSpeed * Time.deltaTime;
     }
 }
+
