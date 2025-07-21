@@ -54,28 +54,31 @@ public class EnemyPos : MonoBehaviour
             if (enemyPrefabs.Length == 0)
                 return;
 
-            random = Random.Range(0, enemyPrefabs.Length);
+            random = Random.Range(0, 3);
 
-            GameObject selectde = enemyPrefabs[random];
-            string tag = selectde.tag;
-
-            if (tag == "Fire")
+            //GameObject selectde = enemyPrefabs[random];
+            foreach (GameObject prefab in enemyPrefabs)
             {
-                spawnRandom = Random.Range(1, 4);
 
-                for (int i = 0; i < spawnRandom; i++)
+                string tag = prefab.tag;
+
+                if (tag == "Fire" && (random == 0 || random == 2))
                 {
-                    side = Random.Range(0, 3);
-                    PrefabInit(selectde, side);
+                    spawnRandom = Random.Range(1, 4);
+
+                    for (int i = 0; i < spawnRandom; i++)
+                    {
+                        side = Random.Range(0, 3);
+                        PrefabInit(prefab, side);
+                    }
+                }
+                else if (tag == "Bat" && (random == 0 || random == 1))
+                {
+                    side = Random.Range(0, 2); // 2방향만 왼 , 오 , 위
+
+                    PrefabInit(prefab, side);
                 }
             }
-            else
-            {
-                side = Random.Range(0, 2); // 2방향만 왼 , 오 , 위
-
-                PrefabInit(selectde, side);
-            }
-
             time = 0f;
         }
 
@@ -111,54 +114,4 @@ public class EnemyPos : MonoBehaviour
 
         return Vector3.zero;
     }
-
-    //public void Spawn()
-    //{
-    //    foreach (var enemy in enemyPrefabs)
-    //    {
-    //        string tag = enemy.tag;
-
-    //        if (tag == "Fire")
-    //        {
-    //            for (int i = 0; i < enemyPrefabs.Length; i++)
-    //            {
-    //                SpawnTag();
-    //            }
-    //        }
-    //        else
-    //        {
-    //            SpawnTag();
-    //        }
-    //    }
-    //}
-
-    //private void PrefabInit()
-    //{
-    //    Vector3 enemyPos = SpawnPos();
-    //    GameObject enemySprite = Instantiate(enemyPrefabs[randomEnemy], enemyPos, Quaternion.identity);
-    //    spriteRenderer = enemySprite.GetComponentInChildren<SpriteRenderer>();
-
-    //    // 왼쪽이거나 x축 절반을 기준으로 0보다 작은 위치에서 생성된다면
-    //    if (side == 0 || (side == 2 && enemyPos.x < camPos.x))
-    //    {
-    //        spriteRenderer.flipX = true;
-    //    }
-    //}
-
-    //private void SpawnTag()
-    //{
-    //    time += Time.deltaTime;
-
-    //    if (time >= PrincessManager.princessInstance.enemyTime)
-    //    {
-    //        if (enemyPrefabs.Length == 0)
-    //        {
-    //            return;
-    //        }
-    //        randomEnemy = Random.Range(0, enemyPrefabs.Length);
-    //        PrefabInit();
-
-    //        time = 0f;
-    //    }
-    //}
 }
