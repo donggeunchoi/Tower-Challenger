@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1568548050708517100}
   - component: {fileID: 3148317445821472024}
   - component: {fileID: 3955614175275355974}
+  - component: {fileID: 3888438757235253229}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -57,14 +58,8 @@ MonoBehaviour:
     type: 3}
   miniGameDataList: []
   stamina: {fileID: 0}
-  resource: {fileID: 0}
-  charactors:
-  - {fileID: 11400000, guid: b7b2ec38d653e492faa9832d82ec5854, type: 2}
-  - {fileID: 11400000, guid: d4c62d21468ac46cc8fe03376c3aa909, type: 2}
-  - {fileID: 11400000, guid: 74cce0f3bf17e4695a4f91dc7df9996f, type: 2}
-  - {fileID: 11400000, guid: 88a591746ea214cfcba472dbb764392d, type: 2}
-  - {fileID: 11400000, guid: 3eefef68d0b3c468db843e7a4b127b32, type: 2}
-  equimentCharacter: {fileID: 0}
+  account: {fileID: 0}
+  character: {fileID: 0}
 --- !u!114 &3148317445821472024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,3 +84,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb221f992e4d5fa48b7a5a6c0bf33b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3888438757235253229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190047159653788234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749dc8ed567edc74fb2f94941deb5202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allCharacterList:
+  - {fileID: 11400000, guid: 3eefef68d0b3c468db843e7a4b127b32, type: 2}
+  - {fileID: 11400000, guid: 88a591746ea214cfcba472dbb764392d, type: 2}
+  - {fileID: 11400000, guid: 74cce0f3bf17e4695a4f91dc7df9996f, type: 2}
+  - {fileID: 11400000, guid: d4c62d21468ac46cc8fe03376c3aa909, type: 2}
+  - {fileID: 11400000, guid: b7b2ec38d653e492faa9832d82ec5854, type: 2}
+  defaltCharater: {fileID: 11400000, guid: e2f4a5fb6052349f1bee492cc6d1dcc2, type: 2}

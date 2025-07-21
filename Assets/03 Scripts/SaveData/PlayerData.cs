@@ -37,13 +37,15 @@ public class PlayerData
                 stamina = GameManager.Instance.stamina.mainStamina;
                 staminaTimer = GameManager.Instance.stamina.staminatimer;
             }
+
+            
             //여기까지 해결
             characterNames.Clear();
-            foreach (CharacterData characters in GameManager.Instance.charactors)
+            foreach (CharacterData characters in GameManager.Instance.character.charaters)
                 characterNames.Add(characters.characterName);
 
-            if (GameManager.Instance.equimentCharacter != null)
-                equippedCharacterName = GameManager.Instance.equimentCharacter.characterName;
+            if (GameManager.Instance.character.equippedCharacter != null)
+                equippedCharacterName = GameManager.Instance.character.equippedCharacter.characterName;
         }
 
         if (StageManager.instance != null)
@@ -77,7 +79,6 @@ public class PlayerData
         if (GameManager.Instance != null)
         {
             GameManager.Instance.LoadResourceData();
-            GameManager.Instance.LoadCharacter();
         }
 
         if (StageManager.instance != null)

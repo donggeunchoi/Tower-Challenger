@@ -19,17 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("데이터 관리")]
     public Stamina stamina;
     public Account account;
-
-    [Header("캐릭터")]
-    public List<CharacterData> allCharacterData { get; private set; } = new List<CharacterData>();
-    public List<CharacterData> charactors = new List<CharacterData>();
-    public CharacterData equimentCharacter;
-
-
-    //1800초 30분 마다 1참
-    //게임이 꺼져도 차게할 방법.... 시작시간과 끝시간을 계산해서 채워준다..?
-    //강종하면 어떻게하지.. 특정행동이나 시간마다 자동 저장을 해준다
-    //추후 저장기능 추가 후 종료시간 ~ 다시킨 시간을 불러와서 staminatimer에 더해준다
+    public Character character;
 
     private void Awake()
     {
@@ -70,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         TryGetComponent(out stamina);
         TryGetComponent(out account);
+        TryGetComponent(out character);
 
         playerData = new PlayerData();
         Save.SetPlayerData(playerData);
@@ -77,8 +68,6 @@ public class GameManager : MonoBehaviour
         LoadMiniGameCSV();
         Save.LoadData();
     }
-
-
 
     private void Update()
     {
@@ -159,25 +148,8 @@ public class GameManager : MonoBehaviour
 
         if (account != null)
             account.LoadResource();
-    }
 
-    public void LoadCharacter()
-    {
-        charactors.Clear();
-        foreach (string name in playerData.characterNames)
-        {
-            CharacterData data = allCharacterData.Find(character => character.characterName == name);
-            if (data != null)
-                charactors.Add(data);
-        }
-        if (playerData.characterNames != null)
-        {
-            if (playerData.equippedCharacterName != null)
-            {
-                CharacterData data = allCharacterData.Find(character => character.characterName == playerData.equippedCharacterName);
-                if (data != null)
-                    equimentCharacter = data;
-            }
-        }
+        if (character != null)
+            character.LoadCharacters();
     }
 }

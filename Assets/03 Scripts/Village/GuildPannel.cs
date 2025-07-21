@@ -45,7 +45,7 @@ public class GuildPannel : MonoBehaviour
         if (GameManager.Instance == null)
             return;
 
-        if (GameManager.Instance.charactors.Any(c => c == characterData))
+        if (GameManager.Instance.character.charaters.Any(c => c.characterName == characterData.characterName))
         {
             Debug.Log("이미 구매한 캐릭터입니다");
             Destroy(this.gameObject);
@@ -60,7 +60,7 @@ public class GuildPannel : MonoBehaviour
                 if (characterData.Price <= Save.playerData.diamond)
                 {
                     GameManager.Instance.UseDiamond(characterData.Price);
-                    GameManager.Instance.charactors.Add(characterData);
+                    GameManager.Instance.character.AddCharacter(characterData.characterName);
                     GameManager.Instance.SaveData();
                     purchased = true;
                 }
@@ -74,7 +74,7 @@ public class GuildPannel : MonoBehaviour
                 if (characterData.Price <= Save.playerData.gold)
                 {
                     GameManager.Instance.UseGold(characterData.Price);
-                    GameManager.Instance.charactors.Add(characterData);
+                    GameManager.Instance.character.AddCharacter(characterData.characterName);
                     GameManager.Instance.SaveData();
                     purchased = true;
                 }

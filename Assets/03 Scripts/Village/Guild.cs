@@ -31,7 +31,7 @@ public class Guild : MonoBehaviour
             {
                 targetButton[i].onClick.AddListener(() => OnClickCharactarBuy(index));
 
-                if (GameManager.Instance.charactors.Any(c => c == characterDatas[i]))
+                if (GameManager.Instance.character.charaters.Any(c => c.characterName == characterDatas[i].characterName))
                 {
                     ClearImage[i].SetActive(true);
                     Destroy(targetButton[i]);
@@ -51,7 +51,7 @@ public class Guild : MonoBehaviour
         {
             if (targetButton[i] != null && characterDatas[i] != null)
             {
-                if (GameManager.Instance.charactors.Any(c => c == characterDatas[i]))
+                if (GameManager.Instance.character.charaters.Any(c => c == characterDatas[i]))
                 {
                     ClearImage[i].SetActive(true);
                     Destroy(targetButton[i]);

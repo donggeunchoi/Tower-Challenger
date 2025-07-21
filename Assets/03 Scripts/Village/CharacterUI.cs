@@ -9,8 +9,8 @@ public class CharacterUI : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            if (GameManager.Instance.equimentCharacter != null)
-                characterImage.sprite = GameManager.Instance.equimentCharacter.characterImage;
+            if (GameManager.Instance.character.equippedCharacter!= null)
+                characterImage.sprite = GameManager.Instance.character.equippedCharacter.characterImage;
         }
     }
 
@@ -18,8 +18,8 @@ public class CharacterUI : MonoBehaviour
     {
         if (GameManager.Instance != null)
         { 
-            if (GameManager.Instance.equimentCharacter != null)
-                characterImage.sprite = GameManager.Instance.equimentCharacter.characterImage;
+            if (GameManager.Instance.character.equippedCharacter != null)
+                characterImage.sprite = GameManager.Instance.character.equippedCharacter.characterImage;
         }
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class CharactorChoiceSlot : MonoBehaviour
 {
-    // public string charactorName;
     public bool Equip = false;
     public Image characterImage;
     public GameObject EquipImage;
@@ -23,7 +22,8 @@ public class CharactorChoiceSlot : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            if (GameManager.Instance.equimentCharacter == data)
+            if (GameManager.Instance.character.equippedCharacter != null &&
+                GameManager.Instance.character.equippedCharacter.characterName == data.characterName)
                 EquipImage.SetActive(true);
         }
         else
@@ -35,8 +35,8 @@ public class CharactorChoiceSlot : MonoBehaviour
     public void OnClickUse()
     {
         if (GameManager.Instance != null)
-        {
-            GameManager.Instance.equimentCharacter = data;
+        {   
+            GameManager.Instance.character.EquipCharacter(data.characterName);
             CharactorChoice.OnCharacterEquipped();
             EquipImage.SetActive(true);
             GameManager.Instance.SaveData();
