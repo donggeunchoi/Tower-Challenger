@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MailBox : MonoBehaviour
@@ -19,7 +19,7 @@ public class MailBox : MonoBehaviour
 
     public void OnClickGetButton()
     {
-        GameManager.Instance.AddGold(firstGift);
+        GameManager.Instance.account.AddGold(firstGift);
         Destroy(GetButton.gameObject);
     }
 }

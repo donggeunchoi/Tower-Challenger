@@ -25,12 +25,12 @@ public class RewardManager : MonoBehaviour
     {
         if (reward.goldReward >= 0)
         {
-            GameManager.Instance.AddGold(reward.goldReward);
+            GameManager.Instance.account.AddGold(reward.goldReward);
         }
 
         if (reward.goldReward >= 0)
         {
-            GameManager.Instance.AddDiamond(reward.diaReward);
+            GameManager.Instance.account.AddDiamond(reward.diaReward);
         }
         
         // if (reward.speedMoveReward)

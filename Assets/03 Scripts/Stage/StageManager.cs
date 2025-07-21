@@ -8,14 +8,14 @@ public class StageManager : MonoBehaviour
     public static StageManager instance;
     public GameObject gameOver;      //게임 오버 창
 
-    [Header("정보")]
+    [Header("정보")]  //UI정보 넘겨받기
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
     public GameObject infoUI;         //각종 인포메이션이 들어갈 공간 (타이머 LP등)[추후 UI매니저로 이동]
 
     private HashSet<string> shownMiniGameUIs = new HashSet<string>();
 
-    public int difficulty { get; private set; }              //난이도
+    public int difficulty { get; private set; }     //난이도
 
     [Header("게임 상태")]
     public bool isGameActive = false;  //현재 게임이 실행되고 있는지 여부
@@ -71,8 +71,11 @@ public class StageManager : MonoBehaviour
         totalStageCount = 1;  //현재 스테이지 카운트 초기화
         timerMultiplier = 1f; //배속 초기화
         SetFloorInfo();
-        MiniGameManager.instance.UnUsedGames();
-        RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
+        if (MiniGameManager.instance != null)
+        {
+            MiniGameManager.instance.UnUsedGames();
+            MiniGameManager.instance.RandomStage(); // 게임 시작 시 랜덤 스테이지 생성
+        }
         LoadRandomMap(); //랜덤 맵
 
         StartGameLoad(false);
@@ -133,13 +136,16 @@ public class StageManager : MonoBehaviour
             bestFloor = floor;
 
         if (GameManager.Instance != null)
-            GameManager.Instance.SaveData();
+            Save.SaveData();
 
         if (floor % BOSS_FLOOR == 0) //10층마다 보스
         {
             stageTimer.StopTimer();
             totalStageCount = 1;
-            BossStage();
+
+            if (MiniGameManager.instance != null)
+                MiniGameManager.instance.BossStage();
+
             StartGameLoad(true);
             return;
         }
@@ -153,7 +159,8 @@ public class StageManager : MonoBehaviour
 
         SetFloorInfo();
 
-        RandomStage();
+        if (MiniGameManager.instance != null)
+            MiniGameManager.instance.RandomStage();
 
         StartGameLoad(false);
     }
@@ -181,18 +188,6 @@ public class StageManager : MonoBehaviour
     }
     #endregion
     #region MiniGameSet
-    private void RandomStage()  //랜덤한 스테이지 생성
-    {
-        if (MiniGameManager.instance != null)
-            MiniGameManager.instance.RandomStage();
-    }
-
-    public void BossStage()
-    {
-        if (MiniGameManager.instance != null)
-            MiniGameManager.instance.BossStage();
-    }
-
     public string LoadRandomMap()
     {
         if (TowerManager.Instance != null)

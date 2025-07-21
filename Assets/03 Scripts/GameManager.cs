@@ -87,60 +87,12 @@ public class GameManager : MonoBehaviour
             Save.SaveData();
     }
 
-    public void LoadData()
-    {
-        Save.LoadData();
-    }
-
-    public void SaveData()
-    {
-        Save.SaveData();
-    }
-
-    public void AddStamina()
-    {
-        if (stamina != null)
-            stamina.AddStamina();
-    }
-
-    public void UseStamina()
-    {
-        if (stamina != null)
-            stamina.UseStamina();
-    }
-
-    public void AddGold(int addGold)
-    {
-        if (account != null)
-            account.AddGold(addGold);
-    }
-
-    public void UseGold(int useGold)
-    {
-        if (account != null)
-            account.UseGold(useGold);
-    }
-
-    public void AddDiamond(int addDia)
-    {
-        if (account != null)
-            account.AddDiamond(addDia);
-    }
-
-    public void UseDiamond(int useDia)
-    {
-        if (account != null)
-            account.UseDiamond(useDia);
-    }
-
     void LoadMiniGameCSV()
     {
         CVSLoader.LoadMiniGameCSV();
         miniGameDataList = CVSLoader.miniGameDataList;
     }
-
-
-
+    
     public void LoadResourceData()
     {
         if (stamina != null)
