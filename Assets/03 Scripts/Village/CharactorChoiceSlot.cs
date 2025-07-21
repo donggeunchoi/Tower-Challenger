@@ -39,7 +39,7 @@ public class CharactorChoiceSlot : MonoBehaviour
             GameManager.Instance.character.EquipCharacter(data.characterName);
             CharactorChoice.OnCharacterEquipped();
             EquipImage.SetActive(true);
-            GameManager.Instance.SaveData();
+            Save.SaveData();
         }
     }
 }

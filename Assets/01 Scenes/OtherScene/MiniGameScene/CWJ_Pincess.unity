@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 1758026337}
   - component: {fileID: 1758026338}
   m_Layer: 0
-  m_Name: Die
+  m_Name: PrincessDie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1239,7 +1239,7 @@ GameObject:
   - component: {fileID: 1988020976}
   - component: {fileID: 1988020977}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PrincessManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1275,8 +1275,12 @@ MonoBehaviour:
   shieldMove: {fileID: 571641003}
   enemyPos: {fileID: 2003439947}
   spriteRenderer: {fileID: 1758026338}
-  moveSpeed: 3
-  enemyTime: 0.07
+  batSpeed: 5
+  maxY: 3
+  minY: 0.5
+  frequency: 7
+  enemyTime: 3
+  fireSpeed: 10
 --- !u!1 &2003439945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,11 +1327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 182873785470881610, guid: 4c0dd3f1fc94157499f2ece7391cfea0, type: 3}
-  - {fileID: 9192070684631920315, guid: 0a938bf91f2f5ca42bac2fb0f824b475, type: 3}
   - {fileID: 226896530266349484, guid: c4e4aa3fcf539304fb37c2be412cd218, type: 3}
-  - {fileID: 8262971866597701607, guid: 75f77bcb319f02449b234521987b9198, type: 3}
-  - {fileID: 8809050760882861677, guid: 51d440c2c294c58458d67ae84c692b2e, type: 3}
-  - {fileID: 7402208752266243758, guid: bdd2f8d5fcee1c341817fb29213cff38, type: 3}
   time: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 5579415842116992447}
   - component: {fileID: 2063206830974715763}
   - component: {fileID: 5742818649215526766}
-  - component: {fileID: 6695005029584726712}
+  - component: {fileID: 3395789564300763856}
   m_Layer: 0
   m_Name: FireBoll (1)
-  m_TagString: Enemy
+  m_TagString: Fire
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs: []
---- !u!114 &6695005029584726712
+  time: 0
+--- !u!114 &3395789564300763856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,6 +188,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8262971866597701607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72a4f9ee0025724f9dceb69d1e40951, type: 3}
+  m_Script: {fileID: 11500000, guid: e654c69eb0c1acb4cb7f218339a57f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

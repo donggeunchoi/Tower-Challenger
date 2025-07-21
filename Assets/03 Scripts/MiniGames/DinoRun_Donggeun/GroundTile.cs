@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
@@ -45,7 +45,8 @@ public class GroundTile : MonoBehaviour
         
         float GetRightMostX(GameObject exclude)
         {
-            GroundTile[] allTiles = FindObjectsOfType<GroundTile>();
+            GroundTile[] allTiles = FindObjectsByType<GroundTile>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
             float maxX = float.MinValue;
             foreach (var tile in allTiles)
             {
@@ -53,7 +54,7 @@ public class GroundTile : MonoBehaviour
                 if (tile.transform.position.x > maxX)
                     maxX = tile.transform.position.x;
             }
-
+            FindAnyObjectByType(typeof(GroundTile));
             return maxX;
         }
     }

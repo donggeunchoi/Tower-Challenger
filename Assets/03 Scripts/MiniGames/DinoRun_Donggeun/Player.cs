@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
     private bool isInvincible = false;
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
-    public Animator animation;
+    public Animator animatior;
     
     private int normalLayer;
     private int invincibleLayer;
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         invincibleLayer = LayerMask.NameToLayer("InvinciblePlayer");
         respawnPosition = transform.position;
         
-        animation = GetComponent<Animator>();
+        animatior = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -142,24 +142,24 @@ public class Player : MonoBehaviour
     
     public void Jump()
     {
-        animation.SetTrigger("Jump");
+        animatior.SetTrigger("Jump");
         playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
     }
 
     public void StopJump()
     {
-        animation.SetBool("IsJump", false);
+        animatior.SetBool("IsJump", false);
     }
 
     public void Sliding()
     {
         Debug.Log("슬라이딩하니?");
-        animation.SetBool("IsSliding", true);
+        animatior.SetBool("IsSliding", true);
     }
 
     public void StopSliding()
     {
-        animation.SetBool("IsSliding", false);
+        animatior.SetBool("IsSliding", false);
     }
     #endregion
    
