@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 1758026337}
   - component: {fileID: 1758026338}
   m_Layer: 0
-  m_Name: Die
+  m_Name: PrincessDie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1239,7 +1239,7 @@ GameObject:
   - component: {fileID: 1988020976}
   - component: {fileID: 1988020977}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PrincessManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1275,8 +1275,12 @@ MonoBehaviour:
   shieldMove: {fileID: 571641003}
   enemyPos: {fileID: 2003439947}
   spriteRenderer: {fileID: 1758026338}
-  moveSpeed: 3
-  enemyTime: 0.07
+  batSpeed: 5
+  maxY: 3
+  minY: 0.5
+  frequency: 7
+  enemyTime: 3
+  fireSpeed: 10
 --- !u!1 &2003439945
 GameObject:
   m_ObjectHideFlags: 0
