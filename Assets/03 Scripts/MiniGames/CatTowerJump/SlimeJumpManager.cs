@@ -1,8 +1,12 @@
-using UnityEngine;
+using System;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ScoreCount : MonoBehaviour
+public class SlimeJumpManager : MonoBehaviour
 {
+    public static SlimeJumpManager Instance;
+    
     [Header("References")]
     public Transform playerTransform;
     public TextMeshProUGUI TargetText;
@@ -11,6 +15,11 @@ public class ScoreCount : MonoBehaviour
     private float startY;
     [SerializeField]private float TargetY;
     
+    
+    private void Awake()
+    {
+       Instance = this;
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +34,8 @@ public class ScoreCount : MonoBehaviour
         float currentY = playerTransform.position.y;
         if (currentY > TargetY)
         {
-            Debug.Log("게임 클리어");
+            //여기가 게임 클리어
+            // SlimeJumpManager.Instance.ClearGame();
         }
         
         CurrnetText.text = $"{currentY.ToString("N0")}m";
@@ -35,5 +45,18 @@ public class ScoreCount : MonoBehaviour
     {
         int currentY = Mathf.FloorToInt(value);
         TargetText.text = $"{currentY.ToString()}m";
+    }
+
+
+    public void ClearGame()
+    {
+        StageManager.instance.MiniGameResult(true);
+        //이쪽에 다시 씬으로 넘기기
+    }
+
+    public void SlimeHit()
+    {
+        StageManager.instance.MiniGameResult(false);
+        //여기에 패널 열어뿌지뭐
     }
 }
