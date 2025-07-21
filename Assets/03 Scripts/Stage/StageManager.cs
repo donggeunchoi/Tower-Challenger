@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
     public static StageManager instance;
     public GameObject gameOver;      //게임 오버 창
 
-    [Header("정보")]  //UI정보 넘겨받기
+    [Header("정보")]                  //UI정보 넘겨받기
     public StageTimer stageTimer;     //스테이지 타이머
     public StageLP stageLP;           //스테이지 LP
     public GameObject infoUI;         //각종 인포메이션이 들어갈 공간 (타이머 LP등)[추후 UI매니저로 이동]
@@ -28,10 +28,8 @@ public class StageManager : MonoBehaviour
     public int bestFloor = 1;          //최고 기록
     public int totalStageCount = 1;    //현재 깨야하는 스테이지
     public float timerMultiplier = 1f;//타이머 배속
-    public Vector3 playerPosition;    //플레이어 포지션 저장
-    public int layerNumber;           //플레이어 레이어 저장
-    public string currentSceneName;   //현재 씬 이름
     public List<int> stageClearPortal = new List<int>(); //여기에 활성화 되는 포탈 인덱스 값만 저장
+
 
     private void Awake()
     {
@@ -99,7 +97,7 @@ public class StageManager : MonoBehaviour
 
     public void StartNextMiniGame()  //미니게임시작
     {
-        currentSceneName = SceneManager.GetActiveScene().name;  //현재 씬 이름 가져오기
+        TowerManager.Instance.currentSceneName = SceneManager.GetActiveScene().name;  //현재 씬 이름 가져오기
 
         if (MiniGameManager.instance.randomGames.Count == 0)
         {
@@ -243,8 +241,8 @@ public class StageManager : MonoBehaviour
                 bestFloor = floor;
 
             GameObject gameOverPanel = Instantiate(gameOver, infoUI.transform);
+            isGameActive = false;
         }
     }
-
     #endregion
 }

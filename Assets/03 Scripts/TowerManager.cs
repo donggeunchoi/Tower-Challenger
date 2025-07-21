@@ -10,6 +10,7 @@ public class TowerManager : MonoBehaviour
     public MiniGameManager miniGameManager;
 
     [SerializeField] private string[] mapScenes;
+    public string currentSceneName;   //현재 씬 이름
     private void Awake()
     {
         if (Instance == null)
@@ -83,7 +84,7 @@ public class TowerManager : MonoBehaviour
 
     public IEnumerator AfterLoadData()
     {
-        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(StageManager.instance.currentSceneName); //어씬크
+        AsyncOperation ansynLoad = SceneManager.LoadSceneAsync(currentSceneName); //어씬크
         while (!ansynLoad.isDone)
         {
             yield return null;
