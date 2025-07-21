@@ -8,7 +8,7 @@ public class StaminaCharge : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            string Show = $"{(GameManager.Instance.staminatimer / 60f).ToString("N0")} / 30";
+            string Show = $"{(GameManager.Instance.stamina.staminatimer / 60f).ToString("N0")} / 30";
             timeText.GetComponent<TMPro.TMP_Text>().text = Show;
         }
     }
