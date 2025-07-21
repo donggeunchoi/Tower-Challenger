@@ -18,12 +18,6 @@ public class ShieldMove : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(collision.gameObject);
-            //PrincessManager.princessInstance.moveSpeed = 0f;
-            //Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            //if (rb != null)
-            //{
-            //    rb.gravityScale = graveityScale;
-            //}
         }
 
     }

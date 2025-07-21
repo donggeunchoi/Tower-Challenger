@@ -14,17 +14,17 @@ public class GameOver : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(collision.gameObject);
-        //if (StageManager.instance != null)
-        //{
-        //    if (StageManager.instance.stageLP.currentLP == 1)
-        //    {
-        //        StartCoroutine(Die());
-        //    }
-        //    else
-        //    {
-        //        StageManager.instance.MiniGameResult(false);
-        //    }
-        //}
+        if (StageManager.instance != null)
+        {
+            if (StageManager.instance.stageLP.currentLP == 1)
+            {
+                StartCoroutine(Die());
+            }
+            else
+            {
+                StageManager.instance.MiniGameResult(false);
+            }
+        }
         StartCoroutine(Hit());
 
     }
