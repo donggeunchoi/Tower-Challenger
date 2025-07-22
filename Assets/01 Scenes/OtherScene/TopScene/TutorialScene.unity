@@ -12136,6 +12136,7 @@ MonoBehaviour:
   - {fileID: 3592263074846575003, guid: 660955d40b3a14f0f9b580885a309e06, type: 3}
   - {fileID: 7651512552488833628, guid: f69536b87644c426dbfe84cc4a9c2880, type: 3}
   - {fileID: 307117994954094486, guid: 9216a5aafe6f743d79332ec0cf500858, type: 3}
+  - {fileID: 3277872997410404056, guid: 5a50d01f7d3104d6f8a140ffa2ec8385, type: 3}
   fadeImage: {fileID: 1181745960}
   fadeDuration: 1
 --- !u!4 &1747403236
@@ -15734,74 +15735,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1403804863937436449
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 185.17165
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 512.07477
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1208.0748
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 308493828560782330, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3277872997410404056, guid: 5a50d01f7d3104d6f8a140ffa2ec8385,
-        type: 3}
-      propertyPath: m_Name
-      value: PortalTutorial
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5a50d01f7d3104d6f8a140ffa2ec8385, type: 3}
 --- !u!212 &2055102312003290482
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16051,4 +15984,3 @@ SceneRoots:
   - {fileID: 206086107}
   - {fileID: 58249272}
   - {fileID: 1747403236}
-  - {fileID: 1403804863937436449}

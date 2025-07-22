@@ -1,16 +1,39 @@
 using UnityEngine;
 
-public class PortalTutorial : MonoBehaviour
+public class PortalTutorial : TutorialBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    private HintUI hintUI;
+    [SerializeField]
+    private string hintMessage;
+    [SerializeField] 
+    private string hintMessage2;
+    [SerializeField]
+    private Transform target;
+    [SerializeField] 
+    private float targetClear = 0.5f;
+    private bool _action;
+    public bool Action => _action;
+
+    public override void Enter()
     {
-        
+        hintUI.Show(hintMessage);
+        _action = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Play(TutorialManager collider)
     {
-        
+        if (!_action)
+        {
+            hintUI.Show(hintMessage2);
+            //내생각 여기에서 포탈을 생성을 해야하지 싶은데
+        }
     }
+    
+
+    public override void Exit()
+    {
+        hintUI.Hide();
+    }
+    
 }
