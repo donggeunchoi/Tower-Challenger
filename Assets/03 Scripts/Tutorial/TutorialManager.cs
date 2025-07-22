@@ -22,6 +22,14 @@ public class TutorialManager : MonoBehaviour
         NextStep();
     }
 
+    void Update()
+    {
+        if (currentTutorial != null)
+        {
+            currentTutorial.Play(this);
+        }
+    }
+
     public void NextStep()
     {
         if (currentTutorial != null)
@@ -37,8 +45,8 @@ public class TutorialManager : MonoBehaviour
             return;
         }
         
-        currentTutorial = cuttentInstance.GetComponent<TutorialBase>();
         cuttentInstance = Instantiate(tutorialPrefabs[currentIndex]);
+        currentTutorial = cuttentInstance.GetComponent<TutorialBase>();
         
         currentTutorial.Enter();
     }

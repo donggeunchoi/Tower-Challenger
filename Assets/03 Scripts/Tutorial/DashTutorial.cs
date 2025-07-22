@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoveTutorial : TutorialBase
+public class DashTutorial : TutorialBase
 {
     [SerializeField]
     private HintUI hintUI;
@@ -12,24 +12,30 @@ public class MoveTutorial : TutorialBase
     [SerializeField] 
     private float targetClear = 0.5f; //도달 판정 반경
 
-    private bool _moved;
+    private bool _dash;
+    
+    public PlayerInput playerInput;
+    
     public override void Enter()
     {
         hintUI.Show(hintMessage);
-        _moved = false;
+        _dash = false;
+
+        if (playerInput == null)
+        {
+            playerInput = FindFirstObjectByType<PlayerInput>(FindObjectsInactive.Exclude);
+        }
     }
 
     public override void Play(TutorialManager controller)
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        
-        if (!_moved && (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f))
+        if (!_dash && playerInput.isDashing)
         {
-            _moved = true;
+            _dash = true;
             controller.NextStep();
-            return;
         }
+           
+        
     }
 
     public override void Exit()

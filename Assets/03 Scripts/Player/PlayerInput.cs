@@ -121,6 +121,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         {
             StartCoroutine(DashRoutine());
         }
+        // isDashing = false;
     }
 
     private IEnumerator DashRoutine()
