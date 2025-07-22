@@ -42,7 +42,6 @@ public class SoundManager : MonoBehaviour
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("씬 전환 감지" + scene.name);
         ChangeBGM(scene.name);
     }
     #endregion
@@ -75,7 +74,6 @@ public class SoundManager : MonoBehaviour
                 PlayBGM(FindMusic("TowerBoss"));
                 break;
             default:
-                Debug.Log(BGM);
                 AudioClip miniGameClip = Array.Find(miniGameAudioClip, clip => clip != null && clip.name.Contains(BGM));
 
                 if (miniGameClip != null)
@@ -92,7 +90,6 @@ public class SoundManager : MonoBehaviour
                     break;
                 }
         }
-
     }
 
     public AudioClip FindMusic(string musicName)
