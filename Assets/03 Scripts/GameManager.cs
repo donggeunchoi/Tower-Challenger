@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject uiManagerPrefab;
     public GameObject itemManagerPrefab;
     public GameObject playerManagerPrefab;
+    public GameObject soundManagerPrefab;
 
     public List<MiniGameData> miniGameDataList = new List<MiniGameData>();
     public PlayerData playerData { get; private set; }
@@ -60,6 +61,12 @@ public class GameManager : MonoBehaviour
         {
             if (playerManagerPrefab != null)
                 Instantiate(playerManagerPrefab);
+        }
+
+        if (FindAnyObjectByType(typeof(SoundManager)) == null)
+        {
+            if (soundManagerPrefab != null)
+                Instantiate(soundManagerPrefab);
         }
     }
 
