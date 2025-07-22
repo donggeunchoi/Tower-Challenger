@@ -116,10 +116,6 @@ public class StageManager : MonoBehaviour
                     shownMiniGameUIs.Add(miniGameID);
                     UIManager.Instance.InstantiateUI(selectedGame.miniGameInfoUI);
                 }
-                else
-                {
-                    Debug.Log($"[MiniGame UI] 이미 본 UI입니다: {miniGameID}, 다시 띄우지 않음.");
-                }
             }
             SceneManager.LoadScene(selectedGame.sceneName);
         }

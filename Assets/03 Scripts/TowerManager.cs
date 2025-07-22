@@ -37,8 +37,7 @@ public class TowerManager : MonoBehaviour
         foreach (StageManager sm in stageManagers)
         {
             if (sm.gameObject != this.gameObject)
-            {
-                Debug.LogWarning("스테이지 매니저 중복 파괴");
+            { 
                 Destroy(sm.gameObject);
             }
         }
@@ -48,7 +47,6 @@ public class TowerManager : MonoBehaviour
         {
             if (mgm.gameObject != this.gameObject)
             {
-                Debug.LogWarning("미니게임 매니저 중복 파괴");
                 Destroy(mgm.gameObject);
             }
         }
