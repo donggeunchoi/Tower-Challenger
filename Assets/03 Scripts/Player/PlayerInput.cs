@@ -22,6 +22,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     [Header("인벤토리")] 
     public GameObject InventoryPanel;
+    public bool isInventory = false;
 
     public Sprite speedUpSprite;
     public Sprite sandglassSprite;
@@ -121,7 +122,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         {
             StartCoroutine(DashRoutine());
         }
-        // isDashing = false;
     }
 
     private IEnumerator DashRoutine()
@@ -153,6 +153,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     public void OnClickInventory()
     {
+        isInventory = true;
         InventoryPanel.SetActive(true);
     }
 }

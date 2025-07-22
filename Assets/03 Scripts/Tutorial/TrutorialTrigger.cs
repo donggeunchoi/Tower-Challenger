@@ -33,6 +33,7 @@ public class TrutorialTrigger : MonoBehaviour, IInteractable
         
         var dashStep = _tutorialStep as DashTutorial;
         var boxStep = _tutorialStep as BoxTutorial;
+        var inventoryStep = _tutorialStep as InventoryTutorial;
             
         if (dashStep != null && !dashStep.Action)
         {
@@ -40,6 +41,11 @@ public class TrutorialTrigger : MonoBehaviour, IInteractable
         }
 
         if (boxStep != null && !boxStep.Action)
+        {
+            return;
+        }
+
+        if (inventoryStep != null && !inventoryStep.Action)
         {
             return;
         }
