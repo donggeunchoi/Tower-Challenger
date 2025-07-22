@@ -5,7 +5,8 @@ using UnityEngine;
 public class TrutorialTrigger : MonoBehaviour
 {
     public TutorialManager tutorialManager;
-    
+
+    private TutorialBase _tutorialStep;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,6 +14,7 @@ public class TrutorialTrigger : MonoBehaviour
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>(FindObjectsInactive.Exclude); //FindObjectOfType<TutorialManager>();
         }
+        _tutorialStep = GetComponentInParent<TutorialBase>();
         
         var collider = GetComponent<Collider2D>();
         collider.isTrigger = true;
@@ -27,10 +29,24 @@ public class TrutorialTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if(!collision.CompareTag("Player")) return;
+        
+        
+        var dashStep = _tutorialStep as DashTutorial;
+        var boxStep = _tutorialStep as BoxTutorial;
+            
+        if (dashStep != null && !dashStep.Action)
         {
-            tutorialManager.NextStep();
-            Destroy(gameObject);
+            return;
         }
+
+        if (boxStep != null && !boxStep.Action)
+        {
+            return;
+        }
+            
+        tutorialManager.NextStep();
+        Destroy(gameObject);
+        
     }
 }

@@ -12,14 +12,15 @@ public class DashTutorial : TutorialBase
     [SerializeField] 
     private float targetClear = 0.5f; //도달 판정 반경
 
-    private bool _dash;
+    private bool _action;
+    public bool Action => _action;
     
     public PlayerInput playerInput;
     
     public override void Enter()
     {
         hintUI.Show(hintMessage);
-        _dash = false;
+        _action = false;
 
         if (playerInput == null)
         {
@@ -29,13 +30,10 @@ public class DashTutorial : TutorialBase
 
     public override void Play(TutorialManager controller)
     {
-        if (!_dash && playerInput.isDashing)
+        if (!_action && playerInput.isDashing)
         {
-            _dash = true;
-            controller.NextStep();
+            _action = true;
         }
-           
-        
     }
 
     public override void Exit()

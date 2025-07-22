@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3516824261492892321}
-  - component: {fileID: 9001555855235487336}
+  - component: {fileID: 2083097164533536660}
   m_Layer: 0
   m_Name: BoxTutorial
   m_TagString: Untagged
@@ -290,7 +290,7 @@ Transform:
   - {fileID: 1336943334594836626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9001555855235487336
+--- !u!114 &2083097164533536660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,15 +299,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7651512552488833628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c99f5d1cb7264c1f84fdff589727265, type: 3}
+  m_Script: {fileID: 11500000, guid: db1562dfa902144fc81dfbfaa9df0035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   hintUI: {fileID: 5983356471162058445}
   hintMessage: "\uC0C1\uC790\uC5D0 \uC6B0\uCE21 \uD558\uB2E8\uC5D0 \uC788\uB294 \uC190\uAC00\uB77D\uC744
     \uD55C \uBC88 \uC0AC\uC6A9\uD574\uBCF4\uC790"
-  target: {fileID: 3530550458323291598}
-  targetClear: 0.5
-  playerInput: {fileID: 0}
+  hintMessage2: "\uC0C1\uD638\uC791\uC6A9 \uC131\uACF5~ \uBC11\uC5D0 \uC788\uB294
+    \uC624\uD06C\uD1B5\uC73C\uB85C \uC774\uB3D9\uD574\uBCF4\uC790"
 --- !u!1 &7710972082119332074
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 7710972082119332074}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -191.46, y: -504.12, z: -1208.0748}
+  m_LocalPosition: {x: -186.05, y: -508.8, z: -1208.0748}
   m_LocalScale: {x: 1.9225698, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -376,7 +376,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.081125334, y: -0.3936116}
+  m_Offset: {x: -0.08867239, y: -0.1443116}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -386,7 +386,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9870584, y: 1.6938967}
+  m_Size: {x: 0.64746296, y: 1.1952968}
   m_EdgeRadius: 0
 --- !u!50 &7254416119019532768
 Rigidbody2D:
@@ -461,10 +461,10 @@ RectTransform:
   - {fileID: 2377643931071068689}
   m_Father: {fileID: 1336943334594836626}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -20.17678, y: 546.3104}
-  m_SizeDelta: {x: 1662.2002, y: 191.7758}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.000022888184, y: -191.77576}
+  m_SizeDelta: {x: 1662.2002, y: 191.77576}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1635915042722962148
 CanvasRenderer:
