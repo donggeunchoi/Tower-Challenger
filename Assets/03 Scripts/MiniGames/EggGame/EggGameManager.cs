@@ -43,6 +43,7 @@ public class EggGameManager : MonoBehaviour
 
     private string currentState = "";
 
+
     void Start()
     {
         for (int i = 0; i < Eggs.Length; i++)
@@ -50,10 +51,7 @@ public class EggGameManager : MonoBehaviour
             Eggs[i].SetActive(false);
 
         }
-        for (int i = 0;i < Eggs.Length; i++)
-        {
-            Particle[i].SetActive(false);
-        }
+
         Eggs[Lv].SetActive(true);
         Set();
         InitHP();
@@ -156,31 +154,29 @@ public class EggGameManager : MonoBehaviour
         {
             animator.SetTrigger(newState);
             currentState = newState;
-
-            // 금이 갈 때마다 파티클 재생
-           
+  
             if(!Heal)         
             {
-                StartCoroutine(PlayCrackParticleOnce(Lv));
+                StartCoroutine(PlayCrackParticleOnce());
             }
         }
     }
-    IEnumerator PlayCrackParticleOnce(int index)
+    IEnumerator PlayCrackParticleOnce()
     {
-        GameObject particle = Particle[index];
-        particle.SetActive(true);
-
-        ParticleSystem ps = particle.GetComponent<ParticleSystem>();
-        if (ps != null)
+        // 풀에서 파티클 꺼내기
+        GameObject particle = PoolManager.Instance.GetObject(
+            Particle[Lv],
+            Eggs[Lv].transform.position,
+            Quaternion.Euler(0, -180f, 0)
+        );
+        if (particle.GetComponent<EggBreak>())
         {
-            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            ps.Play();
+            particle.GetComponent<EggBreak>().EggBreakPC();
         }
-
-        yield return new WaitForSeconds(1f);
-
-        particle.SetActive(false);
+        yield return null;
     }
+
+
 
     void UpdateHPBar()
     {
