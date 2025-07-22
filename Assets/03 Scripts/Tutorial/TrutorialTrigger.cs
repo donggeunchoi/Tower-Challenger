@@ -2,10 +2,9 @@ using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class TrutorialTrigger : MonoBehaviour
+public class TrutorialTrigger : MonoBehaviour, IInteractable
 {
     public TutorialManager tutorialManager;
-
     private TutorialBase _tutorialStep;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,5 +47,10 @@ public class TrutorialTrigger : MonoBehaviour
         tutorialManager.NextStep();
         Destroy(gameObject);
         
+    }
+
+    public void Interact()
+    {
+        Debug.Log("실행은 되었구요~ 보물상자를 실행되도록");
     }
 }

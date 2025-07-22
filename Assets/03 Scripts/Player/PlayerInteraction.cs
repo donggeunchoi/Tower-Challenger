@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
@@ -6,8 +7,8 @@ public class PlayerInteraction : MonoBehaviour
     public Button interactionButton;          //상호작용 버튼
     public Transform interactionUIPannel;     //상호작용 했을때 UI가 뜨는공간
     private IInteractable currentInteractable;//상호작용 연결 (어떤상호작용이 추가되도 대처할 수 있도록)
-    private GameObject currentUI;             //상호작용에 의한 UI가 무엇인지 저장
-    
+    private GameObject currentUI;    //상호작용에 의한 UI가 무엇인지 저장
+    public bool clicked { get; private set; }
     private void Start()
     {
         interactionButton.onClick.AddListener(Interact);
@@ -37,6 +38,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (currentInteractable != null)
         {
+            clicked = true;
             currentInteractable.Interact();
         }
     }

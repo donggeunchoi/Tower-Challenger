@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BoxTutorial : TutorialBase
+public class BoxTutorial : TutorialBase 
 {
     public PlayerInteraction playerInput;
     private bool _action = false;
@@ -12,6 +12,8 @@ public class BoxTutorial : TutorialBase
     [SerializeField]
     private string hintMessage2;
     
+    private bool _interectionState = false;
+    
     public override void Enter()
     {
         hintUI.Show(hintMessage);
@@ -22,11 +24,14 @@ public class BoxTutorial : TutorialBase
         }
         
         _action = false;
+        _interectionState = playerInput.interactionButton;
+        Debug.Log(_interectionState);
     }
 
     public override void Play(TutorialManager controller)
     {
-        if (_action &&  playerInput.interactionButton)
+        
+        if (!_action && playerInput.clicked)
         {
             _action = true;
             hintUI.Show(hintMessage2);
