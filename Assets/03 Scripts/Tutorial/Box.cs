@@ -1,12 +1,18 @@
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Box : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private SpriteRenderer spriteRenderer;
+    public GameObject GoldRenderer;
 
     [SerializeField] private Sprite closedSprite;
     [SerializeField] private Sprite openSprite;
+    
+    
     private bool _isOpen = false;
     public bool IsOpen => _isOpen;
 
@@ -25,6 +31,21 @@ public class Box : MonoBehaviour, IInteractable
         
         _isOpen = true;
         spriteRenderer.sprite = openSprite;
+
+        StartCoroutine(Broken());
+    }
+
+    public void GoldShow()
+    {
+        GoldRenderer.gameObject.SetActive(true);
+    }
+
+    IEnumerator Broken()
+    {
+        GoldShow();
+        
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
         
     }
    

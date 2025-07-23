@@ -11,6 +11,8 @@ public class BoxTutorial : TutorialBase
     private string hintMessage;
     [SerializeField]
     private string hintMessage2;
+
+    [SerializeField] private Box _box;
     
     private bool _interectionState = false;
     
@@ -24,6 +26,8 @@ public class BoxTutorial : TutorialBase
         {
             playerInput = FindFirstObjectByType<PlayerInteraction>(FindObjectsInactive.Exclude);
         }
+
+        _box = GetComponentInChildren<Box>();
         
         _action = false;
         _interectionState = playerInput.interactionButton;
@@ -36,8 +40,8 @@ public class BoxTutorial : TutorialBase
         if (!_action && playerInput.clicked)
         {
             _action = true;
+            _box.Open();
             hintUI.Show(hintMessage2);
-
         }
     }
 

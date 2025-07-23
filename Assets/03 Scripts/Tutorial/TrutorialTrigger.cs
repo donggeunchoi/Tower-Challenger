@@ -17,6 +17,7 @@ public class TrutorialTrigger : MonoBehaviour,IInteractable
             tutorialManager = FindFirstObjectByType<TutorialManager>(FindObjectsInactive.Exclude); //FindObjectOfType<TutorialManager>();
         }
         _tutorialStep = GetComponentInParent<TutorialBase>();
+        
 
         if (GetComponent<Rigidbody2D>() == null)
         {
