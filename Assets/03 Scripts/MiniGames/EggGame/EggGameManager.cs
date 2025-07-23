@@ -16,12 +16,13 @@ public class EggGameManager : MonoBehaviour
     [Header("출력 UI")]
     public GameObject PrintOut;
     public GameObject ClickBlocker;
+    public GameObject EggHealText;
 
     [Header("난이도")]
     public int Lv = 2;
     public int HitDamage = 3;
     public int EndTime = 10;
-    public int healHP = 2;
+
 
     [Header("HP")]
     public int Egg0 = 100;
@@ -34,12 +35,13 @@ public class EggGameManager : MonoBehaviour
     private bool GameStart = false;
     private float tiltTimer;
     private float originalWidth;
+    private int healHP = 1;
 
     private TextMeshProUGUI hpTextUI;
     private TextMeshProUGUI printOutUI;
     private RectTransform hpRect;
     private Animator animator;
-    private bool Heal = false;
+
 
     private string currentState = "";
 
@@ -49,9 +51,8 @@ public class EggGameManager : MonoBehaviour
         for (int i = 0; i < Eggs.Length; i++)
         {
             Eggs[i].SetActive(false);
-
         }
-
+        ClickBlocker.SetActive(false);
         Eggs[Lv].SetActive(true);
         Set();
         InitHP();
@@ -73,9 +74,9 @@ public class EggGameManager : MonoBehaviour
 
         switch (Lv)
         {
-            case 2: MaxHP = Egg2; break;
-            case 1: MaxHP = Egg1; break;
-            default: MaxHP = Egg0; break;
+            case 2: MaxHP = Egg2; healHP = 5; break;
+            case 1: MaxHP = Egg1; healHP = 4; break;
+            default: MaxHP = Egg0;healHP = 3; break;
         }
 
         UpdateHPBar();
@@ -155,7 +156,7 @@ public class EggGameManager : MonoBehaviour
             animator.SetTrigger(newState);
             currentState = newState;
   
-            if(!Heal)         
+            if(!isHealing)         
             {
                 StartCoroutine(PlayCrackParticleOnce());
             }
@@ -163,16 +164,13 @@ public class EggGameManager : MonoBehaviour
     }
     IEnumerator PlayCrackParticleOnce()
     {
-        // 풀에서 파티클 꺼내기
         GameObject particle = PoolManager.Instance.GetObject(
             Particle[Lv],
             Eggs[Lv].transform.position,
             Quaternion.Euler(0, -180f, 0)
         );
-        if (particle.GetComponent<EggBreak>())
-        {
             particle.GetComponent<EggBreak>().EggBreakPC();
-        }
+        
         yield return null;
     }
 
@@ -197,7 +195,8 @@ public class EggGameManager : MonoBehaviour
 
     IEnumerator HealTime()
     {
-        Heal = true;
+        EggHealText.SetActive(true);
+
         ClickBlocker.SetActive(true);
         tiltTimer = 0;
 
@@ -219,7 +218,7 @@ public class EggGameManager : MonoBehaviour
 
         isHealing = false;
         ClickBlocker.SetActive(false);
-        Heal = false;
+        EggHealText.SetActive(false);
         GameStart = true;
     }
 }
