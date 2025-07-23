@@ -16,4 +16,5 @@ public class CharacterData : ScriptableObject
     public string description;
     public PriceType priceType;
     public int Price;
+    public GameObject playerPrefab;
 }

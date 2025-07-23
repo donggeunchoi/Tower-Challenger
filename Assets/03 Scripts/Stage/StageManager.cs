@@ -238,6 +238,11 @@ public class StageManager : MonoBehaviour
 
             GameObject gameOverPanel = Instantiate(gameOver, infoUI.transform);
             isGameActive = false;
+
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.PlayeGameOver();
+            }
         }
     }
     #endregion
