@@ -556,7 +556,8 @@ MonoBehaviour:
   startPlayerPosition: {fileID: 1430763502}
   nextFloorPortal: {fileID: 2097452115}
   tutorialPortal: {fileID: 1700898880}
-  tutorialBox: {fileID: 0}
+  tutorialBox: {fileID: 2055102312003290483}
+  stairs: {fileID: 140129620}
 --- !u!4 &58249272
 Transform:
   m_ObjectHideFlags: 0
@@ -1083,6 +1084,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2055102311959635375, guid: 9e7797bb065982d4497d030f065d6e2f,
     type: 3}
   m_PrefabInstance: {fileID: 138134694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &140129620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6075975974975622418, guid: 78e9efbdf9b33994da8dfbe530f65e5e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2012027528}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &178942834
 GameObject:
@@ -15223,6 +15230,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PF Struct - Stairs S 01 M (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075975974975622418, guid: 78e9efbdf9b33994da8dfbe530f65e5e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
