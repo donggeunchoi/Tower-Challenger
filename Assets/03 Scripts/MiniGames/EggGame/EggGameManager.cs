@@ -54,6 +54,7 @@ public class EggGameManager : MonoBehaviour
         }
         ClickBlocker.SetActive(false);
         Eggs[Lv].SetActive(true);
+        EggHealText.SetActive(false);
         Set();
         InitHP();
         UpdateTime();
@@ -195,8 +196,6 @@ public class EggGameManager : MonoBehaviour
 
     IEnumerator HealTime()
     {
-        EggHealText.SetActive(true);
-
         ClickBlocker.SetActive(true);
         tiltTimer = 0;
 
@@ -205,20 +204,41 @@ public class EggGameManager : MonoBehaviour
         isHealing = true;
         GameStart = false;
 
-        while (HP < MaxHP)
+        EggHealText.SetActive(false); // 초기 비활성화
+
+        float healDelay = 0.1f;
+        int totalHealAmount = MaxHP - HP;
+        int healSteps = Mathf.CeilToInt((float)totalHealAmount / healHP);
+        float totalHealTime = healSteps * healDelay;
+
+        bool shouldShowHealText = totalHealTime >= 3f;
+
+        for (int i = 0; HP < MaxHP; i++)
         {
+            float remainingTime = totalHealTime - (i * healDelay);
+
+            if (shouldShowHealText && remainingTime <= 3f && !EggHealText.activeSelf)
+            {
+                EggHealText.SetActive(true);
+            }
+
             HP += healHP;
             if (HP > MaxHP) HP = MaxHP;
 
             UpdateHPBar();
             UpdateHPText();
             EggBreak();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(healDelay);
+        }
+
+        if (shouldShowHealText)
+        {
+            yield return new WaitForSeconds(2f);
+            EggHealText.SetActive(false);
         }
 
         isHealing = false;
         ClickBlocker.SetActive(false);
-        EggHealText.SetActive(false);
         GameStart = true;
     }
 }
