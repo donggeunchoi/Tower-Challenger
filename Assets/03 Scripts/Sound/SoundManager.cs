@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] bgmAudioClip;
     public AudioClip[] miniGameAudioClip;
 
+    public AudioClip gameOverBGM;
+
     public Transform soundSlot;
 
     private void Awake()
@@ -121,5 +123,11 @@ public class SoundManager : MonoBehaviour
         SoundSource obj = Instantiate(soundSourcePrefab, soundSlot);
         SoundSource soundSource = obj.GetComponent<SoundSource>();
         soundSource.Play(clip, 1);
+    }
+
+    public void PlayeGameOver()
+    {
+        if (gameOverBGM != null)
+            PlayBGM(gameOverBGM);
     }
 }

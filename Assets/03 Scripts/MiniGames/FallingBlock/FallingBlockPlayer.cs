@@ -70,7 +70,7 @@ public class FallingBlockPlayer : MonoBehaviour
                 isInvincible = false; 
             }
         }
-        
+
         UpdateTimer();
         ClearStage();          //클리어 판정여부
         PlayerGroundCollider();//바닥 콜라이더 검사

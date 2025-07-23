@@ -109,7 +109,8 @@ public class Character : MonoBehaviour
         equippedCharacter = data;
         Save.playerData.equippedCharacterName = characterName;
 
-        PlayerManager.Instance.LoadPlayer(equippedCharacter.playerPrefab);
+        if (PlayerManager.Instance != null)
+            PlayerManager.Instance.LoadPlayer(equippedCharacter.playerPrefab);
 
         if (GameManager.Instance != null)
             Save.SaveData();
