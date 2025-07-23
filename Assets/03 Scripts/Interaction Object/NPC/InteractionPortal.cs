@@ -28,7 +28,7 @@ public class InteractionPortal : MonoBehaviour, IInteractable
                 UIManager.Instance.InstantiateUI(UIManager.Instance.allClearUI);  //다음 층으로 이동하는 UI를 띄워줍니다
                 break;
             case PortalType.Tutorial:
-                SceneManager.LoadScene("VillageScene");
+                SceneManager.LoadScene("GameScene");
                 break;
         }
     }

@@ -16,7 +16,7 @@ public class TowerEnerance : MonoBehaviour
 
     public void OnClickOnGameMove()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("TutorialScene");
         //이곳에서도 스테미너 호출해야합니다.
     }
 
