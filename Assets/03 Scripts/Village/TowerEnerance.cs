@@ -49,7 +49,7 @@ public class TowerEnerance : MonoBehaviour
         if (ticketItem != null)
         {
             ItemManager.instance.items.Remove(ticketItem);
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TutorialScene");
         }
         else
         {
@@ -78,7 +78,7 @@ public class TowerEnerance : MonoBehaviour
                 }
                 Debug.Log(GameManager.Instance.stamina.mainStamina);
             }
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TutorialScene");
         }
     }
 
