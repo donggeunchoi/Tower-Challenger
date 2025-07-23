@@ -35,7 +35,10 @@ public class Character : MonoBehaviour
 
             if (PlayerManager.Instance != null)
             {
-                PlayerManager.Instance.LoadPlayer(equippedCharacter.playerPrefab);
+                if (equippedCharacter != null)
+                    PlayerManager.Instance.LoadPlayer(equippedCharacter.playerPrefab);
+                else
+                    PlayerManager.Instance.LoadPlayer(defaltCharater.playerPrefab);
             }
         }
 
