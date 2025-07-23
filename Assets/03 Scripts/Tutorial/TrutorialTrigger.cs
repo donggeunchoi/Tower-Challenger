@@ -3,11 +3,13 @@ using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class TrutorialTrigger : MonoBehaviour, IInteractable
+public class TrutorialTrigger : MonoBehaviour,IInteractable
 {
     public TutorialManager tutorialManager;
     private TutorialBase _tutorialStep;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
+
+   // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (tutorialManager == null)
@@ -15,9 +17,6 @@ public class TrutorialTrigger : MonoBehaviour, IInteractable
             tutorialManager = FindFirstObjectByType<TutorialManager>(FindObjectsInactive.Exclude); //FindObjectOfType<TutorialManager>();
         }
         _tutorialStep = GetComponentInParent<TutorialBase>();
-        
-        // var collider = GetComponent<Collider2D>();
-        // collider.isTrigger = true;
 
         if (GetComponent<Rigidbody2D>() == null)
         {
@@ -73,6 +72,6 @@ public class TrutorialTrigger : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("실행은 되었구요~ 보물상자를 실행되도록");
+        //여기에서 박스를 작동시킬 순 없을까?
     }
 }

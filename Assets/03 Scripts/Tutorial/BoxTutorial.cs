@@ -14,6 +14,8 @@ public class BoxTutorial : TutorialBase
     
     private bool _interectionState = false;
     
+    
+    
     public override void Enter()
     {
         hintUI.Show(hintMessage);
