@@ -9,8 +9,6 @@ public class MoveTutorial : TutorialBase
     private string hintMessage;
     [SerializeField]
     private Transform target;
-    [SerializeField] 
-    private float targetClear = 0.5f; //도달 판정 반경
 
     private bool _moved;
     public override void Enter()

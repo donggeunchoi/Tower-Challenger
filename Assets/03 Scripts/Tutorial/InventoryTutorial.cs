@@ -10,8 +10,6 @@ public class InventoryTutorial : TutorialBase
     private string hintMessage2;
     [SerializeField]
     private Transform target;
-    [SerializeField] 
-    private float targetClear = 0.5f;
     
     private bool _action;
     public bool Action => _action;

@@ -9,8 +9,7 @@ public class DashTutorial : TutorialBase
     private string hintMessage;
     [SerializeField]
     private Transform target;
-    [SerializeField] 
-    private float targetClear = 0.5f; //도달 판정 반경
+   
 
     private bool _action;
     public bool Action => _action;
