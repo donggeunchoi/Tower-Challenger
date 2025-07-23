@@ -1618,6 +1618,74 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &316776508
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402059733480839755, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992555420324306481, guid: a0c879e261f6860478bf4e4e262f95ed,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0c879e261f6860478bf4e4e262f95ed, type: 3}
 --- !u!1001 &317034298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15852,11 +15920,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0020719469, y: 0.28104734}
+  m_Offset: {x: 1.6327829, y: -1.1808553}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -15866,7 +15934,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.93784136, y: 0.5620947}
+  m_Size: {x: 4.59758, y: 0.9149933}
   m_EdgeRadius: 0
 --- !u!4 &2055102312003290485
 Transform:
@@ -15893,14 +15961,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2055102312003290483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db1562dfa902144fc81dfbfaa9df0035, type: 3}
+  m_Script: {fileID: 11500000, guid: d5ea0f6697a594078bd2f402bb1b76e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
-  hintUI: {fileID: 0}
-  hintMessage: "\uC0C1\uD638\uC791\uC6A9 \uC131\uACF5! \uC774\uC81C \uBC11\uC5D0\uC788\uB294
-    \uC624\uD06C\uD1B5\uC73C\uB85C \uAC00\uBCF4\uC790"
-  hintMessage2: 
+  box: {fileID: 2055102312003290483}
 --- !u!1 &2055102312133148088
 GameObject:
   m_ObjectHideFlags: 0
@@ -15997,3 +16061,4 @@ SceneRoots:
   - {fileID: 206086107}
   - {fileID: 58249272}
   - {fileID: 1747403236}
+  - {fileID: 316776508}

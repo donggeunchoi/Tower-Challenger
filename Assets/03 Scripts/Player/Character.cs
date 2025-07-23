@@ -33,6 +33,9 @@ public class Character : MonoBehaviour
             if (equip != null)
                 equippedCharacter = equip;
 
+            if (equippedCharacter == null)
+                return;
+            
             if (PlayerManager.Instance != null)
             {
                 if (equippedCharacter != null)

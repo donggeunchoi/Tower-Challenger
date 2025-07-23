@@ -48,6 +48,7 @@ public class TutorialManager : MonoBehaviour
         cuttentInstance = Instantiate(tutorialPrefabs[currentIndex]);
         currentTutorial = cuttentInstance.GetComponent<TutorialBase>();
         
+        
         currentTutorial.Enter();
     }
 
