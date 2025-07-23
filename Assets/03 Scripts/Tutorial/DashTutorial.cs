@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoveTutorial : TutorialBase
+public class DashTutorial : TutorialBase
 {
     [SerializeField]
     private HintUI hintUI;
@@ -9,22 +9,29 @@ public class MoveTutorial : TutorialBase
     private string hintMessage;
     [SerializeField]
     private Transform target;
+   
 
-    private bool _moved;
+    private bool _action;
+    public bool Action => _action;
+    
+    public PlayerInput playerInput;
+    
     public override void Enter()
     {
         hintUI.Show(hintMessage);
-        _moved = false;
+        _action = false;
+
+        if (playerInput == null)
+        {
+            playerInput = FindFirstObjectByType<PlayerInput>(FindObjectsInactive.Exclude);
+        }
     }
 
     public override void Play(TutorialManager controller)
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        
-        if (!_moved && (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f))
+        if (!_action && playerInput.isDashing)
         {
-            _moved = true;
+            _action = true;
         }
     }
 

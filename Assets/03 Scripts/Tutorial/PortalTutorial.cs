@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MoveTutorial : TutorialBase
+public class PortalTutorial : TutorialBase
 {
     [SerializeField]
     private HintUI hintUI;
@@ -9,27 +8,35 @@ public class MoveTutorial : TutorialBase
     private string hintMessage;
     [SerializeField]
     private Transform target;
+    
+    private bool _action;
+    public bool Action => _action;
 
-    private bool _moved;
     public override void Enter()
     {
+        var portal = FindFirstObjectByType<Map>(FindObjectsInactive.Exclude);
+        
         hintUI.Show(hintMessage);
-        _moved = false;
+        portal.TutorialPortalOpen();
+        
+        _action = false;
     }
 
-    public override void Play(TutorialManager controller)
+    public override void Play(TutorialManager collider)
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         
-        if (!_moved && (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f))
+        if (!_action && (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f))
         {
-            _moved = true;
+            _action = true;
         }
     }
+    
 
     public override void Exit()
     {
         hintUI.Hide();
     }
+    
 }

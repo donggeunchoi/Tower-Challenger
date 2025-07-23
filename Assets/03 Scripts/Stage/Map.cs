@@ -10,6 +10,7 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject nextFloorPortal;
     [SerializeField] private GameObject tutorialPortal;
     [SerializeField] private GameObject tutorialBox;
+    [SerializeField] private GameObject stairs;
     Vector3 playerPosition;
 
     StageManager stageManager;
@@ -90,6 +91,14 @@ public class Map : MonoBehaviour
         if (tutorialPortal != null)
         {
             tutorialPortal.SetActive(false);
+        }
+    }
+
+    public void TutorialPortalOpen()
+    {
+        if (tutorialPortal != null)
+        {
+            tutorialPortal.SetActive(true);
         }
     }
 
