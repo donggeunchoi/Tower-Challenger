@@ -78,6 +78,7 @@ public class TowerManager : MonoBehaviour
 
         Map map = FindAnyObjectByType<Map>();
         map.SetRandomPortal();
+        map.Init();
     }
 
     public IEnumerator AfterLoadData()

@@ -77,9 +77,6 @@ public class SoundManager : MonoBehaviour
                 AudioClip miniGameClip = Array.Find(miniGameAudioClip, clip => clip != null && clip.name.Contains(BGM));
 
                 if (miniGameClip != null)
-                Debug.Log(miniGameClip.name);
-
-                if (miniGameClip != null)
                 {
                     PlayBGM(miniGameClip);
                     break;

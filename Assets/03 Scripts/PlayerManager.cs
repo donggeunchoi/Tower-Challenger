@@ -3,6 +3,8 @@
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
+    
+    public GameObject playerPrefab;
 
     public Vector3 playerPosition;    //플레이어 포지션 저장
     public int layerNumber;           //플레이어 레이어 저장
@@ -20,6 +22,11 @@ public class PlayerManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public void LoadPlayer(GameObject playerObject)
+    {
+        playerPrefab = playerObject;
+    }
+
     public void SavePlayerPosition(Vector3 position, int layer)
     {
         layerNumber = layer;
@@ -33,10 +40,7 @@ public class PlayerManager : MonoBehaviour
     public void PlayerSetting()
     {
         GameObject player = null;
-        while (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾아서 
-        }
+        player = Instantiate(playerPrefab);
 
         if (player != null)
         {
