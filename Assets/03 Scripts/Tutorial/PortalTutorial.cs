@@ -6,8 +6,6 @@ public class PortalTutorial : TutorialBase
     private HintUI hintUI;
     [SerializeField]
     private string hintMessage;
-    [SerializeField] 
-    private string hintMessage2;
     [SerializeField]
     private Transform target;
     
@@ -26,10 +24,12 @@ public class PortalTutorial : TutorialBase
 
     public override void Play(TutorialManager collider)
     {
-        if (!_action)
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        
+        if (!_action && (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f))
         {
-            hintUI.Show(hintMessage2);
-            //내생각 여기에서 포탈을 생성을 해야하지 싶은데
+            _action = true;
         }
     }
     

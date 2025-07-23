@@ -243,10 +243,7 @@ MonoBehaviour:
   hintMessage: "\uC5EC\uAE30\uAE4C\uC9C0 \uC654\uB2E4\uBA74 \uAC70\uC758 \uB2E4\uC654\uB2E4\uB0E5
     \uB0E5\uD3EC\uD0C8\uC744 \uC774\uC6A9\uD558\uBA74 \uAC8C\uC784\uC73C\uB85C \uAC08
     \uC218 \uC788\uB2E4\uB0E5"
-  hintMessage2: "\uD3EC\uD0C8\uC5D0\uB294 \uC5EC\uB7EC \uBBF8\uB2C8\uAC8C\uC784\uC774
-    \uC788\uC73C\uB2C8 \uAE30\uB300\uD558\uB77C\uB0E5"
   target: {fileID: 7200614026857996972}
-  targetClear: 0.5
 --- !u!1 &8384852098317608068
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +396,7 @@ GameObject:
   - component: {fileID: 6500995753034776998}
   - component: {fileID: 2294570947191431370}
   - component: {fileID: 1156304936797396384}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: TriggerZone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +448,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

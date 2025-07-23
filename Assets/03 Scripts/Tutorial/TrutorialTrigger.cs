@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -15,8 +16,8 @@ public class TrutorialTrigger : MonoBehaviour, IInteractable
         }
         _tutorialStep = GetComponentInParent<TutorialBase>();
         
-        var collider = GetComponent<Collider2D>();
-        collider.isTrigger = true;
+        // var collider = GetComponent<Collider2D>();
+        // collider.isTrigger = true;
 
         if (GetComponent<Rigidbody2D>() == null)
         {
@@ -30,10 +31,10 @@ public class TrutorialTrigger : MonoBehaviour, IInteractable
     {
         if(!collision.CompareTag("Player")) return;
         
-        
         var dashStep = _tutorialStep as DashTutorial;
         var boxStep = _tutorialStep as BoxTutorial;
         var inventoryStep = _tutorialStep as InventoryTutorial;
+        var portalStep = _tutorialStep as PortalTutorial;
             
         if (dashStep != null && !dashStep.Action)
         {
@@ -49,10 +50,25 @@ public class TrutorialTrigger : MonoBehaviour, IInteractable
         {
             return;
         }
+
+        if (portalStep != null && !portalStep.Action)
+        {
+            return;
+        }
+        
             
         tutorialManager.NextStep();
         Destroy(gameObject);
         
+    }
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Player"))
+        {
+            tutorialManager.NextStep();
+            Destroy(gameObject);
+        }
     }
 
     public void Interact()

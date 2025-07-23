@@ -25,8 +25,6 @@ public class MoveTutorial : TutorialBase
         if (!_moved && (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f))
         {
             _moved = true;
-            controller.NextStep();
-            return;
         }
     }
 
