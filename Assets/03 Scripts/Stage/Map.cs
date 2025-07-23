@@ -10,15 +10,23 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject nextFloorPortal;
     [SerializeField] private GameObject tutorialPortal;
     [SerializeField] private GameObject tutorialBox;
+    [SerializeField] private GameObject stairs;
     Vector3 playerPosition;
 
     StageManager stageManager;
 
-    private void Awake()
+    public void Init()
     {
         playerPosition = startPlayerPosition.transform.position;
-        GameObject player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
-        player.layer = startPlayerPosition.layer;
+        if (PlayerManager.Instance != null)
+        {
+            GameObject player = PlayerManager.Instance.playerPrefab;
+            if (player != null)
+            {
+                player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
+                player.layer = startPlayerPosition.layer;
+            }
+        }
     }
 
     private void Start()
@@ -29,7 +37,6 @@ public class Map : MonoBehaviour
             nextStagePortal[i].GetComponent<InteractionPortal>().portalNumber = i;
             nextStagePortal[i].gameObject.SetActive(false);
         }
-        // stageManager = StageManager.instance;  //스테이지 매니저에서 정보를 받아서
 
         TutorialPortalClose();
 
@@ -84,6 +91,14 @@ public class Map : MonoBehaviour
         if (tutorialPortal != null)
         {
             tutorialPortal.SetActive(false);
+        }
+    }
+
+    public void TutorialPortalOpen()
+    {
+        if (tutorialPortal != null)
+        {
+            tutorialPortal.SetActive(true);
         }
     }
 

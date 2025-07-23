@@ -60,7 +60,7 @@ public class ProGameManager : MonoBehaviour
 
             if (tiltTimer >= 60)
             {
-                if (StageManager.instance != null)
+                if (StageManager.instance)
                     StageManager.instance.MiniGameResult(true);
                 GameStart = false;
             }

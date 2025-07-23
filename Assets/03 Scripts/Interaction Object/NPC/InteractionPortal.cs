@@ -21,14 +21,14 @@ public class InteractionPortal : MonoBehaviour, IInteractable
             case PortalType.NextGame:
                 Debug.Log(playerPosition);
                 StageManager.instance.SaveClearPortal(portalNumber);
-                StageManager.instance.SavePlayerPosition(playerPosition, layerNumber);  //플레이어의 위치를 저장하고
+                PlayerManager.Instance.SavePlayerPosition(playerPosition, layerNumber);  //플레이어의 위치를 저장하고
                 StageManager.instance.StartNextMiniGame();  //미니게임 씬으로 이동합니다
                 break;
             case PortalType.NextFloor:
                 UIManager.Instance.InstantiateUI(UIManager.Instance.allClearUI);  //다음 층으로 이동하는 UI를 띄워줍니다
                 break;
             case PortalType.Tutorial:
-                SceneManager.LoadScene("VillageScene");
+                SceneManager.LoadScene("GameScene");
                 break;
         }
     }

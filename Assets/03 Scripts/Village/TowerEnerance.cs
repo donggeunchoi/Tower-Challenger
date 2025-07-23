@@ -16,7 +16,7 @@ public class TowerEnerance : MonoBehaviour
 
     public void OnClickOnGameMove()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("TutorialScene");
         //이곳에서도 스테미너 호출해야합니다.
     }
 
@@ -49,7 +49,7 @@ public class TowerEnerance : MonoBehaviour
         if (ticketItem != null)
         {
             ItemManager.instance.items.Remove(ticketItem);
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TutorialScene");
         }
         else
         {
@@ -70,7 +70,7 @@ public class TowerEnerance : MonoBehaviour
             {
                 if (GameManager.Instance.stamina.mainStamina > 0)
                 {
-                    GameManager.Instance.UseStamina();
+                    GameManager.Instance.stamina.UseStamina();
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class TowerEnerance : MonoBehaviour
                 }
                 Debug.Log(GameManager.Instance.stamina.mainStamina);
             }
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TutorialScene");
         }
     }
 

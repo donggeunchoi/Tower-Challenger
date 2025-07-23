@@ -965,11 +965,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1190047159653788234, guid: f6ba1eb0653f02043b53b2730260a515,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1331122367491240891, guid: f6ba1eb0653f02043b53b2730260a515,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1022,44 +1017,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
-        type: 3}
-      propertyPath: allCharacterData.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
-        type: 3}
-      propertyPath: 'allCharacterData.Array.data[0]'
+      propertyPath: soundManagerPrefab
       value: 
-      objectReference: {fileID: 11400000, guid: b7b2ec38d653e492faa9832d82ec5854,
-        type: 2}
-    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
+      objectReference: {fileID: 1630462706875134961, guid: 99d5acf80d62ec24592967c740eaa824,
         type: 3}
-      propertyPath: 'allCharacterData.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: d4c62d21468ac46cc8fe03376c3aa909,
-        type: 2}
-    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
-        type: 3}
-      propertyPath: 'allCharacterData.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 74cce0f3bf17e4695a4f91dc7df9996f,
-        type: 2}
-    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
-        type: 3}
-      propertyPath: 'allCharacterData.Array.data[3]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 88a591746ea214cfcba472dbb764392d,
-        type: 2}
-    - target: {fileID: 1568548050708517100, guid: f6ba1eb0653f02043b53b2730260a515,
-        type: 3}
-      propertyPath: 'allCharacterData.Array.data[4]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 3eefef68d0b3c468db843e7a4b127b32,
-        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

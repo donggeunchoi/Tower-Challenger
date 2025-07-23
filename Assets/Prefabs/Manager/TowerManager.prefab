@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e6d32327e55704fb96334f0d085641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: {fileID: 6143182691706082494, guid: 78fd4790d8ef4d848b6677fe6c5e281c,
+  gameOver: {fileID: 2800109737038716680, guid: 9390119fa06074b9eb23cd6fd21a5db4,
     type: 3}
   stageTimer: {fileID: 0}
   stageLP: {fileID: 0}
@@ -56,9 +56,6 @@ MonoBehaviour:
   bestFloor: 1
   totalStageCount: 10
   timerMultiplier: 1
-  playerPosition: {x: 0, y: 0, z: 0}
-  layerNumber: 0
-  currentSceneName: 
   stageClearPortal: 
 --- !u!114 &6458399170951497763
 MonoBehaviour:
@@ -79,6 +76,7 @@ MonoBehaviour:
   - TopScene-2
   - TopScene-3
   - TopScene-4
+  currentSceneName: 
 --- !u!114 &8634761608726602802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,3 +102,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c67975b1771db7742a039d8626e96ba8, type: 2}
   - {fileID: 11400000, guid: 40a3dac87b6402344bb82e99b10d10fd, type: 2}
   randomGames: []
+  unUsedGames: []

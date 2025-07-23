@@ -5,62 +5,56 @@ using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
+    [Header("튜토리얼 단계 리스트")] [SerializeField]
+    private List<GameObject> tutorialPrefabs;
+
+    private TutorialBase currentTutorial;
+    private GameObject cuttentInstance;
+    private int currentIndex = -1;
+    
     public Image fadeImage;
     public float fadeDuration;
-    public List<GameObject> tutorialTextUI;
 
-    private int currentTutorial = 0;
-    private bool isWaitingForInput = false;
 
-    
-    private void Start()
+    void Start()
     {
-        foreach (GameObject obj in tutorialTextUI)
+        StartCoroutine(FadeOut());
+        NextStep();
+    }
+
+    void Update()
+    {
+        if (currentTutorial != null)
         {
-            obj.SetActive(false);
+            currentTutorial.Play(this);
+        }
+    }
+
+    public void NextStep()
+    {
+        if (currentTutorial != null)
+        {
+            currentTutorial.Exit();
+            Destroy(cuttentInstance);
+        }
+
+        currentIndex++;
+        if (currentIndex >= tutorialPrefabs.Count)
+        {
+            OnAllTutorialsCompleted();
+            return;
         }
         
-        StartCoroutine(StartTutorial());
+        cuttentInstance = Instantiate(tutorialPrefabs[currentIndex]);
+        currentTutorial = cuttentInstance.GetComponent<TutorialBase>();
+        
+        
+        currentTutorial.Enter();
     }
 
-    IEnumerator StartTutorial()
+    private void OnAllTutorialsCompleted()
     {
-        yield return StartCoroutine(FadeOut());
-        tutorialTextUI[0].SetActive(true);
-        isWaitingForInput = true;
-    }
-
-    private void ShowOnlyPanel(int index)
-    {
-        for (int i = 0; i < tutorialTextUI.Count; i++)
-        {
-            tutorialTextUI[i].SetActive(i == index);
-        }
-    }
-
-    IEnumerator EndTutorial()
-    {
-        yield return StartCoroutine(FadeIn());
-    }
-    
-    
-    public void TriggerNextPanel()
-    {
-        if (isWaitingForInput)
-        {
-            isWaitingForInput = false;
-            currentTutorial++;
-
-            if (currentTutorial < tutorialTextUI.Count)
-            {
-                ShowOnlyPanel(currentTutorial);
-                isWaitingForInput = true;
-            }
-            else
-            {
-                Debug.Log("이제 포탈을 이용해야할때");
-            }
-        }
+        currentTutorial = null;
     }
 
     #region Fade

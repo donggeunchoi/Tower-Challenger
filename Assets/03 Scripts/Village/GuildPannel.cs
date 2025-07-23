@@ -59,9 +59,9 @@ public class GuildPannel : MonoBehaviour
             case PriceType.dia:
                 if (characterData.Price <= Save.playerData.diamond)
                 {
-                    GameManager.Instance.UseDiamond(characterData.Price);
+                    GameManager.Instance.account.UseDiamond(characterData.Price);
                     GameManager.Instance.character.AddCharacter(characterData.characterName);
-                    GameManager.Instance.SaveData();
+                    Save.SaveData();
                     purchased = true;
                 }
                 else
@@ -73,9 +73,9 @@ public class GuildPannel : MonoBehaviour
             case PriceType.gold:
                 if (characterData.Price <= Save.playerData.gold)
                 {
-                    GameManager.Instance.UseGold(characterData.Price);
+                    GameManager.Instance.account.UseGold(characterData.Price);
                     GameManager.Instance.character.AddCharacter(characterData.characterName);
-                    GameManager.Instance.SaveData();
+                    Save.SaveData();
                     purchased = true;
                 }
                 else

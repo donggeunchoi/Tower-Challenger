@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -52,7 +52,7 @@ public class StartManager : MonoBehaviour
         
         videoPanel.SetActive(false);
         
-        SceneManager.LoadScene("TutorialScene");
+        SceneManager.LoadScene("VillageScene");
     }
 
     IEnumerator FadeIn()//투명에서 검은거로 

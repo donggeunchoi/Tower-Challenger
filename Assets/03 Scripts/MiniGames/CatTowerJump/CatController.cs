@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -17,7 +17,7 @@ public class CatController : MonoBehaviour
     [Header("무적 기능")] 
     public int coollingDuration;
     private SpriteRenderer _spriteRenderer;
-    private bool _isInvincible;
+    //private bool _isInvincible;
     private Color _originalColor;
     
     
@@ -122,7 +122,7 @@ public class CatController : MonoBehaviour
 
     IEnumerator Invincibility()
     {
-        _isInvincible = true;
+        //_isInvincible = true;
         
         float timer = 0f;
         while (timer < coollingDuration)
@@ -137,7 +137,7 @@ public class CatController : MonoBehaviour
         
         _spriteRenderer.color = _originalColor;
         _spriteRenderer.enabled = true;
-        _isInvincible = false;
+        //_isInvincible = false;
     }
 
     public void ResetJump()

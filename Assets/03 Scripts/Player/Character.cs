@@ -32,6 +32,17 @@ public class Character : MonoBehaviour
             CharacterData equip = allCharacterList.Find(c => c.characterName == Save.playerData.equippedCharacterName);
             if (equip != null)
                 equippedCharacter = equip;
+
+            if (equippedCharacter == null)
+                return;
+            
+            if (PlayerManager.Instance != null)
+            {
+                if (equippedCharacter.playerPrefab != null)
+                {
+                    PlayerManager.Instance.LoadPlayer(equippedCharacter.playerPrefab);
+                }
+            }
         }
 
         if (defaltCharater != null)
@@ -47,6 +58,11 @@ public class Character : MonoBehaviour
 
             if (equippedCharacter == null)
                 equippedCharacter = defaltCharater;
+
+            if (PlayerManager.Instance != null)
+            {
+                PlayerManager.Instance.LoadPlayer(defaltCharater.playerPrefab);
+            }
         }
     }
 
@@ -67,7 +83,7 @@ public class Character : MonoBehaviour
         charaters.Add(data);
 
         if (GameManager.Instance != null)
-            GameManager.Instance.SaveData();
+            Save.SaveData();
 
         return true;
     }
@@ -85,7 +101,7 @@ public class Character : MonoBehaviour
         Save.playerData.characterNames.Remove(characterName);
 
         if (GameManager.Instance != null)
-            GameManager.Instance.SaveData();
+            Save.SaveData();
 
         return true;
     }
@@ -99,8 +115,11 @@ public class Character : MonoBehaviour
         equippedCharacter = data;
         Save.playerData.equippedCharacterName = characterName;
 
+        if (PlayerManager.Instance != null)
+            PlayerManager.Instance.LoadPlayer(equippedCharacter.playerPrefab);
+
         if (GameManager.Instance != null)
-            GameManager.Instance.SaveData();
+            Save.SaveData();
 
         return true;
     }
