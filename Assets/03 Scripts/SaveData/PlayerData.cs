@@ -66,16 +66,28 @@ public class PlayerData
     {
         PlayerData loaded = SaveManager.LoadUsers();
 
-        this.bestFloor = loaded.bestFloor;
-        this.gold = loaded.gold;
-        this.diamond = loaded.diamond;
-        this.stamina = loaded.stamina;
-        this.lastTime = loaded.lastTime;
-        this.itmeDataID = loaded.itmeDataID;
-        this.characterNames = loaded.characterNames;
-        this.equippedCharacterName = loaded.equippedCharacterName;
-        this.staminaTimer = loaded.staminaTimer;
-        this.itmeDataID = loaded.itmeDataID;
+        if (loaded == null)
+        {
+            this.bestFloor = 0;
+            this.gold = 0;
+            this.diamond = 0;
+            this.stamina = 5;
+            this.lastTime = DateTime.Now;
+            this.staminaTimer = 0;
+        }
+        else
+        {
+            this.bestFloor = loaded.bestFloor;
+            this.gold = loaded.gold;
+            this.diamond = loaded.diamond;
+            this.stamina = loaded.stamina;
+            this.lastTime = loaded.lastTime;
+            this.itmeDataID = loaded.itmeDataID;
+            this.characterNames = loaded.characterNames;
+            this.equippedCharacterName = loaded.equippedCharacterName;
+            this.staminaTimer = loaded.staminaTimer;
+            this.itmeDataID = loaded.itmeDataID;
+        }
 
         if (GameManager.Instance != null)
         {

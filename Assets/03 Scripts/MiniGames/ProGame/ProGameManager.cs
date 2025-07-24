@@ -135,6 +135,7 @@ public class ProGameManager : MonoBehaviour
         }
     }
 
+
     private void TriggerBossAnimation(Animator anim, int index)
     {
         anim.ResetTrigger("BossT");

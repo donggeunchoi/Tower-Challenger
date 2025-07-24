@@ -7,7 +7,7 @@ public class Box : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private SpriteRenderer spriteRenderer;
-    public GameObject GoldRenderer;
+    public GameObject LPRenderer;
 
     [SerializeField] private Sprite closedSprite;
     [SerializeField] private Sprite openSprite;
@@ -37,7 +37,7 @@ public class Box : MonoBehaviour, IInteractable
 
     public void GoldShow()
     {
-        GoldRenderer.gameObject.SetActive(true);
+        LPRenderer.gameObject.SetActive(true);
     }
 
     IEnumerator Broken()
