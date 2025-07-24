@@ -7,6 +7,8 @@ public class TutorialManager : MonoBehaviour
 {
     [Header("튜토리얼 단계 리스트")] [SerializeField]
     private List<GameObject> tutorialPrefabs;
+    
+    [SerializeField] private GameObject BoxObject;
 
     private TutorialBase currentTutorial;
     private GameObject cuttentInstance;
@@ -32,6 +34,7 @@ public class TutorialManager : MonoBehaviour
 
     public void NextStep()
     {
+        
         if (currentTutorial != null)
         {
             currentTutorial.Exit();
@@ -47,7 +50,12 @@ public class TutorialManager : MonoBehaviour
         
         cuttentInstance = Instantiate(tutorialPrefabs[currentIndex]);
         currentTutorial = cuttentInstance.GetComponent<TutorialBase>();
-        
+
+        var bt = cuttentInstance.GetComponent<BoxTutorial>();
+        if (bt != null)
+        {
+            bt._box = BoxObject.GetComponent<Box>();
+        }
         
         currentTutorial.Enter();
     }

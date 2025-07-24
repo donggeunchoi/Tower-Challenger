@@ -12,9 +12,9 @@ public class BoxTutorial : TutorialBase
     [SerializeField]
     private string hintMessage2;
 
-    [SerializeField] private Box _box;
+    public Box _box;
     
-    private bool _interectionState = false;
+    private bool _interectionState;
     
     
     
@@ -26,12 +26,12 @@ public class BoxTutorial : TutorialBase
         {
             playerInput = FindFirstObjectByType<PlayerInteraction>(FindObjectsInactive.Exclude);
         }
-
-        _box = GetComponentInChildren<Box>();
+        
+        if(_box == null)
+            Debug.Log("박스가 없어요");
         
         _action = false;
         _interectionState = playerInput.interactionButton;
-        Debug.Log(_interectionState);
     }
 
     public override void Play(TutorialManager controller)
@@ -40,7 +40,7 @@ public class BoxTutorial : TutorialBase
         if (!_action && playerInput.clicked)
         {
             _action = true;
-            _box.Open();
+            _box.Interact();
             hintUI.Show(hintMessage2);
         }
     }
