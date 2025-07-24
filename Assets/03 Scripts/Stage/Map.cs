@@ -12,7 +12,7 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject tutorialBox;
     [SerializeField] private GameObject stairs;
     Vector3 playerPosition;
-
+    public GameObject p;
     StageManager stageManager;
 
     public void Init()
@@ -82,7 +82,10 @@ public class Map : MonoBehaviour
 
     public void AllClearFloor()
     {
+        Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(2, 0, 0);
+
         nextFloorPortal.SetActive(true);
+        Instantiate(p, spawnPos, Quaternion.identity);
     }
 
 

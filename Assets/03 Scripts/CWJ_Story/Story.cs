@@ -1,26 +1,16 @@
 ﻿using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Story : MonoBehaviour
 {
-    public StoryData[] data;
-
-    public TextMeshProUGUI talk;
-    public Image image;
-    public GameObject backGround;
+    [HideInInspector] public int count;
+    [HideInInspector] public List<StoryData> storys;
+    [HideInInspector] public float posY;
 
     private bool isTalking = false;
-    private int count;
-    private int floor;
-
-    private List<StoryData> storys;
     private bool isClear = false;
-    private void OnEnable()
-    {
-        storys = new List<StoryData>();
-    }
+    private int floor;
 
     private void Start()
     {
@@ -49,14 +39,6 @@ public class Story : MonoBehaviour
             }    
             floor = 4;
         }
-        for (int i = 0; i < data.Length; i++)
-        {
-            storys.Add(data[i]);
-            Debug.Log(storys[i]);
-        }
-        
-        backGround.SetActive(false);
-        count = 0;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -74,17 +56,20 @@ public class Story : MonoBehaviour
 
     public void Dialogue()
     {
+        var s = StoryManager.storyInstance.storyUi;
+
         if (isTalking == true && count < storys[floor].lines.Length)
         {
-            backGround.SetActive(true);
-            talk.text = storys[floor].lines[count].dialogueTest;
-            image.sprite = storys[floor].lines[count].charImage;
+            s.backGround.SetActive(true);
+            s.talk.text = storys[floor].lines[count].dialogueTest;
+            s.image.sprite = storys[floor].lines[count].charImage;
         }
         else
         {
-            backGround.SetActive(false);
+            s.backGround.SetActive(false);
             isTalking = false;
         }
+
         count++;
     }
 }
