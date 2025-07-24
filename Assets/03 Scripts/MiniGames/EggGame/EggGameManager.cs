@@ -230,15 +230,13 @@ public class EggGameManager : MonoBehaviour
             EggBreak();
             yield return new WaitForSeconds(healDelay);
         }
-
+        isHealing = false;
+        ClickBlocker.SetActive(false);
+        GameStart = true;
         if (shouldShowHealText)
         {
             yield return new WaitForSeconds(2f);
             EggHealText.SetActive(false);
         }
-
-        isHealing = false;
-        ClickBlocker.SetActive(false);
-        GameStart = true;
     }
 }
