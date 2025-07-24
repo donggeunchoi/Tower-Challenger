@@ -1973,6 +1973,7 @@ GameObject:
   - component: {fileID: 1722386992732996109}
   - component: {fileID: 3504039372541559767}
   - component: {fileID: 5851759213340580545}
+  - component: {fileID: 5211809225153884980}
   m_Layer: 20
   m_Name: Player
   m_TagString: Player
@@ -2065,8 +2066,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
-  m_NotificationBehavior: 0
+  m_Actions: {fileID: -944628639613478452, guid: bf5e297b0250c974281351064ab60ba3,
+    type: 3}
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -2079,9 +2081,53 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5211809225153884980}
+        m_TargetAssemblyTypeName: PlayerDevInput, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1a956fd3-0c85-4a32-83d8-d08a82be18cb
     m_ActionName: Player/Move
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5211809225153884980}
+        m_TargetAssemblyTypeName: PlayerDevInput, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6a42ddb9-894c-4c9d-88b5-d27a571f64e2
+    m_ActionName: 'Player/Dash[/Keyboard/j]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5211809225153884980}
+        m_TargetAssemblyTypeName: PlayerDevInput, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0c4a658a-7651-4367-9e46-fbb3cbd29202
+    m_ActionName: 'Player/Intract[/Keyboard/k]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2164,6 +2210,21 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
+--- !u!114 &5211809225153884980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992555420324306481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8a3d60dfa13cf4d839d4a93bc8e875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  playerInput: {fileID: 1815127224497800545}
+  interaction: {fileID: 3504039372541559767}
 --- !u!1 &6565922014617506718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,6 +2530,7 @@ MonoBehaviour:
   isDashing: 0
   spriteRenderer: {fileID: 0}
   InventoryPanel: {fileID: 8045402199589961553}
+  isInventory: 0
   speedUpSprite: {fileID: 7030114744820723757, guid: e0a00781801bb4742a293ee93952067d,
     type: 3}
   sandglassSprite: {fileID: 8882527590889879161, guid: bec6f3574711c462483f9132939cfd05,
@@ -2754,6 +2816,7 @@ MonoBehaviour:
   SlotParent: {fileID: 2676134193113402454}
   SlotPrefab: {fileID: 7483103867057294285, guid: 169a795ca2a1143429367ba3ed7c5f57,
     type: 3}
+  isTuto: 0
 --- !u!1 &8243511458474008156
 GameObject:
   m_ObjectHideFlags: 0
