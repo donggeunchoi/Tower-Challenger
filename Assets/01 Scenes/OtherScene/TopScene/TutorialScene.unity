@@ -558,6 +558,7 @@ MonoBehaviour:
   tutorialPortal: {fileID: 1700898880}
   tutorialBox: {fileID: 2055102312003290483}
   stairs: {fileID: 140129620}
+  p: {fileID: 0}
 --- !u!4 &58249272
 Transform:
   m_ObjectHideFlags: 0
@@ -1682,7 +1683,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2756422087265026842, guid: a0c879e261f6860478bf4e4e262f95ed, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0c879e261f6860478bf4e4e262f95ed, type: 3}

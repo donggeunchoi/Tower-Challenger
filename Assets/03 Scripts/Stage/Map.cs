@@ -82,10 +82,12 @@ public class Map : MonoBehaviour
 
     public void AllClearFloor()
     {
-        Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(2, 0, 0);
-
         nextFloorPortal.SetActive(true);
-        Instantiate(p, spawnPos, Quaternion.identity);
+        if (StageManager.instance.floor == 6)
+        {
+            Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(2, 0, 0);
+            Instantiate(p, spawnPos, Quaternion.identity);
+        }
     }
 
 

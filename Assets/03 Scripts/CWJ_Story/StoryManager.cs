@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -22,7 +23,11 @@ public class StoryManager : MonoBehaviour
         {
             storyInstance = this;
         }
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void OnEnable()
@@ -32,14 +37,14 @@ public class StoryManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        image = storyUi.image;
-        textTalk = storyUi.talk;
-        backGround = storyUi.backGround;
-
         for (int i = 0; i < data.Length; i++)
         {
             story.storys.Add(data[i]);
         }
+        Debug.Log(story.storys[0].lines.Length);
+        image = storyUi.image;
+        textTalk = storyUi.talk;
+        backGround = storyUi.backGround;
 
         backGround.SetActive(false);
         story.count = 0;
