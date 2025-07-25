@@ -8,6 +8,7 @@ public class TowerManager : MonoBehaviour
 
     public StageManager stageManager;
     public MiniGameManager miniGameManager;
+    private int mapIndex = -1;
 
     [SerializeField] private string[] mapScenes;
     public string currentSceneName;   //현재 씬 이름
@@ -53,11 +54,19 @@ public class TowerManager : MonoBehaviour
     }
     public string LoadRandomMap()
     {
-        int randomSceneNum = Random.Range(0, mapScenes.Length);
-        if (mapScenes == null)
+        if (mapScenes == null || mapScenes.Length == 0)
         {
-            return mapScenes[0];
+            return "TopScene-1";
         }
+
+        int randomSceneNum;
+
+        do
+        {
+            randomSceneNum = Random.Range(0, mapScenes.Length);
+        }
+        while (randomSceneNum == mapIndex);
+
         string mapName = mapScenes[randomSceneNum];
         return mapName;
     }

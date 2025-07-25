@@ -10,7 +10,8 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     private float radius;                   // 조이스틱 이동 반지름
     private Vector2 inputDir = Vector2.zero;// 입력 방향 벡터
     private float deadZone = 0.15f;         // 민감도 조정
-
+    public Vector2 JoystickInput => inputDir;
+    private Vector2 keyboardInput = Vector2.zero;
     [Header("움직임과 대쉬")]
     public float speed = 5;                 // 기본 이동 속도
     public float DashSpeed = 10f;           // 대쉬 스피드
@@ -50,12 +51,23 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     void FixedUpdate()
     {
+        Vector2 finalInput = Vector2.zero;
+
+        if (keyboardInput.sqrMagnitude > 0.01f)
+        {
+            finalInput = keyboardInput;
+        }
+        else
+        {
+            finalInput = inputDir;
+        }
+
         if (player != null && rb != null) //플레이어와 리지드바디가 있을 때만 이동 처리
         {
             float currentSpeed = isDashing ? DashSpeed : speed; // 대쉬 중이면 대쉬 속도
-            rb.linearVelocity = inputDir.normalized * currentSpeed;    // 방향 * 속도
+            rb.linearVelocity = finalInput.normalized * currentSpeed;    // 방향 * 속도
 
-            FlipChange(); // 방향 전환 처리
+            FlipChange(finalInput); // 방향 전환 처리
         }
     }
 
@@ -141,19 +153,23 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     }
 
     //입력 방향에 따라 스프라이트 좌우 반전 처리
-    public void FlipChange()
+    public void FlipChange(Vector2 movementInput)
     {
         if (spriteRenderer == null) return;
 
-        if (inputDir.x > 0.1f)
-            spriteRenderer.flipX = false; // 오른쪽
-        else if (inputDir.x < -0.1f)
-            spriteRenderer.flipX = true;  // 왼쪽
+        if (movementInput.x > 0.1f)
+            spriteRenderer.flipX = false;
+        else if (movementInput.x < -0.1f)
+            spriteRenderer.flipX = true;
     }
 
     public void OnClickInventory()
     {
         isInventory = true;
         InventoryPanel.SetActive(true);
+    }
+    public void SetKeyboardInput(Vector2 input)
+    {
+        keyboardInput = input;
     }
 }

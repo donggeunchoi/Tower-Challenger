@@ -34,7 +34,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void Interact() //상호작용
+    public void Interact() //상호작용
     {
         if (currentInteractable != null)
         {
