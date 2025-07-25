@@ -10,7 +10,7 @@ public class InteractionPortal : MonoBehaviour, IInteractable
     private Vector3 playerPosition;
     public int portalNumber;
     private int layerNumber;
-
+    public bool isPortar;
     public void Interact()  //플레이어 상호작용시 포탈 타입에 맞춰 각각의 코드를 진행
     {
         switch (portalType)

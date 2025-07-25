@@ -29,12 +29,13 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public Sprite sandglassSprite;
     public Sprite topTicketSprite;
 
-
+    public bool ismove;
     [SerializeField] private Animator uiRootAnim;
     private Rigidbody2D rb;                 // Rigidbody2D 컴포넌트
 
     void Start()
     {
+        ismove = true;
         stickBack = GetComponent<RectTransform>();
 
         radius = stick.sizeDelta.x * 0.5f;     //스틱의 크기의 절반을 반지름으로
@@ -51,6 +52,10 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     void FixedUpdate()
     {
+        if (!ismove)
+        {
+            return;
+        }
         Vector2 finalInput = Vector2.zero;
 
         if (keyboardInput.sqrMagnitude > 0.01f)
@@ -69,6 +74,11 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
             FlipChange(finalInput); // 방향 전환 처리
         }
+    }
+
+    public void PlayerMove(float _currentSpeed)
+    { 
+
     }
 
     //터치가 시작될 때 드래그 처리

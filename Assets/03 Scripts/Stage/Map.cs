@@ -1,19 +1,23 @@
 ﻿using System.Linq;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
+    StageManager stageManager;
+
+    Vector3 playerPosition;
+
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private InteractionPortal[] nextStagePortal;
     [SerializeField] private GameObject startPlayerPosition;
-    [SerializeField] private GameObject nextFloorPortal;
+    public GameObject nextFloorPortal;
     [SerializeField] private GameObject tutorialPortal;
     [SerializeField] private GameObject tutorialBox;
     [SerializeField] private GameObject stairs;
-    Vector3 playerPosition;
+
     public GameObject p;
-    StageManager stageManager;
 
     public void Init()
     {
@@ -82,14 +86,18 @@ public class Map : MonoBehaviour
 
     public void AllClearFloor()
     {
-        nextFloorPortal.SetActive(true);
         if (StageManager.instance.floor == 6)
         {
-            Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(2, 0, 0);
+            Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(0, 0, 0);
             Instantiate(p, spawnPos, Quaternion.identity);
+
+
+        }
+        else
+        {
+            nextFloorPortal.SetActive(true);
         }
     }
-
 
     public void TutorialPortalClose()
     {

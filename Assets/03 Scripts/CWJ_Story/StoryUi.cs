@@ -6,5 +6,5 @@ public class StoryUi : MonoBehaviour
 {
     public TextMeshProUGUI talk;
     public Image image;
-    public GameObject backGround;
+    public GameObject canvas;
 }

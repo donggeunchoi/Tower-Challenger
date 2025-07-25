@@ -12,7 +12,7 @@ public class StoryManager : MonoBehaviour
     public StoryUi storyUi;
 
     public StoryData[] data;
-    
+
     private GameObject backGround;
     private Image image;
     private TextMeshProUGUI textTalk;
@@ -41,12 +41,11 @@ public class StoryManager : MonoBehaviour
         {
             story.storys.Add(data[i]);
         }
-        Debug.Log(story.storys[0].lines.Length);
+
         image = storyUi.image;
         textTalk = storyUi.talk;
-        backGround = storyUi.backGround;
+        backGround = storyUi.canvas;
 
-        backGround.SetActive(false);
         story.count = 0;
     }
 }

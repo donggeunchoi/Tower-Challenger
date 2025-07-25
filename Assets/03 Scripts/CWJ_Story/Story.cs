@@ -3,30 +3,42 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Story : MonoBehaviour
+public class Story : MonoBehaviour, IInteractable
 {
+    private PlayerInput playerInput;
+    private StoryUi ui;
+
     private SpriteRenderer sr;
+    private SpriteRenderer potalSr;
+    private Map map;
+
+    public GameObject storyPrefab;
 
     [HideInInspector] public int count;
     [HideInInspector] public List<StoryData> storys;
 
-    public GameObject talkButton;
-
-    public GameObject[] grassLayer_1;
-    public GameObject[] grassLayer_2;
-
-    private bool isTalking = false;
-    private bool isButton = false;
+    private GameObject story;
+    private GameObject button;
+    private bool isTalking;
+    private bool isButton;
     private int floor;
+
+    private void Awake()
+    {
+        map = GameObject.FindAnyObjectByType<Map>();
+    }
 
     private void OnEnable()
     {
+        potalSr = map.nextFloorPortal.gameObject.GetComponent<SpriteRenderer>();
         sr = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
         count = 0;
+        isTalking = false;
+        isButton = false;
 
         if (StageManager.instance.floor == 6)
         {
@@ -45,55 +57,32 @@ public class Story : MonoBehaviour
         {
             floor = 3;
         }
-
+        Layer();
         Debug.Log(StoryManager.storyInstance.storyUi);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        isTalking = true;
-        if (isButton == false)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Instantiate(talkButton);
-            isButton = true;
+            playerInput = collision.gameObject.GetComponentInChildren<PlayerInput>();  
         }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isTalking = false;
-        
-        talkButton.SetActive(false);
-    }
-
-    public void DialogueButton()
-    {
-        Dialogue();
     }
 
     public void Dialogue()
     {
-        Debug.Log(StageManager.instance.floor);
+        isTalking = true;
 
-        Debug.Log(isTalking + " " + floor);
-        Debug.Log(count + " " + storys[floor].lines.Length);
-
-        Debug.Log(StoryManager.storyInstance.storyUi);
-
-        var s = StoryManager.storyInstance.storyUi;
-        
         if (isTalking == true && count < storys[floor].lines.Length)
         {
-            Debug.Log("sss");
-            s.backGround.SetActive(true);
-            s.talk.text = storys[floor].lines[count].dialogueTest;
-            s.image.sprite = storys[floor].lines[count].charImage;
-            Debug.Log(storys[floor]);
+            ui.talk.text = storys[floor].lines[count].dialogueTest;
+            ui.image.sprite = storys[floor].lines[count].charImage;
         }
         else
         {
-            s.backGround.SetActive(false);
+            story.SetActive(false);
             isTalking = false;
+            playerInput.ismove = true;
         }
 
         count++;
@@ -101,18 +90,37 @@ public class Story : MonoBehaviour
 
     private void Layer()
     {
-        for (int i = 0; i < grassLayer_1.Length; i++)
+        if (map.nextFloorPortal.layer == 20)
         {
-            if (grassLayer_1[i].layer == 20)
-            {
-                this.gameObject.layer = grassLayer_1[i].layer;
-                sr.sortingLayerName = "Layer 1";
-            }
-            else if(grassLayer_2[i].layer == 21)
-            {
-                this.gameObject.layer = grassLayer_2[i].layer;
-                sr.sortingLayerName = "Layer 2";
-            }
+            this.gameObject.layer = 20;
+            sr.sortingLayerName = potalSr.sortingLayerName;
         }
+        else if(map.nextFloorPortal.layer == 21)
+        {
+            this.gameObject.layer = 21;
+            sr.sortingLayerName = potalSr.sortingLayerName;
+        }
+        else if(map.nextFloorPortal.layer == 22)
+        {
+            this.gameObject.layer = 22;
+            sr.sortingLayerName = potalSr.sortingLayerName;
+        }
+    }
+
+    public void Interact()
+    {
+        if (!isButton)
+        {
+            story = Instantiate(StoryManager.storyInstance.storyUi.canvas);
+            story.SetActive (true);
+            ui = story.GetComponent<StoryUi>();
+            isButton = true;
+        }
+        else
+        {
+            playerInput.ismove = false;
+            Dialogue();
+        }
+
     }
 }
