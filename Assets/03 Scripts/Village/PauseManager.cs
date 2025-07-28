@@ -19,6 +19,7 @@ public class PauseManager : MonoBehaviour
     public void PauseClosePanel()
     {
         PausePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void OnClickVillageMove()

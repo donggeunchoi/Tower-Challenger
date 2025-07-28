@@ -87,6 +87,7 @@ public class VillageManager : MonoBehaviour
                 break;
             case "PausePanel":
                 StopPanel.SetActive(true);
+                Time.timeScale = 0;
                 break;
             case "CharactorChoicePanel":
                 if (popup != null)
