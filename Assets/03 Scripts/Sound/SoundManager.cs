@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
+public enum SoundType { BGM, SFX }
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
@@ -11,10 +14,18 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgmSource;
     public AudioClip[] bgmAudioClip;
     public AudioClip[] miniGameAudioClip;
+    [SerializeField] private GameObject temporarySoundPlayerPrefab;
+    [SerializeField] private AudioMixer audioMixer;
+
+    [SerializeField][Range(0f, 1f)] private float soundEffectVolume;
+    [SerializeField][Range(0f, 1f)] private float soundEffectPitchVariance;
 
     public AudioClip gameOverBGM;
 
     public Transform soundSlot;
+
+    private Dictionary<string, AudioClip> clipDictionary;
+    private List<TemporarySoundPlayer> activaLoopSounds;
 
     private void Awake()
     {
@@ -29,8 +40,26 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         bgmSource = GetComponent<AudioSource>();
-    }
 
+    }
+    private void Start()
+    {
+        clipDictionary = new Dictionary<string, AudioClip>();
+
+        foreach (AudioClip clip in bgmAudioClip)
+        {
+            if (clip != null && !clipDictionary.ContainsKey(clip.name))
+                clipDictionary.Add(clip.name, clip);
+        }
+
+        foreach (AudioClip clip in miniGameAudioClip)
+        {
+            if (clip != null && !clipDictionary.ContainsKey(clip.name))
+                clipDictionary.Add(clip.name, clip);
+        }
+
+        // 추가로 다른 효과음 클립들도 여기에 등록해야 할 수도 있습니다.
+    }
     #region SceneChange
     private void OnEnable()
     {
@@ -118,16 +147,51 @@ public class SoundManager : MonoBehaviour
         bgmSource.clip = null;
     }
 
-    public void PlayClip(AudioClip clip)
+    public static void PlayClip(AudioClip clip)
     {
-        SoundSource obj = Instantiate(soundSourcePrefab, soundSlot);
+        SoundSource obj = Instantiate(instance.soundSourcePrefab);
         SoundSource soundSource = obj.GetComponent<SoundSource>();
-        soundSource.Play(clip, 1);
+        soundSource.Play(clip, instance.soundEffectVolume, instance.soundEffectPitchVariance);
     }
 
     public void PlayeGameOver()
     {
         if (gameOverBGM != null)
             PlayBGM(gameOverBGM);
+    }
+    public void PlaySound2D(string clipName, float delay = 0f, bool isLoop = false, SoundType type = SoundType.SFX)
+    {
+        GameObject obj = PoolManager.Instance.GetObject(temporarySoundPlayerPrefab, Vector3.zero, Quaternion.identity);
+
+        TemporarySoundPlayer soundPlayer = obj.GetComponent<TemporarySoundPlayer>();
+
+        if (isLoop)
+        {
+            AddToList(soundPlayer);
+        }
+
+        soundPlayer.InitSound2D(GetClip(clipName));
+        soundPlayer.Play(audioMixer.FindMatchingGroups(type.ToString())[0], delay, isLoop); // null?
+
+        if (!isLoop) //단발 사운드
+        {
+            soundPlayer.SetOnFinish(() => PoolManager.Instance.ReturnObject(obj));
+        }
+    }
+    private void AddToList(TemporarySoundPlayer soundPlayer) //사운드 재생 중, 나중에 루프 형태로 재생된 사운드를 제거하기 위해 리스트 저장.
+    {
+        activaLoopSounds.Add(soundPlayer);
+    }
+    private AudioClip GetClip(string clipName)
+    {
+        if (clipDictionary == null) return null;
+        AudioClip clip = clipDictionary[clipName]; //예외처리 필요.
+
+        if (clip == null)
+        {
+            Debug.LogError(clipName + "이 존재하지 않음.");
+        }
+
+        return clip;
     }
 }
