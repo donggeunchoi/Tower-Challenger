@@ -1055,9 +1055,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 907534405809399075, guid: 6718805056fd7426981173e0f77d33f7,
         type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 56418143}
+    - target: {fileID: 907534405809399075, guid: 6718805056fd7426981173e0f77d33f7,
+        type: 3}
       propertyPath: currentStack
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 907534405809399075, guid: 6718805056fd7426981173e0f77d33f7,
+        type: 3}
+      propertyPath: miniGameClearUI
+      value: 
+      objectReference: {fileID: 7954825076138411023, guid: 3fe034bb5131a4689b812d3e910c3724,
+        type: 3}
     - target: {fileID: 1448649035999277692, guid: 6718805056fd7426981173e0f77d33f7,
         type: 3}
       propertyPath: boxColliders.Array.size
