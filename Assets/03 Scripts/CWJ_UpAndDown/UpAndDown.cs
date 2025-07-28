@@ -55,11 +55,11 @@ public class UpAndDown : MonoBehaviour
 
         if (success)
         {
-            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
-            miniGameClear.transform.SetAsLastSibling();
-            
             if (num == (int)UpAndDownManager.instance.randomNumber)
             {
+                GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+                miniGameClear.transform.SetAsLastSibling();
+                
                 UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());
             }
         }
