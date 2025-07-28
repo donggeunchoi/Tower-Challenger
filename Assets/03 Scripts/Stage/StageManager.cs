@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +6,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
     public GameObject gameOver;      //게임 오버 창
+    public GameObject bossGameOver;
 
     [Header("정보")]                  //UI정보 넘겨받기
     public StageTimer stageTimer;     //스테이지 타이머
@@ -236,7 +236,15 @@ public class StageManager : MonoBehaviour
             if (floor > bestFloor)
                 bestFloor = floor;
 
-            GameObject gameOverPanel = Instantiate(gameOver, infoUI.transform);
+            if (floor % BOSS_FLOOR == 0)
+            {
+                GameObject gameOverPannel = Instantiate(bossGameOver, infoUI.transform);
+            }
+            else
+            {
+                GameObject gameOverPanel = Instantiate(gameOver, infoUI.transform);
+            }
+
             isGameActive = false;
 
             if (SoundManager.instance != null)
