@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class Shadow : MonoBehaviour
 {
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
+    
     public void Answer(int selectedIndex)
     {
         var p = ShadowManager.instance.shadowData[ShadowManager.instance.randomIndex];// 랜덤으로 생성된 문제
@@ -13,6 +17,9 @@ public class Shadow : MonoBehaviour
 
         if (selectedIndex == p.successIndex)
         {
+            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+            miniGameClear.transform.SetAsLastSibling();
+            
             if (StageManager.instance != null)
             {
                 StageManager.instance.MiniGameResult(true);

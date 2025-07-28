@@ -542,7 +542,6 @@ MonoBehaviour:
   - {fileID: 602151712}
   - {fileID: 1844241809}
   - {fileID: 1202648530}
-  randomIndex: 0
 --- !u!1 &1202648527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,6 +1002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e8d2a5bd0143840b13bcf35bbc872c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  miniGameClearUI: {fileID: 7954825076138411023, guid: 3fe034bb5131a4689b812d3e910c3724,
+    type: 3}
+  mainCanvas: {fileID: 1035240410}
 --- !u!4 &1988020976
 Transform:
   m_ObjectHideFlags: 0
@@ -1036,6 +1038,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcbfc1b9e736f3c44b27afb6e8233d48, type: 2}
   - {fileID: 11400000, guid: dd2e814aeefe93a48943f2b129d95145, type: 2}
   - {fileID: 11400000, guid: 3df4b0ae9f4059c4fb77d67034721739, type: 2}
+  randomIndex: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
