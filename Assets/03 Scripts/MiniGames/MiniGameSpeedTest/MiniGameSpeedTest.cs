@@ -92,17 +92,23 @@ public class MiniGameSpeedTest : MonoBehaviour
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
             
-            if (stageManager != null)
-            {
-                stageManager.MiniGameResult(true);
-            }
-                
+            StartCoroutine(WaitinTime());
         }
         else
         {
             //trueOrFalse.text = "False!";
             StartCoroutine(FailEffect());
             
+        }
+    }
+
+    IEnumerator WaitinTime()
+    {
+        yield return new WaitForSeconds(1f);
+        
+        if (stageManager != null)
+        {
+            stageManager.MiniGameResult(true);
         }
     }
 

@@ -111,13 +111,15 @@ public class SlimeTower : MonoBehaviour
             
             StartCoroutine(WaitinTime());
             
-            if (StageManager.instance != null)
-                StageManager.instance.MiniGameResult(true);
+            
         }
     }
     
     IEnumerator WaitinTime()
     {
         yield return new WaitForSeconds(1f);
+        
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(true);
     }
 }

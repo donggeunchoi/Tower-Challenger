@@ -130,8 +130,6 @@ public class SellGameManager : MonoBehaviour
 
             StartCoroutine(WaitinTime());
             
-            if (StageManager.instance != null)
-                StageManager.instance.MiniGameResult(true);
             Blocker.SetActive(false);
         }
         else
@@ -145,6 +143,9 @@ public class SellGameManager : MonoBehaviour
     IEnumerator WaitinTime()
     {
         yield return new WaitForSeconds(1f);
+        
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(true);
     }
 
     IEnumerator OnWrongAnswer()

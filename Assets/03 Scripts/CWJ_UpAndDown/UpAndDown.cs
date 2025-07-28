@@ -62,7 +62,6 @@ public class UpAndDown : MonoBehaviour
 
                 StartCoroutine(WaitinTime());
                 
-                UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());
             }
         }
     }
@@ -70,6 +69,8 @@ public class UpAndDown : MonoBehaviour
     IEnumerator WaitinTime()
     {
         yield return new WaitForSeconds(1f);
+        
+        UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());
     }
 
     public void Failure()
