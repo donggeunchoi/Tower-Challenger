@@ -37,7 +37,8 @@ public class Map : MonoBehaviour
             nextStagePortal[i].GetComponent<InteractionPortal>().portalNumber = i;
             nextStagePortal[i].gameObject.SetActive(false);
         }
-
+        playerPosition = startPlayerPosition.transform.position;//임시
+        Instantiate(playerPrefab, playerPosition, Quaternion.identity); //임시
         TutorialPortalClose();
 
         StartCoroutine(RandomPortal());

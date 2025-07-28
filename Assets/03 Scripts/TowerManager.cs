@@ -10,6 +10,8 @@ public class TowerManager : MonoBehaviour
     public MiniGameManager miniGameManager;
     private int mapIndex = -1;
 
+    [SerializeField] private GameObject mapObstacle;
+
     [SerializeField] private string[] mapScenes;
     public string currentSceneName;   //현재 씬 이름
     private void Awake()

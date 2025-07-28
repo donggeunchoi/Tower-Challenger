@@ -2051,6 +2051,7 @@ GameObject:
   - component: {fileID: 3504039372541559767}
   - component: {fileID: 5851759213340580545}
   - component: {fileID: 5211809225153884980}
+  - component: {fileID: 6637197398250792992}
   m_Layer: 20
   m_Name: Player
   m_TagString: Player
@@ -2301,6 +2302,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1815127224497800545}
   interaction: {fileID: 3504039372541559767}
+--- !u!114 &6637197398250792992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992555420324306481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff8d0d2c4e864e4fab8ae4715f6933a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 1815127224497800545}
+  effectTime: 3
+  slowSpeed: 15
 --- !u!1 &6565922014617506718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,8 +2614,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3402059733480839755}
   stick: {fileID: 8945181570517157846}
-  speed: 7
-  DashSpeed: 14
+  isMirror: 0
+  speed: 5.3
+  DashSpeed: 9.7
   DashTime: 4
   CooldownTime: 3
   DashImage: {fileID: 3666423077579430397}
