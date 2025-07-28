@@ -14,6 +14,7 @@ public class UpAndDown : MonoBehaviour
     [Header("미니게임 클리어 UI")]
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
+    private bool _clear = false;
 
     private void Start()
     {
@@ -60,7 +61,11 @@ public class UpAndDown : MonoBehaviour
                 GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
                 miniGameClear.transform.SetAsLastSibling();
 
-                StartCoroutine(WaitinTime());
+                if (!_clear)
+                {
+                    _clear = true;
+                    StartCoroutine(WaitinTime());
+                }
                 
             }
         }
@@ -68,6 +73,8 @@ public class UpAndDown : MonoBehaviour
 
     IEnumerator WaitinTime()
     {
+        if(_clear == false) yield break;
+        
         yield return new WaitForSeconds(1f);
         
         UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());

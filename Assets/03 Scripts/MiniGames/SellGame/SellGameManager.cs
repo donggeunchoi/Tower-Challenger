@@ -25,6 +25,7 @@ public class SellGameManager : MonoBehaviour
     [Header("미니게임 클리어 UI")]
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
+    private bool _clear = false;
 
 
     void Start()
@@ -128,7 +129,11 @@ public class SellGameManager : MonoBehaviour
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
 
-            StartCoroutine(WaitinTime());
+            if (!_clear)
+            {
+                _clear = true;
+                StartCoroutine(WaitinTime());
+            }
             
             Blocker.SetActive(false);
         }
@@ -142,6 +147,8 @@ public class SellGameManager : MonoBehaviour
     
     IEnumerator WaitinTime()
     {
+        if(_clear == false) yield break;
+        
         yield return new WaitForSeconds(1f);
         
         if (StageManager.instance != null)

@@ -26,6 +26,7 @@ public class MiniGameSpeedTest : MonoBehaviour
     [Header("미니게임 클리어 UI")]
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
+    private bool _clear = false;
 
     private void Awake()
     {
@@ -91,8 +92,12 @@ public class MiniGameSpeedTest : MonoBehaviour
 
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
-            
-            StartCoroutine(WaitinTime());
+
+            if (!_clear)
+            {
+                _clear = true;
+                StartCoroutine(WaitinTime());
+            }
         }
         else
         {
@@ -104,6 +109,8 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     IEnumerator WaitinTime()
     {
+        if(_clear == false) yield break;
+        
         yield return new WaitForSeconds(1f);
         
         if (stageManager != null)
