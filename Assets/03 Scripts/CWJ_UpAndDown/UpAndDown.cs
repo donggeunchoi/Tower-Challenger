@@ -10,6 +10,10 @@ public class UpAndDown : MonoBehaviour
     //public int curLP = 4;
 
     public int max_Num;
+    
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
 
     private void Start()
     {
@@ -51,6 +55,9 @@ public class UpAndDown : MonoBehaviour
 
         if (success)
         {
+            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+            miniGameClear.transform.SetAsLastSibling();
+            
             if (num == (int)UpAndDownManager.instance.randomNumber)
             {
                 UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());

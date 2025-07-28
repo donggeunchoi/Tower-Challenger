@@ -11,9 +11,7 @@ public class SellGameManager : MonoBehaviour
     public GameObject StartGameBtn;
     public GameObject[] Card;
 
-
-
-
+    
     [Header("Settings")]
     public float shuffleDuration = 0.15f;      //섞이는속도
     public float waitBetweenShuffles = 0.05f;  //딜레이
@@ -23,6 +21,10 @@ public class SellGameManager : MonoBehaviour
     private RectTransform[] rects;
     private Vector3[] originalPositions;
     private StageManager stageManager;
+    
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
 
 
     void Start()
@@ -123,6 +125,9 @@ public class SellGameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (index == 0)
         {
+            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+            miniGameClear.transform.SetAsLastSibling();
+            
             if (StageManager.instance != null)
                 StageManager.instance.MiniGameResult(true);
             Blocker.SetActive(false);

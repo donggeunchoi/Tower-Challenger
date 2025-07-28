@@ -198,5 +198,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public void OnClickPauseButton()
     {
         PasePanel.SetActive(true);
+        Time.timeScale = 0;
     }
 }

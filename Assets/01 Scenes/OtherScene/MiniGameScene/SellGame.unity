@@ -125,6 +125,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4891730313634396032}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &255030632 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1902362643273505586, guid: c856b5c9981fbef4a84a27710f1ba8b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 4891730313634396032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &417235518
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3883493732411757985, guid: c856b5c9981fbef4a84a27710f1ba8b9,
         type: 3}
+      propertyPath: mainCanvas
+      value: 
+      objectReference: {fileID: 255030632}
+    - target: {fileID: 3883493732411757985, guid: c856b5c9981fbef4a84a27710f1ba8b9,
+        type: 3}
       propertyPath: shuffleCount
       value: 30
       objectReference: {fileID: 0}
@@ -386,6 +397,12 @@ PrefabInstance:
       propertyPath: Card.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3883493732411757985, guid: c856b5c9981fbef4a84a27710f1ba8b9,
+        type: 3}
+      propertyPath: miniGameClearUI
+      value: 
+      objectReference: {fileID: 7954825076138411023, guid: 3fe034bb5131a4689b812d3e910c3724,
+        type: 3}
     - target: {fileID: 3883493732411757985, guid: c856b5c9981fbef4a84a27710f1ba8b9,
         type: 3}
       propertyPath: shuffleDuration

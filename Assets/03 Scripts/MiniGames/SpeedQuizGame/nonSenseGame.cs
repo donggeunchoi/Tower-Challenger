@@ -14,6 +14,10 @@ public class nonSenseGame : MonoBehaviour
     public List<SpeedQuizData> quizes = new List<SpeedQuizData>();
     private string currentCorrectAnswer;
     
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -85,7 +89,9 @@ public class nonSenseGame : MonoBehaviour
 
     public void ClearGame()
     {
-        Debug.Log("성공");
+        GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+        miniGameClear.transform.SetAsLastSibling();
+        
         if (StageManager.instance != null)
         {
             StageManager.instance.MiniGameResult(true);

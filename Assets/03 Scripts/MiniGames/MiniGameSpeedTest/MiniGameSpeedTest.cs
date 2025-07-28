@@ -22,6 +22,10 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     [SerializeField] private float delayTime;
     [SerializeField] private float successTime;
+    
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
 
     private void Awake()
     {
@@ -85,8 +89,14 @@ public class MiniGameSpeedTest : MonoBehaviour
             if (miniGameCoroutine != null)
                 StopCoroutine(miniGameCoroutine);
 
+            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+            miniGameClear.transform.SetAsLastSibling();
+            
             if (stageManager != null)
+            {
                 stageManager.MiniGameResult(true);
+            }
+                
         }
         else
         {

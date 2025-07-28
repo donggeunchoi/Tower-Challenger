@@ -15,6 +15,10 @@ public class SlimeTower : MonoBehaviour
     [SerializeField] public int currentStack; //현재 던질 수 있는 스택
     [SerializeField] public float stackTimer; //쿨타임을 측정해주는 타이머
 
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
+    
     private bool canClick = false;
     private float clickCooldown = 0.2f;
     private float clickCooldownTimer = 0f;
@@ -101,6 +105,9 @@ public class SlimeTower : MonoBehaviour
         int slimeCount = towerRoot.childCount;
         if (slimeCount == clearGameCount)
         {
+            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+            miniGameClear.transform.SetAsLastSibling();
+            
             if (StageManager.instance != null)
                 StageManager.instance.MiniGameResult(true);
         }
