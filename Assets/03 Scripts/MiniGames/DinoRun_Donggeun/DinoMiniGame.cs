@@ -12,6 +12,8 @@ public class DinoMiniGame : MonoBehaviour
     private float gameTimer;
     public bool isGameOver = false;
     public static DinoMiniGame instance;
+    public GameObject MiniGameClearUI;
+    public Canvas mainCanvas;
     
     public float baseSpeed = 5f;
 
@@ -63,6 +65,7 @@ public class DinoMiniGame : MonoBehaviour
         
         if (gameTimer <= 0 && !isGameOver)
         {
+            Debug.Log("여기 들어오니?");
             GameClear();
         }
     }
@@ -83,8 +86,20 @@ public class DinoMiniGame : MonoBehaviour
 
     void GameClear()
     {
+        GameObject miniGameClear = Instantiate(MiniGameClearUI,mainCanvas.transform);
+        miniGameClear.transform.SetAsLastSibling();
+        
+        StartCoroutine(MiniGameClear());
+        
         if (StageManager.instance != null)
             StageManager.instance.MiniGameResult(true);
+    }
+
+    IEnumerator MiniGameClear()
+    {
+        Debug.Log("여기는?? MiniGameClear");
+        
+        yield return new WaitForSeconds(1f);
     }
     
     
