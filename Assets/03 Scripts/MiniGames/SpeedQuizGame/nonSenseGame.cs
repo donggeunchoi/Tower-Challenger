@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class nonSenseGame : MonoBehaviour
     [Header("미니게임 클리어 UI")]
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
+    private bool _clear = false;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -91,6 +93,21 @@ public class nonSenseGame : MonoBehaviour
     {
         GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
         miniGameClear.transform.SetAsLastSibling();
+
+
+        if (!_clear)
+        {
+            _clear = true;
+            StartCoroutine(WaitinTime());
+        }
+        
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        if(_clear == false) yield break;
+        
+        yield return new WaitForSeconds(1f);
         
         if (StageManager.instance != null)
         {

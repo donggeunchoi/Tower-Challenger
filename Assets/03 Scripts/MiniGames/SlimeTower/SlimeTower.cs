@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlimeTower : MonoBehaviour
@@ -18,6 +19,7 @@ public class SlimeTower : MonoBehaviour
     [Header("미니게임 클리어 UI")]
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
+    private bool _clear = false;
     
     private bool canClick = false;
     private float clickCooldown = 0.2f;
@@ -107,9 +109,23 @@ public class SlimeTower : MonoBehaviour
         {
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
+
+            if (!_clear)
+            {
+                _clear = true;
+                StartCoroutine(WaitinTime());
+            }
             
-            if (StageManager.instance != null)
-                StageManager.instance.MiniGameResult(true);
         }
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        if(_clear == false) yield break;
+        
+        yield return new WaitForSeconds(1f);
+        
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(true);
     }
 }

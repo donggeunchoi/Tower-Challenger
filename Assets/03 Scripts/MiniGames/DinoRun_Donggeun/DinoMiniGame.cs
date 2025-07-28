@@ -14,6 +14,7 @@ public class DinoMiniGame : MonoBehaviour
     public static DinoMiniGame instance;
     public GameObject MiniGameClearUI;
     public Canvas mainCanvas;
+    private bool _clear = false;
     
     public float baseSpeed = 5f;
 
@@ -88,10 +89,23 @@ public class DinoMiniGame : MonoBehaviour
     {
         GameObject miniGameClear = Instantiate(MiniGameClearUI,mainCanvas.transform);
         miniGameClear.transform.SetAsLastSibling();
+
+        if (!_clear)
+        {
+            _clear = true;
+            StartCoroutine(WaitinTime());
+        }
+        
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        if(_clear == false) yield break;
+        
+        yield return new WaitForSeconds(1f);
         
         if (StageManager.instance != null)
             StageManager.instance.MiniGameResult(true);
-        
     }
     
     public void HandleHit()

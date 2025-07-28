@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class Shadow : MonoBehaviour
     [Header("미니게임 클리어 UI")]
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
+    private bool _clear = false;
+    
     
     public void Answer(int selectedIndex)
     {
@@ -17,13 +20,16 @@ public class Shadow : MonoBehaviour
 
         if (selectedIndex == p.successIndex)
         {
+            
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
-            
-            if (StageManager.instance != null)
+
+            if (!_clear)
             {
-                StageManager.instance.MiniGameResult(true);
+                _clear = true;
+                StartCoroutine(WaitinTime());
             }
+            
             Debug.Log("클리어");
             return;
         }
@@ -37,6 +43,18 @@ public class Shadow : MonoBehaviour
             ShadowManager.instance.shadowUI.shadowGameInit();
 
             Debug.Log("잘못 선택 했음");
+        }
+        
+        IEnumerator WaitinTime()
+        {
+            if(_clear == false) yield break;
+            
+            yield return new WaitForSeconds(1f);
+            
+            if (StageManager.instance != null)
+            {
+                StageManager.instance.MiniGameResult(true);
+            }
         }
     }
 }
