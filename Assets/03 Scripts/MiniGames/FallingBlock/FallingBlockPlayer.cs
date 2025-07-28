@@ -38,6 +38,10 @@ public class FallingBlockPlayer : MonoBehaviour
 
     private List<RectTransform> obstacleList = new List<RectTransform>();  //스폰된 장애물이 보관되는 리스트
 
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
+    
     private void Start()
     {
         if (StageManager.instance != null && GameManager.Instance)
@@ -200,6 +204,9 @@ public class FallingBlockPlayer : MonoBehaviour
         currentTime += Time.deltaTime;
         if (currentTime > clearTime)
         {
+            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+            miniGameClear.transform.SetAsLastSibling();
+            
             if (StageManager.instance != null)
                 StageManager.instance.MiniGameResult(true);
         }
