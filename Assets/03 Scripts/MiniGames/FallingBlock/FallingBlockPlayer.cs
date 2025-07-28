@@ -207,9 +207,16 @@ public class FallingBlockPlayer : MonoBehaviour
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
             
+            StartCoroutine(WaitinTime());
+            
             if (StageManager.instance != null)
                 StageManager.instance.MiniGameResult(true);
         }
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     private void UpdateTimer()

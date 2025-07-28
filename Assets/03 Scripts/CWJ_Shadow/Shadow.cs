@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,8 @@ public class Shadow : MonoBehaviour
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
             
+            StartCoroutine(WaitinTime());
+            
             if (StageManager.instance != null)
             {
                 StageManager.instance.MiniGameResult(true);
@@ -37,6 +40,11 @@ public class Shadow : MonoBehaviour
             ShadowManager.instance.shadowUI.shadowGameInit();
 
             Debug.Log("잘못 선택 했음");
+        }
+        
+        IEnumerator WaitinTime()
+        {
+            yield return new WaitForSeconds(1f);
         }
     }
 }

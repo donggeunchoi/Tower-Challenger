@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -92,10 +93,17 @@ public class nonSenseGame : MonoBehaviour
         GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
         miniGameClear.transform.SetAsLastSibling();
         
+        StartCoroutine(WaitinTime());
+        
         if (StageManager.instance != null)
         {
             StageManager.instance.MiniGameResult(true);
         }
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     public void WrongAnswer()

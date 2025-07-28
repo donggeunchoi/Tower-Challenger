@@ -59,10 +59,17 @@ public class UpAndDown : MonoBehaviour
             {
                 GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
                 miniGameClear.transform.SetAsLastSibling();
+
+                StartCoroutine(WaitinTime());
                 
                 UpAndDownManager.instance.StartCoroutine(UpAndDownManager.instance.ShowAnswer());
             }
         }
+    }
+
+    IEnumerator WaitinTime()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     public void Failure()

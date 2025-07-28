@@ -127,6 +127,8 @@ public class SellGameManager : MonoBehaviour
         {
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
+
+            StartCoroutine(WaitinTime());
             
             if (StageManager.instance != null)
                 StageManager.instance.MiniGameResult(true);
@@ -138,6 +140,11 @@ public class SellGameManager : MonoBehaviour
                 StageManager.instance.MiniGameResult(false);
             yield return StartCoroutine(OnWrongAnswer());
         }
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator OnWrongAnswer()

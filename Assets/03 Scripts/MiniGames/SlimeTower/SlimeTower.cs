@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlimeTower : MonoBehaviour
@@ -108,8 +109,15 @@ public class SlimeTower : MonoBehaviour
             GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
             miniGameClear.transform.SetAsLastSibling();
             
+            StartCoroutine(WaitinTime());
+            
             if (StageManager.instance != null)
                 StageManager.instance.MiniGameResult(true);
         }
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }

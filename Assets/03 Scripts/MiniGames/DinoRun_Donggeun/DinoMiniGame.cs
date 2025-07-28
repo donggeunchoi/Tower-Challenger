@@ -89,9 +89,16 @@ public class DinoMiniGame : MonoBehaviour
         GameObject miniGameClear = Instantiate(MiniGameClearUI,mainCanvas.transform);
         miniGameClear.transform.SetAsLastSibling();
         
+        StartCoroutine(WaitinTime());
+        
         if (StageManager.instance != null)
             StageManager.instance.MiniGameResult(true);
         
+    }
+    
+    IEnumerator WaitinTime()
+    {
+        yield return new WaitForSeconds(1f);
     }
     
     public void HandleHit()
