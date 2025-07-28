@@ -67,6 +67,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4a417c010a5eb6a46a72ecf893125eaa, type: 3}
   - {fileID: 8300000, guid: 5abb1b0a57ef7084b84b35070b8f5b28, type: 3}
   - {fileID: 8300000, guid: 04851158bd5b64a4c88b3392c7bfaba2, type: 3}
+  - {fileID: 8300000, guid: b33e723f2fb19dc47abe30d1c877874a, type: 3}
+  - {fileID: 8300000, guid: b02e7f87c75b09c48af2f18cdc0112de, type: 3}
+  temporarySoundPlayerPrefab: {fileID: 6794658559904300739, guid: 484a8d9a7c55bc540a9990d99f63cb78,
+    type: 3}
+  audioMixer: {fileID: 24100000, guid: e0d80a8bbe0b3b84b8184912d3853683, type: 2}
+  soundEffectVolume: 0
+  soundEffectPitchVariance: 0
   gameOverBGM: {fileID: 8300000, guid: 5995433f9955b154d8e01395644cea7b, type: 3}
   soundSlot: {fileID: 8051076153285938007}
 --- !u!114 &6017309714740948673
@@ -90,7 +97,8 @@ AudioSource:
   m_GameObject: {fileID: 1630462706875134961}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8734628610753445505, guid: e0d80a8bbe0b3b84b8184912d3853683,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1

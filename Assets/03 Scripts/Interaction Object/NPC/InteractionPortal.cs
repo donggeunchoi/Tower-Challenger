@@ -29,6 +29,8 @@ public class InteractionPortal : MonoBehaviour, IInteractable
                 break;
             case PortalType.Tutorial:
                 SceneManager.LoadScene("GameScene");
+                GameManager.Instance.playerData.tutorialCompleted = true;
+                GameManager.Instance.playerData.SaveData();
                 break;
         }
     }

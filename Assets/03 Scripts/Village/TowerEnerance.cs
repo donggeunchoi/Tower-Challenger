@@ -78,7 +78,16 @@ public class TowerEnerance : MonoBehaviour
                 }
                 Debug.Log(GameManager.Instance.stamina.mainStamina);
             }
-            SceneManager.LoadScene("TutorialScene");
+            
+            bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
+            if (!tutorial)
+            {
+                SceneManager.LoadScene("TutorialScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("GameScene");
+            }
            
         }
     }

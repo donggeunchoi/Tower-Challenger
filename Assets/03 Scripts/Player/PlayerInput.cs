@@ -31,6 +31,9 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public GameObject InventoryPanel;
     public bool isInventory = false;
 
+    [Header("일시 정시")] 
+    public GameObject PasePanel;
+
     public Sprite speedUpSprite;
     public Sprite sandglassSprite;
     public Sprite topTicketSprite;
@@ -190,5 +193,10 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public void SetKeyboardInput(Vector2 input)
     {
         keyboardInput = input;
+    }
+
+    public void OnClickPauseButton()
+    {
+        PasePanel.SetActive(true);
     }
 }
