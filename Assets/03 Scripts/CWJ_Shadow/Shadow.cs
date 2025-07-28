@@ -8,7 +8,7 @@ public class Shadow : MonoBehaviour
     [Header("미니게임 클리어 UI")]
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
-    private bool _clearUI = false;
+    
     
     public void Answer(int selectedIndex)
     {
@@ -19,16 +19,12 @@ public class Shadow : MonoBehaviour
 
         if (selectedIndex == p.successIndex)
         {
-            if (!_clearUI)
-            {
-                _clearUI = true;
-                StartCoroutine(WaitinTime());
-            }
             
-            if (StageManager.instance != null)
-            {
-                StageManager.instance.MiniGameResult(true);
-            }
+            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+            miniGameClear.transform.SetAsLastSibling();
+           
+            StartCoroutine(WaitinTime());
+            
             Debug.Log("클리어");
             return;
         }
@@ -46,12 +42,12 @@ public class Shadow : MonoBehaviour
         
         IEnumerator WaitinTime()
         {
-            if (_clearUI == false)  yield break;
-            
-            GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
-            miniGameClear.transform.SetAsLastSibling();
-            
             yield return new WaitForSeconds(1f);
+            
+            if (StageManager.instance != null)
+            {
+                StageManager.instance.MiniGameResult(true);
+            }
         }
     }
 }
