@@ -10,6 +10,7 @@ public class StoryManager : MonoBehaviour
     public static StoryManager storyInstance;
     public Story story;
     public StoryUi storyUi;
+    public StoryTalk storyTalk;
 
     public StoryData[] data;
 
@@ -32,20 +33,20 @@ public class StoryManager : MonoBehaviour
 
     private void OnEnable()
     {
-        story.storys = new List<StoryData>();
+        storyTalk.storys = new List<StoryData>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         for (int i = 0; i < data.Length; i++)
         {
-            story.storys.Add(data[i]);
+            storyTalk.storys.Add(data[i]);
         }
 
         image = storyUi.image;
         textTalk = storyUi.talk;
         backGround = storyUi.canvas;
 
-        story.count = 0;
+        storyTalk.count = 0;
     }
 }

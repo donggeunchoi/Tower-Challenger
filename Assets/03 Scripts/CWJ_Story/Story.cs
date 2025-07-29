@@ -3,93 +3,32 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Story : MonoBehaviour, IInteractable
+public class Story : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private StoryUi ui;
+    private Map map;
 
     private SpriteRenderer sr;
     private SpriteRenderer potalSr;
-    private Map map;
-
-    public GameObject storyPrefab;
-
-    [HideInInspector] public int count;
-    [HideInInspector] public List<StoryData> storys;
-
-    private GameObject story;
-    private GameObject button;
-    private bool isTalking;
-    private bool isButton;
-    private int floor;
 
     private void Awake()
     {
         map = GameObject.FindAnyObjectByType<Map>();
     }
-
     private void OnEnable()
     {
+        // 다음 층으로 가는 오브젝트의 렌더러 컴퍼넌트를 참조
         potalSr = map.nextFloorPortal.gameObject.GetComponent<SpriteRenderer>();
         sr = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
-        count = 0;
-        isTalking = false;
-        isButton = false;
-
-        if (StageManager.instance.floor == 6)
-        {
-            Debug.Log(StageManager.instance.floor);
-            floor = 0;
-        }
-        else if (StageManager.instance.floor == 10)
-        {
-            floor = 1;
-        }
-        else if (StageManager.instance.floor == 14)
-        {
-            floor = 2;
-        }
-        else if (StageManager.instance.floor == 20)
-        {
-            floor = 3;
-        }
         Layer();
-        Debug.Log(StoryManager.storyInstance.storyUi);
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerInput = collision.gameObject.GetComponentInChildren<PlayerInput>();  
-        }
-    }
-
-    public void Dialogue()
-    {
-        isTalking = true;
-
-        if (isTalking == true && count < storys[floor].lines.Length)
-        {
-            ui.talk.text = storys[floor].lines[count].dialogueTest;
-            ui.image.sprite = storys[floor].lines[count].charImage;
-        }
-        else
-        {
-            story.SetActive(false);
-            isTalking = false;
-            playerInput.ismove = true;
-        }
-
-        count++;
     }
 
     private void Layer()
     {
+        // 소환될 때 레이어 변경
         if (map.nextFloorPortal.layer == 20)
         {
             this.gameObject.layer = 20;
@@ -107,20 +46,18 @@ public class Story : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
-    {
-        if (!isButton)
-        {
-            story = Instantiate(StoryManager.storyInstance.storyUi.canvas);
-            story.SetActive (true);
-            ui = story.GetComponent<StoryUi>();
-            isButton = true;
-        }
-        else
-        {
-            playerInput.ismove = false;
-            Dialogue();
-        }
-
-    }
+    //public void Interact()
+    //{
+    //    Debug.Log(StoryManager.storyInstance.storyTalk.isButton);
+    //    if (!StoryManager.storyInstance.storyTalk.isButton)
+    //    {
+    //        Debug.Log("스토리스크립트 초기화");
+    //        StoryManager.storyInstance.storyTalk.StoryInit();
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("스토리스크립트 대화진행");
+    //        StoryManager.storyInstance.storyTalk.Dialogue();
+    //    }
+    //}
 }

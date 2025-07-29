@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2885830115630250368}
   m_Layer: 20
   m_Name: PF Player
-  m_TagString: Player
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,17 +287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ed4fca7ef1d5142834018119a95717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyPrefab: {fileID: 6491690359942566113, guid: 5ce3970fee5e50042bf2effc0c4b0f92,
-    type: 3}
-  count: 0
-  storys:
-  - {fileID: 11400000, guid: 5724ce697b7ddfb47aa04e9cbe9ade38, type: 2}
-  - {fileID: 11400000, guid: 390b759514b7b3d44bfff6483f03921a, type: 2}
-  - {fileID: 11400000, guid: eb47b845b9b121a419ea97819396ada3, type: 2}
-  - {fileID: 11400000, guid: 4bc82208d9b811244a364fda96300dbe, type: 2}
-  - {fileID: 11400000, guid: 847ae803d678ae748998c33c41548709, type: 2}
-  - {fileID: 11400000, guid: 109c142c255b2e84880eb555929c696e, type: 2}
-  canvasPrefab: {fileID: 0}
+  playerInput: {fileID: 0}
+  map: {fileID: 0}
 --- !u!61 &2885830115630250368
 BoxCollider2D:
   m_ObjectHideFlags: 0

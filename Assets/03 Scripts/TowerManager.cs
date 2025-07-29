@@ -97,6 +97,7 @@ public class TowerManager : MonoBehaviour
         {
             yield return null;
         }
+        if (StageManager.instance.floor == 30 && !StoryManager.storyInstance.storyTalk.isClear) { StoryManager.storyInstance.storyTalk.StoryInit(); Debug.Log("30층"); }
 
         if (StageManager.instance.stageClearPortal.Count == 0 && StageManager.instance.isGameActive)
         {
@@ -105,7 +106,7 @@ public class TowerManager : MonoBehaviour
         }
 
         PlayerManager.Instance.PlayerSetting();  //플레이어 놓기
-
+        StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         if (StageManager.instance.isGameActive)
         {
             if (StageManager.instance.stageClearPortal.Count == 0)

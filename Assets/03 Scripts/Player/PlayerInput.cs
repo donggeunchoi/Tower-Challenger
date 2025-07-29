@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
 {
@@ -29,13 +30,14 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public Sprite sandglassSprite;
     public Sprite topTicketSprite;
 
-    public bool ismove;
     [SerializeField] private Animator uiRootAnim;
     private Rigidbody2D rb;                 // Rigidbody2D 컴포넌트
 
+    public Button nextButton; // 버튼 스토리에서 활용
+
     void Start()
     {
-        ismove = true;
+        PlayerManager.Instance.isMove = true;
         stickBack = GetComponent<RectTransform>();
 
         radius = stick.sizeDelta.x * 0.5f;     //스틱의 크기의 절반을 반지름으로
@@ -52,7 +54,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     void FixedUpdate()
     {
-        if (!ismove)
+        if (!PlayerManager.Instance.isMove)
         {
             return;
         }
