@@ -1,19 +1,24 @@
 ﻿using System.Linq;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
+    StageManager stageManager;
+
+    Vector3 playerPosition;
+
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private InteractionPortal[] nextStagePortal;
     [SerializeField] private GameObject startPlayerPosition;
-    [SerializeField] private GameObject nextFloorPortal;
+    public GameObject nextFloorPortal;
     [SerializeField] private GameObject tutorialPortal;
     [SerializeField] private GameObject tutorialBox;
     [SerializeField] private GameObject stairs;
-    Vector3 playerPosition;
 
-    StageManager stageManager;
+    public GameObject p;
+    public GameObject pPrefab;
 
     public void Init()
     {
@@ -83,9 +88,20 @@ public class Map : MonoBehaviour
 
     public void AllClearFloor()
     {
-        nextFloorPortal.SetActive(true);
-    }
+        if (StageManager.instance.floor == 6)
+        {
+            Debug.Log("6층");
+            Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(0, 0, 0);
+            pPrefab = Instantiate(p, spawnPos, Quaternion.identity);
+            StoryManager.storyInstance.story = pPrefab.GetComponent<Story>();
+        }
+        else if (StageManager.instance.floor == 10) { StoryManager.storyInstance.storyTalk.StoryInit();Debug.Log("10층"); }
+        else if (StageManager.instance.floor == 14) { Debug.Log("14층"); }
+        else if (StageManager.instance.floor == 20) { StoryManager.storyInstance.storyTalk.StoryInit(); Debug.Log("20층"); }
+        else if (StageManager.instance.floor == 30 && StoryManager.storyInstance.storyTalk.isClear) { StoryManager.storyInstance.storyTalk.StoryInit(); Debug.Log("30층"); }
 
+        else { nextFloorPortal.SetActive(true); Debug.Log("그외층"); }
+    }
 
     public void TutorialPortalClose()
     {
@@ -102,7 +118,4 @@ public class Map : MonoBehaviour
             tutorialPortal.SetActive(true);
         }
     }
-
-    
-    
 }

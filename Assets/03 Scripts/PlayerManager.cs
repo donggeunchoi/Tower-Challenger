@@ -3,13 +3,15 @@
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
-    
+    public GameObject player;
     public GameObject playerPrefab;
 
     public GameObject player;
 
     public Vector3 playerPosition;    //플레이어 포지션 저장
     public int layerNumber;           //플레이어 레이어 저장
+
+    public bool isMove;
 
     private void Awake()
     {

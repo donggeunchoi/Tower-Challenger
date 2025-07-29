@@ -1,90 +1,63 @@
 ﻿using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Story : MonoBehaviour
 {
-    public StoryData[] data;
+    private Map map;
 
-    public TextMeshProUGUI talk;
-    public Image image;
-    public GameObject backGround;
+    private SpriteRenderer sr;
+    private SpriteRenderer potalSr;
 
-    private bool isTalking = false;
-    private int count;
-    private int floor;
-
-    private List<StoryData> storys;
-    private bool isClear = false;
+    private void Awake()
+    {
+        map = GameObject.FindAnyObjectByType<Map>();
+    }
     private void OnEnable()
     {
-        storys = new List<StoryData>();
+        // 다음 층으로 가는 오브젝트의 렌더러 컴퍼넌트를 참조
+        potalSr = map.nextFloorPortal.gameObject.GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
-        if (StageManager.instance.floor == 6)
-        {
-            floor = 0;
-        }
-        else if (StageManager.instance.floor == 10)
-        {
-            floor = 1;
-        }
-        else if (StageManager.instance.floor == 14)
-        {
-            floor = 2;
-        }
-        else if (StageManager.instance.floor == 20)
-        {
-            floor = 3;
-        }
-        else if (StageManager.instance.floor == 30)
-        {
-            if (isClear)
-            {
-                floor = 5;
-                return;
-            }    
-            floor = 4;
-        }
-        for (int i = 0; i < data.Length; i++)
-        {
-            storys.Add(data[i]);
-            Debug.Log(storys[i]);
-        }
-        
-        backGround.SetActive(false);
-        count = 0;
+        Layer();
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void Layer()
     {
-        if (collision.gameObject.CompareTag("Player") && !isTalking)
+        // 소환될 때 레이어 변경
+        if (map.nextFloorPortal.layer == 20)
         {
-            isTalking = true;
+            this.gameObject.layer = 20;
+            sr.sortingLayerName = potalSr.sortingLayerName;
+        }
+        else if(map.nextFloorPortal.layer == 21)
+        {
+            this.gameObject.layer = 21;
+            sr.sortingLayerName = potalSr.sortingLayerName;
+        }
+        else if(map.nextFloorPortal.layer == 22)
+        {
+            this.gameObject.layer = 22;
+            sr.sortingLayerName = potalSr.sortingLayerName;
         }
     }
 
-    public void DialogueButton()
-    {
-        Dialogue();
-    }
-
-    public void Dialogue()
-    {
-        if (isTalking == true && count < storys[floor].lines.Length)
-        {
-            backGround.SetActive(true);
-            talk.text = storys[floor].lines[count].dialogueTest;
-            image.sprite = storys[floor].lines[count].charImage;
-        }
-        else
-        {
-            backGround.SetActive(false);
-            isTalking = false;
-        }
-        count++;
-    }
+    //public void Interact()
+    //{
+    //    Debug.Log(StoryManager.storyInstance.storyTalk.isButton);
+    //    if (!StoryManager.storyInstance.storyTalk.isButton)
+    //    {
+    //        Debug.Log("스토리스크립트 초기화");
+    //        StoryManager.storyInstance.storyTalk.StoryInit();
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("스토리스크립트 대화진행");
+    //        StoryManager.storyInstance.storyTalk.Dialogue();
+    //    }
+    //}
 }
