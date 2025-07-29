@@ -63,12 +63,19 @@ public class TowerManager : MonoBehaviour
 
         int randomSceneNum;
 
+        if (mapScenes.Length == 1)
+        {
+            mapIndex = 0;
+            return mapScenes[0];
+        }
+
         do
         {
             randomSceneNum = Random.Range(0, mapScenes.Length);
         }
         while (randomSceneNum == mapIndex);
-
+        
+        mapIndex = randomSceneNum;
         string mapName = mapScenes[randomSceneNum];
         return mapName;
     }

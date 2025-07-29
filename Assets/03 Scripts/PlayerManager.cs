@@ -6,6 +6,8 @@ public class PlayerManager : MonoBehaviour
     
     public GameObject playerPrefab;
 
+    public GameObject player;
+
     public Vector3 playerPosition;    //플레이어 포지션 저장
     public int layerNumber;           //플레이어 레이어 저장
 
@@ -39,7 +41,7 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerSetting()
     {
-        GameObject player = null;
+        player = null;
         player = Instantiate(playerPrefab);
 
         if (player != null)

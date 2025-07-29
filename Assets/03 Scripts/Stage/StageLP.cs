@@ -32,7 +32,17 @@ public class StageLP : MonoBehaviour
 
     public void HealLP(int amount)
     {
+        int previousLP = currentLP;
         currentLP = Mathf.Min(currentLP + amount, DEFALT_LP + bonusLP);
+
+        for (int i = previousLP; i < currentLP; i++)
+        {
+            if (i >= 0 && i < heartIcon.Length)
+            {
+                heartIcon[i].gameObject.SetActive(true);
+                heartIcon[i].sprite = nomalHeart;
+            }
+        }
     }
 
     private IEnumerator BrokenHeartImage(int index)

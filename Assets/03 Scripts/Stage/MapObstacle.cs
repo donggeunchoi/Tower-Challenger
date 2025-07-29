@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-
-
 public class MapObstacle : MonoBehaviour
 {
     [SerializeField] private GameObject[] obstacleMap;
@@ -43,6 +41,4 @@ public class MapObstacle : MonoBehaviour
 
         return difficulty;
     }
-
-
 }
