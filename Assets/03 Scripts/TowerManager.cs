@@ -10,6 +10,8 @@ public class TowerManager : MonoBehaviour
     public MiniGameManager miniGameManager;
     private int mapIndex = -1;
 
+    [SerializeField] private GameObject mapObstacle;
+
     [SerializeField] private string[] mapScenes;
     public string currentSceneName;   //현재 씬 이름
     private void Awake()
@@ -61,12 +63,19 @@ public class TowerManager : MonoBehaviour
 
         int randomSceneNum;
 
+        if (mapScenes.Length == 1)
+        {
+            mapIndex = 0;
+            return mapScenes[0];
+        }
+
         do
         {
             randomSceneNum = Random.Range(0, mapScenes.Length);
         }
         while (randomSceneNum == mapIndex);
-
+        
+        mapIndex = randomSceneNum;
         string mapName = mapScenes[randomSceneNum];
         return mapName;
     }

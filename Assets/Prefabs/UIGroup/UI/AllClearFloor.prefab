@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadea51e446bee948bc683b0cad75a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardBase: {fileID: 1370794954594616511}
   nextFloorText: {fileID: 1702244329854356520}
   goldReward: {fileID: 6341587141004278681}
   goldRewardText: {fileID: 6475156242950789154}
@@ -1585,7 +1584,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8862986569653979761}
-  - component: {fileID: 1370794954594616511}
   m_Layer: 5
   m_Name: BaseReward
   m_TagString: Untagged
@@ -1612,20 +1610,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1370794954594616511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8698017000450890370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b34d5a73f0343b2bac2a3bac012b1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  csvFile: {fileID: 4900000, guid: 8f192dd4bf402419487a8f5a4bc619d0, type: 3}
-  rewards: []
 --- !u!1 &9122211387351439917
 GameObject:
   m_ObjectHideFlags: 0

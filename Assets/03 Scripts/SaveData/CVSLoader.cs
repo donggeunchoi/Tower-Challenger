@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using static BoxDataTable;
 using static StageTable;
 
 public static class CVSLoader
@@ -7,6 +8,15 @@ public static class CVSLoader
     public static List<MiniGameData> miniGameDataList = new List<MiniGameData>();
     public static List<RewardTableData> rewardTableDataList = new List<RewardTableData>();
     public static List<PotalStageData> potalStageDataList = new List<PotalStageData>();
+    public static List<DebuffTable> debuffTableDataList = new List<DebuffTable>();
+    public static List<DebuffStunTableRow> debuffSturnTableDataList = new List<DebuffStunTableRow>();
+
+    public static List<ArrowDataTableRow> arrowDataList = new List<ArrowDataTableRow>();
+    public static List<BoxDataTableRow> boxDataList = new List<BoxDataTableRow>();
+    public static List<GoldBoxDataTableRow> goldBoxDataList = new List<GoldBoxDataTableRow>();
+    public static List<NekoManDataTableRow> nekoManDataList = new List<NekoManDataTableRow>();
+    public static List<PlusLPDataTableRow> plusLPDataList = new List<PlusLPDataTableRow>();
+    #region MiniGame
     public static void LoadMiniGameCSV()
     {
         TextAsset data = Resources.Load<TextAsset>("Mini-GameDifficultySettings");
@@ -49,7 +59,8 @@ public static class CVSLoader
     //3. 리플렉션 활용 코드가 짧아지지만 속도가 느리고 실수 시 런타임 에러발생
     //4. 스크립터블 오브젝트로 변환 unity-excel-importer활용
     //https://github.com/mikito/unity-excel-importer
-
+    #endregion
+    #region Reward
     public static void LoadRewardCVS()
     {
         TextAsset data = Resources.Load<TextAsset>("TowerRewardTable");
@@ -78,12 +89,11 @@ public static class CVSLoader
             row.sandGlassReward = ParseBool(GetValue(values, 8));
             row.topTicketReward = ParseBool(GetValue(values, 9));
 
-
             rewardTableDataList.Add(row);
         }
-
     }
-
+    #endregion
+    #region Portal
     public static void LoadPotalCVS()
     {
         TextAsset data = Resources.Load<TextAsset>("floorTable(Sheet1)"); // 경로/파일명 파일명만(확장자없음), 실제 CSV명에 맞추기!
@@ -129,6 +139,216 @@ public static class CVSLoader
             potalStageDataList.Add(row);
         }
     }
+    #endregion
+    #region Debuff
+    public static void LoadDebuffCSV()
+    {
+        StageTable.debuffSlowTableList.Clear();
+        TextAsset data = Resources.Load<TextAsset>("DebuffTable");
+        if (data == null)
+        {
+            Debug.LogError("디버프 테이블 CSV 파일이 없습니다.");
+            return;
+        }
+
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+
+            string[] values = lines[i].Split(',');
+
+            StageTable.DebuffTable row = new StageTable.DebuffTable();
+            row.index = GetValue(values, 0);
+            row.name = GetValue(values, 1);
+            row.desc = GetValue(values, 2);
+            row.type = GetValue(values, 3);
+            row.floor = ParseInt(GetValue(values, 4));
+            row.diflev = ParseInt(GetValue(values, 5));
+            row.downSP = GetValue(values, 6);
+            row.eftTime = ParseInt(GetValue(values, 7));
+
+            StageTable.debuffSlowTableList.Add(row);
+        }
+    }
+
+    public static void LoadDebuffStunCSV()
+    {
+        StageTable.debuffStunTableList.Clear();
+        TextAsset data = Resources.Load<TextAsset>("debuffStunTable");
+        if (data == null)
+        {
+            Debug.LogError("debuffStunTable.csv 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            if (vals.Length < 8) continue;
+
+            StageTable.DebuffStunTableRow row = new StageTable.DebuffStunTableRow();
+            row.index = vals[0];
+            row.name = vals[1];
+            row.dec = vals[2];
+            row.type = vals[3];
+            row.floor = ParseInt(vals[4]);
+            row.diflev = ParseInt(vals[5]);
+            row.eftTime = ParseInt(vals[6]);
+            row.imm = ParseBool(vals[7]);
+            StageTable.debuffStunTableList.Add(row);
+        }
+    }
+    #endregion
+    #region BoxData
+    // ArrowDataTable.csv
+    public static void LoadArrowDataCSV()
+    {
+        BoxDataTable.arrowDataList.Clear();
+
+        TextAsset data = Resources.Load<TextAsset>("ArrowDataTable");
+        if (data == null)
+        {
+            Debug.LogError("ArrowDataTable.csv 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            ArrowDataTableRow row = new ArrowDataTableRow();
+            row.index = GetValue(vals, 0);
+            row.name = GetValue(vals, 1);
+            row.dec = GetValue(vals, 2);
+            row.floor = ParseInt(GetValue(vals, 3));
+            row.waring = ParseBool(GetValue(vals, 4));
+            row.arrowPer = ParseInt(GetValue(vals, 5));
+            row.arrowSP = ParseFloat(GetValue(vals, 6));
+            row.timing = ParseFloat(GetValue(vals, 7));
+            row.damege = ParseInt(GetValue(vals, 8));
+            BoxDataTable.arrowDataList.Add(row);
+        }
+    }
+    // BoxDataTable.csv
+    public static void LoadBoxDataCSV()
+    {
+        BoxDataTable.boxDataList.Clear();
+        TextAsset data = Resources.Load<TextAsset>("BoxDataTable");
+        if (data == null)
+        {
+            Debug.LogError("BoxDataTable.csv 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            BoxDataTableRow row = new BoxDataTableRow();
+            row.index = GetValue(vals, 0);
+            row.name = GetValue(vals, 1);
+            row.dec = GetValue(vals, 2);
+            row.floor = ParseInt(GetValue(vals, 3));
+            row.box = ParseBool(GetValue(vals, 4));
+            row.boxCount = ParseInt(GetValue(vals, 5));
+            row.oneBoxPer = ParseInt(GetValue(vals, 6));
+            row.twoBoxPer = ParseInt(GetValue(vals, 7));
+            row.thrBoxPer = ParseInt(GetValue(vals, 8));
+            BoxDataTable.boxDataList.Add(row);
+        }
+    }
+    // GoldBoxDataTable.csv
+    public static void LoadGoldBoxDataCSV()
+    {
+        BoxDataTable.goldBoxDataList.Clear();
+        TextAsset data = Resources.Load<TextAsset>("GoldBoxDataTable");
+        if (data == null)
+        {
+            Debug.LogError("GoldBoxDataTable.csv 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            GoldBoxDataTableRow row = new GoldBoxDataTableRow();
+
+            row.index = GetValue(vals, 0);
+            row.name = GetValue(vals, 1);
+            row.dec = GetValue(vals, 2);
+            row.floor = ParseInt(GetValue(vals, 3));
+            row.goldPer = ParseInt(GetValue(vals, 4));
+            row.goldRe = ParseInt(GetValue(vals, 5));
+
+            BoxDataTable.goldBoxDataList.Add(row);
+        }
+    }
+    // NekoManDataTable.csv
+    public static void LoadNekoManDataCSV()
+    {
+        BoxDataTable.nekoManDataList.Clear();
+        TextAsset data = Resources.Load<TextAsset>("NekoManDataTable");
+        if (data == null)
+        {
+            Debug.LogError("NekoManDataTable.csv 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            NekoManDataTableRow row = new NekoManDataTableRow();
+            row.index = GetValue(vals, 0);
+            row.name = GetValue(vals, 1);
+            row.dec = GetValue(vals, 2);
+            row.floor = ParseInt(GetValue(vals, 3));
+            row.waring = ParseBool(GetValue(vals, 4));
+            row.nekoPer = ParseInt(GetValue(vals, 5));
+            row.neokSP = ParseFloat(GetValue(vals, 6));
+            row.timing = ParseFloat(GetValue(vals, 7));
+            row.damege = ParseInt(GetValue(vals, 8));
+            BoxDataTable.nekoManDataList.Add(row);
+        }
+    }
+    // PlusLPDataTable.csv
+    public static void LoadPlusLPDataCSV()
+    {
+        BoxDataTable.plusLPDataList.Clear();
+        TextAsset data = Resources.Load<TextAsset>("PlusLPDataTable");
+        if (data == null)
+        {
+            Debug.LogError("PlusLPDataTable.csv 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            PlusLPDataTableRow row = new PlusLPDataTableRow();
+            row.index = GetValue(vals, 0);
+            row.name = GetValue(vals, 1);
+            row.dec = GetValue(vals, 2);
+            row.floor = ParseInt(GetValue(vals, 3));
+            row.plusL = ParseInt(GetValue(vals, 4));
+            row.lpPer = ParseInt(GetValue(vals, 5));
+            row.oneLPPer = ParseInt(GetValue(vals, 6));
+            row.twoLPPer = ParseInt(GetValue(vals, 7));
+            BoxDataTable.plusLPDataList.Add(row);
+        }
+    }
+    #endregion
+
 
     private static string GetValue(string[] arr, int idx)
     {
