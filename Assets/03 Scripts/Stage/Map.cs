@@ -94,12 +94,12 @@ public class Map : MonoBehaviour
             pPrefab = Instantiate(p, spawnPos, Quaternion.identity);
             StoryManager.storyInstance.story = pPrefab.GetComponent<Story>();
         }
-        else if (StageManager.instance.floor == 10) { StoryManager.storyInstance.storyTalk.StoryInit();Debug.Log("10층"); }
-        else if (StageManager.instance.floor == 14) { Debug.Log("14층"); }
-        else if (StageManager.instance.floor == 20) { StoryManager.storyInstance.storyTalk.StoryInit(); Debug.Log("20층"); }
-        else if (StageManager.instance.floor == 30 && StoryManager.storyInstance.storyTalk.isClear) { StoryManager.storyInstance.storyTalk.StoryInit(); Debug.Log("30층"); }
+        else if (StageManager.instance.floor == 10) { StoryManager.storyInstance.storyTalk.StoryInit();}
+        else if (StageManager.instance.floor == 14) { }
+        else if (StageManager.instance.floor == 20) { StoryManager.storyInstance.storyTalk.StoryInit();}
+        else if (StageManager.instance.floor == 30 && StoryManager.storyInstance.storyTalk.isClear) { StoryManager.storyInstance.storyTalk.StoryInit();}
 
-        else { nextFloorPortal.SetActive(true); Debug.Log("그외층"); }
+        else { nextFloorPortal.SetActive(true); }
     }
 
     public void TutorialPortalClose()

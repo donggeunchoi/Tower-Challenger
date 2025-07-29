@@ -15,7 +15,7 @@ public class StoryTalk : MonoBehaviour, IInteractable
     private GameObject story; // 프리펩 복사본
 
     public bool isButton; // 버튼을 눌렀는지 여부
-    public bool isClear;
+    public bool isClear; // 클리어 했는지 여부(30층에서 사용)
     private bool isTalking; // 스토리 진행중인지 여부
     private int storyFloor;
 
@@ -24,7 +24,8 @@ public class StoryTalk : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        isButton = false;     
+        isButton = false;
+        isClear = false;
     }
     public void SetPlayer(GameObject _player)
     {
@@ -53,9 +54,6 @@ public class StoryTalk : MonoBehaviour, IInteractable
         {
             ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
             ui.image.sprite = storys[storyFloor].lines[count].charImage;
-
-            Debug.Log(ui.talk.text);
-            Debug.Log(ui.image.sprite);
         }
         else
         {
@@ -93,8 +91,12 @@ public class StoryTalk : MonoBehaviour, IInteractable
         story = Instantiate(StoryManager.storyInstance.storyUi.canvas);
 
         ui = story.GetComponent<StoryUi>();
-        ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
-        ui.image.sprite = storys[storyFloor].lines[count].charImage;
+        if (ui.talk.text != null && storys[storyFloor].lines[count].dialogueTest != null)
+            ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
+        if (ui.image.sprite != null && storys[storyFloor].lines[count].charImage != null)
+            ui.image.sprite = storys[storyFloor].lines[count].charImage;
+        //ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
+        //ui.image.sprite = storys[storyFloor].lines[count].charImage;
 
         isButton = true;
     }
