@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         {
             if (storyManagerPrefab != null)
                 Instantiate(storyManagerPrefab);
+        }
 
         if (FindAnyObjectByType(typeof(PoolManager)) == null)
         {
