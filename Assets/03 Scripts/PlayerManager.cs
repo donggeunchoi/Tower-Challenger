@@ -42,9 +42,13 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerSetting()
     {
-        player = null;
-        player = Instantiate(playerPrefab);
+        if (player == null)
+        {
+            player = null;
+            player = Instantiate(playerPrefab);
+        }
 
+        Debug.Log("플레이어 입장이오 : " + player);
         if (player != null)
         {
             player.layer = layerNumber;

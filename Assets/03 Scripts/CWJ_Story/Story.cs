@@ -21,43 +21,40 @@ public class Story : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Layer();
+        if (map.sr.enabled == false) return;
+
+        if (StageManager.instance.floor == 14)
+        {
+            StoryManager.storyInstance.storyTalk.StoryInit();
+            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+        }
+
     }
 
-    private void Layer()
-    {
-        // 소환될 때 레이어 변경
-        if (map.nextFloorPortal.layer == 20)
-        {
-            this.gameObject.layer = 20;
-            sr.sortingLayerName = potalSr.sortingLayerName;
-        }
-        else if(map.nextFloorPortal.layer == 21)
-        {
-            this.gameObject.layer = 21;
-            sr.sortingLayerName = potalSr.sortingLayerName;
-        }
-        else if(map.nextFloorPortal.layer == 22)
-        {
-            this.gameObject.layer = 22;
-            sr.sortingLayerName = potalSr.sortingLayerName;
-        }
-    }
-
-    //public void Interact()
+    //private void Start()
     //{
-    //    Debug.Log(StoryManager.storyInstance.storyTalk.isButton);
-    //    if (!StoryManager.storyInstance.storyTalk.isButton)
+    //    Layer();
+    //}
+
+    //private void Layer()
+    //{
+    //    // 소환될 때 레이어 변경
+    //    if (map.nextFloorPortal.layer == 20)
     //    {
-    //        Debug.Log("스토리스크립트 초기화");
-    //        StoryManager.storyInstance.storyTalk.StoryInit();
+    //        this.gameObject.layer = 20;
+    //        sr.sortingLayerName = potalSr.sortingLayerName;
     //    }
-    //    else
+    //    else if(map.nextFloorPortal.layer == 21)
     //    {
-    //        Debug.Log("스토리스크립트 대화진행");
-    //        StoryManager.storyInstance.storyTalk.Dialogue();
+    //        this.gameObject.layer = 21;
+    //        sr.sortingLayerName = potalSr.sortingLayerName;
+    //    }
+    //    else if(map.nextFloorPortal.layer == 22)
+    //    {
+    //        this.gameObject.layer = 22;
+    //        sr.sortingLayerName = potalSr.sortingLayerName;
     //    }
     //}
 }

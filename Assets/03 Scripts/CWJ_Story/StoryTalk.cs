@@ -57,20 +57,34 @@ public class StoryTalk : MonoBehaviour, IInteractable
         }
         else
         {
-            story.SetActive(false);
+            if (StageManager.instance.floor == 14)
+            {
+                map.sr.enabled = false;
+            }
+            if (story != null)
+            {
+                story.SetActive(false);
+            }
             isTalking = false;
             PlayerManager.Instance.isMove = true;
 
             if (map.pPrefab != null)
             {
-                map.pPrefab.SetActive(false);
-                map.nextFloorPortal.SetActive(true);
+                if (StageManager.instance.floor != 14)
+                {
+                    map.pPrefab.SetActive(false);
+                    map.nextFloorPortal.SetActive(true);
+                }
             }
             else
             {
-                map.nextFloorPortal.SetActive(true);
+                if (StageManager.instance.floor != 14)
+                {
+                    map.nextFloorPortal.SetActive(true);
+                }
             }
         }
+
     }
 
     public void StoryInit()
@@ -91,12 +105,15 @@ public class StoryTalk : MonoBehaviour, IInteractable
         story = Instantiate(StoryManager.storyInstance.storyUi.canvas);
 
         ui = story.GetComponent<StoryUi>();
+        
         if (ui.talk.text != null && storys[storyFloor].lines[count].dialogueTest != null)
+        {
             ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
+        }
         if (ui.image.sprite != null && storys[storyFloor].lines[count].charImage != null)
+        {
             ui.image.sprite = storys[storyFloor].lines[count].charImage;
-        //ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
-        //ui.image.sprite = storys[storyFloor].lines[count].charImage;
+        }
 
         isButton = true;
     }
@@ -105,12 +122,10 @@ public class StoryTalk : MonoBehaviour, IInteractable
         // 
         if (!isButton)
         {
-            Debug.Log("스토리 초기화");
             StoryInit();
         }
         else
         {
-            Debug.Log("스토리 대화진행");
             Dialogue();
         }
     }
