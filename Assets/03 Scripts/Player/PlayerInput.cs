@@ -18,6 +18,7 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public float DashSpeed = 10f;           // 대쉬 스피드
     public float DashTime = 0.2f;           // 대쉬 지속 시간
     public float CooldownTime = 1f;         // 대쉬 쿨타임
+    public Image DashImage;                 // 대쉬 이미지
     public bool canDash = true;             // 대쉬 가능 여부
     public bool isDashing = false;          // 대쉬 중 여부
     public SpriteRenderer spriteRenderer;   // 방향 전환 이미지
@@ -25,6 +26,9 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     [Header("인벤토리")] 
     public GameObject InventoryPanel;
     public bool isInventory = false;
+
+    [Header("일시 정시")] 
+    public GameObject PasePanel;
 
     public Sprite speedUpSprite;
     public Sprite sandglassSprite;
@@ -158,6 +162,18 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
         // 대쉬 종료
         isDashing = false;
+        DashImage.gameObject.SetActive(true);
+        DashImage.fillAmount = 0f;
+
+        float timer = 0f;
+        while (timer < DashTime)
+        {
+            timer += Time.deltaTime;
+            DashImage.fillAmount = Mathf.Clamp01(timer / CooldownTime);
+            yield return null;
+        }
+        
+        DashImage.gameObject.SetActive(false);
 
         // 쿨타임 대기
         yield return new WaitForSeconds(CooldownTime);
@@ -183,5 +199,11 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public void SetKeyboardInput(Vector2 input)
     {
         keyboardInput = input;
+    }
+
+    public void OnClickPauseButton()
+    {
+        PasePanel.SetActive(true);
+        Time.timeScale = 0;
     }
 }

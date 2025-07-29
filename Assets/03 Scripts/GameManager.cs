@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public StageManager towerManager;
     public UIManager uiManager;
     public ItemManager itemManager;
+    public GameObject PoolManager;
 
     public GameObject towerManagerPrefab;
     public GameObject uiManagerPrefab;
@@ -69,10 +70,17 @@ public class GameManager : MonoBehaviour
             if (soundManagerPrefab != null)
                 Instantiate(soundManagerPrefab);
         }
+
         if (FindAnyObjectByType(typeof(StoryManager)) == null)
         {
             if (storyManagerPrefab != null)
                 Instantiate(storyManagerPrefab);
+
+        if (FindAnyObjectByType(typeof(PoolManager)) == null)
+        {
+            if (PoolManager != null)
+                Instantiate(PoolManager);
+
         }
     }
 

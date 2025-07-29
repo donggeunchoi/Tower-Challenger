@@ -42,6 +42,7 @@ public class TutorialManager : MonoBehaviour
         }
 
         currentIndex++;
+        
         if (currentIndex >= tutorialPrefabs.Count)
         {
             OnAllTutorialsCompleted();
