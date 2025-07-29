@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         {
             if (storyManagerPrefab != null)
                 Instantiate(storyManagerPrefab);
-
+        }
         if (FindAnyObjectByType(typeof(PoolManager)) == null)
         {
             if (PoolManager != null)
@@ -118,9 +118,16 @@ public class GameManager : MonoBehaviour
     void LoadMiniGameCSV()
     {
         CVSLoader.LoadMiniGameCSV();
+
+        CVSLoader.LoadBoxDataCSV();
+        CVSLoader.LoadArrowDataCSV();
+        CVSLoader.LoadGoldBoxDataCSV();
+        CVSLoader.LoadNekoManDataCSV();
+        CVSLoader.LoadPlusLPDataCSV();
+
         miniGameDataList = CVSLoader.miniGameDataList;
     }
-    
+
     public void LoadResourceData()
     {
         if (stamina != null)

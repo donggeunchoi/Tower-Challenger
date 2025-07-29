@@ -13,7 +13,11 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     private float deadZone = 0.15f;         // 민감도 조정
     public Vector2 JoystickInput => inputDir;
     private Vector2 keyboardInput = Vector2.zero;
+
+    public bool isMirror;
+
     [Header("움직임과 대쉬")]
+    public float originSpeed { get; private set;}
     public float speed = 5;                 // 기본 이동 속도
     public float DashSpeed = 10f;           // 대쉬 스피드
     public float DashTime = 0.2f;           // 대쉬 지속 시간
@@ -41,7 +45,11 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     void Start()
     {
+
+        originSpeed = speed;
+
         PlayerManager.Instance.isMove = true;
+
         stickBack = GetComponent<RectTransform>();
 
         radius = stick.sizeDelta.x * 0.5f;     //스틱의 크기의 절반을 반지름으로

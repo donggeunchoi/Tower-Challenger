@@ -9,7 +9,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void Awake()
     {   
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void LateUpdate()
