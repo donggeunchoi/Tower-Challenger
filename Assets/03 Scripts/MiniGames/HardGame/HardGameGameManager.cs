@@ -134,7 +134,7 @@ public class HardGameGameManager : MonoBehaviour
                         case 3:
                             newSpawnPos = new Vector3(-10f, -5f, Player.transform.position.z);
                             break;
-                        default:
+                        case 4:
                             shouldMove = false;
                             if (StageManager.instance)
                                 StageManager.instance.MiniGameResult(true);
