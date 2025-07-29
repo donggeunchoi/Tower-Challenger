@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HardGameGameManager : MonoBehaviour 
+public class HardGameGameManager : MonoBehaviour
 {
     public GameObject[] StraightBall;
     public GameObject[] TurnBall;
@@ -100,6 +100,11 @@ public class HardGameGameManager : MonoBehaviour
                 BG2.transform.position += new Vector3(backgroundWidth * 2f, 0f, 0f);
         }
     }
+    public void End()
+    {
+        Debug.Log("딸깍");
+        StageManager.instance.MiniGameResult(true);
+    }
 
     public void NextLv()
     {
@@ -113,29 +118,35 @@ public class HardGameGameManager : MonoBehaviour
                 if (Player)
                 {
                     Vector3 newSpawnPos = Vector3.zero;
+                    bool shouldMove = true;
 
-                    switch (i + 1)
+                    switch (i)
                     {
-                        case 1:
+                        case 0:
                             newSpawnPos = new Vector3(-6f, -5f, Player.transform.position.z);
                             break;
-                        case 2:
+                        case 1:
                             newSpawnPos = new Vector3(-8f, -4f, Player.transform.position.z);
                             break;
-                        case 3:
+                        case 2:
                             newSpawnPos = new Vector3(-8f, -3f, Player.transform.position.z);
                             break;
-                        case 4:
+                        case 3:
                             newSpawnPos = new Vector3(-10f, -5f, Player.transform.position.z);
                             break;
-                        case 5:
-                            if (StageManager.instance != null)
+                        default:
+                            shouldMove = false;
+                            if (StageManager.instance)
                                 StageManager.instance.MiniGameResult(true);
+                            Debug.Log("클리어");
                             break;
                     }
 
-                    Player.transform.position = newSpawnPos;
-                    Player.GetComponent<HardGamePlayer>().SetSpawn(newSpawnPos);
+                    if (shouldMove)
+                    {
+                        Player.transform.position = newSpawnPos;
+                        Player.GetComponent<HardGamePlayer>().SetSpawn(newSpawnPos);
+                    }
                 }
 
                 return;
