@@ -2,42 +2,45 @@
 
 public class MapObstacle : MonoBehaviour
 {
-    [SerializeField] private GameObject[] obstacleMap;
+    [SerializeField] private GameObject[] mapObstacle;
 
     [SerializeField] private int difficulty;
 
-
-    private void Start()
+    public void Init()
     {
-        for (int i = 0; i < obstacleMap.Length; i++)
+        for (int i = 0; i < mapObstacle.Length; i++)
         {
-            obstacleMap[i].gameObject.SetActive(false);
+            mapObstacle[i].gameObject.SetActive(false);
         }
-    }
 
-    private void Init()
-    {
         difficulty = CheckDifficuty();
-        int mapDif = Mathf.Min(difficulty, obstacleMap.Length);
+        int mapDif = Mathf.Min(difficulty, mapObstacle.Length);
 
         for (int i = 0; i < mapDif; i++)
         {
-            obstacleMap[i].gameObject.SetActive(true);
+            mapObstacle[i].gameObject.SetActive(true);
         }
     }
 
     private int CheckDifficuty()
     {
-        //if (StageManager.instance != null)
-        //{
-        //    StageManager.instance.floor 
-
-
-        //    switch (StageManager.instance.floor)
-        //    {
-        //        case 
-        //    }
-        //}
+        if (StageManager.instance != null)
+        {
+            if (StageManager.instance.floor <= 5)
+                difficulty = 1;
+            else if (StageManager.instance.floor <= 10)
+                difficulty = 2;
+            else if (StageManager.instance.floor <= 15)
+                difficulty = 3;
+            else if (StageManager.instance.floor <= 20)
+                difficulty = 4;
+            else if (StageManager.instance.floor <= 25)
+                difficulty = 5;
+            else
+                difficulty = 6;
+        }
+        else
+            difficulty = 1;
 
         return difficulty;
     }
