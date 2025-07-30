@@ -657,21 +657,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -425}
   m_SizeDelta: {x: 129, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &442965181920997603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7160245843065262740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aceb870b8215c644481593c152c42bf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 60
-  timerText: {fileID: 5086940746494645868}
-  uiBar: {fileID: 6388855669742715904}
 --- !u!222 &477396476603685378
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1409,7 +1394,6 @@ GameObject:
   - component: {fileID: 5398232851372256901}
   - component: {fileID: 477396476603685378}
   - component: {fileID: 211586805939587818}
-  - component: {fileID: 442965181920997603}
   m_Layer: 5
   m_Name: TimerUI
   m_TagString: Untagged

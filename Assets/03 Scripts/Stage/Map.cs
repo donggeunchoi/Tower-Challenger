@@ -16,10 +16,11 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject tutorialBox;
     [SerializeField] private GameObject stairs;
 
-    public SpriteRenderer sr;
-    public GameObject p;
-    public GameObject pPrefab;
-    public GameObject gameObject;
+    [HideInInspector] public SpriteRenderer myuraSr;
+    [HideInInspector] public GameObject p;
+    [HideInInspector] public GameObject myuraPrefab;
+    public GameObject MyuraGameObject;
+    [HideInInspector] public Collider2D myuraCd;
 
     public void Init()
     {
@@ -37,7 +38,8 @@ public class Map : MonoBehaviour
         }
         if (StageManager.instance.floor == 14)
         {
-            sr.enabled = true;
+            myuraSr.enabled = true;
+            myuraCd.enabled = true;
         }
         else if (StageManager.instance.floor == 30 && !StoryManager.storyInstance.storyTalk.isClear)
         {
@@ -48,8 +50,10 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
-        sr = gameObject.GetComponent<SpriteRenderer>();
-        sr.enabled = false;
+        myuraCd = MyuraGameObject.GetComponent<Collider2D>();
+        myuraSr = MyuraGameObject.GetComponent<SpriteRenderer>();
+        myuraSr.enabled = false;
+        myuraCd.enabled = false;
 
         nextFloorPortal.SetActive(false);
         for (int i = 0; i < nextStagePortal.Length; i++) //일단 다 꺼주고
@@ -113,8 +117,9 @@ public class Map : MonoBehaviour
         {
             Debug.Log("6층");
             Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(0, 0, 0);
-            pPrefab = Instantiate(p, spawnPos, Quaternion.identity);
-            StoryManager.storyInstance.story = pPrefab.GetComponent<Story>();
+            myuraPrefab = Instantiate(p, spawnPos, Quaternion.identity);
+            myuraPrefab.GetComponent<SpriteRenderer>().enabled = true;
+            StoryManager.storyInstance.story = myuraPrefab.GetComponent<Story>();
 
             StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }

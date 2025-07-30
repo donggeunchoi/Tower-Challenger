@@ -1665,7 +1665,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef67ba864d1ecc042b5f4cf48455c0a6, type: 3}
---- !u!1 &825666784 stripped
+--- !u!61 &825666784 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5628018141983903116, guid: ef67ba864d1ecc042b5f4cf48455c0a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 825666783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &825666785 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5628018141983903104, guid: ef67ba864d1ecc042b5f4cf48455c0a6,
     type: 3}
@@ -2753,10 +2759,11 @@ MonoBehaviour:
   tutorialPortal: {fileID: 0}
   tutorialBox: {fileID: 0}
   stairs: {fileID: 0}
-  sr: {fileID: 0}
+  myuraSr: {fileID: 0}
   p: {fileID: 5628018141983903104, guid: ef67ba864d1ecc042b5f4cf48455c0a6, type: 3}
-  pPrefab: {fileID: 0}
-  gameObject: {fileID: 825666784}
+  myuraPrefab: {fileID: 0}
+  MyuraGameObject: {fileID: 825666785}
+  myuraCd: {fileID: 825666784}
 --- !u!4 &1236596428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4476954077967853646, guid: c518d4ededd9a4d0ab4a5b115f6be373,

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class PrincessManager : MonoBehaviour
 {
@@ -8,7 +9,15 @@ public class PrincessManager : MonoBehaviour
     public EnemyPos enemyPos;
     public SpriteRenderer spriteRenderer;
 
+    [Header("시간")]
+    public float clearTime;
+    public float currentTime;
 
+    public bool clear;
+
+    [Header("UI")]
+    public TextMeshProUGUI timeText;
+    
     [Header("박쥐 이동속도")]
     public float batSpeed;
     [Header("박쥐가 최대로 올라가는 y값")]
@@ -22,6 +31,7 @@ public class PrincessManager : MonoBehaviour
 
     [Header("불덩이 이동속도")]
     public float fireSpeed;
+    
     private void Awake()
     {
         if (princessInstance == null)
@@ -33,6 +43,19 @@ public class PrincessManager : MonoBehaviour
 
     private void Start()
     {
+        clear = false;
         spriteRenderer.gameObject.SetActive(false);
+
+        timeText.text = Mathf.Max(0f, (clearTime - currentTime)).ToString("F1");
+    }
+
+    private void Update()
+    {
+        if (!clear)
+        {
+            currentTime += Time.deltaTime;
+            timeText.text = Mathf.Max(0f, (clearTime - currentTime)).ToString("F1");
+        }
+
     }
 }
