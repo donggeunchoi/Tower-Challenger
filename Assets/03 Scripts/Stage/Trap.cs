@@ -41,6 +41,10 @@ public class Trap : MonoBehaviour
                     playerBuff.StunDebuff();
                 break;
             case DebuffType.Hit:
+                player.TryGetComponent<PlayerBuff>(out playerBuff);
+                if (playerBuff != null)
+                    playerBuff.isHit();
+
                 if (StageManager.instance != null)
                     StageManager.instance.MiniGameResult(false);
                 break;
