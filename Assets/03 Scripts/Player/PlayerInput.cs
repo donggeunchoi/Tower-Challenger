@@ -66,10 +66,14 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     void FixedUpdate()
     {
-        if (!PlayerManager.Instance.isMove)
+        if (PlayerManager.Instance != null)
         {
-            return;
+            if (!PlayerManager.Instance.isMove)
+            {
+                return;
+            }
         }
+
         Vector2 finalInput = Vector2.zero;
 
         if (keyboardInput.sqrMagnitude > 0.01f)

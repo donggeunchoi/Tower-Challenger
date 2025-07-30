@@ -213,7 +213,7 @@ public class StageManager : MonoBehaviour
         {
             if (stageLP != null)
             {
-                //stageLP.LPdown();
+                stageLP.LPdown();
                 if (stageLP.currentLP <= 0)
                     GameOver();
             }

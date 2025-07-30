@@ -9,7 +9,7 @@ public enum DebuffType
 public class Trap : MonoBehaviour
 {
     [SerializeField] private DebuffType type;
-
+    public string trapId;
     private PlayerBuff playerBuff;
 
     private void Start()
@@ -47,6 +47,9 @@ public class Trap : MonoBehaviour
             default:
                 break;
         }
+        MapInfo.StageTempMemory.destroyedInfo.destroyedTrapIds.Add(trapId);
+        Destroy(this.gameObject);
+
         Destroy(this.gameObject);
     }
 

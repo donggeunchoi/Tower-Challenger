@@ -101,9 +101,6 @@ GameObject:
   - component: {fileID: 1105034027635185944}
   - component: {fileID: 3480779799274992094}
   - component: {fileID: 3757396867202095566}
-  - component: {fileID: 5709715671366093058}
-  - component: {fileID: 9025738033339824726}
-  - component: {fileID: 7531975307127500393}
   m_Layer: 20
   m_Name: PF Village Props - Chest Golden
   m_TagString: Untagged
@@ -229,7 +226,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.016609311, y: 0.32388735}
+  m_Offset: {x: -0.000034332275, y: 0.40676224}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -239,7 +236,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5647271, y: 1.1494865}
+  m_Size: {x: 1.9956765, y: 1.6688361}
   m_EdgeRadius: 0
 --- !u!114 &3757396867202095566
 MonoBehaviour:
@@ -256,116 +253,8 @@ MonoBehaviour:
   animator: {fileID: 6491913702539827632}
   boxType: 3
   reward: 0
-  objectPosition: {fileID: 0}
-  arrow: {fileID: 908338091820766451, guid: 5d1c29826b9426c459b5c29f74734d2f, type: 3}
-  stone: {fileID: 5186519590451335636, guid: c1c1d8992161ea74d8c6239df8e43939, type: 3}
---- !u!61 &5709715671366093058
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930122694965717508}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.26575375}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.4684925}
-  m_EdgeRadius: 0
---- !u!61 &9025738033339824726
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930122694965717508}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.016609311, y: 0.32388735}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.5647271, y: 1.1494865}
-  m_EdgeRadius: 0
---- !u!114 &7531975307127500393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930122694965717508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93e59399898bdaf458e4de0a0e52453c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 6491913702539827632}
-  boxType: 2
-  reward: 0
+  warningSign: {fileID: 42428825731115370, guid: aa3536fbef8b22c458eb06dca0e61508,
+    type: 3}
   objectPosition: {fileID: 0}
   arrow: {fileID: 908338091820766451, guid: 5d1c29826b9426c459b5c29f74734d2f, type: 3}
   stone: {fileID: 5186519590451335636, guid: c1c1d8992161ea74d8c6239df8e43939, type: 3}
