@@ -558,10 +558,11 @@ MonoBehaviour:
   tutorialPortal: {fileID: 1700898880}
   tutorialBox: {fileID: 2055102312003290483}
   stairs: {fileID: 140129620}
-  sr: {fileID: 0}
+  myuraSr: {fileID: 0}
   p: {fileID: 0}
-  pPrefab: {fileID: 0}
-  gameObject: {fileID: 247020408}
+  myuraPrefab: {fileID: 0}
+  MyuraGameObject: {fileID: 247020408}
+  myuraCd: {fileID: 247020409}
 --- !u!4 &58249272
 Transform:
   m_ObjectHideFlags: 0
@@ -1351,6 +1352,12 @@ PrefabInstance:
 --- !u!1 &247020408 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5628018141983903104, guid: ef67ba864d1ecc042b5f4cf48455c0a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 247020407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &247020409 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5628018141983903116, guid: ef67ba864d1ecc042b5f4cf48455c0a6,
     type: 3}
   m_PrefabInstance: {fileID: 247020407}
   m_PrefabAsset: {fileID: 0}
