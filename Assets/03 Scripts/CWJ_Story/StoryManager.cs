@@ -11,6 +11,7 @@ public class StoryManager : MonoBehaviour
     public Story story;
     public StoryUi storyUi;
     public StoryTalk storyTalk;
+    public Story_14Floor story_14Floor;
 
     public StoryData[] data;
 
