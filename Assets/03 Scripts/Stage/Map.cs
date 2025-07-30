@@ -30,7 +30,7 @@ public class Map : MonoBehaviour
             GameObject player = PlayerManager.Instance.playerPrefab;
             if (player != null)
             {
-                PlayerManager.Instance.player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
+                PlayerManager.Instance.player = Instantiate(player, startPlayerPosition.transform.position, Quaternion.identity);
                 PlayerManager.Instance.player.layer = startPlayerPosition.layer;
             }
         }
