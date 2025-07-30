@@ -66,7 +66,6 @@ public class DinoMiniGame : MonoBehaviour
         
         if (gameTimer <= 0 && !isGameOver)
         {
-            Debug.Log("여기 들어오니?");
             GameClear();
         }
     }

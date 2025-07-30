@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Map : MonoBehaviour
 {
     StageManager stageManager;
-
     Vector3 playerPosition;
 
     [SerializeField] private GameObject playerPrefab;
@@ -17,11 +16,15 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject tutorialBox;
     [SerializeField] private GameObject stairs;
 
+    public SpriteRenderer sr;
     public GameObject p;
     public GameObject pPrefab;
+    public GameObject gameObject;
 
     public void Init()
     {
+        StoryManager.storyInstance.storyTalk.isClear = false;
+
         playerPosition = startPlayerPosition.transform.position;
         if (PlayerManager.Instance != null)
         {
@@ -32,10 +35,22 @@ public class Map : MonoBehaviour
                 PlayerManager.Instance.player.layer = startPlayerPosition.layer;
             }
         }
+        if (StageManager.instance.floor == 14)
+        {
+            sr.enabled = true;
+        }
+        else if (StageManager.instance.floor == 30 && !StoryManager.storyInstance.storyTalk.isClear)
+        {
+            StoryManager.storyInstance.storyTalk.StoryInit();
+            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+        }
     }
 
     private void Start()
     {
+        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr.enabled = false;
+
         nextFloorPortal.SetActive(false);
         for (int i = 0; i < nextStagePortal.Length; i++) //일단 다 꺼주고
         {
@@ -88,19 +103,39 @@ public class Map : MonoBehaviour
 
     public void AllClearFloor()
     {
+
+        if (PlayerManager.Instance.player == null)
+        {
+            PlayerManager.Instance.PlayerSetting();
+        }
+        StoryManager.storyInstance.storyTalk.isClear = true;
         if (StageManager.instance.floor == 6)
         {
             Debug.Log("6층");
             Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(0, 0, 0);
             pPrefab = Instantiate(p, spawnPos, Quaternion.identity);
             StoryManager.storyInstance.story = pPrefab.GetComponent<Story>();
-        }
-        else if (StageManager.instance.floor == 10) { StoryManager.storyInstance.storyTalk.StoryInit();Debug.Log("10층"); }
-        else if (StageManager.instance.floor == 14) { Debug.Log("14층"); }
-        else if (StageManager.instance.floor == 20) { StoryManager.storyInstance.storyTalk.StoryInit(); Debug.Log("20층"); }
-        else if (StageManager.instance.floor == 30 && StoryManager.storyInstance.storyTalk.isClear) { StoryManager.storyInstance.storyTalk.StoryInit(); Debug.Log("30층"); }
 
-        else { nextFloorPortal.SetActive(true); Debug.Log("그외층"); }
+            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+        }
+        else if (StageManager.instance.floor == 10)
+        { 
+            StoryManager.storyInstance.storyTalk.StoryInit();
+            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+        }
+
+        else if (StageManager.instance.floor == 20)
+        {
+            StoryManager.storyInstance.storyTalk.StoryInit();
+            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+        }
+        else if (StageManager.instance.floor == 30 && StoryManager.storyInstance.storyTalk.isClear)
+        {
+            StoryManager.storyInstance.storyTalk.StoryInit();
+            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+        }
+
+        else { nextFloorPortal.SetActive(true); }
     }
 
     public void TutorialPortalClose()
