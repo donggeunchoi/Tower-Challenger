@@ -121,7 +121,7 @@ public class InteractionBox : MonoBehaviour, IInteractable
             Destroy(warSig);
         }
 
-        Arrow spawnStone = Instantiate(stone, this.transform.position, Quaternion.identity);
+        Arrow spawnStone = Instantiate(spawnArrow, this.transform.position, Quaternion.identity);
         spawnStone.Init(objectPosition);
         yield return null;
     }
