@@ -23,7 +23,7 @@ public class Story : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (map.sr.enabled == false) return;
+        if (map.myuraSr.enabled == false) return;
 
         if (StageManager.instance.floor == 14)
         {

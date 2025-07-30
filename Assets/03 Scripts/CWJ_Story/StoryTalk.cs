@@ -63,7 +63,8 @@ public class StoryTalk : MonoBehaviour, IInteractable
         {
             if (StageManager.instance.floor == 14)
             {
-                map.sr.enabled = false;
+                map.myuraSr.enabled = false;
+                map.myuraCd.enabled = false;
             }
             if (story != null)
             {
@@ -73,11 +74,11 @@ public class StoryTalk : MonoBehaviour, IInteractable
             isTalking = false;
             PlayerManager.Instance.isMove = true;
 
-            if (map.pPrefab != null)
+            if (map.myuraPrefab != null)
             {
                 if (StageManager.instance.floor != 14)
                 {
-                    map.pPrefab.SetActive(false);
+                    map.myuraPrefab.SetActive(false);
                     map.nextFloorPortal.SetActive(true);
                 }
             }
