@@ -9,7 +9,7 @@ public class GuildPannel : MonoBehaviour
     private Guild guild;
 
     [SerializeField] private Image characterSprite;
-    [SerializeField] private Image currencySprite;
+    // [SerializeField] private Image currencySprite;
     [SerializeField] private TextMeshProUGUI characterName;
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private TextMeshProUGUI price;
@@ -27,10 +27,10 @@ public class GuildPannel : MonoBehaviour
         if (characterSprite != null && characterData.inGameImage != null)
             characterSprite.sprite = characterData.inGameImage;
 
-        if (characterData.priceType == PriceType.dia)
-            currencySprite.sprite = diamond;
-        else if (characterData.priceType == PriceType.gold)
-            currencySprite.sprite = gold;
+        // if (characterData.priceType == PriceType.dia)
+        //     currencySprite.sprite = diamond;
+        // else if (characterData.priceType == PriceType.gold)
+        //     currencySprite.sprite = gold;
 
         price.text = characterData.Price.ToString();
         characterName.text = characterData.name;

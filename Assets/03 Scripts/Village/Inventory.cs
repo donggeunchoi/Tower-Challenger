@@ -41,7 +41,6 @@ public class Inventory : MonoBehaviour
         }
 
         UpdateInventory();
-        Debug.Log("활성화됨");
     }
 
     public void OnClickInventoryClose()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum SoundType { BGM, SFX }
 public class SoundManager : MonoBehaviour
@@ -27,6 +28,61 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, AudioClip> clipDictionary;
     private List<TemporarySoundPlayer> activaLoopSounds;
 
+    [SerializeField] private GameObject TotalVolumeBar;
+    [SerializeField] private GameObject BGXBar;
+    [SerializeField] private GameObject EFXBar;
+
+    public void FindVolumeBar()
+    {
+        TotalVolumeBar = GameObject.Find("MVolumeBar");
+        BGXBar = GameObject.Find("B.G.XBar");
+        EFXBar = GameObject.Find("E.F.XBar");
+
+        Scrollbar totalVolumeSlider = TotalVolumeBar.GetComponent<Scrollbar>();
+        Scrollbar bgxSlider = BGXBar.GetComponent<Scrollbar>();
+        Scrollbar efxSlider = EFXBar.GetComponent<Scrollbar>();
+
+        if (totalVolumeSlider != null)
+        {
+            totalVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+            SetMasterVolume(totalVolumeSlider.value); // 초기값 즉시 반영
+        }
+
+        if (bgxSlider != null)
+        {
+            bgxSlider.onValueChanged.AddListener(SetBGMVolume);
+            SetBGMVolume(bgxSlider.value); // 초기값 즉시 반영
+        }
+
+        if (efxSlider != null)
+        {
+            efxSlider.onValueChanged.AddListener(SetSFXVolume);
+            SetSFXVolume(efxSlider.value); // 초기값 즉시 반영
+        }
+    }
+    private void SetMasterVolume(float value)
+    {
+        audioMixer.SetFloat("A", VolumeToDecibel(value));
+    }
+
+    private void SetBGMVolume(float value)
+    {
+        audioMixer.SetFloat("BGM", VolumeToDecibel(value));
+    }
+
+    private void SetSFXVolume(float value)
+    {
+        audioMixer.SetFloat("SFX", VolumeToDecibel(value));
+    }
+    private float VolumeToDecibel(float value)
+    {
+        return Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20f;
+    }
+    private void Update()
+    {
+
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -40,8 +96,9 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         bgmSource = GetComponent<AudioSource>();
-
     }
+
+
     private void Start()
     {
         clipDictionary = new Dictionary<string, AudioClip>();
@@ -92,6 +149,7 @@ public class SoundManager : MonoBehaviour
                 PlayBGM(FindMusic("Village"));
                 break;
             case "TowerEntrance":
+            case "TutorialScene":
             case "GameScene":
                 PlayBGM(FindMusic("TowerEntrance_Lobby"));
                 break;
