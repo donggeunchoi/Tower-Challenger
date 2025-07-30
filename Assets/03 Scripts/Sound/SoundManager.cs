@@ -92,6 +92,7 @@ public class SoundManager : MonoBehaviour
                 PlayBGM(FindMusic("Village"));
                 break;
             case "TowerEntrance":
+            case "TutorialScene":
             case "GameScene":
                 PlayBGM(FindMusic("TowerEntrance_Lobby"));
                 break;
