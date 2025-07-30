@@ -2669,6 +2669,7 @@ PrefabInstance:
     - {fileID: 4947433728878860264, guid: c518d4ededd9a4d0ab4a5b115f6be373, type: 3}
     - {fileID: 6868568766074486420, guid: c518d4ededd9a4d0ab4a5b115f6be373, type: 3}
     - {fileID: 2191984832466588339, guid: c518d4ededd9a4d0ab4a5b115f6be373, type: 3}
+    - {fileID: 2084266613313829834, guid: c518d4ededd9a4d0ab4a5b115f6be373, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4476954077967853646, guid: c518d4ededd9a4d0ab4a5b115f6be373,
         type: 3}
@@ -2740,7 +2741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd871deb54dce1d41a9b3590091b1591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 825666784}
   playerPrefab: {fileID: 5992555420324306481, guid: a0c879e261f6860478bf4e4e262f95ed,
     type: 3}
   nextStagePortal:
@@ -2753,8 +2753,10 @@ MonoBehaviour:
   tutorialPortal: {fileID: 0}
   tutorialBox: {fileID: 0}
   stairs: {fileID: 0}
+  sr: {fileID: 0}
   p: {fileID: 5628018141983903104, guid: ef67ba864d1ecc042b5f4cf48455c0a6, type: 3}
   pPrefab: {fileID: 0}
+  gameObject: {fileID: 825666784}
 --- !u!4 &1236596428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4476954077967853646, guid: c518d4ededd9a4d0ab4a5b115f6be373,
@@ -3840,7 +3842,7 @@ Transform:
   m_GameObject: {fileID: 1713933659}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.21, y: -5.16, z: 0}
+  m_LocalPosition: {x: 5.79, y: -5.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

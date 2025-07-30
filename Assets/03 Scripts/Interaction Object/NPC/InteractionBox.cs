@@ -20,6 +20,8 @@ public class InteractionBox : MonoBehaviour, IInteractable
     [SerializeField] private BoxType boxType;
     [SerializeField] private int reward;
 
+    public string boxId;
+
     [SerializeField] private GameObject warningSign;
 
     [SerializeField] private Transform objectPosition;
@@ -108,8 +110,12 @@ public class InteractionBox : MonoBehaviour, IInteractable
     {
         if (warningSign != null)
         {
-            GameObject warSig = Instantiate(warningSign);
-            yield return new WaitForSeconds(2);
+            Vector3 warningPos = transform.position + Vector3.up * 1.1f;
+
+            Debug.LogWarning("날아간당!");
+
+            GameObject warSig = Instantiate(warningSign, warningPos, Quaternion.identity, this.transform);
+            yield return new WaitForSeconds(0.2f);
             Destroy(warSig);
         }
 
@@ -120,7 +126,7 @@ public class InteractionBox : MonoBehaviour, IInteractable
 
     public IEnumerator BoxDestroyCor()
     {
-
+        MapInfo.StageTempMemory.destroyedInfo.destroyedChestIds.Add(boxId);
 
         if (animator != null)
             animator.SetBool("IsOpened", true);

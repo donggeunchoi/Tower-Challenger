@@ -73,6 +73,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageManager: {fileID: 0}
   miniGameManager: {fileID: 0}
+  mapObstacle:
+  - {fileID: 5348872058217873507, guid: 0d1c1aac3fc1363459b4bf976da63a1f, type: 3}
+  - {fileID: 6389576344129112467, guid: d7babdf6c4aa4704db6d1363e1ffaa39, type: 3}
+  - {fileID: 5667271411218763280, guid: 2523c2fa853842b459f0769659d1b7d1, type: 3}
+  - {fileID: 3542542253520749200, guid: 41d99cf249671f3459d1ee63a3e19b09, type: 3}
+  currentObstacle: {fileID: 0}
   mapScenes:
   - TopScene-1
   - TopScene-2
