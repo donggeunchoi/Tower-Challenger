@@ -9,6 +9,7 @@ public class SlimeTower : MonoBehaviour
     public Transform spawnPosition; //스폰 포지션
     public Transform towerRoot;     //타워 포지션
     public int clearGameCount;      //몇개 쌓으면 클리어인지
+    public TMPro.TMP_Text clearText;
 
     [Header("쿨타임")]
     [SerializeField] private int maxStack = 3;  //슬라임을 던질 수 있는 최대 스택갯수
@@ -41,7 +42,8 @@ public class SlimeTower : MonoBehaviour
                 clearGameCount = data.clearGameCount;
             }
         }
-
+        
+        clearText.text = $"목표 갯수 : {clearGameCount.ToString()}";
         currentStack = maxStack;
         stackTimer = 0;
     }
