@@ -14,8 +14,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public Vector2 JoystickInput => inputDir;
     private Vector2 keyboardInput = Vector2.zero;
 
-    public bool isMirror;
-
     [Header("움직임과 대쉬")]
     public float originSpeed { get; private set;}
     public float speed = 5;                 // 기본 이동 속도

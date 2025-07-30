@@ -185,8 +185,15 @@ public class PlayerBuff : MonoBehaviour
         float slowSpeed = ParsePercent(slowDebuff.downSP);
 
         float beforSpeed = playerInput.speed;
-        playerInput.speed = playerInput.speed - (playerInput.speed * (slowSpeed / 100));
-        yield return new WaitForSeconds(slowDebuff.eftTime);
+        float time = 0;
+
+        while (time < slowDebuff.eftTime)
+        {
+            playerInput.speed = playerInput.speed - (playerInput.speed * (slowSpeed / 100));
+            time += Time.deltaTime;
+            yield return null;
+        }
+
         playerInput.speed = playerInput.originSpeed;
 
         isSlow = false;
@@ -220,8 +227,15 @@ public class PlayerBuff : MonoBehaviour
         isStun = true;
 
         float beforSpeed = playerInput.speed;
-        playerInput.speed = 0;
-        yield return new WaitForSeconds(stunDebuff.eftTime);
+        float time = 0;
+
+        while (time < stunDebuff.eftTime)
+        {
+            playerInput.speed = 0;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
         playerInput.speed = playerInput.originSpeed;
 
         isStun = false;

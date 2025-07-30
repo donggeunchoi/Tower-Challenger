@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.WSA;
 using static BoxDataTable;
 
 public enum BoxType
@@ -23,10 +21,9 @@ public class InteractionBox : MonoBehaviour, IInteractable
     public string boxId;
 
     [SerializeField] private GameObject warningSign;
-
-    //상의 후 결정
     [SerializeField] private GameObject goldSign;
-    [SerializeField] private GameObject defaltSign;
+    [SerializeField] private GameObject lpSign;
+
 
     [SerializeField] private Transform objectPosition;
     [SerializeField] private Arrow arrow;
@@ -77,18 +74,20 @@ public class InteractionBox : MonoBehaviour, IInteractable
                 if (GameManager.Instance != null)
                     GameManager.Instance.account.AddGold(reward);
 
-                Debug.Log("Gold" + reward);
+                Debug.Log(reward);
+
+                StartCoroutine(WarningCor(null, goldSign));
                 break;
             case BoxType.ArrowBox:
                 if (arrow != null)
                 {
-                    StartCoroutine(WarningCor(arrow));
+                    StartCoroutine(WarningCor(arrow, warningSign));
                 }
                 break;
             case BoxType.NekoManBox:
                 if (stone != null)
                 {
-                    StartCoroutine(WarningCor(stone));
+                    StartCoroutine(WarningCor(stone, warningSign));
                 }
                 break;
             default:
@@ -100,9 +99,15 @@ public class InteractionBox : MonoBehaviour, IInteractable
                     int rand = UnityEngine.Random.Range(1, 101);
 
                     if (rand <= oneLP)
+                    {
                         StageManager.instance.stageLP.HealLP(1);
-                    else if (rand <= oneLP+twoLP)
+                        StartCoroutine(WarningCor(null, lpSign));
+                    }
+                    else if (rand <= oneLP + twoLP)
+                    {
                         StageManager.instance.stageLP.HealLP(2);
+                        StartCoroutine(WarningCor(null, lpSign));
+                    }
                 }
                 break;
         }
@@ -110,23 +115,26 @@ public class InteractionBox : MonoBehaviour, IInteractable
         StartCoroutine(BoxDestroyCor());
     }
 
-    public IEnumerator WarningCor(Arrow spawnArrow)
+    public IEnumerator WarningCor(Arrow spawnArrow, GameObject sign)
     {
-        if (warningSign != null)
+        if (sign != null)
         {
             float chestHeight = 1.0f; 
             float warningSignHeight = 0.45f;
 
             Vector3 warningPos = transform.position + Vector3.up * (chestHeight / 2f + warningSignHeight / 2f + 0.05f);
 
-            GameObject warSig = Instantiate(warningSign, warningPos, Quaternion.identity);
+            GameObject warSig = Instantiate(sign, warningPos, Quaternion.identity);
 
             yield return new WaitForSeconds(0.5f);
             Destroy(warSig);
         }
 
-        Arrow spawnStone = Instantiate(spawnArrow, this.transform.position, Quaternion.identity);
-        spawnStone.Init(objectPosition);
+        if (spawnArrow != null)
+        {
+            Arrow spawnStone = Instantiate(spawnArrow, this.transform.position, Quaternion.identity);
+            spawnStone.Init(objectPosition);
+        }
         yield return null;
     }
 
