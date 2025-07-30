@@ -34,20 +34,18 @@ public class StoryManager : MonoBehaviour
 
     private void OnEnable()
     {
-        storyTalk.storys = new List<StoryData>();
+        storyTalk.storyList = new List<StoryData>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         for (int i = 0; i < data.Length; i++)
         {
-            storyTalk.storys.Add(data[i]);
+            storyTalk.storyList.Add(data[i]);
         }
 
         image = storyUi.image;
         textTalk = storyUi.talk;
         backGround = storyUi.canvas;
-
-        storyTalk.count = 0;
     }
 }

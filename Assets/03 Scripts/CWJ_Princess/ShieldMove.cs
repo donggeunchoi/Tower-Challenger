@@ -6,11 +6,15 @@ public class ShieldMove : MonoBehaviour
     public int graveityScale;
     public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 screenPos = context.ReadValue<Vector2>();
+        if (Camera.main != null)
+        {
+            Debug.Log("ㅇㅇㅇ");
+            Vector2 screenPos = context.ReadValue<Vector2>();
 
-        Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
-        transform.position = worldPos;
+            transform.position = worldPos;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

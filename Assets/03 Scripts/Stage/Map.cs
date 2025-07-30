@@ -18,7 +18,7 @@ public class Map : MonoBehaviour
 
     public GameObject mnyura_14;
     public GameObject mnyura;
-    [HideInInspector] public GameObject myuraPrefab;
+    public GameObject myuraPrefab;
 
     public void Init()
     {
@@ -36,11 +36,16 @@ public class Map : MonoBehaviour
         }
         if (StageManager.instance.floor == 14)
         {
+            StoryManager.storyInstance.storyTalk.BoolInit();
+
+            mnyura_14.SetActive(true);
             StoryManager.storyInstance.story_14Floor = mnyura_14.GetComponent<Story_14Floor>();
             StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
         else if (StageManager.instance.floor == 30 && !StoryManager.storyInstance.storyTalk.isClear)
         {
+            StoryManager.storyInstance.storyTalk.BoolInit();
+
             StoryManager.storyInstance.storyTalk.StoryInit();
             StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
@@ -100,32 +105,35 @@ public class Map : MonoBehaviour
 
     public void AllClearFloor()
     {
-        Debug.Log("0");
         if (PlayerManager.Instance.player == null)
-        {
             PlayerManager.Instance.PlayerSetting();
-        }
+
         StoryManager.storyInstance.storyTalk.isClear = true;
+
         if (StageManager.instance.floor == 6)
         {
-            Debug.Log("1");
+            StoryManager.storyInstance.storyTalk.BoolInit();
+
             Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(0, 0, 0); // 포탈 위치 반환
             myuraPrefab = Instantiate(mnyura, spawnPos, Quaternion.identity); // 포탈 위치에 프리펩 생성
+            
             StoryManager.storyInstance.story = myuraPrefab.GetComponent<Story>(); // 프리펩으로 변경
         }
         else if (StageManager.instance.floor == 10)
         {
-            Debug.Log("2");
+            StoryManager.storyInstance.storyTalk.BoolInit();
             StoryManager.storyInstance.storyTalk.StoryInit();
             StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
         else if (StageManager.instance.floor == 20)
         {
+            StoryManager.storyInstance.storyTalk.BoolInit();
             StoryManager.storyInstance.storyTalk.StoryInit();
             StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
         else if (StageManager.instance.floor == 30 && StoryManager.storyInstance.storyTalk.isClear)
         {
+            StoryManager.storyInstance.storyTalk.BoolInit();
             StoryManager.storyInstance.storyTalk.StoryInit();
             StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }

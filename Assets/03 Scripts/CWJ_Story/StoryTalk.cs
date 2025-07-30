@@ -1,37 +1,33 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class StoryTalk : MonoBehaviour, IInteractable
 {
-    [HideInInspector] public Map map;
+    public Map map;
+    public List<StoryData> storyList;
 
-    private Button interactionButton;          //상호작용 버튼
-    [SerializeField] private StoryUi ui;
-    private GameObject story; // 프리펩 복사본
 
-    public bool isButton; // 버튼을 눌렀는지 여부
-    public bool isClear; // 클리어 했는지 여부(30층에서 사용)
-    private bool isTalking; // 스토리 진행중인지 여부
+    private Button interactionButton;          // 대화 상호 작용 버튼
+    [SerializeField] private StoryUi prefabUi; // 프리펩의 ui를 담을 변수
+    private GameObject storyCanvas;            // 대화 UI복사본을 담는 변수
+
+    public bool isTalk;         // 스토리가 시작했는지
+    public bool isClear;        // 클리어 했는지 여부(30층에서 사용)
+    private bool isDialogue;    // 대화가 시작했는지
     private int storyFloor;
-
-    [HideInInspector] public int count;
-    [HideInInspector] public List<StoryData> storys;
+    private int count;          // 다음 대사로 넘기는 숫자
 
     private void Start()
     {
-        isButton = false;
-        isClear = false;
+        BoolInit();
     }
-    public void SetPlayer(GameObject _player)
+    public void SetPlayer(GameObject _player) // 플레이어 오브젝트 안에있는 버튼을 찾는 함수
     {
         Transform button = FindDeepChild(_player.transform, "InteractionButton ");
         button.GetComponent<Button>().onClick.AddListener(Interact);
     }
+
     private Transform FindDeepChild(Transform parent, string name)
     {
         foreach (Transform child in parent)
@@ -46,28 +42,26 @@ public class StoryTalk : MonoBehaviour, IInteractable
     }
     public void Dialogue()
     {
-        PlayerManager.Instance.isMove = false;
-        isTalking = true;
-        count++;
+        Debug.Log(isDialogue + ", " + count + ", " + storyList[storyFloor].lines.Length);
+        isDialogue = true; // 대화 시작
+        count++; // 다음 대사로 넘어감
 
-        if (isTalking == true && count < storys[storyFloor].lines.Length)
+        if (isDialogue && count < storyList[storyFloor].lines.Length)
         {
-            if (ui.talk.text != null && storys[storyFloor].lines[count].dialogueTest != null)
-                ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
+            Debug.Log("다음 대사");
+            if (prefabUi.talk.text != null && storyList[storyFloor].lines[count].dialogueTest != null)
+                prefabUi.talk.text = storyList[storyFloor].lines[count].dialogueTest;
 
-            if (ui.image.sprite != null && storys[storyFloor].lines[count].charImage != null)
-            ui.image.sprite = storys[storyFloor].lines[count].charImage;
-
+            if (prefabUi.image.sprite != null && storyList[storyFloor].lines[count].charImage != null)
+            prefabUi.image.sprite = storyList[storyFloor].lines[count].charImage;
         }
         else
         {
-            if (story != null)
-            {
-                story.SetActive(false);
-            }
+            if (storyCanvas != null)
+                storyCanvas.SetActive(false);
 
-            isTalking = false;
-            PlayerManager.Instance.isMove = true;
+            Debug.Log(map.myuraPrefab);
+            Debug.Log(map);
 
             if (map.myuraPrefab != null)
             {
@@ -80,23 +74,23 @@ public class StoryTalk : MonoBehaviour, IInteractable
             else
             {
                 if (StageManager.instance.floor != 14)
-                {
                     map.nextFloorPortal.SetActive(true);
-                }
             }
-            Debug.Log(StoryManager.storyInstance.story_14Floor.myura_14.activeSelf);
-            if (StoryManager.storyInstance.story_14Floor.myura_14.activeSelf)
-            {
-                StoryManager.storyInstance.story_14Floor.myura_14.SetActive(false);
-            }
-        }
+            map.mnyura_14.SetActive(false);
 
+            // 초기화
+            PlayerManager.Instance.isMove = true;
+        }
     }
 
     public void StoryInit()
     {
         map = GameObject.FindAnyObjectByType<Map>();
 
+        // 플레이어의 움직임을 멈춰
+        PlayerManager.Instance.isMove = false;
+
+        // 층에 따라 대화 배열을 변경
         if (StageManager.instance.floor == 6) storyFloor = 0;
         else if (StageManager.instance.floor == 10) storyFloor = 1;
         else if (StageManager.instance.floor == 14) storyFloor = 2;
@@ -104,34 +98,44 @@ public class StoryTalk : MonoBehaviour, IInteractable
         else if (StageManager.instance.floor == 30 && !isClear) storyFloor = 4;
         else if (StageManager.instance.floor == 30 && isClear) storyFloor = 5;
 
-        count = 0;
-        isTalking = false;
-
         // 스토리 대화 프리펩을 생성
-        story = Instantiate(StoryManager.storyInstance.storyUi.canvas);
+        storyCanvas = Instantiate(StoryManager.storyInstance.storyUi.canvas);
 
-        ui = story.GetComponent<StoryUi>();
+        // 복사본의 UI를 할당
+        prefabUi = storyCanvas.GetComponent<StoryUi>();
         
-        if (ui.talk.text != null && storys[storyFloor].lines[count].dialogueTest != null)
+        // 가장 첫번 째의 대화 텍스트와 이미지를 생성
+        if (prefabUi.talk.text != null && storyList[storyFloor].lines[count].dialogueTest != null)
         {
-            ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
+            prefabUi.talk.text = storyList[storyFloor].lines[count].dialogueTest;
         }
-        if (ui.image.sprite != null && storys[storyFloor].lines[count].charImage != null)
+        if (prefabUi.image.sprite != null && storyList[storyFloor].lines[count].charImage != null)
         {
-            ui.image.sprite = storys[storyFloor].lines[count].charImage;
+            prefabUi.image.sprite = storyList[storyFloor].lines[count].charImage;
         }
 
-        isButton = true;
+        // 스토리가 시작했는지 여부
+        isTalk = true;
     }
     public void Interact()
     {
-        if (!isButton)
+        if (!isTalk) // 대화가 시작 안했다면
         {
             StoryInit();
         }
         else
         {
+            Debug.Log("클릭 대화");
+
             Dialogue();
         }
+    }
+
+    public void BoolInit()
+    {
+        isDialogue = false;
+        isTalk = false;
+        isClear = false;
+        count = 0;
     }
 }
