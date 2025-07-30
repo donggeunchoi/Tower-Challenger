@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using Unity.VisualScripting.AssemblyQualifiedNameParser;
+using Unity.VisualScripting;
 
 public class PlayerBuff : MonoBehaviour
 {
@@ -11,16 +12,127 @@ public class PlayerBuff : MonoBehaviour
     private StageTable.DebuffStunTableRow stunDebuff;
     [SerializeField] private float slowSpeed;
 
+    public SpriteRenderer playerSprite;
+
+    private bool isSlow;
+    private bool isStun;
+
+
     [SerializeField] private int difficulty;
 
     private Coroutine slowCor;
     private Coroutine stunCor;
 
+    private Coroutine slowEftCor;
+    private Coroutine stunEftCor;
+    private Coroutine hitEftCor;
+
     private void Start()
     {
         CVSLoader.LoadDebuffCSV();
         CVSLoader.LoadDebuffStunCSV();
+
+        isSlow = false;
+        isStun = false;
     }
+
+    private IEnumerator SlowEftCor()
+    {
+        Color playerColor = playerSprite.color;
+        float duration = 0.5f;
+
+        while (isSlow)
+        {
+            float time = 0f;
+            while (time < duration)
+            {
+                playerSprite.color = new Color(time / duration, playerColor.g, playerColor.b, playerColor.a);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            time = 0f;
+
+            while (time < duration)
+            {
+                playerSprite.color = new Color((duration - time) / duration, playerColor.g, playerColor.b, playerColor.a);
+                time += Time.deltaTime;
+                yield return null;
+            }
+        }
+        playerSprite.color = playerColor;
+
+        yield return null;
+    }
+
+    private IEnumerator HitEftCor()
+    {
+        bool isHit = true;
+        int stack = 3;
+        int currentStack = 0;
+        Color playerColor = playerSprite.color;
+        float duration = 0.2f;
+
+        while (isHit)
+        {
+            float time = 0f;
+            while (time < duration)
+            {
+                playerSprite.color = new Color(playerColor.r, playerColor.g, playerColor.b, 1/2);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            time = 0f;
+
+            while (time < duration)
+            {
+                playerSprite.color = new Color(playerColor.r, playerColor.g, playerColor.b, playerColor.a);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            currentStack++;
+            if (currentStack == stack)
+            {
+                isHit = false;
+            }
+        }
+        playerSprite.color = playerColor;
+
+        yield return null;
+    }
+
+    private IEnumerator StunEftCor()
+    {
+        Color playerColor = playerSprite.color;
+        float duration = 0.5f;
+
+        while (isStun)
+        {
+            float time = 0f;
+            while (time < duration)
+            {
+                playerSprite.color = new Color(playerColor.r, playerColor.g, 0, playerColor.a);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            time = 0f;
+
+            while (time < duration)
+            {
+                playerSprite.color = new Color(playerColor.r, playerColor.g, playerColor.b, playerColor.a);
+                time += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        playerSprite.color = playerColor;
+
+        yield return null;
+    }
+
 
     private void CheckFloor()
     {
@@ -37,6 +149,16 @@ public class PlayerBuff : MonoBehaviour
         }
     }
 
+    public void isHit()
+    {
+        if (playerSprite != null)
+        {
+            if (hitEftCor != null)
+                StopCoroutine(hitEftCor);
+            hitEftCor = StartCoroutine(HitEftCor());
+        }
+    }
+
     public void SlowDebuff()
     {
         CheckFloor();
@@ -47,16 +169,35 @@ public class PlayerBuff : MonoBehaviour
         if (slowCor != null)
             StopCoroutine(slowCor);
         slowCor = StartCoroutine(SlowEffect(input));
+
+        if (playerSprite != null)
+        {
+            if (slowEftCor != null)
+                StopCoroutine(slowEftCor);
+            slowCor = StartCoroutine(SlowEftCor());
+        }
     }
 
     private IEnumerator SlowEffect(PlayerInput playerInput)
     {
+        isSlow = true;
+
         float slowSpeed = ParsePercent(slowDebuff.downSP);
 
         float beforSpeed = playerInput.speed;
-        playerInput.speed = playerInput.speed - (playerInput.speed * (slowSpeed / 100));
-        yield return new WaitForSeconds(slowDebuff.eftTime);
+        float time = 0;
+
+        while (time < slowDebuff.eftTime)
+        {
+            playerInput.speed = playerInput.speed - (playerInput.speed * (slowSpeed / 100));
+            time += Time.deltaTime;
+            yield return null;
+        }
+
         playerInput.speed = playerInput.originSpeed;
+
+        isSlow = false;
+
         yield return null;
     }
 
@@ -70,16 +211,35 @@ public class PlayerBuff : MonoBehaviour
         if (slowCor != null)
             StopCoroutine(slowCor);
         if (stunCor != null)
-            StopCoroutine(stunCor); 
+            StopCoroutine(stunCor);
         stunCor = StartCoroutine(StunEffect(input));
+
+        if (playerSprite != null)
+        {
+            if (stunEftCor != null)
+                StopCoroutine(stunEftCor);
+            stunCor = StartCoroutine(StunEftCor());
+        }
     }
 
     private IEnumerator StunEffect(PlayerInput playerInput)
     {
+        isStun = true;
+
         float beforSpeed = playerInput.speed;
-        playerInput.speed = 0;
-        yield return new WaitForSeconds(stunDebuff.eftTime);
+        float time = 0;
+
+        while (time < stunDebuff.eftTime)
+        {
+            playerInput.speed = 0;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
         playerInput.speed = playerInput.originSpeed;
+
+        isStun = false;
+
         yield return null;
     }
 

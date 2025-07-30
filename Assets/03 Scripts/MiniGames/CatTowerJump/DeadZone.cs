@@ -34,6 +34,8 @@ public class DeadZone : MonoBehaviour
     {
         if (!other.CompareTag(playerTag)) return;
         
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(false);
         Debug.Log("떨어짐 여기도 LP 다운");
         
         float zDist = Mathf.Abs(target.transform.position.z - other.transform.position.z);

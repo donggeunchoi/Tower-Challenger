@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,11 @@ public class SlimeJumpManager : MonoBehaviour
 
     private float startY;
     [SerializeField]private float TargetY;
+    
+    [Header("미니게임 클리어 UI")]
+    public GameObject miniGameClearUI;
+    public Canvas mainCanvas;
+    private bool _clear = false;
     
     
     private void Awake()
@@ -34,8 +40,12 @@ public class SlimeJumpManager : MonoBehaviour
         float currentY = playerTransform.position.y;
         if (currentY > TargetY)
         {
-            //여기가 게임 클리어
-            // SlimeJumpManager.Instance.ClearGame();
+            if (!_clear)
+            {
+                _clear = true;
+                ShowClearUI();
+                StartCoroutine(WaitinTime());
+            }
         }
         
         CurrnetText.text = $"{currentY.ToString("N0")}m";
@@ -46,17 +56,44 @@ public class SlimeJumpManager : MonoBehaviour
         int currentY = Mathf.FloorToInt(value);
         TargetText.text = $"{currentY.ToString()}m";
     }
-
-
-    public void ClearGame()
+    
+    IEnumerator WaitinTime()
     {
-        StageManager.instance.MiniGameResult(true);
-        //이쪽에 다시 씬으로 넘기기
+        if(_clear == false) yield break;
+        
+        yield return new WaitForSeconds(1f);
+        
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(true);
+    }
+    
+    IEnumerator ScaleUp(RectTransform rect, float duration)
+    {
+        float time = 0f;
+        Vector3 from = Vector3.zero;
+        Vector3 to = Vector3.one;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, time / duration);
+            rect.localScale = Vector3.Lerp(from, to, t);
+            yield return null;
+        }
+        
+        rect.localScale = to;
     }
 
-    public void SlimeHit()
+    void ShowClearUI()
     {
-        StageManager.instance.MiniGameResult(false);
-        //여기에 패널 열어뿌지뭐
+        GameObject miniGameClear = Instantiate(miniGameClearUI,mainCanvas.transform);
+        miniGameClear.transform.SetAsLastSibling();
+        
+        var rt = miniGameClear.GetComponent<RectTransform>();
+        rt.pivot = new Vector2(0.5f, 0.5f);         // 하단 중앙
+        rt.anchoredPosition = Vector2.zero;       // 캔버스 하단 중앙
+        rt.localScale = Vector3.zero;             // 초기 스케일 0
+        
+        // 3) Scale 애니메이션
+        StartCoroutine(ScaleUp(rt, 0.5f));        // 0.5초 동안
     }
 }

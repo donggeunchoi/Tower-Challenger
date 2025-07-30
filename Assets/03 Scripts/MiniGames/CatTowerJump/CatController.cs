@@ -66,6 +66,9 @@ public class CatController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
+
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(false);
             //이곳이 LP다운이 되어야하는곳
             Debug.Log("장애물 충돌 이곳도 LP 다운");
           // SlimeJumpManager.Instance.SlimeHit();
