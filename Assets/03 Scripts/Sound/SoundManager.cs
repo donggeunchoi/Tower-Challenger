@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour
     }
     private void SetMasterVolume(float value)
     {
-        audioMixer.SetFloat("A", VolumeToDecibel(value));
+        audioMixer.SetFloat("Master", VolumeToDecibel(value));
     }
 
     private void SetBGMVolume(float value)
