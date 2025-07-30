@@ -124,6 +124,9 @@ public class EggGameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         animator.SetTrigger("Clear");
         yield return new WaitForSeconds(2f);
+
+        if (StageManager.instance != null)
+            StageManager.instance.MiniGameResult(true);
     }
 
     void EggBreak()

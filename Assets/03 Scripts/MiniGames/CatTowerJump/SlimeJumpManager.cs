@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,6 +34,9 @@ public class SlimeJumpManager : MonoBehaviour
         float currentY = playerTransform.position.y;
         if (currentY > TargetY)
         {
+            if (StageManager.instance != null)
+                StageManager.instance.MiniGameResult(true);
+
             //여기가 게임 클리어
             // SlimeJumpManager.Instance.ClearGame();
         }
