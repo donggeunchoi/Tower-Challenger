@@ -110,12 +110,14 @@ public class InteractionBox : MonoBehaviour, IInteractable
     {
         if (warningSign != null)
         {
-            Vector3 warningPos = transform.position + Vector3.up * 1.1f;
+            float chestHeight = 1.0f; 
+            float warningSignHeight = 0.45f;
 
-            Debug.LogWarning("날아간당!");
+            Vector3 warningPos = transform.position + Vector3.up * (chestHeight / 2f + warningSignHeight / 2f + 0.05f);
 
-            GameObject warSig = Instantiate(warningSign, warningPos, Quaternion.identity, this.transform);
-            yield return new WaitForSeconds(0.2f);
+            GameObject warSig = Instantiate(warningSign, warningPos, Quaternion.identity);
+
+            yield return new WaitForSeconds(0.5f);
             Destroy(warSig);
         }
 
