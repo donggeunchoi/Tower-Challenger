@@ -48,6 +48,8 @@ MonoBehaviour:
   story: {fileID: 672737578060911867, guid: ef67ba864d1ecc042b5f4cf48455c0a6, type: 3}
   storyUi: {fileID: 2561689670208244721, guid: 5ce3970fee5e50042bf2effc0c4b0f92, type: 3}
   storyTalk: {fileID: -38335708110616720}
+  story_14Floor: {fileID: -339744519768013553, guid: aa5a9d040d7765c418f59ddda5cb5f5d,
+    type: 3}
   data:
   - {fileID: 11400000, guid: 5724ce697b7ddfb47aa04e9cbe9ade38, type: 2}
   - {fileID: 11400000, guid: 390b759514b7b3d44bfff6483f03921a, type: 2}
@@ -67,8 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6636604d29fd9824cb695629a76647d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  ui: {fileID: 0}
   isButton: 0
-  buttonParent: {fileID: 5992555420324306481, guid: a0c879e261f6860478bf4e4e262f95ed,
-    type: 3}
+  isClear: 0
   count: 0
   storys: []

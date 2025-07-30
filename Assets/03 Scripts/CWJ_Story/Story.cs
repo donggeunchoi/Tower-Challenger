@@ -23,38 +23,16 @@ public class Story : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (map.myuraSr.enabled == false) return;
-
-        if (StageManager.instance.floor == 14)
-        {
-            StoryManager.storyInstance.storyTalk.StoryInit();
-            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
-        }
-
+         StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
     }
 
-    //private void Start()
-    //{
-    //    Layer();
-    //}
+    private void Start()
+    {
+        Layer();
+    }
 
-    //private void Layer()
-    //{
-    //    // 소환될 때 레이어 변경
-    //    if (map.nextFloorPortal.layer == 20)
-    //    {
-    //        this.gameObject.layer = 20;
-    //        sr.sortingLayerName = potalSr.sortingLayerName;
-    //    }
-    //    else if(map.nextFloorPortal.layer == 21)
-    //    {
-    //        this.gameObject.layer = 21;
-    //        sr.sortingLayerName = potalSr.sortingLayerName;
-    //    }
-    //    else if(map.nextFloorPortal.layer == 22)
-    //    {
-    //        this.gameObject.layer = 22;
-    //        sr.sortingLayerName = potalSr.sortingLayerName;
-    //    }
-    //}
+    private void Layer()
+    {
+        sr.sortingLayerName = potalSr.sortingLayerName;
+    }
 }

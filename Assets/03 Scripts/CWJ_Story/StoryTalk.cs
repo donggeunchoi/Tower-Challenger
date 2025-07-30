@@ -61,11 +61,6 @@ public class StoryTalk : MonoBehaviour, IInteractable
         }
         else
         {
-            if (StageManager.instance.floor == 14)
-            {
-                map.myuraSr.enabled = false;
-                map.myuraCd.enabled = false;
-            }
             if (story != null)
             {
                 story.SetActive(false);
@@ -88,6 +83,11 @@ public class StoryTalk : MonoBehaviour, IInteractable
                 {
                     map.nextFloorPortal.SetActive(true);
                 }
+            }
+            Debug.Log(StoryManager.storyInstance.story_14Floor.myura_14.activeSelf);
+            if (StoryManager.storyInstance.story_14Floor.myura_14.activeSelf)
+            {
+                StoryManager.storyInstance.story_14Floor.myura_14.SetActive(false);
             }
         }
 
@@ -125,7 +125,6 @@ public class StoryTalk : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        // 
         if (!isButton)
         {
             StoryInit();

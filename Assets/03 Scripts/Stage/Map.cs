@@ -16,17 +16,15 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject tutorialBox;
     [SerializeField] private GameObject stairs;
 
-    [HideInInspector] public SpriteRenderer myuraSr;
-    [HideInInspector] public GameObject p;
+    public GameObject mnyura_14;
+    public GameObject mnyura;
     [HideInInspector] public GameObject myuraPrefab;
-    public GameObject MyuraGameObject;
-    [HideInInspector] public Collider2D myuraCd;
 
     public void Init()
     {
-        StoryManager.storyInstance.storyTalk.isClear = false;
+        StoryManager.storyInstance.storyTalk.isClear = false; // 아직 클리어 전
 
-        playerPosition = startPlayerPosition.transform.position;
+        playerPosition = startPlayerPosition.transform.position; // 빈 오브젝트로 플레이어가 생성되는 위치를 저장
         if (PlayerManager.Instance != null)
         {
             GameObject player = PlayerManager.Instance.playerPrefab;
@@ -38,8 +36,8 @@ public class Map : MonoBehaviour
         }
         if (StageManager.instance.floor == 14)
         {
-            myuraSr.enabled = true;
-            myuraCd.enabled = true;
+            StoryManager.storyInstance.story_14Floor = mnyura_14.GetComponent<Story_14Floor>();
+            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
         else if (StageManager.instance.floor == 30 && !StoryManager.storyInstance.storyTalk.isClear)
         {
@@ -50,11 +48,6 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
-        myuraCd = MyuraGameObject.GetComponent<Collider2D>();
-        myuraSr = MyuraGameObject.GetComponent<SpriteRenderer>();
-        myuraSr.enabled = false;
-        myuraCd.enabled = false;
-
         nextFloorPortal.SetActive(false);
         for (int i = 0; i < nextStagePortal.Length; i++) //일단 다 꺼주고
         {
@@ -107,7 +100,7 @@ public class Map : MonoBehaviour
 
     public void AllClearFloor()
     {
-
+        Debug.Log("0");
         if (PlayerManager.Instance.player == null)
         {
             PlayerManager.Instance.PlayerSetting();
@@ -115,20 +108,17 @@ public class Map : MonoBehaviour
         StoryManager.storyInstance.storyTalk.isClear = true;
         if (StageManager.instance.floor == 6)
         {
-            Debug.Log("6층");
-            Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(0, 0, 0);
-            myuraPrefab = Instantiate(p, spawnPos, Quaternion.identity);
-            myuraPrefab.GetComponent<SpriteRenderer>().enabled = true;
-            StoryManager.storyInstance.story = myuraPrefab.GetComponent<Story>();
-
-            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+            Debug.Log("1");
+            Vector3 spawnPos = nextFloorPortal.transform.position + new Vector3(0, 0, 0); // 포탈 위치 반환
+            myuraPrefab = Instantiate(mnyura, spawnPos, Quaternion.identity); // 포탈 위치에 프리펩 생성
+            StoryManager.storyInstance.story = myuraPrefab.GetComponent<Story>(); // 프리펩으로 변경
         }
         else if (StageManager.instance.floor == 10)
-        { 
+        {
+            Debug.Log("2");
             StoryManager.storyInstance.storyTalk.StoryInit();
             StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
-
         else if (StageManager.instance.floor == 20)
         {
             StoryManager.storyInstance.storyTalk.StoryInit();
