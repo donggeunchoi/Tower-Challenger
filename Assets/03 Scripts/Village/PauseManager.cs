@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
@@ -9,6 +9,7 @@ public class PauseManager : MonoBehaviour
     public void OnClickSettingPanel()
     {
         SattingPanel.SetActive(true);
+        SoundManager.instance.FindVolumeBar();
     }
 
     public void OnClickSettingClose()
