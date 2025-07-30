@@ -90,10 +90,10 @@ public class SellGameManager : MonoBehaviour
     {
         Blocker.SetActive(true);
         StartGameBtn.SetActive(false);
-        fadeIn.SetActive(true);
+        //fadeIn.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
-        fadeIn.SetActive(false);
+       // yield return new WaitForSeconds(1f);
+        //fadeIn.SetActive(false);
 
         yield return new WaitForSeconds(1f);
         Card[0].GetComponent<Animator>().SetTrigger("ThisCard");
