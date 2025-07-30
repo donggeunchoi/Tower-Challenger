@@ -11,7 +11,7 @@ public class StoryTalk : MonoBehaviour, IInteractable
     [HideInInspector] public Map map;
 
     private Button interactionButton;          //상호작용 버튼
-    [SerializeField]private StoryUi ui;
+    [SerializeField] private StoryUi ui;
     private GameObject story; // 프리펩 복사본
 
     public bool isButton; // 버튼을 눌렀는지 여부
@@ -24,7 +24,7 @@ public class StoryTalk : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        isButton = false;     
+        isButton = false;
     }
     public void SetPlayer(GameObject _player)
     {
@@ -48,18 +48,22 @@ public class StoryTalk : MonoBehaviour, IInteractable
         PlayerManager.Instance.isMove = false;
         isTalking = true;
         count++;
-        
+
         if (isTalking == true && count < storys[storyFloor].lines.Length)
         {
-            ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
+            if (ui.talk.text != null && storys[storyFloor].lines[count].dialogueTest != null)
+                ui.talk.text = storys[storyFloor].lines[count].dialogueTest;
+
+            if (ui.image.sprite != null && storys[storyFloor].lines[count].charImage != null)
             ui.image.sprite = storys[storyFloor].lines[count].charImage;
 
-            Debug.Log(ui.talk.text);
-            Debug.Log(ui.image.sprite);
+            //Debug.Log(ui.talk.text);
+            //Debug.Log(ui.image.sprite);
         }
         else
         {
-            story.SetActive(false);
+            if (story != null)
+                story.SetActive(false);
             isTalking = false;
             PlayerManager.Instance.isMove = true;
 

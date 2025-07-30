@@ -10,7 +10,9 @@ public class TowerManager : MonoBehaviour
     public MiniGameManager miniGameManager;
     private int mapIndex = -1;
 
-    [SerializeField] private GameObject mapObstacle;
+    [SerializeField] private MapObstacle[] mapObstacle;
+    public MapObstacle currentObstacle;
+
 
     [SerializeField] private string[] mapScenes;
     public string currentSceneName;   //현재 씬 이름
@@ -40,7 +42,7 @@ public class TowerManager : MonoBehaviour
         foreach (StageManager sm in stageManagers)
         {
             if (sm.gameObject != this.gameObject)
-            { 
+            {
                 Destroy(sm.gameObject);
             }
         }
@@ -74,9 +76,13 @@ public class TowerManager : MonoBehaviour
             randomSceneNum = Random.Range(0, mapScenes.Length);
         }
         while (randomSceneNum == mapIndex);
-        
+
         mapIndex = randomSceneNum;
         string mapName = mapScenes[randomSceneNum];
+
+        if (mapObstacle[randomSceneNum] != null)
+            currentObstacle = mapObstacle[randomSceneNum];
+
         return mapName;
     }
 
@@ -85,13 +91,24 @@ public class TowerManager : MonoBehaviour
         AsyncOperation ansynLoad;
 
         if (isBoss)
+        {
             ansynLoad = SceneManager.LoadSceneAsync("BossRoom");
+            currentObstacle = null;
+        }
         else
             ansynLoad = SceneManager.LoadSceneAsync(LoadRandomMap()); //어씬크
 
         while (!ansynLoad.isDone)
         {
             yield return null;
+        }
+
+        MapInfo.StageTempMemory.destroyedInfo = new MapInfo.DestroyedItemInfo();
+
+        if (currentObstacle != null)
+        {
+            MapObstacle thisObstacle = Instantiate(currentObstacle);
+            thisObstacle.Init();
         }
 
         Map map = FindAnyObjectByType<Map>();
@@ -114,12 +131,34 @@ public class TowerManager : MonoBehaviour
             map.AllClearFloor();
         }
 
+        if (currentObstacle != null)
+        {
+            MapObstacle thisObstacle = Instantiate(currentObstacle);
+            thisObstacle.Init();
+
+            RestoreDestroyedObjects();
+        }
         PlayerManager.Instance.PlayerSetting();  //플레이어 놓기
         StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         if (StageManager.instance.isGameActive)
         {
             if (StageManager.instance.stageClearPortal.Count == 0)
                 StageManager.instance.ResetClearPortal();
+        }
+    }
+
+    void RestoreDestroyedObjects()
+    {
+        foreach (Trap trap in FindObjectsByType<Trap>(FindObjectsSortMode.None))
+        {
+            if (MapInfo.StageTempMemory.destroyedInfo.destroyedTrapIds.Contains(trap.trapId))
+                trap.gameObject.SetActive(false);
+        }
+
+        foreach (InteractionBox box in FindObjectsByType<InteractionBox>(FindObjectsSortMode.None))
+        {
+            if (MapInfo.StageTempMemory.destroyedInfo.destroyedChestIds.Contains(box.boxId))
+                box.gameObject.SetActive(false);
         }
     }
 }
