@@ -24,6 +24,10 @@ public class InteractionBox : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject warningSign;
 
+    //상의 후 결정
+    [SerializeField] private GameObject goldSign;
+    [SerializeField] private GameObject defaltSign;
+
     [SerializeField] private Transform objectPosition;
     [SerializeField] private Arrow arrow;
     [SerializeField] private Arrow stone;
