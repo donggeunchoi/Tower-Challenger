@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class QuickGameUI : MonoBehaviour
 {
-    public GameObject Panel;
+    public GameObject panel;
+    public TMPro.TMP_Text warningText;
     
     public void OnClickUseTicket()
     {
@@ -35,10 +37,20 @@ public class QuickGameUI : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
+
+            if (GameManager.Instance.stamina.mainStamina <= 0)
+            {
+                warningText.text = "스테미나가 없습니다.";
+                StartCoroutine(WarningText());
+                return;
+            }
+            
+            
             if (GameManager.Instance.stamina.mainStamina > 0)
             {
                 GameManager.Instance.stamina.UseStamina();
             }
+           
         }
         
         bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
@@ -54,6 +66,14 @@ public class QuickGameUI : MonoBehaviour
 
     public void OnClickCancel()
     {
-        Panel.SetActive(false);
+        panel.SetActive(false);
+    }
+
+
+    IEnumerator WarningText()
+    {
+        yield return new WaitForSeconds(1f);
+        
+        warningText.text = "스테미나를 사용해서 타워에 입장하겠습니까?";
     }
 }
