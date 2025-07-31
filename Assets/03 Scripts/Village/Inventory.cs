@@ -120,9 +120,9 @@ public class Inventory : MonoBehaviour
             slot.itemData = items[i];                                    //해당 슬롯의 아이템 데이터를 넣어주고!
 
             newSlot.GetComponentInChildren<TMP_Text>().text = items[i].itemName; //아이템 이름이랑 이미지!
-            newSlot.GetComponent<Image>().sprite = items[i].icon;                //코드는 동일!
             
             
+            // newSlot.GetComponentInChildren<Image>().sprite = items[i].icon;                //코드는 동일!
             // newSlot.GetComponentInChildren<TMPro.TMP_Text>().text = items[i];
             // newSlot.GetComponent<InventorySlot>().itemName = items[i];
             // newSlot.GetComponent<Image>().sprite = items[i];
@@ -155,7 +155,9 @@ public class Inventory : MonoBehaviour
             slot.itemData = items[i];                                    //해당 슬롯의 아이템 데이터를 넣어주고!
 
             newSlot.GetComponentInChildren<TMP_Text>().text = items[i].itemName; //아이템 이름이랑 이미지!
-            newSlot.GetComponent<Image>().sprite = items[i].icon;                //코드는 동일!
+            
+            
+            // newSlot.GetComponentInChildren<Image>().sprite = items[i].icon;                //코드는 동일!
         }
     }
 }

@@ -1,10 +1,16 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
     public ItemData itemData; //바뀐부분! 아이템 데이터로 들고있기!
+    public Image icon;
 
+    void Start()
+    {
+        icon.sprite = itemData.icon;
+    }
     
     public void OnClickUse()
     {
@@ -12,6 +18,7 @@ public class InventorySlot : MonoBehaviour
         if (itemData != null)
         {
             Items items = this.GetComponent<Items>();
+            
             switch (itemData.type) //타입으로 실행!
             {
                 case ItemType.TopTicket:  //티켓인 경우!
