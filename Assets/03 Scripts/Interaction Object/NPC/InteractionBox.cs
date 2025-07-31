@@ -73,6 +73,7 @@ public class InteractionBox : MonoBehaviour, IInteractable
                     reward = goldBoxDataList.Find(r => r.floor == StageManager.instance.floor).goldRe;
                 if (GameManager.Instance != null)
                     GameManager.Instance.account.AddGold(reward);
+                SoundManager.instance.PlaySound2D("goldGetSFX");
 
                 Debug.Log(reward);
 
@@ -82,12 +83,14 @@ public class InteractionBox : MonoBehaviour, IInteractable
                 if (arrow != null)
                 {
                     StartCoroutine(WarningCor(arrow, warningSign));
+                    SoundManager.instance.PlaySound2D("warningSFX");
                 }
                 break;
             case BoxType.NekoManBox:
                 if (stone != null)
                 {
                     StartCoroutine(WarningCor(stone, warningSign));
+                    SoundManager.instance.PlaySound2D("warningSFX");
                 }
                 break;
             default:
@@ -108,6 +111,7 @@ public class InteractionBox : MonoBehaviour, IInteractable
                         StageManager.instance.stageLP.HealLP(2);
                         StartCoroutine(WarningCor(null, lpSign));
                     }
+                    SoundManager.instance.PlaySound2D("lpGetSFX");
                 }
                 break;
         }
