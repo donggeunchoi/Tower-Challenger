@@ -151,5 +151,9 @@ public class VillageManager : MonoBehaviour
         MailBox.SetActive(false);
     }
     
+    public void OnClickEndTutorial()
+    {
+       tutorialCanvas.gameObject.SetActive(false);
+    }
     
 }
