@@ -37,10 +37,16 @@ public class InteractionPortal : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             if (portalType == PortalType.StartGame)
-                StageManager.instance.StartGame();
+                StartCoroutine(StartGameRoutine());
 
             layerNumber = other.gameObject.layer;
             playerPosition = other.transform.position;
         }
+    }
+    
+    private IEnumerator StartGameRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StageManager.instance.StartGame();
     }
 }
