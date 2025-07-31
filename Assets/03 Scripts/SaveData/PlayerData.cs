@@ -13,7 +13,8 @@ public class PlayerData
     public List<string> itmeDataID = new List<string>();
     public List<string> characterNames = new List<string>(); // 보유 캐릭터 이름 리스트
     public string equippedCharacterName; // 장착 캐릭터 이름
-    public bool tutorialCompleted;   
+    public bool tutorialCompleted; 
+    public bool VillageTutorialCompleted;
 
     public string lastTimeString;
 
@@ -76,6 +77,7 @@ public class PlayerData
             this.lastTime = DateTime.Now;
             this.staminaTimer = 0;
             this.tutorialCompleted = false;
+            this.VillageTutorialCompleted = false;
         }
         else
         {
@@ -90,6 +92,7 @@ public class PlayerData
             this.staminaTimer = loaded.staminaTimer;
             this.itmeDataID = loaded.itmeDataID;
             this.tutorialCompleted = loaded.tutorialCompleted;
+            this.VillageTutorialCompleted = loaded.VillageTutorialCompleted;
         }
 
         if (GameManager.Instance != null)

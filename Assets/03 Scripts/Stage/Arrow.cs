@@ -90,6 +90,7 @@ public class Arrow : MonoBehaviour
                     StageManager.instance.MiniGameResult(false);
                     break;
             }
+            SoundManager.instance.PlaySound2D("trapHitSFX");
         }
     }
 }

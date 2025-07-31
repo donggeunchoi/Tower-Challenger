@@ -161,7 +161,7 @@ public class PlayerBuff : MonoBehaviour
 
     public void SlowDebuff()
     {
-        CheckFloor();
+      //  CheckFloor();
 
         if (slowDebuff == null || string.IsNullOrEmpty(slowDebuff.downSP)) return;
 
@@ -203,7 +203,7 @@ public class PlayerBuff : MonoBehaviour
 
     public void StunDebuff()
     {
-        CheckFloor();
+     //   CheckFloor();
 
         if (stunDebuff == null) return;
 

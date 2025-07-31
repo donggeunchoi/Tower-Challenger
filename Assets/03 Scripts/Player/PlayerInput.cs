@@ -196,12 +196,12 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     //입력 방향에 따라 스프라이트 좌우 반전 처리
     public void FlipChange(Vector2 movementInput)
     {
-        if (spriteRenderer == null) return;
+        //if (spriteRenderer == null) return;
 
-        if (movementInput.x > 0.1f)
-            spriteRenderer.flipX = false;
-        else if (movementInput.x < -0.1f)
-            spriteRenderer.flipX = true;
+        //if (movementInput.x > 0.1f)
+        //    spriteRenderer.flipX = false;
+        //else if (movementInput.x < -0.1f)
+        //    spriteRenderer.flipX = true;
     }
 
     public void OnClickInventory()

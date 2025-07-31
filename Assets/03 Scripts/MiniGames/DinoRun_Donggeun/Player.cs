@@ -144,6 +144,7 @@ public class Player : MonoBehaviour
     {
         animatior.SetTrigger("Jump");
         playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
+        SoundManager.instance.PlaySound2D("DjumpSFX");
     }
 
     public void StopJump()

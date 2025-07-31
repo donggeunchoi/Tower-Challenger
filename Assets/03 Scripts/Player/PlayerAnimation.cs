@@ -1,33 +1,60 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    
     public Animator animator;
-
     private Vector2 moveInput;
-   
+    private string lastDirection = "";
 
-    // Update is called once per frame
     void Update()
     {
-        // 입력 처리
+        // 방향키 입력
         moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        // 방향 파라미터 설정
-        animator.SetFloat("MoveX", moveInput.x);
-        animator.SetFloat("MoveY", moveInput.y);
-
-        // 움직임 여부
-        bool isMoving = moveInput.sqrMagnitude > 0f;
-        animator.SetBool("IsMove", isMoving);
-        
-        // 마지막 방향 저장 (정지 상태에서 Idle 방향용)
-        if (isMoving)
+        if (moveInput == Vector2.zero)
         {
-            animator.SetFloat("LastX", moveInput.x);
-            animator.SetFloat("LastY", moveInput.y);
+            // 입력이 없을 경우 Stand 트리거 작동
+            if (lastDirection != "Stand")
+            {
+                ResetAllTriggers();
+                animator.SetTrigger("Stand");
+                lastDirection = "Stand";
+            }
+            return;
+        }
+
+        // 수직 방향 우선
+        if (Mathf.Abs(moveInput.y) > Mathf.Abs(moveInput.x))
+        {
+            if (moveInput.y > 0)
+                TriggerAnimation("UpWalk");
+            else
+                TriggerAnimation("DownWalk");
+        }
+        else
+        {
+            if (moveInput.x > 0)
+                TriggerAnimation("RightWalk");
+            else
+                TriggerAnimation("LeftWalk");
         }
     }
-}
 
+    void TriggerAnimation(string direction)
+    {
+        if (direction == lastDirection) return;
+
+        ResetAllTriggers();
+        animator.SetTrigger(direction);
+        lastDirection = direction;
+    }
+
+    void ResetAllTriggers()
+    {
+        animator.ResetTrigger("RightWalk");
+        animator.ResetTrigger("LeftWalk");
+        animator.ResetTrigger("UpWalk");
+        animator.ResetTrigger("DownWalk");
+        animator.ResetTrigger("Stand");
+    }
+}

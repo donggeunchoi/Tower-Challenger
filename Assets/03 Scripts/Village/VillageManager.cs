@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,14 +35,34 @@ public class VillageManager : MonoBehaviour
     [Header("판넬 관리")]
     public Transform popupGroup;
     public GameObject popup;
-    
-    
+
+    [Header("튜토리얼")] 
+    public Canvas tutorialCanvas;
+    private bool isTutorial;
+
+
+    private void Awake()
+    {
+        // if (!GameManager.Instance.playerData.VillageTutorialCompleted)
+        // {
+        //     GameManager.Instance.playerData.VillageTutorialCompleted = true;
+        //     tutorialCanvas.gameObject.SetActive(true);
+        // }
+
+        if (!isTutorial)
+        {
+            isTutorial = true;
+            tutorialCanvas.gameObject.SetActive(true);
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         fadePanel.gameObject.SetActive(true);
         fadePanel.color = new Color(0, 0, 0, 1);
         StartCoroutine(FadeOut());
+        
     }
 
     IEnumerator FadeOut()
@@ -130,5 +151,9 @@ public class VillageManager : MonoBehaviour
         MailBox.SetActive(false);
     }
     
+    public void OnClickEndTutorial()
+    {
+       tutorialCanvas.gameObject.SetActive(false);
+    }
     
 }
