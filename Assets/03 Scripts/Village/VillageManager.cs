@@ -43,30 +43,14 @@ public class VillageManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!GameManager.Instance.playerData.VillageTutorialCompleted)
-        {
-            GameManager.Instance.playerData.VillageTutorialCompleted = true;
-            tutorialCanvas.gameObject.SetActive(true);
-        }
-        else
-        {
-            tutorialCanvas.gameObject.SetActive(false);
-        }
-
-        // if (!isTutorial)
-        // {
-        //     isTutorial = true;
-        //     tutorialCanvas.gameObject.SetActive(true);
-        // }
+        TutorialCheck();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         fadePanel.gameObject.SetActive(true);
         fadePanel.color = new Color(0, 0, 0, 1);
         StartCoroutine(FadeOut());
-        
     }
 
     IEnumerator FadeOut()
@@ -80,6 +64,7 @@ public class VillageManager : MonoBehaviour
             yield return null;
         }
 
+        
         fadePanel.gameObject.SetActive(false);
     }
 
@@ -158,6 +143,8 @@ public class VillageManager : MonoBehaviour
     public void OnClickEndTutorial()
     {
        tutorialCanvas.gameObject.SetActive(false);
+       GameManager.Instance.playerData.VillageTutorialCompleted = true;
+       GameManager.Instance.playerData.SaveData();
     }
     
     public void OnClickStartTutorial()
@@ -165,5 +152,19 @@ public class VillageManager : MonoBehaviour
        tutorialCanvas.gameObject.SetActive(true);
        StopPanel.SetActive(false);
     }
-    
+
+
+    public void TutorialCheck()
+    {
+        bool tutorialC = GameManager.Instance.playerData.VillageTutorialCompleted;
+
+        if (!tutorialC)
+        {
+            tutorialCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            tutorialCanvas.gameObject.SetActive(false);
+        }
+    }
 }

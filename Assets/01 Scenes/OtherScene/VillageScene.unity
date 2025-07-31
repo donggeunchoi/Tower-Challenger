@@ -5638,7 +5638,6 @@ GameObject:
   - component: {fileID: 595298174}
   - component: {fileID: 595298177}
   - component: {fileID: 595298176}
-  - component: {fileID: 595298175}
   m_Layer: 5
   m_Name: CharactorUI (1)
   m_TagString: Untagged
@@ -5668,19 +5667,6 @@ RectTransform:
   m_AnchoredPosition: {x: 189.36853, y: -22.21051}
   m_SizeDelta: {x: 685.4885, y: 249.228}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &595298175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595298173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58ff2e158a30c9488fb0dd199c13e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterImage: {fileID: 1033346527}
 --- !u!114 &595298176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6171,7 +6157,6 @@ GameObject:
   - component: {fileID: 673010047}
   - component: {fileID: 673010050}
   - component: {fileID: 673010049}
-  - component: {fileID: 673010048}
   m_Layer: 5
   m_Name: StaminaRecharge
   m_TagString: Untagged
@@ -6199,19 +6184,6 @@ RectTransform:
   m_AnchoredPosition: {x: 134.63895, y: 24}
   m_SizeDelta: {x: 305.7167, y: 60.55}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &673010048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673010046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3551c06dd6fa244e48f068abf2863cf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeText: {fileID: 1795977911}
 --- !u!114 &673010049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10357,7 +10329,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1078368203}
-  - component: {fileID: 1078368204}
   m_Layer: 5
   m_Name: Stamina
   m_TagString: Untagged
@@ -10389,24 +10360,6 @@ RectTransform:
   m_AnchoredPosition: {x: 32.58429, y: 0}
   m_SizeDelta: {x: 165.1685, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1078368204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078368202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3fce42482a04fa4fad436e5e6f9b7b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staminaUI:
-  - {fileID: 1067683961}
-  - {fileID: 1993148413}
-  - {fileID: 882452145}
-  - {fileID: 1007182413}
-  - {fileID: 1754539619}
 --- !u!1 &1089376825
 GameObject:
   m_ObjectHideFlags: 0
@@ -10798,7 +10751,6 @@ GameObject:
   - component: {fileID: 1110515286}
   - component: {fileID: 1110515289}
   - component: {fileID: 1110515288}
-  - component: {fileID: 1110515287}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -10825,62 +10777,6 @@ RectTransform:
   m_AnchoredPosition: {x: -27, y: -23}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1110515287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110515285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1110515288}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1608422677}
-        m_TargetAssemblyTypeName: VillageManager, Assembly-CSharp
-        m_MethodName: OnClickMailBoxClose
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1110515288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11072,7 +10968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1133849226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11613,7 +11509,6 @@ GameObject:
   - component: {fileID: 1179355991}
   - component: {fileID: 1179355994}
   - component: {fileID: 1179355993}
-  - component: {fileID: 1179355992}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -11640,62 +11535,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030517578, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1179355992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179355990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1179355993}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 974985409}
-        m_TargetAssemblyTypeName: MailBox, Assembly-CSharp
-        m_MethodName: OnClickMailBoxClose
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1179355993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20762,7 +20601,6 @@ GameObject:
   - component: {fileID: 1999920544}
   - component: {fileID: 1999920547}
   - component: {fileID: 1999920546}
-  - component: {fileID: 1999920545}
   m_Layer: 5
   m_Name: GetButton
   m_TagString: Untagged
@@ -20789,62 +20627,6 @@ RectTransform:
   m_AnchoredPosition: {x: -12, y: 7}
   m_SizeDelta: {x: 50, y: 30}
   m_Pivot: {x: 1, y: 0}
---- !u!114 &1999920545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999920543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1999920546}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 974985409}
-        m_TargetAssemblyTypeName: MailBox, Assembly-CSharp
-        m_MethodName: OnClickGetButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1999920546
 MonoBehaviour:
   m_ObjectHideFlags: 0
