@@ -6,6 +6,7 @@ public class QuickGameUI : MonoBehaviour
 {
     public GameObject panel;
     public TMPro.TMP_Text warningText;
+    public TMPro.TMP_Text warningText2;
     
     public void OnClickUseTicket()
     {
@@ -40,8 +41,17 @@ public class QuickGameUI : MonoBehaviour
 
             if (GameManager.Instance.stamina.mainStamina <= 0)
             {
-                warningText.text = "스테미나가 없습니다.";
-                StartCoroutine(WarningText());
+                if (!warningText != null)
+                {
+                    warningText.text = "스테미나가 없습니다.";
+                    StartCoroutine(WarningText());
+                }
+
+                if (!warningText2 != null)
+                {
+                    warningText2.text = "스테미나가 없습니다.";
+                    StartCoroutine(WarningText());
+                }
                 return;
             }
             
@@ -73,7 +83,16 @@ public class QuickGameUI : MonoBehaviour
     IEnumerator WarningText()
     {
         yield return new WaitForSeconds(1f);
+
+        if (warningText != null)
+        {
+            warningText.text = "스테미나를 사용해서 타워에 입장하겠습니까?";
+        }
+
+        if (warningText2 != null)
+        {
+            warningText2.text = "타워 입장권을 사용해서 타워로 들어가겠습니까?\nNo - 스테미나 사용해서 입장합니다";
+        }
         
-        warningText.text = "스테미나를 사용해서 타워에 입장하겠습니까?";
     }
 }
