@@ -41,6 +41,9 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     public Button nextButton; // 버튼 스토리에서 활용
 
+    public Vector2 FinalInput => keyboardInput.sqrMagnitude > 0.01f ? keyboardInput : JoystickInput;
+
+
     void Start()
     {
 
