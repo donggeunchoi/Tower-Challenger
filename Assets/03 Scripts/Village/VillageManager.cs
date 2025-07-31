@@ -40,6 +40,9 @@ public class VillageManager : MonoBehaviour
     public Canvas tutorialCanvas;
     private bool isTutorial;
 
+    [Header("빠른 입장")] 
+    public GameObject quickStaminaUI;
+    public GameObject quickTicketUI;
 
     private void Awake()
     {
@@ -167,5 +170,30 @@ public class VillageManager : MonoBehaviour
         {
             tutorialCanvas.gameObject.SetActive(false);
         }
+    }
+    
+    public void OnClickEnter()
+    {
+        if (CheckItem())
+        {
+            quickTicketUI.gameObject.SetActive(true);
+        }
+        else
+        {
+            quickStaminaUI.gameObject.SetActive(true);
+        }
+    }
+
+    public bool CheckItem()
+    {
+        foreach (ItemData item in ItemManager.instance.items)
+        {
+            if (item.type == ItemType.TopTicket)
+            {
+                return true;
+            }
+
+        }
+        return false;
     }
 }
