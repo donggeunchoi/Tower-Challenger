@@ -8,7 +8,7 @@ public class TutorialVillage : MonoBehaviour
 
     public void OnClickNext()
     {
-        if (index < Tutorial.Count - 1)
+        if (index < Tutorial.Count)
         {
             index++;
             ShowUI();
@@ -17,7 +17,7 @@ public class TutorialVillage : MonoBehaviour
 
     public void OnClickBack()
     {
-        if (index < Tutorial.Count - 1)
+        if (index < Tutorial.Count)
         {
             index--;
             ShowUI();

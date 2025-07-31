@@ -156,4 +156,10 @@ public class VillageManager : MonoBehaviour
        tutorialCanvas.gameObject.SetActive(false);
     }
     
+    public void OnClickStartTutorial()
+    {
+       tutorialCanvas.gameObject.SetActive(true);
+       StopPanel.SetActive(false);
+    }
+    
 }
