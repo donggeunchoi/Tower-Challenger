@@ -46,7 +46,10 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
         originSpeed = speed;
 
-        PlayerManager.Instance.isMove = true;
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.isMove = true;
+        }
 
         stickBack = GetComponent<RectTransform>();
 
