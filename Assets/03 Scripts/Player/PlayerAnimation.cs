@@ -6,8 +6,27 @@ public class PlayerAnimation : MonoBehaviour
     private Vector2 moveInput;
     private string lastDirection = "";
 
+    public PlayerInput playerInput;
+    void Start()
+    {
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+        if (playerInput == null)
+            playerInput = FindObjectOfType<PlayerInput>();
+
+    }
     void Update()
     {
+        if (playerInput.isDashing)
+        {
+            TriggerAnimation("Dash");
+        }
+        else
+        {
+            TriggerAnimation("Walk");
+        }
         // 방향키 입력
         moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
