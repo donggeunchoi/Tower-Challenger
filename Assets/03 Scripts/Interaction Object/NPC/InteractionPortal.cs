@@ -15,9 +15,6 @@ public class InteractionPortal : MonoBehaviour, IInteractable
     {
         switch (portalType)
         {
-            case PortalType.StartGame:
-                StageManager.instance.StartGame();  //게임이 시작됩니다
-                break;
             case PortalType.NextGame:
                 Debug.Log(playerPosition);
                 StageManager.instance.SaveClearPortal(portalNumber);
@@ -37,6 +34,9 @@ public class InteractionPortal : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter2D(Collider2D other)  //상호작용 영역에 플레이어가 들어오면 상호작용 가능
     {
+        if (portalType == PortalType.StartGame)
+            StageManager.instance.StartGame();
+
         if (other.CompareTag("Player"))
         {
             layerNumber = other.gameObject.layer;
