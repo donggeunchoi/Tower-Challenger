@@ -173,26 +173,29 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         isDashing = true;
         canDash = false;
 
-        // 대쉬 시작
-        yield return new WaitForSeconds(DashTime);
-
-        // 대쉬 종료
-        isDashing = false;
         DashImage.gameObject.SetActive(true);
-        DashImage.fillAmount = 0f;
+        DashImage.fillAmount = 1f;
 
+        float totalTime = DashTime + CooldownTime;
         float timer = 0f;
+
         while (timer < DashTime)
         {
             timer += Time.deltaTime;
-            DashImage.fillAmount = Mathf.Clamp01(timer / CooldownTime);
+            DashImage.fillAmount = Mathf.Clamp01(1f - (timer / totalTime));
             yield return null;
         }
-        
-        DashImage.gameObject.SetActive(false);
 
-        // 쿨타임 대기
-        yield return new WaitForSeconds(CooldownTime);
+        isDashing = false;
+
+        while (timer < totalTime)
+        {
+            timer += Time.deltaTime;
+            DashImage.fillAmount = Mathf.Clamp01(1f - (timer / totalTime));
+            yield return null;
+        }
+
+        DashImage.gameObject.SetActive(false);
         canDash = true;
     }
 
