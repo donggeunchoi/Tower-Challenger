@@ -151,6 +151,7 @@ public class VillageManager : MonoBehaviour
     {
        tutorialCanvas.gameObject.SetActive(true);
        StopPanel.SetActive(false);
+       Time.timeScale = 1;
     }
 
 
