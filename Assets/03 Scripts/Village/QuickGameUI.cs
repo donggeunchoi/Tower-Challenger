@@ -14,7 +14,16 @@ public class QuickGameUI : MonoBehaviour
         if (ticketItem != null)
         {
             ItemManager.instance.items.Remove(ticketItem);
-            SceneManager.LoadScene("TutorialScene");
+            
+            bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
+            if (!tutorial)
+            {
+                SceneManager.LoadScene("TutorialScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("GameScene");
+            }
         }
         else
         {
