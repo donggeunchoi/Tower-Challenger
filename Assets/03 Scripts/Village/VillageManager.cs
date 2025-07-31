@@ -43,17 +43,21 @@ public class VillageManager : MonoBehaviour
 
     private void Awake()
     {
-        // if (!GameManager.Instance.playerData.VillageTutorialCompleted)
-        // {
-        //     GameManager.Instance.playerData.VillageTutorialCompleted = true;
-        //     tutorialCanvas.gameObject.SetActive(true);
-        // }
-
-        if (!isTutorial)
+        if (!GameManager.Instance.playerData.VillageTutorialCompleted)
         {
-            isTutorial = true;
+            GameManager.Instance.playerData.VillageTutorialCompleted = true;
             tutorialCanvas.gameObject.SetActive(true);
         }
+        else
+        {
+            tutorialCanvas.gameObject.SetActive(false);
+        }
+
+        // if (!isTutorial)
+        // {
+        //     isTutorial = true;
+        //     tutorialCanvas.gameObject.SetActive(true);
+        // }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
