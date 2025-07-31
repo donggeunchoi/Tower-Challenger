@@ -34,11 +34,11 @@ public class InteractionPortal : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter2D(Collider2D other)  //상호작용 영역에 플레이어가 들어오면 상호작용 가능
     {
-        if (portalType == PortalType.StartGame)
-            StageManager.instance.StartGame();
-
         if (other.CompareTag("Player"))
         {
+            if (portalType == PortalType.StartGame)
+                StageManager.instance.StartGame();
+
             layerNumber = other.gameObject.layer;
             playerPosition = other.transform.position;
         }
