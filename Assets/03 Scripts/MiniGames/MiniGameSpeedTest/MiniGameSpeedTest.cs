@@ -107,9 +107,10 @@ public class MiniGameSpeedTest : MonoBehaviour
 
     IEnumerator WaitinTime()
     {
-        if(_clear == false) yield break;
+        SoundManager.instance.PlaySound2D("MiniGameClear");
+        if (_clear == false) yield break;
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         
         if (stageManager != null)
         {

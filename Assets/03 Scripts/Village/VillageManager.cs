@@ -82,14 +82,17 @@ public class VillageManager : MonoBehaviour
                 popup = Instantiate(StorePanel, popupGroup);
                 break;
             case "Invetory":
+                SoundManager.instance.PlaySound2D("UISound");
                 if (popup != null)
                     Destroy(popup);
                 popup = Instantiate(Invetory, popupGroup);
                 break;
             case "MailBox":
+                SoundManager.instance.PlaySound2D("UISound");
                 MailBox.SetActive(true);
                 break;
             case "ClothesShopPanel":
+                SoundManager.instance.PlaySound2D("UISound");
                 if (popup != null)
                     Destroy(popup);
                 popup = Instantiate(ClothesShopPanel, popupGroup);
@@ -101,6 +104,7 @@ public class VillageManager : MonoBehaviour
                 popup = Instantiate(Guild, popupGroup);
                 break;
             case "PausePanel":
+                SoundManager.instance.PlaySound2D("UISound");
                 StopPanel.SetActive(true);
                 Time.timeScale = 0;
                 break;
@@ -138,24 +142,28 @@ public class VillageManager : MonoBehaviour
 
     public void OnClickMailBox()
     {
+        SoundManager.instance.PlaySound2D("UISound");
         MailBox.SetActive(true);
     }
 
     public void OnClickMailBoxClose()
     {
+        SoundManager.instance.PlaySound2D("UISound");
         MailBox.SetActive(false);
     }
     
     public void OnClickEndTutorial()
     {
-       tutorialCanvas.gameObject.SetActive(false);
+        SoundManager.instance.PlaySound2D("UISound");
+        tutorialCanvas.gameObject.SetActive(false);
        GameManager.Instance.playerData.VillageTutorialCompleted = true;
        GameManager.Instance.playerData.SaveData();
     }
     
     public void OnClickStartTutorial()
     {
-       tutorialCanvas.gameObject.SetActive(true);
+        SoundManager.instance.PlaySound2D("UISound");
+        tutorialCanvas.gameObject.SetActive(true);
        StopPanel.SetActive(false);
        Time.timeScale = 1;
     }
@@ -177,8 +185,10 @@ public class VillageManager : MonoBehaviour
     
     public void OnClickEnter()
     {
+        SoundManager.instance.PlaySound2D("UISound");
         if (CheckItem())
         {
+           
             quickTicketUI.gameObject.SetActive(true);
         }
         else
