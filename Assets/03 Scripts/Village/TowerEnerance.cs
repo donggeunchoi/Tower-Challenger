@@ -8,7 +8,8 @@ public class TowerEnerance : MonoBehaviour
     public GameObject MailPanel;
     public GameObject PausePanel;
     public GameObject EnterPanel;
-
+    public GameObject quickStaminaUI;
+    public GameObject quickTicketUI;
     public void OnClickVillageMove()
     {
         SceneManager.LoadScene("VillageScene");
@@ -66,23 +67,19 @@ public class TowerEnerance : MonoBehaviour
         else
         {
 
-            if (GameManager.Instance != null)
-            {
-                if (GameManager.Instance.stamina.mainStamina > 0)
-                {
-                    GameManager.Instance.stamina.UseStamina();
-                }
-            }
-            
-            bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
-            if (!tutorial)
-            {
-                SceneManager.LoadScene("TutorialScene");
-            }
-            else
-            {
-                SceneManager.LoadScene("GameScene");
-            }
+            quickStaminaUI.SetActive(true);
+
+
+            //bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
+            //if (!tutorial)
+            //{
+            //    SceneManager.LoadScene("TutorialScene");
+            //}
+            //else
+            //{
+            //    if (GameManager.Instance.stamina.mainStamina > 0)
+            //        SceneManager.LoadScene("GameScene");
+            //}
            
         }
     }
