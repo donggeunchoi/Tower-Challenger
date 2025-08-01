@@ -2286,7 +2286,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3402059733175135062}
   stick: {fileID: 8945181570756687563}
-  isMirror: 0
   speed: 5
   DashSpeed: 8
   DashTime: 4
@@ -3524,6 +3523,7 @@ GameObject:
   - component: {fileID: 1722386992970593040}
   - component: {fileID: 5851759213571845084}
   - component: {fileID: 8186495971592003730}
+  - component: {fileID: 8186495971592003732}
   - component: {fileID: 8186495971592003731}
   m_Layer: 20
   m_Name: Player
@@ -4287,6 +4287,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4e8913b4da58f439f789a7f3f4c7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8186495971592003732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992555420623630124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb3154aa1568f04da6766c0ef29fdc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!114 &8191271210784353718
 MonoBehaviour:
   m_ObjectHideFlags: 0
