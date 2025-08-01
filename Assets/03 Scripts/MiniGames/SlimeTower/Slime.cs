@@ -48,6 +48,7 @@ public class Slime : MonoBehaviour
         //슬라임이면 정착단계로 이동하게
         if (other.gameObject.CompareTag("Slime"))
         {
+            SoundManager.instance.PlaySound2D("Sstand");
             ContactPoint2D contact = other.contacts[0];
             if (contact.normal.y > 0.5f)
             {
