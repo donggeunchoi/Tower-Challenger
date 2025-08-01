@@ -7,19 +7,26 @@ public class PlayerAnimation : MonoBehaviour
     private string lastDirection = "";
 
     public PlayerInput playerInput;
+
     void Start()
     {
         if (animator == null)
         {
             animator = GetComponent<Animator>();
         }
+
+#if UNITY_2023_1_OR_NEWER
+        if (playerInput == null)
+            playerInput = FindFirstObjectByType<PlayerInput>();
+#else
         if (playerInput == null)
             playerInput = FindObjectOfType<PlayerInput>();
-
+#endif
     }
+
     void Update()
     {
-        if (playerInput.isDashing)
+        if (playerInput != null && playerInput.isDashing)
         {
             TriggerAnimation("Dash");
         }
@@ -27,12 +34,11 @@ public class PlayerAnimation : MonoBehaviour
         {
             TriggerAnimation("Walk");
         }
-        // 방향키 입력
+
         moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (moveInput == Vector2.zero)
         {
-            // 입력이 없을 경우 Stand 트리거 작동
             if (lastDirection != "Stand")
             {
                 ResetAllTriggers();
@@ -42,7 +48,6 @@ public class PlayerAnimation : MonoBehaviour
             return;
         }
 
-        // 수직 방향 우선
         if (Mathf.Abs(moveInput.y) > Mathf.Abs(moveInput.x))
         {
             if (moveInput.y > 0)
@@ -75,5 +80,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.ResetTrigger("UpWalk");
         animator.ResetTrigger("DownWalk");
         animator.ResetTrigger("Stand");
+        animator.ResetTrigger("Dash");
+        animator.ResetTrigger("Walk");
     }
 }
