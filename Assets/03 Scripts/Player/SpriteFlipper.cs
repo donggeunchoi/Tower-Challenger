@@ -8,8 +8,13 @@ public class SpriteFlipper : MonoBehaviour
     void Start()
     {
         // PlayerInput 자동 할당
+#if UNITY_2023_1_OR_NEWER
+        if (playerInput == null)
+            playerInput = FindFirstObjectByType<PlayerInput>();
+#else
         if (playerInput == null)
             playerInput = FindObjectOfType<PlayerInput>();
+#endif
 
         // SpriteRenderer 자동 할당
         if (spriteRenderer == null)

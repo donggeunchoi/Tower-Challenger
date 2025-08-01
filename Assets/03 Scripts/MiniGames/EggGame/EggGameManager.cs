@@ -38,7 +38,7 @@ public class EggGameManager : MonoBehaviour
     private int HP = 1;
     private int MaxHP;
     private bool GameStart = false;
-    private float tiltTimer;
+    //private float tiltTimer;
     private float originalWidth;
     private int healHP = 1;
 
@@ -53,6 +53,12 @@ public class EggGameManager : MonoBehaviour
 
     void Start()
     {
+        if (StageManager.instance != null)
+        {
+            if (StageManager.instance.difficulty >= 1 && StageManager.instance.difficulty <= 3)
+            Lv = StageManager.instance.difficulty - 1;
+        }
+
         for (int i = 0; i < Eggs.Length; i++)
         {
             Eggs[i].SetActive(false);
@@ -62,7 +68,7 @@ public class EggGameManager : MonoBehaviour
         EggHealText.SetActive(false);
         Set();
         InitHP();
-        UpdateTime();
+        //UpdateTime();
         StartCoroutine(HealTime());
     }
 
@@ -93,14 +99,14 @@ public class EggGameManager : MonoBehaviour
     {
         if (GameStart)
         {
-            tiltTimer += Time.deltaTime;
-            UpdateTime();
+            //tiltTimer += Time.deltaTime;
+            //UpdateTime();
 
-            if (tiltTimer >= EndTime)
-            {
-                GameStart = false;
-                StartCoroutine(HealTime());
-            }
+            //if (tiltTimer >= EndTime)
+            //{
+            //    GameStart = false;
+            //    StartCoroutine(HealTime());
+            //}
         }
     }
     public void EggClick()
@@ -202,16 +208,16 @@ public class EggGameManager : MonoBehaviour
         hpTextUI.text = HP + " / " + MaxHP;
     }
 
-    void UpdateTime()
-    {
-        string timerText = tiltTimer.ToString("F1");
-        printOutUI.text = timerText + " / " + EndTime;
-    }
+    //void UpdateTime()
+    //{
+    //    string timerText = tiltTimer.ToString("F1");
+    //    printOutUI.text = timerText + " / " + EndTime;
+    //}
 
     IEnumerator HealTime()
     {
         ClickBlocker.SetActive(true);
-        tiltTimer = 0;
+        //tiltTimer = 0;
 
         if (isHealing) yield break;
 
