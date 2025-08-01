@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum PortalType { StartGame, NextGame, NextFloor, Tutorial }  //우선 포탈 타입을 나눠놓기

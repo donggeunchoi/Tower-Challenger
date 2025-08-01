@@ -36,6 +36,12 @@ public class PlayerBuff : MonoBehaviour
         isStun = false;
     }
 
+    private void RestorePlayerColor()
+    {
+        if (playerSprite != null)
+            playerSprite.color = new Color (1,1,1,1);
+    }
+
     private IEnumerator SlowEftCor()
     {
         Color playerColor = playerSprite.color;
@@ -154,42 +160,47 @@ public class PlayerBuff : MonoBehaviour
         if (playerSprite != null)
         {
             if (hitEftCor != null)
+            {
+                RestorePlayerColor();
                 StopCoroutine(hitEftCor);
+            }
             hitEftCor = StartCoroutine(HitEftCor());
         }
     }
 
     public void SlowDebuff()
     {
-      //  CheckFloor();
+        CheckFloor();
 
         if (slowDebuff == null || string.IsNullOrEmpty(slowDebuff.downSP)) return;
 
         input.speed = input.originSpeed;
+
+        isSlow = true;
+
         if (slowCor != null)
             StopCoroutine(slowCor);
+        if (slowEftCor != null)
+            StopCoroutine(slowEftCor);
+
         slowCor = StartCoroutine(SlowEffect(input));
 
         if (playerSprite != null)
         {
-            if (slowEftCor != null)
-                StopCoroutine(slowEftCor);
-            slowCor = StartCoroutine(SlowEftCor());
+            RestorePlayerColor();
+            slowEftCor = StartCoroutine(SlowEftCor());
         }
     }
 
     private IEnumerator SlowEffect(PlayerInput playerInput)
     {
-        isSlow = true;
-
         float slowSpeed = ParsePercent(slowDebuff.downSP);
-
         float beforSpeed = playerInput.speed;
         float time = 0;
 
         while (time < slowDebuff.eftTime)
         {
-            playerInput.speed = playerInput.speed - (playerInput.speed * (slowSpeed / 100));
+            playerInput.speed = playerInput.originSpeed * (1f - (slowSpeed / 100f));
             time += Time.deltaTime;
             yield return null;
         }
@@ -203,7 +214,7 @@ public class PlayerBuff : MonoBehaviour
 
     public void StunDebuff()
     {
-     //   CheckFloor();
+        CheckFloor();
 
         if (stunDebuff == null) return;
 
@@ -217,8 +228,11 @@ public class PlayerBuff : MonoBehaviour
         if (playerSprite != null)
         {
             if (stunEftCor != null)
+            {
+                RestorePlayerColor();
                 StopCoroutine(stunEftCor);
-            stunCor = StartCoroutine(StunEftCor());
+            }
+            stunEftCor = StartCoroutine(StunEftCor());
         }
     }
 
@@ -245,7 +259,7 @@ public class PlayerBuff : MonoBehaviour
 
     private float ParsePercent(string percent)
     {
-        if (string.IsNullOrEmpty(percent)) return 0;
+        if (string.IsNullOrEmpty(percent)) return 0f;
         percent = percent.Replace("%", "");
         float.TryParse(percent, out var num);
         return num;
