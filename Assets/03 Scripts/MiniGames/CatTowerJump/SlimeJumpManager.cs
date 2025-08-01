@@ -62,6 +62,8 @@ public class SlimeJumpManager : MonoBehaviour
     {
         if(_clear == false) yield break;
         
+        playerTransform.localScale = Vector3.zero;
+        
         yield return new WaitForSeconds(2f);
         
         if (StageManager.instance != null)
