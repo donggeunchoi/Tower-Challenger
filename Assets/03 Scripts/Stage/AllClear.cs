@@ -162,7 +162,6 @@ public class AllClear : MonoBehaviour
             itemManager = (ItemManager)FindAnyObjectByType(typeof(ItemManager));
         }
         
-        
         if ( itemManager.rewardsItmes.Count == 0)
         {
             Debug.LogWarning("itemManager.rewardsItmes가 비어있거나 null입니다.");
@@ -171,8 +170,6 @@ public class AllClear : MonoBehaviour
         
         foreach (ItemData item in itemManager.rewardsItmes)
         {
-            Debug.Log("여기 없는거지 안되는거 맞지?");
-            Debug.Log(item.itemID);
             if (item.itemID.Trim() == itemName.Trim())
             {
                 itemImage.gameObject.SetActive(true);
