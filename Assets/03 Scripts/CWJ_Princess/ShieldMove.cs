@@ -14,6 +14,10 @@ public class ShieldMove : MonoBehaviour
 
             transform.position = worldPos;
         }
+        else
+        {
+            Debug.Log(Camera.main);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
