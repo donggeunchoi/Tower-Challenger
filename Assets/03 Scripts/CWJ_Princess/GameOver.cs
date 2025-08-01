@@ -88,6 +88,7 @@ public class GameOver : MonoBehaviour
 
     IEnumerator WaitinTime()
     {
+        StageManager.instance.MiniGameResult(true);
         if (PrincessManager.princessInstance.clear == false) yield break;
 
         yield return new WaitForSeconds(1f);

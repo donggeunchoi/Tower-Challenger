@@ -130,11 +130,13 @@ public class EggGameManager : MonoBehaviour
 
     IEnumerator PlayClearAnimation()
     {
+        SoundManager.instance.PlaySound2D("breakingEgg");
         yield return new WaitForSeconds(1f);
+        SoundManager.instance.PlaySound2D("EggGameClear");
         animator.SetTrigger("Clear");
         yield return new WaitForSeconds(1f);
+        SoundManager.instance.PlaySound2D("MiniGameClear");
         animator.SetTrigger("Clear");
-        yield return new WaitForSeconds(2f);
 
         if (!_clear)
         {
@@ -180,6 +182,7 @@ public class EggGameManager : MonoBehaviour
             if(!isHealing)         
             {
                 StartCoroutine(PlayCrackParticleOnce());
+                SoundManager.instance.PlaySound2D("crackingEgg");
             }
         }
     }
@@ -264,7 +267,7 @@ public class EggGameManager : MonoBehaviour
     {
         if(_clear == false) yield break;
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         
         if (StageManager.instance != null)
             StageManager.instance.MiniGameResult(true);

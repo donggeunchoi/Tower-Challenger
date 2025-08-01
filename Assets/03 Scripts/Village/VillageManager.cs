@@ -76,7 +76,8 @@ public class VillageManager : MonoBehaviour
         switch (villageName)
         {
             case "StorePanel":
-                if (popup != null)
+                SoundManager.instance.PlaySound2D("ShopBoor");
+                if (popup != null) 
                     Destroy(popup);
                 popup = Instantiate(StorePanel, popupGroup);
                 break;
@@ -94,6 +95,7 @@ public class VillageManager : MonoBehaviour
                 popup = Instantiate(ClothesShopPanel, popupGroup);
                 break;
             case "Guild":
+                SoundManager.instance.PlaySound2D("guild");
                 if (popup != null)
                     Destroy(popup);
                 popup = Instantiate(Guild, popupGroup);
@@ -103,6 +105,7 @@ public class VillageManager : MonoBehaviour
                 Time.timeScale = 0;
                 break;
             case "CharactorChoicePanel":
+                SoundManager.instance.PlaySound2D("HoleSFX");
                 if (popup != null)
                     Destroy(popup);
                 popup = Instantiate(CharactorChoicePanel, popupGroup);

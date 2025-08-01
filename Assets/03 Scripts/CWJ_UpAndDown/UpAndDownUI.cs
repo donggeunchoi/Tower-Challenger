@@ -40,6 +40,7 @@ public class UpAndDownUI : MonoBehaviour
     public void OnClearText()
     {
         textAnswer.text = "";
+        SoundManager.instance.PlaySound2D("UpAndDownBtn");
     }
 
     public void AnswerButton()
@@ -51,11 +52,13 @@ public class UpAndDownUI : MonoBehaviour
         StartCoroutine(ButtonCorutine());
 
         textAnswer.text = "";
+        SoundManager.instance.PlaySound2D("UpAndDownBtn");
     }
 
     public void InputAnswerButton(int index)
     {
         UpAndDownManager.instance.upAndDown.InputAnswer(index);
+        SoundManager.instance.PlaySound2D("UpAndDownBtn");
     }
 
     public void SetActiveFalse()

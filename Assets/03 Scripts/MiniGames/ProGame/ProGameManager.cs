@@ -101,6 +101,7 @@ public class ProGameManager : MonoBehaviour
 
             TriggerBossAnimation(animator, randomIndex1); 
             Boss.transform.position = TeleportPoint[randomIndex1].transform.position;
+            SoundManager.instance.PlaySound2D("ProGameTP");
 
             if (tiltTimer >= 50)
             {
@@ -113,7 +114,8 @@ public class ProGameManager : MonoBehaviour
                 }
                     
                 TriggerBossAnimation(animator2, randomIndex2);
-                Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;                   
+                Boss2.transform.position = TeleportPoint[randomIndex2].transform.position;
+                SoundManager.instance.PlaySound2D("ProGameTP");
             }
 
             yield return new WaitForSeconds(0.5f);
