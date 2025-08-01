@@ -53,8 +53,6 @@ public class Trap : MonoBehaviour
         }
         MapInfo.StageTempMemory.destroyedInfo.destroyedTrapIds.Add(trapId);
         Destroy(this.gameObject);
-
-        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
