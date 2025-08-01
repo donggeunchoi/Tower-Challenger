@@ -8,7 +8,6 @@ public class ShieldMove : MonoBehaviour
     {
         if (Camera.main != null)
         {
-            Debug.Log("ㅇㅇㅇ");
             Vector2 screenPos = context.ReadValue<Vector2>();
 
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);

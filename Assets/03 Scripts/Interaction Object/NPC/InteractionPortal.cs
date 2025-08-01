@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum PortalType { StartGame, NextGame, NextFloor, Tutorial }  //우선 포탈 타입을 나눠놓기
@@ -34,13 +35,19 @@ public class InteractionPortal : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter2D(Collider2D other)  //상호작용 영역에 플레이어가 들어오면 상호작용 가능
     {
-        if (portalType == PortalType.StartGame)
-            StageManager.instance.StartGame();
-
         if (other.CompareTag("Player"))
         {
+            if (portalType == PortalType.StartGame)
+                StartCoroutine(StartGameRoutine());
+
             layerNumber = other.gameObject.layer;
             playerPosition = other.transform.position;
         }
+    }
+    
+    private IEnumerator StartGameRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StageManager.instance.StartGame();
     }
 }

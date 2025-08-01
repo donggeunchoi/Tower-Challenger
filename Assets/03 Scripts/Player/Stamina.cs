@@ -29,9 +29,6 @@ public class Stamina : MonoBehaviour
 
         float secondsPassed = (float)(DateTime.Now - Save.playerData.lastTime).TotalSeconds;
         staminatimer = Save.playerData.staminaTimer + secondsPassed;
-
-        if (mainStamina <= 0)  //테스트용 코드
-            mainStamina = 5;
     }
 
     private void UpdateStaminaTimer()

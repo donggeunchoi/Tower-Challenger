@@ -60,9 +60,6 @@ public class StoryTalk : MonoBehaviour, IInteractable
             if (storyCanvas != null)
                 storyCanvas.SetActive(false);
 
-            Debug.Log(map.myuraPrefab);
-            Debug.Log(map);
-
             if (map.myuraPrefab != null)
             {
                 if (StageManager.instance.floor != 14)
