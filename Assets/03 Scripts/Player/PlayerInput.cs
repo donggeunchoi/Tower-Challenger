@@ -41,12 +41,18 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     public Button nextButton; // 버튼 스토리에서 활용
 
+    public Vector2 FinalInput => keyboardInput.sqrMagnitude > 0.01f ? keyboardInput : JoystickInput;
+
+
     void Start()
     {
 
         originSpeed = speed;
 
-        PlayerManager.Instance.isMove = true;
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.isMove = true;
+        }
 
         stickBack = GetComponent<RectTransform>();
 
@@ -167,38 +173,41 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         isDashing = true;
         canDash = false;
 
-        // 대쉬 시작
-        yield return new WaitForSeconds(DashTime);
-
-        // 대쉬 종료
-        isDashing = false;
         DashImage.gameObject.SetActive(true);
-        DashImage.fillAmount = 0f;
+        DashImage.fillAmount = 1f;
 
+        float totalTime = DashTime + CooldownTime;
         float timer = 0f;
+
         while (timer < DashTime)
         {
             timer += Time.deltaTime;
-            DashImage.fillAmount = Mathf.Clamp01(timer / CooldownTime);
+            DashImage.fillAmount = Mathf.Clamp01(1f - (timer / totalTime));
             yield return null;
         }
-        
-        DashImage.gameObject.SetActive(false);
 
-        // 쿨타임 대기
-        yield return new WaitForSeconds(CooldownTime);
+        isDashing = false;
+
+        while (timer < totalTime)
+        {
+            timer += Time.deltaTime;
+            DashImage.fillAmount = Mathf.Clamp01(1f - (timer / totalTime));
+            yield return null;
+        }
+
+        DashImage.gameObject.SetActive(false);
         canDash = true;
     }
 
     //입력 방향에 따라 스프라이트 좌우 반전 처리
     public void FlipChange(Vector2 movementInput)
     {
-        if (spriteRenderer == null) return;
+        //if (spriteRenderer == null) return;
 
-        if (movementInput.x > 0.1f)
-            spriteRenderer.flipX = false;
-        else if (movementInput.x < -0.1f)
-            spriteRenderer.flipX = true;
+        //if (movementInput.x > 0.1f)
+        //    spriteRenderer.flipX = false;
+        //else if (movementInput.x < -0.1f)
+        //    spriteRenderer.flipX = true;
     }
 
     public void OnClickInventory()

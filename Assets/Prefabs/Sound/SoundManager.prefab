@@ -69,6 +69,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 04851158bd5b64a4c88b3392c7bfaba2, type: 3}
   - {fileID: 8300000, guid: b33e723f2fb19dc47abe30d1c877874a, type: 3}
   - {fileID: 8300000, guid: b02e7f87c75b09c48af2f18cdc0112de, type: 3}
+  MineGameSFXClips:
+  - {fileID: 8300000, guid: d640d26c00379b3409b19187df262322, type: 3}
+  - {fileID: 8300000, guid: 074e8c5fa3aa326418c024184e9d9ad8, type: 3}
+  - {fileID: 8300000, guid: 944ceed71540a2c4d9ecba5121d28b56, type: 3}
+  - {fileID: 8300000, guid: 619ac6ab6e5a8074ba394e123a04e28f, type: 3}
+  - {fileID: 8300000, guid: 3ed6d383fbe3a204ebd2b8250fa2e646, type: 3}
+  - {fileID: 8300000, guid: 492c4197051b36c4aa7bb020fd874edf, type: 3}
   temporarySoundPlayerPrefab: {fileID: 6794658559904300739, guid: 484a8d9a7c55bc540a9990d99f63cb78,
     type: 3}
   audioMixer: {fileID: 24100000, guid: e0d80a8bbe0b3b84b8184912d3853683, type: 2}
@@ -76,6 +83,9 @@ MonoBehaviour:
   soundEffectPitchVariance: 0
   gameOverBGM: {fileID: 8300000, guid: 5995433f9955b154d8e01395644cea7b, type: 3}
   soundSlot: {fileID: 8051076153285938007}
+  TotalVolumeBar: {fileID: 0}
+  BGXBar: {fileID: 0}
+  EFXBar: {fileID: 0}
 --- !u!114 &6017309714740948673
 MonoBehaviour:
   m_ObjectHideFlags: 0

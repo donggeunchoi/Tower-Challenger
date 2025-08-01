@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,10 +35,21 @@ public class VillageManager : MonoBehaviour
     [Header("판넬 관리")]
     public Transform popupGroup;
     public GameObject popup;
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    [Header("튜토리얼")] 
+    public Canvas tutorialCanvas;
+    private bool isTutorial;
+
+    [Header("빠른 입장")] 
+    public GameObject quickStaminaUI;
+    public GameObject quickTicketUI;
+
+    private void Awake()
+    {
+        TutorialCheck();
+    }
+
+    private void Start()
     {
         fadePanel.gameObject.SetActive(true);
         fadePanel.color = new Color(0, 0, 0, 1);
@@ -55,6 +67,7 @@ public class VillageManager : MonoBehaviour
             yield return null;
         }
 
+        
         fadePanel.gameObject.SetActive(false);
     }
 
@@ -130,5 +143,57 @@ public class VillageManager : MonoBehaviour
         MailBox.SetActive(false);
     }
     
+    public void OnClickEndTutorial()
+    {
+       tutorialCanvas.gameObject.SetActive(false);
+       GameManager.Instance.playerData.VillageTutorialCompleted = true;
+       GameManager.Instance.playerData.SaveData();
+    }
     
+    public void OnClickStartTutorial()
+    {
+       tutorialCanvas.gameObject.SetActive(true);
+       StopPanel.SetActive(false);
+       Time.timeScale = 1;
+    }
+
+
+    public void TutorialCheck()
+    {
+        bool tutorialC = GameManager.Instance.playerData.VillageTutorialCompleted;
+
+        if (!tutorialC)
+        {
+            tutorialCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            tutorialCanvas.gameObject.SetActive(false);
+        }
+    }
+    
+    public void OnClickEnter()
+    {
+        if (CheckItem())
+        {
+            quickTicketUI.gameObject.SetActive(true);
+        }
+        else
+        {
+            quickStaminaUI.gameObject.SetActive(true);
+        }
+    }
+
+    public bool CheckItem()
+    {
+        foreach (ItemData item in ItemManager.instance.items)
+        {
+            if (item.type == ItemType.TopTicket)
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
 }

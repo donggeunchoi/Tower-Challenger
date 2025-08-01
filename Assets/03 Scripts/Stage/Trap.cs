@@ -16,14 +16,16 @@ public class Trap : MonoBehaviour
     {
         int randomValue = Random.Range(0, 100);
 
-        if (randomValue < 51)                           //임시 50%
-            type = DebuffType.Slow;
-        else if (randomValue > 50 && randomValue < 91)  //임시 40%
-            type = DebuffType.Stun;
-        else if (randomValue > 90 && randomValue < 96)  //임시 5%
-            type = DebuffType.Hit;
-        else                                            //임시 5%
-            type = DebuffType.None;
+        type = DebuffType.None;
+
+        //if (randomValue < 51)                           //임시 50%
+        //    type = DebuffType.Slow;
+        //else if (randomValue > 50 && randomValue < 91)  //임시 40%
+        //    type = DebuffType.Stun;
+        //else if (randomValue > 90 && randomValue < 96)  //임시 5%
+        //    type = DebuffType.Hit;
+        //else                                            //임시 5%
+        //    type = DebuffType.None;
     }
 
     private void AddDebuff(GameObject player)
@@ -52,8 +54,6 @@ public class Trap : MonoBehaviour
                 break;
         }
         MapInfo.StageTempMemory.destroyedInfo.destroyedTrapIds.Add(trapId);
-        Destroy(this.gameObject);
-
         Destroy(this.gameObject);
     }
 

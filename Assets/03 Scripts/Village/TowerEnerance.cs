@@ -72,10 +72,6 @@ public class TowerEnerance : MonoBehaviour
                 {
                     GameManager.Instance.stamina.UseStamina();
                 }
-                else
-                {
-                    //return;
-                }
             }
             
             bool tutorial = GameManager.Instance.playerData.tutorialCompleted;

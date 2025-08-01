@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum PortalType { StartGame, NextGame, NextFloor, Tutorial }  //우선 포탈 타입을 나눠놓기
@@ -15,9 +16,6 @@ public class InteractionPortal : MonoBehaviour, IInteractable
     {
         switch (portalType)
         {
-            case PortalType.StartGame:
-                StageManager.instance.StartGame();  //게임이 시작됩니다
-                break;
             case PortalType.NextGame:
                 Debug.Log(playerPosition);
                 StageManager.instance.SaveClearPortal(portalNumber);
@@ -39,8 +37,17 @@ public class InteractionPortal : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
+            if (portalType == PortalType.StartGame)
+                StartCoroutine(StartGameRoutine());
+
             layerNumber = other.gameObject.layer;
             playerPosition = other.transform.position;
         }
+    }
+    
+    private IEnumerator StartGameRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StageManager.instance.StartGame();
     }
 }

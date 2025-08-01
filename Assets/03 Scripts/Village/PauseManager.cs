@@ -28,6 +28,7 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("VillageScene");
     }
     
+    
     public void QuitGame()
     {
 #if UNITY_EDITOR

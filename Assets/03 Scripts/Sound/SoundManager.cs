@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum SoundType { BGM, SFX }
+
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
@@ -13,8 +14,14 @@ public class SoundManager : MonoBehaviour
     public SoundSource soundSourcePrefab;
 
     public AudioSource bgmSource;
+
+    [Header("브금")]
     public AudioClip[] bgmAudioClip;
+    [Header("미니게임 브금")]
     public AudioClip[] miniGameAudioClip;
+    [Header("미니게임 효과음")]
+    public AudioClip[] MineGameSFXClips;
+
     [SerializeField] private GameObject temporarySoundPlayerPrefab;
     [SerializeField] private AudioMixer audioMixer;
 
@@ -45,21 +52,22 @@ public class SoundManager : MonoBehaviour
         if (totalVolumeSlider != null)
         {
             totalVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-            SetMasterVolume(totalVolumeSlider.value); // 초기값 즉시 반영
+            SetMasterVolume(totalVolumeSlider.value);
         }
 
         if (bgxSlider != null)
         {
             bgxSlider.onValueChanged.AddListener(SetBGMVolume);
-            SetBGMVolume(bgxSlider.value); // 초기값 즉시 반영
+            SetBGMVolume(bgxSlider.value);
         }
 
         if (efxSlider != null)
         {
             efxSlider.onValueChanged.AddListener(SetSFXVolume);
-            SetSFXVolume(efxSlider.value); // 초기값 즉시 반영
+            SetSFXVolume(efxSlider.value);
         }
     }
+
     private void SetMasterVolume(float value)
     {
         audioMixer.SetFloat("Master", VolumeToDecibel(value));
@@ -74,13 +82,10 @@ public class SoundManager : MonoBehaviour
     {
         audioMixer.SetFloat("SFX", VolumeToDecibel(value));
     }
+
     private float VolumeToDecibel(float value)
     {
         return Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20f;
-    }
-    private void Update()
-    {
-
     }
 
     private void Awake()
@@ -93,11 +98,12 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         DontDestroyOnLoad(this.gameObject);
 
         bgmSource = GetComponent<AudioSource>();
+        activaLoopSounds = new List<TemporarySoundPlayer>(); // ✅ 초기화 추가
     }
-
 
     private void Start()
     {
@@ -115,8 +121,13 @@ public class SoundManager : MonoBehaviour
                 clipDictionary.Add(clip.name, clip);
         }
 
-        // 추가로 다른 효과음 클립들도 여기에 등록해야 할 수도 있습니다.
+        foreach (AudioClip clip in MineGameSFXClips)
+        {
+            if (clip != null && !clipDictionary.ContainsKey(clip.name))
+                clipDictionary.Add(clip.name, clip);
+        }
     }
+
     #region SceneChange
     private void OnEnable()
     {
@@ -133,6 +144,7 @@ public class SoundManager : MonoBehaviour
         ChangeBGM(scene.name);
     }
     #endregion
+
     public void ChangeBGM(string BGM)
     {
         if (bgmAudioClip == null || bgmAudioClip.Length == 0)
@@ -168,13 +180,12 @@ public class SoundManager : MonoBehaviour
                 if (miniGameClip != null)
                 {
                     PlayBGM(miniGameClip);
-                    break;
                 }
                 else
                 {
                     StopBGM();
-                    break;
                 }
+                break;
         }
     }
 
@@ -217,10 +228,10 @@ public class SoundManager : MonoBehaviour
         if (gameOverBGM != null)
             PlayBGM(gameOverBGM);
     }
+
     public void PlaySound2D(string clipName, float delay = 0f, bool isLoop = false, SoundType type = SoundType.SFX)
     {
         GameObject obj = PoolManager.Instance.GetObject(temporarySoundPlayerPrefab, Vector3.zero, Quaternion.identity);
-
         TemporarySoundPlayer soundPlayer = obj.GetComponent<TemporarySoundPlayer>();
 
         if (isLoop)
@@ -228,26 +239,44 @@ public class SoundManager : MonoBehaviour
             AddToList(soundPlayer);
         }
 
-        soundPlayer.InitSound2D(GetClip(clipName));
-        soundPlayer.Play(audioMixer.FindMatchingGroups(type.ToString())[0], delay, isLoop); // null?
-
-        if (!isLoop) //단발 사운드
+        AudioClip clip = GetClip(clipName);
+        if (clip == null)
         {
-            soundPlayer.SetOnFinish(() => PoolManager.Instance.ReturnObject(obj));
+            if (!isLoop)
+            {
+                PoolManager.Instance?.ReturnObject(obj); // 예외 방지
+            }
+            return;
+        }
+
+        soundPlayer.InitSound2D(clip);
+        soundPlayer.Play(audioMixer.FindMatchingGroups(type.ToString())[0], delay, isLoop);
+
+        if (!isLoop)
+        {
+            soundPlayer.SetOnFinish(() =>
+            {
+                if (PoolManager.Instance != null)
+                {
+                    PoolManager.Instance.ReturnObject(obj);
+                }
+            });
         }
     }
-    private void AddToList(TemporarySoundPlayer soundPlayer) //사운드 재생 중, 나중에 루프 형태로 재생된 사운드를 제거하기 위해 리스트 저장.
+
+    private void AddToList(TemporarySoundPlayer soundPlayer)
     {
         activaLoopSounds.Add(soundPlayer);
     }
+
     private AudioClip GetClip(string clipName)
     {
         if (clipDictionary == null) return null;
-        AudioClip clip = clipDictionary[clipName]; //예외처리 필요.
 
-        if (clip == null)
+        if (!clipDictionary.TryGetValue(clipName, out AudioClip clip))
         {
-            Debug.LogError(clipName + "이 존재하지 않음.");
+            Debug.LogError(clipName + " 이(가) clipDictionary에 존재하지 않음.");
+            return null;
         }
 
         return clip;
