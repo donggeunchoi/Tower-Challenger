@@ -22,6 +22,7 @@ public class ShieldMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-            Destroy(collision.gameObject);
+        SoundManager.instance.PlaySound2D("PGameextinction");
+        Destroy(collision.gameObject);
     }
 }

@@ -30,9 +30,10 @@ public class UpAndDownManager : MonoBehaviour
 
     public IEnumerator ShowAnswer()
     {
+        SoundManager.instance.PlaySound2D("MiniGameClear");
         upAndDownUI.number.text = randomNumber.ToString();
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         if(StageManager.instance != null)
             StageManager.instance.MiniGameResult(true);

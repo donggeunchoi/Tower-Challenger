@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float jumpForce = 10f;
     private bool isGrounded = true;
     private bool isInvincible = false;
+    private bool wasGrounded = true;
     public Vector3 respawnPosition = new Vector3(-3f, -1.5f, 0f);
     public Animator animatior;
     
@@ -27,9 +28,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Touch for jump
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+        // 땅에 닿아 있는지 체크
+        bool currentlyGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
 
+        // 상태가 false → true로 바뀌었을 때 한 번만 디버그 출력
+        if (!wasGrounded && currentlyGrounded)
+        {
+            SoundManager.instance.PlaySound2D("Sstand");
+        }
+
+        wasGrounded = currentlyGrounded;
+        isGrounded = currentlyGrounded;
         // //테스트용
         // if (Input.GetKey(KeyCode.Space) && isGrounded)
         // {
@@ -49,7 +58,6 @@ public class Player : MonoBehaviour
         // {
         //     StopSliding();
         // }
-        
     }
 
     public void OnClickJump()
@@ -87,8 +95,10 @@ public class Player : MonoBehaviour
         //}
         if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
         {
+            SoundManager.instance.PlaySound2D("SlSt");
             DinoMiniGame.instance.HandleHit();
             StartCoroutine(InvencibilityRoutine());
+            
         }
         
     }

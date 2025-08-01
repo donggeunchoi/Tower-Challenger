@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,11 +32,11 @@ public class StartManager : MonoBehaviour
     IEnumerator PlayVideoSequence()
     {
         fadeImage.gameObject.SetActive(true);
-        
         yield return StartCoroutine(FadeIn());
         
         videoPanel.SetActive(true);
         startPanel.SetActive(false);
+
         videoPlayer.Play();
         
         yield return StartCoroutine(FadeOut());
@@ -45,13 +46,22 @@ public class StartManager : MonoBehaviour
 
     IEnumerator WaitforVideoToEnd()
     {
-        while (videoPlayer.isPlaying)
+        videoPlayer.Prepare();
+        while (!videoPlayer.isPrepared)
+            yield return null;
+
+        float vidioPlaying = (float)videoPlayer.length - 2.65f;
+        float timer = 0;
+
+        Debug.Log(vidioPlaying);
+
+        while (timer < vidioPlaying)
         {
+            timer += Time.deltaTime;
             yield return null;
         }
-        
+
         videoPanel.SetActive(false);
-        
         SceneManager.LoadScene("VillageScene");
     }
 
@@ -82,5 +92,4 @@ public class StartManager : MonoBehaviour
         }
         fadeImage.color = new Color(0, 0, 0, 0);
     }
-    
 }

@@ -51,7 +51,7 @@ public class CatController : MonoBehaviour
         if (_isTouchingWall || jumpLeft > 0)
         {
             JumpCount();
-            
+            SoundManager.instance.PlaySound2D("DjumpSFX");
             _rigidbody.linearVelocity = new Vector2(wallBounceForce * _moveDirection, jumpForce);
 
             // 고양이 방향 반전 점프할때 전환해야한다면
@@ -66,7 +66,7 @@ public class CatController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-
+            SoundManager.instance.PlaySound2D("SlSt");
             if (StageManager.instance != null)
                 StageManager.instance.MiniGameResult(false);
             //이곳이 LP다운이 되어야하는곳
@@ -83,6 +83,7 @@ public class CatController : MonoBehaviour
         _rigidbody.linearVelocity = Vector2.zero;
         _rigidbody.gravityScale = 0;
         _isTouchingWall = true;
+        SoundManager.instance.PlaySound2D("Sstand");
 
         ContactPoint2D contect = other.GetContact(0);
 
@@ -149,7 +150,8 @@ public class CatController : MonoBehaviour
         // 필요하면 중력/벽접촉 상태 초기화
         _isTouchingWall = false;
         _rigidbody.gravityScale = 0f;
-        
+       
+
         StartCoroutine(Invincibility());
     }
 }

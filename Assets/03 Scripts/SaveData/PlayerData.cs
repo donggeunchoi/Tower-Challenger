@@ -20,6 +20,23 @@ public class PlayerData
 
     [NonSerialized]
     public DateTime lastTime;
+
+    public PlayerData()
+    {
+        bestFloor = 0;
+        gold = 0;
+        diamond = 0;
+        stamina = 5;
+        staminaTimer = 0;
+        tutorialCompleted = false;
+        VillageTutorialCompleted = false;
+        lastTime = DateTime.Now;
+        lastTimeString = lastTime.ToString("yyyy-MM-ddTHH:mm:ss.fffK");
+        itmeDataID = new List<string>();
+        characterNames = new List<string>();
+        equippedCharacterName = "";
+    }
+
     public void SaveData()
     {
         lastTime = DateTime.Now;

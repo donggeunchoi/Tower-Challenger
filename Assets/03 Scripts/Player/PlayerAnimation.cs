@@ -13,9 +13,14 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
-        if (playerInput == null)
-            playerInput = FindObjectOfType<PlayerInput>();
 
+#if UNITY_2023_1_OR_NEWER
+        if (playerInput == null)
+            playerInput = FindFirstObjectByType<PlayerInput>();
+#else
+    if (playerInput == null)
+        playerInput = FindObjectOfType<PlayerInput>();
+#endif
     }
     void Update()
     {

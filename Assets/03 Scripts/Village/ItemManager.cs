@@ -88,6 +88,6 @@ public class ItemManager : MonoBehaviour
             Debug.Log($"[검사] '{item.itemName}' == '{name}' ? {item.itemName == name}");
         }
 
-        return items.Find(rewardsItmes => rewardsItmes.itemName.Trim() == name.Trim());
+        return rewardsItmes.Find(item => item.itemName.Trim() == name.Trim());
     }
 }

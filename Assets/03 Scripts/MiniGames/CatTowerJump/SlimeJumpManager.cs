@@ -43,6 +43,7 @@ public class SlimeJumpManager : MonoBehaviour
             if (!_clear)
             {
                 _clear = true;
+                SoundManager.instance.PlaySound2D("MiniGameClear");
                 ShowClearUI();
                 StartCoroutine(WaitinTime());
             }
@@ -61,7 +62,9 @@ public class SlimeJumpManager : MonoBehaviour
     {
         if(_clear == false) yield break;
         
-        yield return new WaitForSeconds(1f);
+        playerTransform.localScale = Vector3.zero;
+        
+        yield return new WaitForSeconds(2f);
         
         if (StageManager.instance != null)
             StageManager.instance.MiniGameResult(true);

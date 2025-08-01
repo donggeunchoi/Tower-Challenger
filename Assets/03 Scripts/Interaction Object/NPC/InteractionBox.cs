@@ -33,6 +33,7 @@ public class InteractionBox : MonoBehaviour, IInteractable
 
     private void Start()
     {
+       
         isIntract = true;
 
         int currentFloor = StageManager.instance != null ? StageManager.instance.floor : 1;  // 기본값 1층
@@ -65,7 +66,7 @@ public class InteractionBox : MonoBehaviour, IInteractable
     public void Interact()  //플레이어 상호작용시 포탈 타입에 맞춰 각각의 코드를 진행
     {
         if (!isIntract) return;
-
+        SoundManager.instance.PlaySound2D("OpenBox");
         switch (boxType)
         {
             case BoxType.GoldBox:
