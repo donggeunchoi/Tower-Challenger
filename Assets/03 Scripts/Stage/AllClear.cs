@@ -133,15 +133,18 @@ public class AllClear : MonoBehaviour
 
         if (currentRewards[0].speedMoveReward)
         {
-            ShowItem("이동속도 주문서");
+            // ShowItem("이동속도 주문서");
+            ShowItem("speed1001");
         }
         else if (currentRewards[0].sandGlassReward)
         {
-            ShowItem("마법의 모래시계 +10");
+            // ShowItem("마법의 모래시계 +10");
+            ShowItem("sandGlass1002");
         }
         else if (currentRewards[0].topTicketReward)
         {
-            ShowItem("타워 입장권 1매");
+            // ShowItem("타워 입장권 1매");
+            ShowItem("TopTicket1003");
         }
         else
         {
@@ -153,14 +156,24 @@ public class AllClear : MonoBehaviour
 
     private void ShowItem(string itemName)
     {
+        Debug.Log(itemName);
         if (itemManager == null)
         {
             itemManager = (ItemManager)FindAnyObjectByType(typeof(ItemManager));
         }
-
+        
+        
+        if ( itemManager.rewardsItmes.Count == 0)
+        {
+            Debug.LogWarning("itemManager.rewardsItmes가 비어있거나 null입니다.");
+            return;
+        }
+        
         foreach (ItemData item in itemManager.rewardsItmes)
         {
-            if (item.itemName.Trim() == itemName.Trim())
+            Debug.Log("여기 없는거지 안되는거 맞지?");
+            Debug.Log(item.itemID);
+            if (item.itemID.Trim() == itemName.Trim())
             {
                 itemImage.gameObject.SetActive(true);
                 itemImage.sprite = item.icon;
