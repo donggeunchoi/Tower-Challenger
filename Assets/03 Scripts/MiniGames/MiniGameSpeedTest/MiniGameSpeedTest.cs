@@ -114,6 +114,7 @@ public class MiniGameSpeedTest : MonoBehaviour
         if (stageManager != null)
         {
             stageManager.MiniGameResult(true);
+            
         }
     }
 
@@ -142,6 +143,7 @@ public class MiniGameSpeedTest : MonoBehaviour
 
         backGround.sprite = sprites[1];
         isGreen = true;
+        SoundManager.instance.PlaySound2D("BoorLight");
         yield return new WaitForSeconds(successTime); //1초동안 눌러도되는시간
 
         if (isGreen && !isClick)  //클릭했는지 안했는지 검사 안했으면 실패

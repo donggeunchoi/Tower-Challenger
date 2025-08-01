@@ -216,6 +216,7 @@ public class StageManager : MonoBehaviour
                 stageLP.LPdown();
                 if (stageLP.currentLP <= 0)
                     GameOver();
+                SoundManager.instance.PlaySound2D("LPDown");
             }
         }
         else  //성공

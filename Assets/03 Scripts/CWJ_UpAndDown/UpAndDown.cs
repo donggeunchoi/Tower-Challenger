@@ -140,6 +140,7 @@ public class UpAndDown : MonoBehaviour
             curCount = Mathf.Max(curCount - 1, 0);
 
             if (StageManager.instance != null)
+                SoundManager.instance.PlaySound2D("UpandDowncount");
                 StageManager.instance.MiniGameResult(false);
         }
     }
