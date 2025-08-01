@@ -53,6 +53,12 @@ public class EggGameManager : MonoBehaviour
 
     void Start()
     {
+        if (StageManager.instance != null)
+        {
+            if (StageManager.instance.difficulty >= 1 && StageManager.instance.difficulty <= 3)
+            Lv = StageManager.instance.difficulty - 1;
+        }
+
         for (int i = 0; i < Eggs.Length; i++)
         {
             Eggs[i].SetActive(false);
