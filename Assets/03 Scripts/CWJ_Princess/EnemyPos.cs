@@ -49,7 +49,7 @@ public class EnemyPos : MonoBehaviour
     }
     private void SpawnTag() // 태그에 알맞는 몬스터 찾기
     {
-        if (time >= PrincessManager.princessInstance.enemyTime)
+        if (time > PrincessManager.princessInstance.enemyTime)
         {
             if (enemyPrefabs.Length == 0)
                 return;
