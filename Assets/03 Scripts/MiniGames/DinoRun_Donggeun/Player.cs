@@ -34,7 +34,8 @@ public class Player : MonoBehaviour
         // 상태가 false → true로 바뀌었을 때 한 번만 디버그 출력
         if (!wasGrounded && currentlyGrounded)
         {
-            SoundManager.instance.PlaySound2D("Sstand");
+            if(SoundManager.instance != null)
+                SoundManager.instance.PlaySound2D("Sstand");
         }
 
         wasGrounded = currentlyGrounded;
@@ -95,7 +96,8 @@ public class Player : MonoBehaviour
         //}
         if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
         {
-            SoundManager.instance.PlaySound2D("SlSt");
+            if(SoundManager.instance != null)
+                SoundManager.instance.PlaySound2D("SlSt");
             DinoMiniGame.instance.HandleHit();
             StartCoroutine(InvencibilityRoutine());
             
@@ -154,7 +156,9 @@ public class Player : MonoBehaviour
     {
         animatior.SetTrigger("Jump");
         playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpForce);
-        SoundManager.instance.PlaySound2D("DjumpSFX");
+        
+        if(SoundManager.instance != null)
+            SoundManager.instance.PlaySound2D("DjumpSFX");
     }
 
     public void StopJump()

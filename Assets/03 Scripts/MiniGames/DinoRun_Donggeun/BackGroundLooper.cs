@@ -3,7 +3,7 @@ using UnityEngine;
 public class BackGroundLooper : MonoBehaviour
 {
     public float scrollSpeed = 5f;
-    public float backgroundWidth = 20f; // 배경 하나의 가로 길이
+    public float backgroundWidth; // 배경 하나의 가로 길이
     public int backGroundCount = 3; // 배경 갯수
     private Vector3 startPosition;
 
