@@ -81,6 +81,8 @@ public class StoryTalk : MonoBehaviour
             }
             // 초기화
             PlayerManager.Instance.isMove = true;
+
+            UIManager.Instance.timerUI.StartTimer();
         }
     }
 
@@ -90,6 +92,8 @@ public class StoryTalk : MonoBehaviour
 
         // 플레이어의 움직임을 멈춰
         PlayerManager.Instance.isMove = false;
+
+        UIManager.Instance.timerUI.StopTimer();
 
         // 층에 따라 대화 배열을 변경
         if (StageManager.instance.floor == 6) storyFloor = 0;
