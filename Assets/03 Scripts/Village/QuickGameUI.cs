@@ -41,17 +41,18 @@ public class QuickGameUI : MonoBehaviour
 
             if (GameManager.Instance.stamina.mainStamina <= 0)
             {
-                if (!warningText != null)
-                {
-                    warningText.text = "스테미나가 없습니다.";
-                    StartCoroutine(WarningText());
-                }
-
-                if (!warningText2 != null)
-                {
-                    warningText2.text = "스테미나가 없습니다.";
-                    StartCoroutine(WarningText());
-                }
+                if (warningText == null) return;
+                if (warningText2 == null) return;
+                
+                
+                warningText.text = "스테미나가 없습니다.";
+                StartCoroutine(WarningText());
+                
+                
+                warningText2.text = "스테미나가 없습니다.";
+                StartCoroutine(WarningText());
+                
+                
                 return;
             }
             
