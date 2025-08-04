@@ -44,19 +44,19 @@ public class StoryTalk : MonoBehaviour
     {
         Debug.Log(isDialogue + ", " + count + ", " + storyList[storyFloor].lines.Length);
         isDialogue = true; // 대화 시작
-        count++; // 다음 대사로 넘어감
+        count++; 
 
-        if (isDialogue && count < storyList[storyFloor].lines.Length)
+        if (isDialogue && count < storyList[storyFloor].lines.Length) // 다음 대사로 넘어감
         {
-            Debug.Log("다음 대사");
             if (prefabUi.talk.text != null && storyList[storyFloor].lines[count].dialogueTest != null)
                 prefabUi.talk.text = storyList[storyFloor].lines[count].dialogueTest;
 
             if (prefabUi.image.sprite != null && storyList[storyFloor].lines[count].charImage != null)
             prefabUi.image.sprite = storyList[storyFloor].lines[count].charImage;
         }
-        else
+        else // 대사가 끝났다면
         {
+            // 대사 UI 제거
             if (storyCanvas != null)
                 storyCanvas.SetActive(false);
 
@@ -68,11 +68,11 @@ public class StoryTalk : MonoBehaviour
                     map.nextFloorPortal.SetActive(true);
                 }
             }
-            else if(map != null)
-            {
-                if (StageManager.instance.floor != 14)
-                    map.nextFloorPortal.SetActive(true);
-            }
+            //else if(map != null)
+            //{
+            //    if (StageManager.instance.floor != 14)
+            //        map.nextFloorPortal.SetActive(true);
+            //}
             map.mnyura_14.SetActive(false);
 
             if (StageManager.instance.floor != 6 && StageManager.instance.floor != 14)
@@ -81,6 +81,8 @@ public class StoryTalk : MonoBehaviour
             }
             // 초기화
             PlayerManager.Instance.isMove = true;
+
+            UIManager.Instance.timerUI.StartTimer();
         }
     }
 
@@ -90,6 +92,8 @@ public class StoryTalk : MonoBehaviour
 
         // 플레이어의 움직임을 멈춰
         PlayerManager.Instance.isMove = false;
+
+        UIManager.Instance.timerUI.StopTimer();
 
         // 층에 따라 대화 배열을 변경
         if (StageManager.instance.floor == 6) storyFloor = 0;

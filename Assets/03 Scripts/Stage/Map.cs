@@ -36,8 +36,12 @@ public class Map : MonoBehaviour
         }
         if (StageManager.instance.floor == 14)
         {
+            if (StoryManager.storyInstance.setCount == false)
+            {
                 mnyura_14.SetActive(true);
                 StoryManager.storyInstance.story_14Floor = mnyura_14.GetComponent<Story_14Floor>();
+            }
+
         }
         else if (StageManager.instance.floor == 30 && !StoryManager.storyInstance.storyTalk.isClear)
         {
