@@ -7,6 +7,7 @@ public class QuickGameUI : MonoBehaviour
     public GameObject panel;
     public TMPro.TMP_Text warningText;
     public TMPro.TMP_Text warningText2;
+    public GameObject Panel2;
     
     public void OnClickUseTicket()
     {
@@ -46,9 +47,6 @@ public class QuickGameUI : MonoBehaviour
                 
                 
                 warningText.text = "스테미나가 없습니다.";
-                StartCoroutine(WarningText());
-                
-                
                 warningText2.text = "스테미나가 없습니다.";
                 StartCoroutine(WarningText());
                 
@@ -95,5 +93,10 @@ public class QuickGameUI : MonoBehaviour
             warningText2.text = "타워 입장권을 사용해서 타워로 들어가겠습니까?\nNo - 스테미나 사용해서 입장합니다";
         }
         
+    }
+
+    public void OnCllickCancel2()
+    {
+        Panel2.SetActive(false);
     }
 }
