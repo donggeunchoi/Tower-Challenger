@@ -19,6 +19,7 @@ public class StoryManager : MonoBehaviour
     private Image image;
     private TextMeshProUGUI textTalk;
 
+    public bool setCount;
     private void Awake()
     {
         if (storyInstance == null)
@@ -30,6 +31,8 @@ public class StoryManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+
+        setCount = false;
     }
 
     private void OnEnable()
