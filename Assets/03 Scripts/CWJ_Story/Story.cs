@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Story : MonoBehaviour
 {
     private Map map;
+    GameObject button;
 
     private SpriteRenderer sr;
     private SpriteRenderer potalSr;
@@ -20,11 +21,29 @@ public class Story : MonoBehaviour
         potalSr = map.nextFloorPortal.gameObject.GetComponent<SpriteRenderer>();
         sr = GetComponent<SpriteRenderer>();
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-         StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StoryManager.storyInstance.storyTalk.BoolInit();
+
+            button = Instantiate(StoryManager.storyInstance.storyUi.talkButton);
+            button.GetComponent<Button>();
+            button.SetActive(true);
+        }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            button.SetActive(false);
+        }
+    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //     //StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+    //}
 
     private void Start()
     {

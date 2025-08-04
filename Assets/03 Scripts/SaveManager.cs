@@ -12,7 +12,6 @@ public class SaveManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(playerData, true);
         File.WriteAllText(filePath, json);
-        Debug.Log(filePath);
     }
 
     public static PlayerData LoadUsers()

@@ -2,11 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoryTalk : MonoBehaviour, IInteractable
+public class StoryTalk : MonoBehaviour
 {
     public Map map;
     public List<StoryData> storyList;
-
+    public GameObject button;
 
     private Button interactionButton;          // 대화 상호 작용 버튼
     [SerializeField] private StoryUi prefabUi; // 프리펩의 ui를 담을 변수
@@ -22,24 +22,24 @@ public class StoryTalk : MonoBehaviour, IInteractable
     {
         BoolInit();
     }
-    public void SetPlayer(GameObject _player) // 플레이어 오브젝트 안에있는 버튼을 찾는 함수
-    {
-        Transform button = FindDeepChild(_player.transform, "InteractionButton ");
-        button.GetComponent<Button>().onClick.AddListener(Interact);
-    }
+    //public void SetPlayer(GameObject _player) // 플레이어 오브젝트 안에있는 버튼을 찾는 함수
+    //{
+    //    Transform button = FindDeepChild(_player.transform, "InteractionButton ");
+    //    button.GetComponent<Button>().onClick.AddListener(Interact);
+    //}
 
-    private Transform FindDeepChild(Transform parent, string name)
-    {
-        foreach (Transform child in parent)
-        {
-            if (child.name == name)
-                return child;
-            var result = FindDeepChild(child, name);
-            if (result != null)
-                return result;
-        }
-        return null;
-    }
+    //private Transform FindDeepChild(Transform parent, string name)
+    //{
+    //    foreach (Transform child in parent)
+    //    {
+    //        if (child.name == name)
+    //            return child;
+    //        var result = FindDeepChild(child, name);
+    //        if (result != null)
+    //            return result;
+    //    }
+    //    return null;
+    //}
     public void Dialogue()
     {
         Debug.Log(isDialogue + ", " + count + ", " + storyList[storyFloor].lines.Length);
@@ -60,7 +60,7 @@ public class StoryTalk : MonoBehaviour, IInteractable
             if (storyCanvas != null)
                 storyCanvas.SetActive(false);
 
-            if (map.myuraPrefab != null)
+            if (map.myuraPrefab != null && map != null)
             {
                 if (StageManager.instance.floor != 14)
                 {
@@ -68,13 +68,17 @@ public class StoryTalk : MonoBehaviour, IInteractable
                     map.nextFloorPortal.SetActive(true);
                 }
             }
-            else
+            else if(map != null)
             {
                 if (StageManager.instance.floor != 14)
                     map.nextFloorPortal.SetActive(true);
             }
             map.mnyura_14.SetActive(false);
 
+            if (StageManager.instance.floor != 6 && StageManager.instance.floor != 14)
+            {
+                button.SetActive(false);
+            }
             // 초기화
             PlayerManager.Instance.isMove = true;
         }
@@ -111,21 +115,15 @@ public class StoryTalk : MonoBehaviour, IInteractable
             prefabUi.image.sprite = storyList[storyFloor].lines[count].charImage;
         }
 
+        if (StageManager.instance.floor != 6 && StageManager.instance.floor != 14)
+        {
+            button = Instantiate(StoryManager.storyInstance.storyUi.talkButton);
+            button.GetComponent<Button>();
+            button.SetActive(true);
+        }
+
         // 스토리가 시작했는지 여부
         isTalk = true;
-    }
-    public void Interact()
-    {
-        if (!isTalk) // 대화가 시작 안했다면
-        {
-            StoryInit();
-        }
-        else
-        {
-            Debug.Log("클릭 대화");
-
-            Dialogue();
-        }
     }
 
     public void BoolInit()

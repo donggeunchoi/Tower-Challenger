@@ -36,16 +36,14 @@ public class Map : MonoBehaviour
         }
         if (StageManager.instance.floor == 14)
         {
-            mnyura_14.SetActive(true);
-            StoryManager.storyInstance.story_14Floor = mnyura_14.GetComponent<Story_14Floor>();
-            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
+                mnyura_14.SetActive(true);
+                StoryManager.storyInstance.story_14Floor = mnyura_14.GetComponent<Story_14Floor>();
         }
         else if (StageManager.instance.floor == 30 && !StoryManager.storyInstance.storyTalk.isClear)
         {
             StoryManager.storyInstance.storyTalk.BoolInit();
 
             StoryManager.storyInstance.storyTalk.StoryInit();
-            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
     }
 
@@ -122,7 +120,6 @@ public class Map : MonoBehaviour
             Debug.Log("10층 클리어");
             StoryManager.storyInstance.storyTalk.BoolInit();
             StoryManager.storyInstance.storyTalk.StoryInit();
-            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
         else if (StageManager.instance.floor == 20)
         {
@@ -130,7 +127,6 @@ public class Map : MonoBehaviour
 
             StoryManager.storyInstance.storyTalk.BoolInit();
             StoryManager.storyInstance.storyTalk.StoryInit();
-            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
         else if (StageManager.instance.floor == 30 && StoryManager.storyInstance.storyTalk.isClear)
         {
@@ -138,7 +134,6 @@ public class Map : MonoBehaviour
 
             StoryManager.storyInstance.storyTalk.BoolInit();
             StoryManager.storyInstance.storyTalk.StoryInit();
-            StoryManager.storyInstance.storyTalk.SetPlayer(PlayerManager.Instance.player);
         }
 
         else { nextFloorPortal.SetActive(true); }

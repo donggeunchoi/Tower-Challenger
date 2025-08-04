@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         TryGetComponent(out account);
         TryGetComponent(out character);
 
-        playerData = new PlayerData();
+        playerData = SaveManager.LoadUsers();
         Save.SetPlayerData(playerData);
 
         LoadMiniGameCSV();
