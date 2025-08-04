@@ -57,6 +57,8 @@ public class StageManager : MonoBehaviour
     #region MiniGameCall
     public void StartGame()
     {
+
+        shownMiniGameUIs.Clear();
         isGameActive = true;  //현재 게임 시작
 
         if (infoUI != null)
