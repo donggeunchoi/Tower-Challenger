@@ -3,12 +3,12 @@ using UnityEngine;
 public class BackGroundLooper : MonoBehaviour
 {
     public Transform[] backgrounds; // 자식 배경들
-    private float backgroundWidth;
+    private int backgroundWidth;
 
     void Start()
     {
         // 자식 중 하나에서 가로 너비 가져오기
-        backgroundWidth = backgrounds[0].GetComponent<SpriteRenderer>().bounds.size.x;
+        backgroundWidth = (int)backgrounds[0].GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     void Update()
