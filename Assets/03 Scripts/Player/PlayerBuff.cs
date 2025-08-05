@@ -14,8 +14,8 @@ public class PlayerBuff : MonoBehaviour
 
     public SpriteRenderer playerSprite;
 
-    private bool isSlow;
-    private bool isStun;
+    public bool isSlow;
+    public bool isStun;
 
 
     [SerializeField] private int difficulty;
