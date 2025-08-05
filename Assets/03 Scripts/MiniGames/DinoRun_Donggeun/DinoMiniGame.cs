@@ -57,7 +57,7 @@ public class DinoMiniGame : MonoBehaviour
 
         // Timer
         gameTimer -= Time.deltaTime;
-        timerText.text = "Time: " + Mathf.CeilToInt(gameTimer).ToString();
+        timerText.text = "Time: " + Mathf.CeilToInt(Mathf.Max(gameTimer,0f));
         
         CurrentSpeed = baseSpeed + (gameDuration - gameTimer) * speedIncreaseRate;
         

@@ -2,26 +2,40 @@ using UnityEngine;
 
 public class BackGroundLooper : MonoBehaviour
 {
-    public float scrollSpeed = 5f;
-    public float backgroundWidth; // 배경 하나의 가로 길이
-    public int backGroundCount = 3; // 배경 갯수
-    private Vector3 startPosition;
+    public Transform[] backgrounds; // 자식 배경들
+    private int backgroundWidth;
 
     void Start()
     {
-        startPosition = transform.position;
+        // 자식 중 하나에서 가로 너비 가져오기
+        backgroundWidth = (int)backgrounds[0].GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     void Update()
     {
-        float speed = DinoMiniGame.instance.CurrentSpeed;
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
-
-        // 배경이 왼쪽으로 완전히 나가면 오른쪽으로 재배치
-        if (transform.position.x < -backgroundWidth)
+        foreach (Transform bg in backgrounds)
         {
-            float offset = backGroundCount * backgroundWidth;
-            transform.position += Vector3.right * offset;
+            if (bg.position.x < -backgroundWidth)
+            {
+                Transform rightmost = FindRightmostBackground();
+                float newX = rightmost.position.x + backgroundWidth;
+                bg.position = new Vector3(newX, bg.position.y, bg.position.z);
+            }
         }
+    }
+
+    Transform FindRightmostBackground()
+    {
+        Transform rightmost = backgrounds[0];
+
+        foreach (Transform bg in backgrounds)
+        {
+            if (bg.position.x > rightmost.position.x)
+            {
+                rightmost = bg;
+            }
+        }
+
+        return rightmost;
     }
 }
