@@ -17,7 +17,9 @@ public class PrincessManager : MonoBehaviour
 
     [Header("UI")]
     public TextMeshProUGUI timeText;
-    
+
+    [Header("박쥐 직선 추가 이동속도")]
+    public float batStraightSpeed;
     [Header("박쥐 이동속도")]
     public float batSpeed;
     [Header("박쥐가 최대로 올라가는 y값")]

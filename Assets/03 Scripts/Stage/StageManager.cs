@@ -163,7 +163,18 @@ public class StageManager : MonoBehaviour
 
     private void SetFloorInfo()
     {
-        difficulty = Mathf.Clamp((floor - 1) / 10 + 1, 1, 4);
+        if (floor <= 9)
+            difficulty = 1;
+        else if (floor <= 15)
+            difficulty = 2;
+        else if (floor <= 19)
+            difficulty = 3;
+        else if (floor <= 25)
+            difficulty = 4;
+        else if (floor <= 29)
+            difficulty = 5;
+        else
+            difficulty = 1;
 
         StageTable.PotalStageData data = new StageTable.PotalStageData();
         StageTable.PotalStageData portalData = CVSLoader.potalStageDataList.Find(d => d.floor == floor);

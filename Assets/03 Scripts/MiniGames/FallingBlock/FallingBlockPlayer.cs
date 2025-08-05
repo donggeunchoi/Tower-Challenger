@@ -172,6 +172,9 @@ public class FallingBlockPlayer : MonoBehaviour
 
     private void CheckCollision()
     {
+        if (currentTime > clearTime)
+            return;
+
         Rect playerRect = new Rect(
         player.anchoredPosition.x - player.rect.width * player.pivot.x,
         player.anchoredPosition.y - player.rect.height * player.pivot.y,
