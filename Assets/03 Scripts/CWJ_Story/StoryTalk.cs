@@ -42,7 +42,6 @@ public class StoryTalk : MonoBehaviour
     //}
     public void Dialogue()
     {
-        Debug.Log(isDialogue + ", " + count + ", " + storyList[storyFloor].lines.Length);
         isDialogue = true; // 대화 시작
         count++; 
 
@@ -68,11 +67,11 @@ public class StoryTalk : MonoBehaviour
                     map.nextFloorPortal.SetActive(true);
                 }
             }
-            //else if(map != null)
-            //{
-            //    if (StageManager.instance.floor != 14)
-            //        map.nextFloorPortal.SetActive(true);
-            //}
+            else if (map != null)
+            {
+                if (StageManager.instance.floor != 14)
+                    map.nextFloorPortal.SetActive(true);
+            }
             map.mnyura_14.SetActive(false);
 
             if (StageManager.instance.floor != 6 && StageManager.instance.floor != 14)
@@ -81,6 +80,7 @@ public class StoryTalk : MonoBehaviour
             }
             // 초기화
             PlayerManager.Instance.isMove = true;
+            StoryManager.storyInstance.setCount = true;
 
             UIManager.Instance.timerUI.StartTimer();
         }

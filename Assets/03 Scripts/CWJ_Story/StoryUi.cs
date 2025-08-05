@@ -19,8 +19,6 @@ public class StoryUi : MonoBehaviour
         }
         else
         {
-            Debug.Log("클릭 대화");
-
             s.Dialogue();
         }
     }
