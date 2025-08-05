@@ -55,8 +55,28 @@ public class EggGameManager : MonoBehaviour
     {
         if (StageManager.instance != null)
         {
-            if (StageManager.instance.difficulty >= 1 && StageManager.instance.difficulty <= 3)
-            Lv = StageManager.instance.difficulty - 1;
+            int difficulty = StageManager.instance.difficulty;
+
+            if (difficulty == 1)
+            {
+                Lv = 0;
+            }
+            else if (difficulty == 2)
+            {
+                Lv = 1;
+            }
+            else if (difficulty == 3)
+            {
+                Lv = 2;
+            }
+            else if (difficulty == 4)
+            {
+                Lv = 2;
+            }
+            else if (difficulty == 5)
+            {
+                Lv = 2;
+            }
         }
 
         for (int i = 0; i < Eggs.Length; i++)

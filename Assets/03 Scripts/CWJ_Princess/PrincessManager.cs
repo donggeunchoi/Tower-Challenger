@@ -34,7 +34,7 @@ public class PrincessManager : MonoBehaviour
     [Header("불덩이 이동속도")]
     public float fireSpeed;
     
-    private void Awake()
+    private void Awake()    
     {
         if (princessInstance == null)
         {
@@ -45,6 +45,32 @@ public class PrincessManager : MonoBehaviour
 
     private void Start()
     {
+        if (StageManager.instance != null)
+        {
+            int difficulty = StageManager.instance.difficulty;
+
+            if (difficulty == 1)
+            {
+                batSpeed = 8f; enemyTime = 1.5f; batStraightSpeed = 15f; fireSpeed = 7f;
+            }
+            else if (difficulty == 2)
+            {
+                batSpeed = 8f; enemyTime = 1.3f; batStraightSpeed = 15f; fireSpeed = 7f;
+            }
+            else if (difficulty == 3)
+            {
+                batSpeed = 10f; enemyTime = 1.15f; batStraightSpeed = 18f; fireSpeed = 7f;
+            }
+            else if (difficulty == 4)
+            {
+                batSpeed = 10f; enemyTime = 1f; batStraightSpeed = 21f; fireSpeed = 9f;
+            }
+            else if (difficulty == 5)
+            {
+                batSpeed = 12f; enemyTime = 0.75f; batStraightSpeed = 23f; fireSpeed = 11f;
+            }
+        }
+
         clear = false;
         spriteRenderer.gameObject.SetActive(false);
 
