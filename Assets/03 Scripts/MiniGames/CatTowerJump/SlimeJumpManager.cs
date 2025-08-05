@@ -31,7 +31,7 @@ public class SlimeJumpManager : MonoBehaviour
     void Start()
     {
         startY =playerTransform.position.y;
-        UpdateText(100);
+        UpdateText(TargetY);
     }
 
     // Update is called once per frame
