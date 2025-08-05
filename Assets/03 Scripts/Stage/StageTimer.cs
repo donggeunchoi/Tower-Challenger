@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class StageTimer : MonoBehaviour
 {
-    public const float MAX_TIME = 100f;
-    public float timer = 100f;
+    public const float MAX_TIME = 120f;
+    public float timer = 120f;
     private bool isActive = false;
     public TextMeshProUGUI timerText;
     public Image uiBar;
