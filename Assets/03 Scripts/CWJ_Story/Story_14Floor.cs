@@ -31,6 +31,7 @@ public class Story_14Floor : MonoBehaviour
 
         if (StageManager.instance.floor != 14)
         {
+            Debug.Log("14층이 아닙니다.");
             gameObject.SetActive(false);
             b.setCount = false;
             return;
@@ -38,11 +39,11 @@ public class Story_14Floor : MonoBehaviour
         
         if (b.setCount)
         {
+            Debug.Log("대화를 했습니다.");
             gameObject.SetActive(false);
             return;
         }
-
+        Debug.Log("14층 입니다.");
         gameObject.SetActive(true);
-        b.setCount = true;
     }
 }
