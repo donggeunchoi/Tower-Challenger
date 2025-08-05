@@ -17,20 +17,29 @@ public class TowerEnerance : MonoBehaviour
 
     public void OnClickOnGameMove()
     {
-        SceneManager.LoadScene("TutorialScene");
-        //이곳에서도 스테미너 호출해야합니다.
+        if (GameManager.Instance.stamina.mainStamina > 0)
+        {
+            GameManager.Instance.stamina.UseStamina();
+        }
+        else
+        {
+            Debug.Log("스테미나가 없습니다");
+        }
+        
+        
+        bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
+        if (!tutorial)
+        {
+            SceneManager.LoadScene("TutorialScene");
+        }
+        else
+        {
+            if (GameManager.Instance.stamina.mainStamina > 0)
+                SceneManager.LoadScene("GameScene");
+        }
+        
     }
-
-    public void OnClickMail()
-    {
-        MailPanel.SetActive(true);
-    }
-
-    public void OnClickMailClose()
-    {
-        MailPanel.SetActive(false);
-    }
-
+    
     public void OnClickInventorty()
     {
         InventortyPanel.SetActive(true);
@@ -49,8 +58,17 @@ public class TowerEnerance : MonoBehaviour
 
         if (ticketItem != null)
         {
-            ItemManager.instance.items.Remove(ticketItem);
-            SceneManager.LoadScene("TutorialScene");
+            bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
+            if (!tutorial)
+            {
+                ItemManager.instance.items.Remove(ticketItem);
+                SceneManager.LoadScene("TutorialScene");
+            }
+            else
+            {
+                ItemManager.instance.items.Remove(ticketItem);
+                SceneManager.LoadScene("GameScene");
+            }
         }
         else
         {
@@ -68,18 +86,6 @@ public class TowerEnerance : MonoBehaviour
         {
 
             quickStaminaUI.SetActive(true);
-
-
-            //bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
-            //if (!tutorial)
-            //{
-            //    SceneManager.LoadScene("TutorialScene");
-            //}
-            //else
-            //{
-            //    if (GameManager.Instance.stamina.mainStamina > 0)
-            //        SceneManager.LoadScene("GameScene");
-            //}
            
         }
     }
