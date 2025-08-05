@@ -201,6 +201,49 @@ public static class CVSLoader
             StageTable.debuffStunTableList.Add(row);
         }
     }
+
+    public static void LoadTrapPerTableCSV()
+    {
+        trapPerTableList.Clear();
+        TextAsset data = Resources.Load<TextAsset>("TrapPerTable"); // 확장자X
+        if (data == null)
+        {
+            Debug.LogError("TrapPerTable.csv 파일이 없습니다.");
+            return;
+        }
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            TrapPerTableRow row = new TrapPerTableRow();
+
+            // NOTE: TrapPerTable.csv에서 index~stuPer까지 총 8열
+            row.index = GetValue(vals, 0);
+            row.name = GetValue(vals, 1);
+            row.dec = GetValue(vals, 2);
+            row.type = GetValue(vals, 3);
+            row.floor = ParseInt(GetValue(vals, 4));
+            row.hitPer = ParseInt(GetValue(vals, 5));
+            row.slowPer = ParseInt(GetValue(vals, 6));
+            row.stuPer = ParseInt(GetValue(vals, 7));
+
+            if (
+                string.IsNullOrWhiteSpace(row.index) &&
+                string.IsNullOrWhiteSpace(row.name) &&
+                string.IsNullOrWhiteSpace(row.dec) &&
+                string.IsNullOrWhiteSpace(row.type) &&
+                row.floor == 0 &&
+                row.hitPer == 0 &&
+                row.slowPer == 0 &&
+                row.stuPer == 0
+            )
+                continue;
+
+            trapPerTableList.Add(row);
+        }
+    }
     #endregion
     #region BoxData
     // ArrowDataTable.csv

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 public enum DebuffType
 {
     None,
@@ -14,18 +15,34 @@ public class Trap : MonoBehaviour
 
     private void Start()
     {
-        int randomValue = Random.Range(0, 100);
+        int randomValue;
+        if (StageTable.trapPerTableList[0] != null)
+        {
+            int randomCount = StageTable.trapPerTableList[0].hitPer + StageTable.trapPerTableList[0].slowPer + StageTable.trapPerTableList[0].stuPer;
+            randomValue = Random.Range(1, randomCount + 1);
 
-        type = DebuffType.None;
+            if (randomValue <= StageTable.trapPerTableList[0].hitPer)
+                type = DebuffType.Hit;
+            else if (randomValue <= StageTable.trapPerTableList[0].hitPer + StageTable.trapPerTableList[0].slowPer)
+                type = DebuffType.Slow;
+            else if (randomValue <= randomCount)
+                type = DebuffType.Stun;
+            else
+                type = DebuffType.None;
+        }
+        else
+        {
+            randomValue = Random.Range(1, 101);
 
-        if (randomValue < 51)                           //임시 50%
-            type = DebuffType.Slow;
-        else if (randomValue > 50 && randomValue < 91)  //임시 40%
-            type = DebuffType.Stun;
-        else if (randomValue > 90 && randomValue < 96)  //임시 5%
-            type = DebuffType.Hit;
-        else                                            //임시 5%
-            type = DebuffType.None;
+            if (randomValue < 51)                           //임시 50%
+                type = DebuffType.Slow;
+            else if (randomValue > 50 && randomValue < 91)  //임시 40%
+                type = DebuffType.Stun;
+            else if (randomValue > 90 && randomValue < 96)  //임시 5%
+                type = DebuffType.Hit;
+            else                                            //임시 5%
+                type = DebuffType.None;
+        }
     }
 
     private void AddDebuff(GameObject player)

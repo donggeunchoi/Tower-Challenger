@@ -40,6 +40,19 @@ public class StageTable
         public int eftTime;
         public bool imm;
     }
+    [System.Serializable]
+    public class TrapPerTableRow
+    {
+        public string index;   // ex) Trap1001 (있는 row만)
+        public string name;    // ex) Trap
+        public string dec;     // ex) 트랩 확률
+        public string type;    // ex) trap
+        public int floor;      // ex) 1~30
+        public int hitPer;     // ex) 60, 50 등등
+        public int slowPer;
+        public int stuPer;
+    }
     public static List<DebuffTable> debuffSlowTableList = new List<DebuffTable>();
     public static List<DebuffStunTableRow> debuffStunTableList = new List<DebuffStunTableRow>();
+    public static List<TrapPerTableRow> trapPerTableList = new List<TrapPerTableRow>();
 }

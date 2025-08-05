@@ -31,6 +31,7 @@ public class PlayerBuff : MonoBehaviour
     {
         CVSLoader.LoadDebuffCSV();
         CVSLoader.LoadDebuffStunCSV();
+        CVSLoader.LoadTrapPerTableCSV();
 
         isSlow = false;
         isStun = false;
