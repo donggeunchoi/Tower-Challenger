@@ -49,13 +49,25 @@ public class FallingBlockPlayer : MonoBehaviour
         {
             int difficulty = StageManager.instance.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "FaillingBlock" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
+            if (difficulty == 1)
             {
-                clearTime = data.clearTime;
-                gravity = data.gravity;
-                spawnDelay = data.spawnDelay;
+                gravity = -800; spawnDelay = 0.5f;
+            }
+            else if (difficulty == 2)
+            {
+                gravity = -900; spawnDelay = 0.375f;
+            }
+            else if (difficulty == 3)
+            {
+                gravity = -1000; spawnDelay = 0.285f;
+            }
+            else if (difficulty == 4)
+            {
+                gravity = -1000; spawnDelay = 0.25f;
+            }
+            else if (difficulty == 5)
+            {
+                gravity = -800; spawnDelay = 0.1f;
             }
         }
 
@@ -172,6 +184,9 @@ public class FallingBlockPlayer : MonoBehaviour
 
     private void CheckCollision()
     {
+        if (currentTime > clearTime)
+            return;
+
         Rect playerRect = new Rect(
         player.anchoredPosition.x - player.rect.width * player.pivot.x,
         player.anchoredPosition.y - player.rect.height * player.pivot.y,

@@ -2333,9 +2333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bef13caba723e84fb7ad9a120a0f67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  failCount: 7
+  failCount: 10
   curCount: 0
-  max_Num: 50
+  max_Num: 99
   miniGameClearUI: {fileID: 7954825076138411023, guid: 3fe034bb5131a4689b812d3e910c3724,
     type: 3}
   mainCanvas: {fileID: 1957861561}
@@ -3792,7 +3792,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3819,10 +3819,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 72
   m_fontSizeBase: 100
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

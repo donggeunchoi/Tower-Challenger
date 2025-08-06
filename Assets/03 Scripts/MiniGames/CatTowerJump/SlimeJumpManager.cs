@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using TMPro;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,8 +31,34 @@ public class SlimeJumpManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (StageManager.instance != null && GameManager.Instance)
+        {
+            int difficulty = StageManager.instance.difficulty;
+
+            if (difficulty == 1)
+            {
+                TargetY = 70;
+            }
+            else if (difficulty == 2)
+            {
+                TargetY = 90;
+            }
+            else if (difficulty == 3)
+            {
+                TargetY = 110;
+            }
+            else if (difficulty == 4)
+            {
+                TargetY = 130;
+            }
+            else if (difficulty == 5)
+            {
+                TargetY = 150;
+            }
+        }
+
         startY =playerTransform.position.y;
-        UpdateText(100);
+        UpdateText(TargetY);
     }
 
     // Update is called once per frame

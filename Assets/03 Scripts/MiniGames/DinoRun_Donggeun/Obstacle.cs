@@ -17,11 +17,25 @@ public class Obstacle : MonoBehaviour
         {
             int difficulty = StageManager.instance.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeRun" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
+            if (difficulty == 1)
             {
-                spawnInterval = data.spawnInterval;
+                spawnInterval = 1.5f;
+            }
+            else if (difficulty == 2)
+            {
+                spawnInterval = 1.3f;
+            }
+            else if (difficulty == 3)
+            {
+                spawnInterval = 1.3f;
+            }
+            else if (difficulty == 4)
+            {
+                spawnInterval = 1.15f;
+            }
+            else if (difficulty == 5)
+            {
+                spawnInterval = 1.15f;
             }
         }
 

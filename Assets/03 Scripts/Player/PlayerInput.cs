@@ -24,6 +24,8 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public bool canDash = true;             // 대쉬 가능 여부
     public bool isDashing = false;          // 대쉬 중 여부
     public SpriteRenderer spriteRenderer;   // 방향 전환 이미지
+    public PlayerBuff playerBuff;
+
 
     [Header("인벤토리")] 
     public GameObject InventoryPanel;
@@ -46,7 +48,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     void Start()
     {
-
         originSpeed = speed;
 
         if (PlayerManager.Instance != null)
@@ -65,6 +66,9 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
             spriteRenderer = player.GetComponent<SpriteRenderer>(); //플레이어 스프라이트
 
             player.TryGetComponent<Rigidbody2D>(out rb);
+
+            if (playerBuff == null)
+                player.TryGetComponent<PlayerBuff>(out playerBuff);
         }
     }
 
@@ -91,10 +95,26 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
         if (player != null && rb != null) //플레이어와 리지드바디가 있을 때만 이동 처리
         {
-            float currentSpeed = isDashing ? DashSpeed : speed; // 대쉬 중이면 대쉬 속도
-            rb.linearVelocity = finalInput.normalized * currentSpeed;    // 방향 * 속도
-
             FlipChange(finalInput); // 방향 전환 처리
+
+            if (playerBuff != null)
+            {
+                if (playerBuff.isSlow || playerBuff.isStun)
+                {
+                    rb.linearVelocity = finalInput.normalized * speed;    // 방향 * 속도
+                    return;
+                }                    
+            }
+
+            if (isDashing)
+            {
+                rb.linearVelocity = finalInput.normalized * DashSpeed;
+                return;
+            }
+            else
+                rb.linearVelocity = Vector2.zero;
+
+            rb.linearVelocity = finalInput.normalized * originSpeed;
         }
     }
 

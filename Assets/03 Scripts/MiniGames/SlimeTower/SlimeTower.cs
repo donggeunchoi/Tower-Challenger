@@ -35,11 +35,25 @@ public class SlimeTower : MonoBehaviour
         {
             int difficulty = StageManager.instance.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeTower" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
+            if (difficulty == 1)
             {
-                clearGameCount = data.clearGameCount;
+                clearGameCount = 5;
+            }
+            else if (difficulty == 2)
+            {
+                clearGameCount = 7;
+            }
+            else if (difficulty == 3)
+            {
+                clearGameCount = 7;
+            }
+            else if (difficulty == 4)
+            {
+                clearGameCount = 8;
+            }
+            else if (difficulty == 5)
+            {
+                clearGameCount = 7;
             }
         }
         

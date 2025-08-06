@@ -20,11 +20,25 @@ public class Bird : MonoBehaviour
         {
             int difficulty = StageManager.instance.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeTower" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
+            if (difficulty == 1)
             {
-                birdSpeed = data.birdSpeed;
+                birdSpeed = 5;
+            }
+            else if (difficulty == 2)
+            {
+                birdSpeed = 7;
+            }
+            else if (difficulty == 3)
+            {
+                birdSpeed = 9;
+            }
+            else if (difficulty == 4)
+            {
+                birdSpeed = 10;
+            }
+            else if (difficulty == 5)
+            {
+                birdSpeed = 14;
             }
         }
 

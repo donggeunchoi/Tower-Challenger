@@ -88,6 +88,6 @@ public class BatAttack : MonoBehaviour
     {
         Vector3 dir = (princess.position - transform.position).normalized;
         // 
-        transform.position += dir * (PrincessManager.princessInstance.batSpeed + 10f) * Time.deltaTime;
+        transform.position += dir * (PrincessManager.princessInstance.batSpeed + PrincessManager.princessInstance.batStraightSpeed) * Time.deltaTime;
     }
 }

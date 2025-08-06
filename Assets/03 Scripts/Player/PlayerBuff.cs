@@ -14,8 +14,8 @@ public class PlayerBuff : MonoBehaviour
 
     public SpriteRenderer playerSprite;
 
-    private bool isSlow;
-    private bool isStun;
+    public bool isSlow;
+    public bool isStun;
 
 
     [SerializeField] private int difficulty;
@@ -31,6 +31,7 @@ public class PlayerBuff : MonoBehaviour
     {
         CVSLoader.LoadDebuffCSV();
         CVSLoader.LoadDebuffStunCSV();
+        CVSLoader.LoadTrapPerTableCSV();
 
         isSlow = false;
         isStun = false;

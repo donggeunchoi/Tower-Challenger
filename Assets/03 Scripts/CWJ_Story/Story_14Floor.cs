@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class Story_14Floor : MonoBehaviour
 {
     GameObject button;
-    static public bool setCount = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,19 +27,23 @@ public class Story_14Floor : MonoBehaviour
 
     private void Start()
     {
+        var b = StoryManager.storyInstance;
+
         if (StageManager.instance.floor != 14)
         {
+            Debug.Log("14층이 아닙니다.");
             gameObject.SetActive(false);
-            setCount = false;
+            b.setCount = false;
+            return;
         }
-        else
+        
+        if (b.setCount)
         {
-            Debug.Log("숫자 : " + setCount);
-            if (setCount == false)
-            {
-                gameObject.SetActive(true);
-                setCount = true;
-            }
+            Debug.Log("대화를 했습니다.");
+            gameObject.SetActive(false);
+            return;
         }
+        Debug.Log("14층 입니다.");
+        gameObject.SetActive(true);
     }
 }
