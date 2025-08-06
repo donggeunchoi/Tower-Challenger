@@ -7,6 +7,7 @@ public class NPController : MonoBehaviour
     public NPCData npcData;
     public GameObject talkImage;
     public TMPro.TMP_Text talkText;
+    private Animator animator;
     
     private float _startPositionX;
     private bool _movingLeft = true;
@@ -15,6 +16,7 @@ public class NPController : MonoBehaviour
     void Start()
     {
         _startPositionX = transform.localPosition.x;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -24,6 +26,8 @@ public class NPController : MonoBehaviour
         {
             return;
         }
+        
+        animator.SetBool("IsMove", true);
         
         float newX = transform.localPosition.x;
 
@@ -58,6 +62,8 @@ public class NPController : MonoBehaviour
     private IEnumerator WaitBeforeTurn(bool turnToRight)
     {
         _isWaiting = true;
+        
+        animator.SetBool("IsMove", false);
 
         if (!turnToRight)
         {

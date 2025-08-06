@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4b70630a4bd44fd8aa8b141a9e232e, type: 3}
+  m_Name: NPC3
+  m_EditorClassIdentifier: 
+  npcName: "\uD0D5\uD6C4\uB8E8 \uC544\uC800\uC528"
+  npcImage: {fileID: 21300000, guid: 8fbb2e652eff94a1f8b4cf394427b6d2, type: 3}
+  npcDescription:
+  - "\uB2E4"
+  MoveSpeed: 100
+  MoveDistance: 200
+  StopDuration: 5
