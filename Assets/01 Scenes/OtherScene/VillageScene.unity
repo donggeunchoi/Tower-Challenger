@@ -4166,7 +4166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00012207, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429648293
@@ -10605,7 +10605,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1724231698}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.50117177
+  m_Size: 0.33333325
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10848,6 +10848,7 @@ GameObject:
   - component: {fileID: 975799027}
   - component: {fileID: 975799026}
   - component: {fileID: 975799028}
+  - component: {fileID: 975799029}
   m_Layer: 5
   m_Name: NPC2
   m_TagString: Untagged
@@ -10872,8 +10873,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -347, y: 199.39001}
-  m_SizeDelta: {x: 136.208, y: 175.1321}
+  m_AnchoredPosition: {x: -347, y: 187.82031}
+  m_SizeDelta: {x: 136.208, y: 201.5772}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &975799026
 MonoBehaviour:
@@ -10895,8 +10896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6047752347147467583, guid: 3954e159b61c54ca68f874ddd64d1827,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3cc63c76acb964700807d516c168f222, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10926,9 +10926,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5900dd416bf4581887a1677298600b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcData: {fileID: 11400000, guid: 4cc12511088de434ab45cb3a967d7f38, type: 2}
+  npcData: {fileID: 11400000, guid: 215742ca19c734fa0b1bf97fccfb753c, type: 2}
   talkImage: {fileID: 33750237}
   talkText: {fileID: 1851801153}
+--- !u!95 &975799029
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975799024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43af5b52b8ef94d45a8a6a729d7ee1db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &996734025
 GameObject:
   m_ObjectHideFlags: 0
@@ -17373,6 +17395,7 @@ GameObject:
   - component: {fileID: 1567397580}
   - component: {fileID: 1567397579}
   - component: {fileID: 1567397581}
+  - component: {fileID: 1567397582}
   m_Layer: 5
   m_Name: NPC3
   m_TagString: Untagged
@@ -17397,8 +17420,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -732, y: 199.39001}
-  m_SizeDelta: {x: 136.208, y: 175.1321}
+  m_AnchoredPosition: {x: -732, y: 189.47314}
+  m_SizeDelta: {x: 136.208, y: 208.1885}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1567397579
 MonoBehaviour:
@@ -17420,8 +17443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5207544987158716770, guid: 53ca7a420001d4642aaa0154f04d2e6d,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c3e862147714409aa53a302fcd799ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17451,9 +17473,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5900dd416bf4581887a1677298600b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcData: {fileID: 11400000, guid: 6bf19b2565a3642c5bbcbb788416a7df, type: 2}
+  npcData: {fileID: 11400000, guid: 5d3fafd37857a48e5a54f64375998baa, type: 2}
   talkImage: {fileID: 313592789}
   talkText: {fileID: 1954636710}
+--- !u!95 &1567397582
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567397577}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5d7eb94a4ffb473fb54b752cacc8563, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1575706910
 GameObject:
   m_ObjectHideFlags: 0
@@ -22560,6 +22604,7 @@ GameObject:
   - component: {fileID: 1950291780}
   - component: {fileID: 1950291779}
   - component: {fileID: 1950291781}
+  - component: {fileID: 1950291782}
   m_Layer: 5
   m_Name: NPC1
   m_TagString: Untagged
@@ -22584,8 +22629,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 185, y: 199.39001}
-  m_SizeDelta: {x: 127.0226, y: 165.85}
+  m_AnchoredPosition: {x: 185, y: 192.23145}
+  m_SizeDelta: {x: 127.0226, y: 194.4843}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1950291779
 MonoBehaviour:
@@ -22607,8 +22652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7232521027535748977, guid: bf1e907861d63415784bbe0fbaeaaf3b,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c86bd3cc0f0ce4bdebceeb82ef3089d2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -22638,9 +22682,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5900dd416bf4581887a1677298600b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcData: {fileID: 11400000, guid: b4b673beebec34779a29a45a0f66af63, type: 2}
+  npcData: {fileID: 11400000, guid: 1f94df28b141d48d4b296ec3b1b74822, type: 2}
   talkImage: {fileID: 1459629908}
   talkText: {fileID: 13050406}
+--- !u!95 &1950291782
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950291777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46cfed6c73a67467aa74a983cb533874, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1953316022
 GameObject:
   m_ObjectHideFlags: 0
