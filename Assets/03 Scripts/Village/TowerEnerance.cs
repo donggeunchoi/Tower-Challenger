@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class TowerEnerance : MonoBehaviour
 {
     public GameObject InventortyPanel;
-    public GameObject MailPanel;
     public GameObject PausePanel;
     public GameObject EnterPanel;
     public GameObject quickStaminaUI;
@@ -17,25 +16,23 @@ public class TowerEnerance : MonoBehaviour
 
     public void OnClickOnGameMove()
     {
+        bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
         if (GameManager.Instance.stamina.mainStamina > 0)
         {
-            GameManager.Instance.stamina.UseStamina();
+            if (!tutorial)
+            {
+                GameManager.Instance.stamina.UseStamina();
+                SceneManager.LoadScene("TutorialScene");
+            }
+            else
+            {
+                GameManager.Instance.stamina.UseStamina();
+                SceneManager.LoadScene("GameScene");
+            }
         }
         else
         {
             Debug.Log("스테미나가 없습니다");
-        }
-        
-        
-        bool tutorial = GameManager.Instance.playerData.tutorialCompleted;
-        if (!tutorial)
-        {
-            SceneManager.LoadScene("TutorialScene");
-        }
-        else
-        {
-            if (GameManager.Instance.stamina.mainStamina > 0)
-                SceneManager.LoadScene("GameScene");
         }
         
     }
