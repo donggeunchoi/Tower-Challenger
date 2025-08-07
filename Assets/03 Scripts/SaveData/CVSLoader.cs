@@ -244,6 +244,44 @@ public static class CVSLoader
             trapPerTableList.Add(row);
         }
     }
+
+    public static void LoadTrapCountTableCSV()
+    {
+        StageTable.trapCountTableList.Clear();
+
+        TextAsset data = Resources.Load<TextAsset>("TrabCountTable"); // 파일명에 .csv 제거, 리소스 폴더에 위치
+        if (data == null)
+        {
+            Debug.LogError("TrabCountTable.csv 파일이 없습니다.");
+            return;
+        }
+
+        string[] lines = data.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            string[] vals = lines[i].Split(',');
+
+            TrapCountTableRow row = new TrapCountTableRow();
+            row.index = GetValue(vals, 0);
+            row.name = GetValue(vals, 1);
+            row.dec = GetValue(vals, 2);
+            row.floor = ParseInt(GetValue(vals, 3));
+            row.disBuff = ParseBool(GetValue(vals, 4));
+            row.disBuffCount = GetValue(vals, 5);
+            row.oneDisPer = ParseInt(GetValue(vals, 6));
+            row.twoDisPer = ParseInt(GetValue(vals, 7));
+            row.thrDisPer = ParseInt(GetValue(vals, 8));
+            row.foDisPer = ParseInt(GetValue(vals, 9));
+            row.fiveDisPer = ParseInt(GetValue(vals, 10));
+
+            // row 전체가 비어 있는 경우는 패스
+            if (string.IsNullOrWhiteSpace(row.index) && string.IsNullOrWhiteSpace(row.name) && row.floor == 0)
+                continue;
+
+            StageTable.trapCountTableList.Add(row);
+        }
+    }
     #endregion
     #region BoxData
     // ArrowDataTable.csv

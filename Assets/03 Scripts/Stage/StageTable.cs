@@ -52,6 +52,24 @@ public class StageTable
         public int slowPer;
         public int stuPer;
     }
+
+    [System.Serializable]
+    public class TrapCountTableRow
+    {
+        public string index;        // ex) di1001
+        public string name;         // ex) disBuff
+        public string dec;          // 설명
+        public int floor;           // 층수
+        public bool disBuff;        // 예시: TRUE/FALSE
+        public string disBuffCount; // 예시: 1 ~ 2 또는 2 또는 2~3
+        public int oneDisPer;
+        public int twoDisPer;
+        public int thrDisPer;
+        public int foDisPer;
+        public int fiveDisPer;
+    }
+
+    public static List<TrapCountTableRow> trapCountTableList = new List<TrapCountTableRow>();
     public static List<DebuffTable> debuffSlowTableList = new List<DebuffTable>();
     public static List<DebuffStunTableRow> debuffStunTableList = new List<DebuffStunTableRow>();
     public static List<TrapPerTableRow> trapPerTableList = new List<TrapPerTableRow>();
