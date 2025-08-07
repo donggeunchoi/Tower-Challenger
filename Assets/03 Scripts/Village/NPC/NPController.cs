@@ -2,62 +2,13 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class NPController : MonoBehaviour
+public class NPController : NPCBase
 {
-    public NPCData npcData;
-    public GameObject talkImage;
-    public TMPro.TMP_Text talkText;
-    
-    private float _startPositionX;
-    private bool _movingLeft = true;
-    private bool _isWaiting = false;
-
-    void Start()
-    {
-        _startPositionX = transform.localPosition.x;
-    }
-
-    void Update()
-    {
-        //나중에 여기에 대사 집어넣기.
-        if (_isWaiting)
-        {
-            return;
-        }
-        
-        float newX = transform.localPosition.x;
-
-        if (_movingLeft)
-        {
-            newX -= npcData.MoveSpeed*Time.deltaTime;
-            if (newX <= _startPositionX - npcData.MoveDistance)
-            {
-                _movingLeft = false;
-                StartCoroutine(WaitBeforeTurn(false));
-            }
-        }
-        else
-        {
-            newX += npcData.MoveSpeed*Time.deltaTime;
-            if (newX >= _startPositionX + npcData.MoveDistance)
-            {
-                _movingLeft = true;
-                StartCoroutine(WaitBeforeTurn(true));
-            }
-        }
-        transform.localPosition = new Vector3(newX, transform.localPosition.y, transform.localPosition.z);
-    }
-
-    private void Flip(bool faceLeft)
-    {
-        Vector3 scale = transform.localScale;
-        scale.x = faceLeft ? -1 : 1;
-        transform.localScale = scale;
-    }
-
-    private IEnumerator WaitBeforeTurn(bool turnToRight)
+    protected override IEnumerator WaitBeforeTurn(bool turnToRight)
     {
         _isWaiting = true;
+        
+        _animator.SetBool("IsMove", false);
 
         if (!turnToRight)
         {
