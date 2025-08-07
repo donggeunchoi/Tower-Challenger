@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SlimeJumpManager : MonoBehaviour
 {
