@@ -121,9 +121,9 @@ public class NPC1Controller : NPCBase
       }
    }
    
-   private void ShowDialogue(int a)
+   private void ShowDialogue(int index)
    {
       if (talkImage != null) talkImage.SetActive(true);
-      if (talkText != null) talkText.text = npcData.npcDescription[a];
+      if (talkText != null) talkText.text = npcData.npcDescription[index];
    }
 }
