@@ -36,13 +36,25 @@ public class SellGameManager : MonoBehaviour
         {
             int difficulty = stageManager.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "야바위" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
+            if (difficulty == 1)
             {
-                shuffleCount = data.shuffleCount;
-                shuffleDuration = data.shuffleDuration;
-                card = data.Card;
+                card = 3; shuffleDuration = 0.25f; shuffleCount = 20;
+            }
+            else if (difficulty == 2)
+            {
+                card = 3; shuffleDuration = 0.18f; shuffleCount = 20;
+            }
+            else if (difficulty == 3)
+            {
+                card = 4; shuffleDuration = 0.2f; shuffleCount = 20;
+            }
+            else if (difficulty == 4)
+            {
+                card = 4; shuffleDuration = 0.17f; shuffleCount = 20;
+            }
+            else if (difficulty == 5)
+            {
+                card = 5; shuffleDuration = 0.215f; shuffleCount = 20;
             }
         }
 

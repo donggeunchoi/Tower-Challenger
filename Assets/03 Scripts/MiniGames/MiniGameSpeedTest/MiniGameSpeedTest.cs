@@ -39,12 +39,25 @@ public class MiniGameSpeedTest : MonoBehaviour
         {
             int difficulty = stageManager.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SpeedTest" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
+            if (difficulty == 1)
             {
-                successTime = data.successTime;
-                delayTime = data.delayTime;
+                successTime = 1.5f;
+            }
+            else if (difficulty == 2)
+            {
+                successTime = 1f;
+            }
+            else if (difficulty == 3)
+            {
+                successTime = 0.75f;
+            }
+            else if (difficulty == 4)
+            {
+                successTime = 0.5f;
+            }
+            else if (difficulty == 5)
+            {
+                successTime = 0.315f;
             }
         }
 

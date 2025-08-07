@@ -37,12 +37,25 @@ public class DinoMiniGame : MonoBehaviour
         {
             int difficulty = StageManager.instance.difficulty;
 
-            MiniGameData data = GameManager.Instance.miniGameDataList.Find(x => x.name == "SlimeRun" && x.DifficultyLevel == difficulty);
-
-            if (data != null)
+            if (difficulty == 1)
             {
-                baseSpeed = data.baseSpeed;
-                gameDuration = data.gameDuration;
+                baseSpeed = 6;
+            }
+            else if (difficulty == 2)
+            {
+                baseSpeed = 8;
+            }
+            else if (difficulty == 3)
+            {
+                baseSpeed = 10;
+            }
+            else if (difficulty == 4)
+            {
+                baseSpeed = 12;
+            }
+            else if (difficulty == 5)
+            {
+                baseSpeed = 14;
             }
         }
         
