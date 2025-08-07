@@ -73,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -105541197
-  m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingLayerID: -44025399
+  m_SortingLayer: 2
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300174, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,8 +99,8 @@ GameObject:
   - component: {fileID: 8487454110019527921}
   - component: {fileID: 1840992279263815765}
   - component: {fileID: 951512735721348665}
-  m_Layer: 20
-  m_Name: Trab
+  m_Layer: 21
+  m_Name: Trap
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  trapId: 
+  trapId: Trap42
 --- !u!212 &951512735721348665
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -223,9 +223,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -105541197
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: -44025399
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300080, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
