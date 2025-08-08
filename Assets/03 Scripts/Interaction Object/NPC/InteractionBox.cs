@@ -143,9 +143,14 @@ public class InteractionBox : MonoBehaviour, IInteractable
         yield return null;
     }
 
-    public IEnumerator BoxDestroyCor()
+    public void DestroyBoxInfo()
     {
         MapInfo.StageTempMemory.destroyedInfo.destroyedChestIds.Add(boxId);
+    }
+
+    public IEnumerator BoxDestroyCor()
+    {
+        DestroyBoxInfo();
 
         if (animator != null)
             animator.SetBool("IsOpened", true);

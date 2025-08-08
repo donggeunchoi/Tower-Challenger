@@ -2,35 +2,35 @@
 
 public class MapObstacle : MonoBehaviour
 {
-    [SerializeField] private GameObject[] mapObstacle;
+    [SerializeField] private DiffcultyObstacles[] obstacles;
 
     [SerializeField] private int difficulty;
 
     public void Init()
     {
-        for (int i = 0; i < mapObstacle.Length; i++)
+        this.gameObject.SetActive(true);
+
+        for (int i = 0; i < obstacles.Length; i++)
         {
-            mapObstacle[i].gameObject.SetActive(false);
+            obstacles[i].gameObject.SetActive(false);
         }
 
-        difficulty = CheckDifficuty();
-        int mapDif = Mathf.Min(difficulty, mapObstacle.Length);
+        int diffcultyIndex = CheckDiffculty();
 
-        for (int i = 0; i < mapDif; i++)
+        if (diffcultyIndex >= 0 && diffcultyIndex < obstacles.Length && obstacles[diffcultyIndex] != null)
         {
-            mapObstacle[i].gameObject.SetActive(true);
+            obstacles[diffcultyIndex].gameObject.SetActive(true);
+            obstacles[diffcultyIndex].Init();
         }
     }
 
-    private int CheckDifficuty()
+    public int CheckDiffculty()
     {
         if (StageManager.instance != null)
         {
-            difficulty = StageManager.instance.difficulty;
+            return Mathf.Clamp(StageManager.instance.difficulty - 1, 0, obstacles.Length - 1);
         }
         else
-            difficulty = 1;
-
-        return difficulty;
+            return 0;
     }
 }

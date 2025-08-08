@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 public enum DebuffType
 {
     None,
@@ -70,8 +69,13 @@ public class Trap : MonoBehaviour
             default:
                 break;
         }
-        MapInfo.StageTempMemory.destroyedInfo.destroyedTrapIds.Add(trapId);
+        DestroyTrapInfo();
         Destroy(this.gameObject);
+    }
+
+    public void DestroyTrapInfo()
+    {
+        MapInfo.StageTempMemory.destroyedInfo.destroyedTrapIds.Add(trapId);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
