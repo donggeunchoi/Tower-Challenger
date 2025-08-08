@@ -14,6 +14,7 @@ public class PrincessManager : MonoBehaviour
     public float currentTime;
 
     public bool clear;
+    public bool isDie;
 
     [Header("UI")]
     public TextMeshProUGUI timeText;
@@ -72,7 +73,7 @@ public class PrincessManager : MonoBehaviour
         }
 
         clear = false;
-        spriteRenderer.gameObject.SetActive(false);
+        isDie = false;
 
         timeText.text = Mathf.Max(0f, (clearTime - currentTime)).ToString("F1");
     }
@@ -81,7 +82,7 @@ public class PrincessManager : MonoBehaviour
     {
         if (!clear)
         {
-            currentTime += Time.deltaTime;
+            if (!isDie) currentTime += Time.deltaTime;
             timeText.text = Mathf.Max(0f, (clearTime - currentTime)).ToString("F1");
         }
 

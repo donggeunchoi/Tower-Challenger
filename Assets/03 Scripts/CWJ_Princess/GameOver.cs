@@ -3,15 +3,25 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
     private Color color;
 
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
 
+    private bool isInvincible;
+
+    private void OnEnable()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         color = spriteRenderer.color;
+        isInvincible = false;
     }
 
     public void Update()
@@ -25,9 +35,11 @@ public class GameOver : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(collision.gameObject);
+        if (isInvincible) return;
+
         if (StageManager.instance != null)
         {
-            if (StageManager.instance.stageLP.currentLP == 1)
+            if (StageManager.instance.stageLP.currentLP <= 1)
             {
                 StartCoroutine(Die());
             }
@@ -37,25 +49,35 @@ public class GameOver : MonoBehaviour
             }
         }
         StartCoroutine(Hit());
-
     }
 
     private IEnumerator Die()
     {
         SpriteSet();
+
+        PrincessManager.princessInstance.enemyTime = 100;
         yield return new WaitForSeconds(2f);
         StageManager.instance.MiniGameResult(false);
     }
 
     private void SpriteSet()
     {
-        spriteRenderer.gameObject.SetActive(false);
-        PrincessManager.princessInstance.spriteRenderer.gameObject.SetActive(true);
+        if (PrincessManager.princessInstance.isDie) return;
+
+        PrincessManager.princessInstance.isDie = true;
+        animator.SetBool("isDie", true);
+
+        Vector3 pos = this.transform.position;
+        pos.y = -3f;
+
+        this.transform.position = pos;
     }
 
     private IEnumerator Hit()
     {
-        for (int i = 0; i < 4; i++)
+        isInvincible = true;
+
+        for (int i = 0; i < 2; i++)
         {
             color.a = 0;
             spriteRenderer.color = color;
@@ -67,6 +89,8 @@ public class GameOver : MonoBehaviour
 
             yield return new WaitForSeconds(0.3f);
         }
+
+        isInvincible = false;
     }
 
     private void ClearStage()
@@ -78,6 +102,7 @@ public class GameOver : MonoBehaviour
             if (!p.clear)
             {
                 p.clear = true;
+
                 ShowClearUI();
                 StartCoroutine(WaitinTime());
 
