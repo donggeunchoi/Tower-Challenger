@@ -289,8 +289,8 @@ RectTransform:
   - {fileID: 5306788341691666377}
   m_Father: {fileID: 6408759618649936647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.05, y: 0.05}
+  m_AnchorMax: {x: 0.95, y: 0.95}
   m_AnchoredPosition: {x: 0.00012207031, y: 0.000061035156}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 4797265876928012358}
   - component: {fileID: 447941391403412757}
   - component: {fileID: 5872832272203893483}
+  - component: {fileID: 8532207962011555419}
   m_Layer: 20
   m_Name: Player11
   m_TagString: Player
@@ -1184,6 +1185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionButton: {fileID: 8785584671449272828}
+  interactImage: {fileID: 0}
   interactionUIPannel: {fileID: 355341673445421872}
 --- !u!58 &8845903950683409621
 CircleCollider2D:
@@ -1219,7 +1221,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.6}
   m_Radius: 0.3
 --- !u!114 &290206579449063444
 MonoBehaviour:
@@ -1251,6 +1253,8 @@ MonoBehaviour:
   effectTime: 3
   slowSpeed: 15
   playerSprite: {fileID: 829112455607000040}
+  isSlow: 0
+  isStun: 0
   difficulty: 0
 --- !u!95 &447941391403412757
 Animator:
@@ -1287,6 +1291,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 447941391403412757}
+  playerInput: {fileID: 0}
+--- !u!70 &8532207962011555419
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109100048317351054}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0038261414, y: -0.3113243}
+  m_Size: {x: 0.64151764, y: 1.1173514}
+  m_Direction: 0
 --- !u!1 &1127067772166109174
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,6 +2324,7 @@ MonoBehaviour:
   canDash: 1
   isDashing: 0
   spriteRenderer: {fileID: 0}
+  playerBuff: {fileID: 0}
   InventoryPanel: {fileID: 833724506272776655}
   isInventory: 0
   PasePanel: {fileID: 704560000823114471}
