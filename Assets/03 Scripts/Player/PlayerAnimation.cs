@@ -33,7 +33,7 @@ public class PlayerAnimation : MonoBehaviour
             TriggerAnimation("Walk");
         }
         // 방향키 입력
-        moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        moveInput = playerInput.FinalInput.normalized;
 
         if (moveInput == Vector2.zero)
         {
