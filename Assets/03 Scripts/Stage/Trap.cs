@@ -11,9 +11,11 @@ public class Trap : MonoBehaviour
     [SerializeField] private DebuffType type;
     public string trapId;
     private PlayerBuff playerBuff;
+    private bool isHit;
 
     private void Start()
     {
+        isHit = false;
         int randomValue;
         if (StageTable.trapPerTableList[0] != null)
         {
@@ -59,6 +61,10 @@ public class Trap : MonoBehaviour
                     playerBuff.StunDebuff();
                 break;
             case DebuffType.Hit:
+                if (isHit)
+                    break;
+
+                isHit = true;
                 player.TryGetComponent<PlayerBuff>(out playerBuff);
                 if (playerBuff != null)
                     playerBuff.isHit();
