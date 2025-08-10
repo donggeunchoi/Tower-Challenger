@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using static BoxDataTable;
 
@@ -30,6 +31,9 @@ public class InteractionBox : MonoBehaviour, IInteractable
     [SerializeField] private Arrow stone;
 
     private bool isIntract;
+
+    public event Action OnOpened;
+    public bool IsOpened { get; private set; }
 
     private void Start()
     {
@@ -118,6 +122,9 @@ public class InteractionBox : MonoBehaviour, IInteractable
                 break;
         }
         isIntract = false;
+        IsOpened = true;
+        OnOpened?.Invoke();
+        
         StartCoroutine(BoxDestroyCor());
     }
 
