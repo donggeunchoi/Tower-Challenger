@@ -66,7 +66,8 @@ public class InteractionBox : MonoBehaviour, IInteractable
     public void Interact()  //플레이어 상호작용시 포탈 타입에 맞춰 각각의 코드를 진행
     {
         if (!isIntract) return;
-        SoundManager.instance.PlaySound2D("OpenBox");
+        if(SoundManager.instance != null)
+         SoundManager.instance.PlaySound2D("OpenBox");
         switch (boxType)
         {
             case BoxType.GoldBox:

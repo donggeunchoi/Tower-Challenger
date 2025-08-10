@@ -12,7 +12,7 @@ public class BoxTutorial : TutorialBase
     [SerializeField]
     private string hintMessage2;
 
-    public Box _box;
+    // public Box _box;
     
     private bool _interectionState;
     
@@ -27,9 +27,6 @@ public class BoxTutorial : TutorialBase
             playerInput = FindFirstObjectByType<PlayerInteraction>(FindObjectsInactive.Exclude);
         }
         
-        if(_box == null)
-            Debug.Log("박스가 없어요");
-        
         _action = false;
         _interectionState = playerInput.interactionButton;
     }
@@ -40,7 +37,6 @@ public class BoxTutorial : TutorialBase
         if (!_action && playerInput.clicked)
         {
             _action = true;
-            _box.Interact();
             hintUI.Show(hintMessage2);
         }
     }

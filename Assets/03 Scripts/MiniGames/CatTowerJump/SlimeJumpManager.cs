@@ -19,6 +19,9 @@ public class SlimeJumpManager : MonoBehaviour
     public GameObject miniGameClearUI;
     public Canvas mainCanvas;
     private bool _clear = false;
+    private bool _isGameOver = false;
+    
+    public int LpCount = 0;
     
     
     private void Awake()
@@ -124,4 +127,15 @@ public class SlimeJumpManager : MonoBehaviour
         // 3) Scale 애니메이션
         StartCoroutine(ScaleUp(rt, 0.5f));        // 0.5초 동안
     }
+
+    public void GameOver()
+    {
+        if(_clear)  return;
+        
+        _isGameOver = true;
+        
+        
+    }
+    
+    
 }
