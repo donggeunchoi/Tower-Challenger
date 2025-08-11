@@ -15,6 +15,7 @@ public class DinoMiniGame : MonoBehaviour
     public GameObject MiniGameClearUI;
     public Canvas mainCanvas;
     private bool _clear = false;
+    private bool _resultLocked = false;
     
     public float baseSpeed = 5f;
 
@@ -93,12 +94,17 @@ public class DinoMiniGame : MonoBehaviour
 
     void GameOver()
     {
+        if (_resultLocked) return;
+        
+        _resultLocked = true;
         isGameOver = true;
         Time.timeScale = 0f;
     }
 
     void GameClear()
     {
+        if (_resultLocked) return;
+        _resultLocked = true;
 
         if (!_clear)
         {
@@ -152,6 +158,8 @@ public class DinoMiniGame : MonoBehaviour
     
     public void HandleHit()
     {
+        if (_resultLocked) return;
+        
         if (StageManager.instance != null)
             StageManager.instance.MiniGameResult(false);
         UpdateLpui();
