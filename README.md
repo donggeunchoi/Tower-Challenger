@@ -11,11 +11,15 @@
 - **최동혁** : 디자이너, 인게임 내의 대부분의 에셋들을 작업
 
 # 게임 미리보기
-![Village]()<br>
-![Tower Map])()<br>
-![MiniGame1]()<br>
-![MiniGame2]()<br>
-![BossGame1]()<br>
+![Village](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EB%B9%8C%EB%A6%AC%EC%A7%80.gif)&nbsp;&nbsp;&nbsp;
+![Tower Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%9D%B4%EB%8F%99.gif)<br>
+
+
+![MiniGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EA%B3%B5%EC%A3%BC%EC%A7%80%ED%82%A4%EA%B8%B0.gif)&nbsp;&nbsp;&nbsp;
+![MiniGame2](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%AC%EB%9D%BC%EC%9E%84%20%ED%83%80%EC%9B%8C.gif)<br>
+
+
+![BossGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%A3%BC%EC%A0%95%EB%B1%85%EC%9D%B4%20%EC%95%84%EC%A0%80%EC%94%A8%20%EA%B2%8C%EC%9E%84.gif)<br>
 ## 게임 소개
 ![게임 시작 화면](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/02%20Images/StartBackGround/ChatGPT_Image_2025_6_27_09_20_12.png)
 - **개발기간** : 6 / 20 ~ 8 / 11
