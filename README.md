@@ -66,114 +66,159 @@
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
-| [GameManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/GameManager.cs) | 게임 매니저 | 김형중 |
-| [SoundManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/SoundManager.cs) | 사운드 매니저 | 김형중 |
-| [Stage2Manager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/Stage2Manager.cs) | Stage 2 관리 | 정재훈, 박지원 |
-| [StartStoryUI](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/StartStoryUI.cs) | 스토리 관리 | 김형중 |
-| [GimmickForObject](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/GimmickForObject.cs) | Stage 3 관리 | 이홍준 |
-| [Stamina](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Stamina.cs) | 스테미나 생성 및 저장 | 이해성 |
+[BackGroundPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundPool.cs) | 배경 오브젝트 풀기능 | 최동근|
 
-## **Scene 변경 관련**
+## **스테이지**
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
-| [AsyncLoading](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/ChangeScene/AsyncLoading.cs) | 로딩창 | 김어진 |
-| [ChangeSceneManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/ChangeScene/ChangeSceneManager.cs) | 스테이지 선택 매니저 | 김형중 |
-| [Stage1ClearCutScene](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/ChangeScene/Stage1ClearCutScene.cs) | 스테이지 1 클리어 화면 | 김어진 |
+[BackGroundPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundPool.cs) | 배경 오브젝트 풀기능 | 최동근|
 
-## **시작 화면**
+## **빌리지**
 
-| 스크립트 | 내용 | 당담자 |
-| -- | -- | -- |
-| [ConfirmationPopupMenu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/StartScene/ConfirmationPopupMenu.cs) | 확인 버튼 메뉴 | 김어진 |
-| [MainMenu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/StartScene/MainMenu.cs) | 메인 메뉴 관리 | 김어진 |
-| [Menu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/StartScene/Menu.cs) | 메뉴 버튼 강조 | 김어진 |
-| [SaveSlot](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/StartScene/SaveSlot.cs) | 세이브 슬롯 관리 | 김어진 |
-| [SaveSlotsMenu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/StartScene/SaveSlotsMenu.cs) | 세이브 슬롯 메뉴 | 김어진 |
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [Guild](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/Guild.cs) | 길드 관리 | 최동근
+| [Inventory](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/Inventory.cs) | 인벤토리 관리 | 최동근
+| [InventorySlot](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/InventorySlot.cs) | 인벤토리 슬롯관리 | 최동근
+| [VillageManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/VillageManager.cs) | 빌리지 전반적인 관리 | 최동근
+| [Store](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/Store.cs) | 상점 관리 | 최동근
+| [PauseManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/PauseManager.cs) | 설정 관리 | 최동근
+| [MailBox](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/MailBox.cs) | 우편함 관리 | 최동근
+| [itemManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/ItemManager.cs) | 아이템데이터 관리 | 최동근
+| [NPCBase](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Village/NPC/NPCBase.cs) | NPC 기본 관리 | 최동근
 
-## **스테이지 선택 화면**
+</details>
 
-| 스크립트 | 내용 | 당담자 |
-| -- | -- | -- |
-| [BgmController](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/StageSelect/BgmController.cs) | 배경음악 조절 | 김형중 |
-| [MoveSelect](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/StageSelect/MoveSelect.cs) | 캐릭터 선택 화면 총괄 | 김형중 |
-| [OptionMenu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/StageSelect/OptionMenu.cs) | 옵션 창 | 김형중 |
+---
+## **타워**
 
-## **데이터 저장(JSON)**
-
-| 스크립트 | 내용 | 당담자 |
-| -- | -- | -- |
-| [DataPersistenceManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/DataPersistence/DataPersistenceManager.cs) | JSON 데이터 총괄 매니저 | 김어진 |
-| [FileDataHandler](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/DataPersistence/FileDataHandler.cs) | JSON 데이터 핸들러 | 김어진 |
-| [IDataPersistence](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/DataPersistence/IDataPersistence.cs) | JSON 데이터 불러오기/저장 관리 | 김어진 |
-| [GameData](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/Data/GameData.cs) | JSON 데이터 | 김어진 |
-| [HiddenItem](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/HiddenItems/HiddenItem.cs) | 히든 아이템 관리 | 김어진 |
-| [SerializableDictionary](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/HiddenItems/SerializableTypes/SerializableDictionary.cs) | 히든 아이템 정보를 저장하는 딕셔너리 | 김어진 |
-| [PuzzleParticle](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/HiddenItems/PuzzleParticle.cs) | 스테이지 별 퍼즐 파티클 | 김형중 |
-
-## **캐릭터**
+<details>
+<summary>열기</summary>
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
-| [Player](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/Player.cs) | 플레이어 총괄 | 박지원 |
-| [ForceReceiver](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/ForceReceiver.cs) | 플레이어 점프 및 상태 관리 | 박지원 |
-| [PlayerInput](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/PlayerInput.cs) | 플레이어 이동 가능상태 변경 | 박지원 |
-| [Respawn](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/Respawn.cs) | 플레이어 리스폰 | 이홍준 |
-| [RunSFX](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/RunSFX.cs) | 지형별 발걸음 소리 | 김형중 |
-| [TopViewPlayer](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/TopViewPlayer.cs) | 탑뷰에서의 플레이어 | 박지원 |
-| [JumpEffect](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/JumpEffect/JumpEffect.cs) | 점프 효과 | 김형중 |
-| [ObjectPoolJump](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/JumpEffect/ObjectPoolJump.cs) | 점프 효과에 필요한 오브젝트 풀링 | 김형중 |
+[RewardManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/RewardTableData/RewardManager.cs) | 보상 관리 | 최동근
+[RewardTavleData](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/RewardTableData/RewardTableData.cs) | 보상 CSV 파일 관련 변수 선언 | 최동근
 
-## **카메라**
+---
+
+### 튜토리얼
+
+<details>
+<summary>열기</summary>
+
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [BoxTutorial](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/BoxTutorial.cs) | 상자 튜토리얼 관리 | 최동근
+| [DashTutorial](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/DashTutorial.cs) | 대쉬 튜토리얼 관리 | 최동근
+| [HintUI](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/HintUI.cs) | 설명 UI 표출관리 | 최동근
+| [InventortTutorial](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/InventoryTutorial.cs) | 인벤토리 튜토리얼 관리 | 최동근
+| [MoveTutorial](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/MoveTutorial.cs) | 움직임 튜토리얼 관리 | 최동근
+| [PortalTutorial](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/PortalTutorial.cs) | 포탈 튜토리얼 관리 | 최동근
+| [TutorialBase](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/TutorialBase.cs) | 튜토리얼 기본 정보 관리 | 최동근
+| [TutorialManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/TutorialManager.cs) | 전반적인 튜토리얼 진행 관리 | 최동근
+| [TutorialPortalOpen](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Tutorial/TutorialPortalOpen.cs) | 포탈 열림 기능 관리 | 최동근
+
+</details>
+
+</details>
+
+---
+
+## **미니게임**
+
+<details>
+<summary>열기</summary>
+
+## 미니게임 슬라임 점프1
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [BackGroundPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundPool.cs) | 배경 오브젝트 풀기능 | 최동근
+| [BackGroundSpawner](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundSpawner.cs) | 배경 스폰 | 최동근
+| [CatController](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/CatController.cs) | 슬라임 점프기능 | 최동근
+| [DeadZone](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/DeadZone.cs) | 슬라임 떨어질때 상태관련 | 최동근
+| [FollowCamera](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/FollowCamera.cs) | 슬라임을 따라가는 카메라 기능 | 최동근
+| [ObstacleBase](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/Obstacle/ObstacleBase.cs) | 장애물기본 데이터 | 최동근
+| [DamageTile](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/Obstacle/DamageTile.cs) | 벽장애물 | 최동근
+| [HorizontalMoverObstacle](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/Obstacle/HorizontalMoverObstacle.cs) | 수평 움직임 장애물 | 최동근
+| [ObstaclePoolManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/Obstacle/ObstaclePoolManager.cs) | 장애물 오브젝트 풀 기능 | 최동근
+| [ObvstacleSpawner](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/Obstacle/ObstacleSpawner.cs) | 장애물 스폰 | 최동근
+| [SpinnerObstacle](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/Obstacle/SpinnerObstacle.cs) | 회전 장애물 | 최동근
+| [ReMoveWall](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/RemoveWall.cs) | 벽 비활성 기능 | 최동근
+| [RsetTable](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/ResetTable.cs) | 초기값관련 기능 | 최동근
+| [SlimeJumpManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/SlimeJumpManager.cs) | 전반적인 게임 관여 | 최동근
+| [WallPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/WallPool.cs) | 벽 오브젝트 풀 기능 | 최동근
+| [WallSpawner](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/WallSpawner.cs) | 벽 스폰기능 | 최동근
+
+</details>
+
+---
+
+## 미니게임 슬라임런2
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [BackGround](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/BackGround.cs) | 배경 | 최동근
+| [BackGroundLooper](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/BackGroundLooper.cs) | 배경루퍼기능 | 최동근
+| [DinoMiniGame](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/DinoMiniGame.cs) | 전반적인 미니게임 관리 | 최동근
+| [GroundTile](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/GroundTile.cs) | 땅타일생성 및 파괴 | 최동근
+| [GroundTileSpawner](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/GroundTileSpawner.cs) | 땅 스폰기능 | 최동근
+| [Obstacle](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/Obstacle.cs) | 장애물 | 최동근
+| [PivotObject](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/PivotObject.cs) | 장애물 회전 | 최동근
+| [Player](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/DinoRun_Donggeun/Player.cs) | 플레이어(슬라임 점프, 슬라이딩) | 최동근
+
+</details>
+
+## 미니게임 스피드 퀴즈3
+
+<details>
+<summary>열기</summary>  
+
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [QuizBase](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SpeedQuizGame/QuizBase.cs) | CSV 파일 파싱 | 최동근
+| [SpeedQuizData](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SpeedQuizGame/SpeedQuizData.cs) | CSV 파일 파싱관련 변수선언 |최동근
+| [nonSenseGame](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SpeedQuizGame/nonSenseGame.cs) | 전반적인 스피드퀴즈 게임 관리 | 최동근
+
+</details>
+
+---
+
+## 미니게임 슬라임 타워4
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [Bird](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SlimeTower/Bird.cs) | 좌우 움직이는 새기능 | 최동근
+| [Slime](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SlimeTower/Slime.cs) | 떨어지는 슬라임 | 최동근
+| [SlimeTower](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SlimeTower/SlimeTower.cs) | 게임 전반을 관리하는 기능 | 최동근
+| [CoolDownUI](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SlimeTower/CoolDownUI.cs) | 쿨타임 기능 | 이해성
+| [BarSize](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SlimeTower/BarSize.cs) | 바닥 바 기능 | 이해성
+  
+</details>
+
+---
+
+</details>
+
+## **Json**
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
-| [CamChange](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Camera/CamChange.cs) | 스테이지 1 카메라 회전 관리 | 김형중 |
-| [FollowCam](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Camera/FollowCam.cs) | 스테이지 1 카메라 접근 관리 | 김형중 |
-| [TrackingZone](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Camera/TrackingZone.cs) | 스테이지 1 카메라 이동 루트 관리 | 김형중 |
-| [CamPos](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Camera/CamPos.cs) | 스테이지 2 카메라 회전 관리 | 정재훈 |
-
-## **기믹**
-
-| 스크립트 | 내용 | 당담자 |
-| -- | -- | -- |
-| [JumpMush](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/JumpMush.cs) | 캐릭터를 점프시키는 점프대 | 이홍준 |
-| [Log](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/Log.cs) | 캐릭터가 밟으면 잠시 후 떨어지는 발판 | 이홍준 |
-| [LogChild](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/LogChild.cs) | Log 오브젝트에 신호 전달 | 이홍준 |
-| [Obstacles](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/Obstacles.cs) | 캐릭터가 닿으면 밀쳐버리는 토네이도 | 정재훈, 박지원 |
-
-| 스크립트 | 내용 | 당담자 |
-| -- | -- | -- |
-| [CubeType](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/CubeType.cs) | 큐브 블록 속성 | 정재훈 |
-| [FallingObject](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/FallingObject.cs) | 떨어지는 고드름 | 정재훈 |
-| [FireTrap](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/FireTrap.cs) | 화염을 뿜는 트랩 | 박지원, 정재훈 |
-| [Hammer](https://github.com/KimEoJin24/TSEROF/blob/main/TSEROF/Assets/Scripts/Gimmick/Hammer.cs) | 돌아가면서 플레이어를 공격하는 해머 | 정재훈 |
-| [LaserPatternManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/LaserPatternManager.cs) | 레이저 패턴을 관리하는 매니저 | 박지원 |
-| [LaserReceiver](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/LaserReceiver.cs) | 레이저 수신부 | 박지원 |
-| [LaserTransmitter](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/LaserTransmitter.cs) | 레이저 발신부 | 박지원 |
-| [Leaf](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/Leaf.cs) | 나뭇잎 발판 | 박지원 |
-| [Lebu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/Lebu.cs) | 레버를 이용한 입구 | 정재훈, 박지원 |
-| [LebuMoving](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/LebuMoving.cs) | 레버에 따른 입구 이동통로 생성 | 정재훈 |
-| [MovingPlatform](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/MovingPlatform.cs) | 웨이포인트에 따른 이동 발판 | 정재훈, 박지원 |
-| [WaypointPath](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/WaypointPath.cs) | 이동 발판 웨이포인트 지정 | 정재훈 |
-| [NeedleTrap](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/NeedleTrap.cs) | 가시 트랩 | 박지원 |
-| [RotationCube](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/RotationCube.cs) | 큐브 움직임 | 정재훈 |
-| [RotationObstacle](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/RotationObstacle.cs) | 움직이는 회전 장애물 | 정재훈 |
-| [SideNeedleTraps](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/SideNeedleTraps.cs) | 지정된 곳에 가시 이동 | 정재훈 |
-| [Transparent](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/Transparent.cs) | 투명한 가시벽 설정 | 정재훈 |
-| [Transparents](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/Transparents.cs) | 전체적인 가시벽을 관리 | 정재훈, 박지원 |
-| [TransparentObject](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/TransparentObject.cs) | 닿으면 드러나는 투명한 오브젝트 | 박지원, 정재훈 |
-
-| 스크립트 | 내용 | 당담자 |
-| -- | -- | -- |
-| [Wind](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/Wind/Wind.cs) | 캐릭터를 특정 방향으로 밀어내는 바람 구역 | 이홍준 |
-| [PopBlock](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/PopBlock.cs) | 캐릭터를 더 높게 점프시키는 일회용 점프대 | 이홍준 |
-| [BallCannon](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/BallCannons/BallCannon.cs) | 지정한 위치로 공을 쏘는 캐논 | 이홍준 |
-| [ChangeBtnColor](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/LinePlatform/ChangeBtnColor.cs) | 발판을 움직이는 버튼의 시각적 효과 | 이홍준 |
-| [PlatformRespawn](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/LinePlatform/PlatformRespawn.cs) | 리스폰 될 때 발판 위치를 제자리로 | 이홍준 |
-| [PressBtn](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/LinePlatform/PressBtn.cs) | 버튼으로 움직이는 발판 | 이홍준 |
-| [PillarX](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/PillarX.cs) | X축으로 움직이는 기둥 | 이홍준 |
-| [PillarZ](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/PillarZ.cs) | Z축으로 움직이는 기둥 | 이홍준 |
+[BackGroundPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundPool.cs) | 배경 오브젝트 풀기능 | 최동근|
 
 ---
 
