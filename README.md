@@ -10,6 +10,8 @@
 - **장태현** : 개발자, 각종 미니 게임 개발 및 미니 게임 디테일 수정
 - **최동혁** : 디자이너, 인게임 내의 대부분의 에셋들을 작업
 
+### [🎞 시연 영상](https://youtu.be/1Lm-lpVsmq8)
+
 
 # 게임 소개
 ![게임 시작 화면](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/02%20Images/StartBackGround/ChatGPT_Image_2025_6_27_09_20_12.png)
@@ -32,8 +34,10 @@
 
 ## 게임 미리보기
 ![Village](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EB%B9%8C%EB%A6%AC%EC%A7%80.gif)&nbsp;&nbsp;&nbsp;
-![Tower Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%9D%B4%EB%8F%99.gif)&nbsp;&nbsp;&nbsp;
-![MiniGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EA%B3%B5%EC%A3%BC%EC%A7%80%ED%82%A4%EA%B8%B0.gif)
+![Tower Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%9D%B4%EB%8F%99.gif)
+
+
+![MiniGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EA%B3%B5%EC%A3%BC%EC%A7%80%ED%82%A4%EA%B8%B0.gif)&nbsp;&nbsp;&nbsp;
 ![MiniGame2](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%AC%EB%9D%BC%EC%9E%84%20%ED%83%80%EC%9B%8C.gif)<br>
 
 
@@ -468,6 +472,25 @@
 
 <br>
 
-# 4. 사용 에셋
+###  사용 이미지 에셋
 
-# 팀원 최동혁님이 혼자서 다 해주셨습니다.
+- [Pixel Art Top Down - Basic](https://assetstore.unity.com/packages/2d/environments/pixel-art-top-down-basic-187605)
+- [Pixel Art Platformer - Village Props](https://assetstore.unity.com/packages/2d/environments/pixel-art-platformer-village-props-166114)
+- 그 외 이미지 아트는 Chatgpt 와 최동혁님의 아트로 이뤄졌습니다.
+
+
+### 사운드 에셋 사용
+- [8-bit Fantasy & Adventure Music](https://assetstore.unity.com/packages/audio/music/electronic/8-bit-fantasy-adventure-music-211334)
+- [8bit Quirky BGM](https://assetstore.unity.com/packages/audio/music/electronic/8bit-quirky-bgm-205076)
+- [8Bit Music - 062022](https://assetstore.unity.com/packages/audio/music/8bit-music-062022-225623)
+- [Retro-Fit Adventure (Free 8-Bit Video Game Music)](https://assetstore.unity.com/packages/audio/music/electronic/retro-fit-adventure-free-8-bit-video-game-music-205627)
+- [Retro-Fit Adventure (Free 8-Bit Video Game Music)](https://assetstore.unity.com/packages/audio/music/electronic/retro-fit-adventure-free-8-bit-video-game-music-205627)
+- [8Bit Music Album - 051321](https://assetstore.unity.com/packages/audio/music/8bit-music-album-051321-196147)
+- [8-Bit RPG/Adventure Music Pack I](https://assetstore.unity.com/packages/audio/music/8-bit-rpg-adventure-music-pack-i-230766)
+- [Fantasy Music Package](https://assetstore.unity.com/packages/p/fantasy-music-package-270899)
+- [8 Bit Music Tracks}](https://assetstore.unity.com/packages/audio/music/8-bit-music-tracks-291369)
+- [Ultimate UI Sound Effect Pack[SFX]](https://jdsherbert.itch.io/ultimate-ui-sfx-pack)
+
+
+
+
