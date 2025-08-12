@@ -10,7 +10,7 @@
 - **장태현** : 개발자, 각종 미니 게임 개발 및 미니 게임 디테일 수정
 - **최동혁** : 디자이너, 인게임 내의 대부분의 에셋들을 작업
 
-### [🎞 시연 영상](https://youtu.be/1Lm-lpVsmq8)
+### [🎞 시연 영상](https://www.youtube.com/watch?v=rJi4zztVWto)
 
 
 # 게임 소개
