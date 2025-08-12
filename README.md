@@ -5,7 +5,7 @@
 - **김재의** : 팀장, 리드 기획자 , 미니 / 보스 게임 기획서 작성, 게임 UI/ 핵심 시스템 기획서 작성, 와이어 프레임 작성
 - **박지훈** : 서브 기획자, 미니 / 보스 게임 기획서 작성, 게임 UI/ 핵심 시스템 기획서 작성, 와이어 프레임 작성
 - **이해성** : 리드 개발자, 게임의 전반적인 시스템 개발, 미니 게임 병합 및 오류 수정 작업
-- **최동근근** : 개발자, 미니 게임 개발, 게임 내의 대다수 UI 작업, 게임 내의 시스템의 디테일 작업
+- **최동근** : 개발자, 미니 게임 개발, 게임 내의 대다수 UI 작업, 게임 내의 시스템의 디테일 작업
 - **차우진** : 개발자, 각종 미니 게임 개발 및 미니 게임 디테일 수정
 - **장태현** : 개발자, 각종 미니 게임 개발 및 미니 게임 디테일 수정
 - **최동혁** : 디자이너, 인게임 내의 대부분의 에셋들을 작업
@@ -93,7 +93,7 @@
 <br>
 
 ## **빌리지**
-
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EB%B9%8C%EB%A6%AC%EC%A7%80.gif" width="400" height="400">
 <details>
 <summary>열기</summary>
   
@@ -182,7 +182,7 @@
 
 ## 미니게임 슬라임 점프1
 
-<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Process.webp" width="400" height="400"/>
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%AC%EB%9D%BC%EC%9E%84%20%EC%A0%90%ED%94%84.png" width="400" height="400"/>
 
 <details>
 <summary>열기</summary>
@@ -212,6 +212,8 @@
 
 ## 미니게임 슬라임런2
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%AC%EB%9D%BC%EC%9E%84%EB%9F%B0.png" width="400" height="400">
+
 <details>
 <summary>열기</summary>
   
@@ -230,6 +232,8 @@
 
 ## 미니게임 스피드 퀴즈3
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%A4%ED%94%BC%EB%93%9C%20%ED%80%B4%EC%A6%88.png" width="400" height="400">
+
 <details>
 <summary>열기</summary>  
 
@@ -244,6 +248,8 @@
 ---
 
 ## 미니게임 슬라임 타워4
+
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%AC%EB%9D%BC%EC%9E%84%20%ED%83%80%EC%9B%8C.gif" width="400" height="400">
 
 <details>
 <summary>열기</summary>
@@ -262,6 +268,8 @@
 
 ## 미니게임 순발력 테스트5
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%88%9C%EB%B0%9C%EB%A0%A5%20%ED%85%8C%EC%8A%A4%ED%8A%B8.png" width="400" height="400">
+
 <details>
 <summary>열기</summary>
   
@@ -275,6 +283,8 @@
 
 ## 미니게임 똥피하기 6
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EB%98%A5%ED%94%BC%ED%95%98%EA%B8%B0.png" width="400" height="400">
+
 <details>
 <summary>열기</summary>
   
@@ -285,6 +295,8 @@
 </details>
 
 ## 미니게임 알게임 7
+
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%95%8C%EA%B2%8C%EC%9E%84.png" width="400" height="400">
 
 <details>
 <summary>열기</summary>
@@ -299,6 +311,8 @@
 ---
 
 ## 미니게임 어려운 게임 8
+
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%96%B4%EB%A0%A4%EC%9A%B4%EA%B2%8C%EC%9E%84.png" width="400" height="400">
 
 <details>
 <summary>열기</summary>
@@ -318,6 +332,8 @@
 
 ## 미니게임 탄막 피하기 게임 9
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%ED%83%84%EB%A7%89%20%ED%94%BC%ED%95%98%EA%B8%B0%20%EA%B2%8C%EC%9E%84.png" width="400" height="400">
+
 <details>
 <summary>열기</summary>
   
@@ -333,6 +349,8 @@
 
 ## 미니게임 야바위 게임 10
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%95%BC%EB%B0%94%EC%9C%84%20%EA%B2%8C%EC%9E%84.png" width="400" height="400">
+
 <details>
 <summary>열기</summary>
   
@@ -346,6 +364,8 @@
 
 ## 미니게임 주정뱅이 게임 11
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%A3%BC%EC%A0%95%EB%B1%85%EC%9D%B4%20%EC%95%84%EC%A0%80%EC%94%A8%20%EA%B2%8C%EC%9E%84.gif" width="400" height="400">
+
 <details>
 <summary>열기</summary>
   
@@ -358,6 +378,8 @@
 ---
 
 ## 미니게임 공주 지키기 12
+
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EA%B3%B5%EC%A3%BC%EC%A7%80%ED%82%A4%EA%B8%B0.gif" width="400" height="400">
 
 <details>
 <summary>열기</summary>
@@ -377,6 +399,8 @@
 
 ## 미니게임 그림자 맞추기 13
 
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EA%B7%B8%EB%A6%BC%EC%9E%90%20%ED%80%B4%EC%A6%88.png" width="400" height="400">
+
 <details>
 <summary>열기</summary>
   
@@ -392,6 +416,8 @@
 ---
 
 ## 미니게임 Up&Down 14
+
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%97%85%EC%95%A4%EB%8B%A4%EC%9A%B4.png" width="400" height="400">
 
 <details>
 <summary>열기</summary>
@@ -410,6 +436,8 @@
 </details>
 
 ## **플레이어**
+
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%9D%B4%EB%8F%99.gif" width="400" height="400">
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
