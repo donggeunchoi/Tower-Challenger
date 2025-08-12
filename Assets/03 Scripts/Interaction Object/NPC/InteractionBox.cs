@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using static BoxDataTable;
 
@@ -30,6 +31,9 @@ public class InteractionBox : MonoBehaviour, IInteractable
     [SerializeField] private Arrow stone;
 
     private bool isIntract;
+
+    public event Action OnOpened;
+    public bool IsOpened { get; private set; }
 
     private void Start()
     {
@@ -66,7 +70,8 @@ public class InteractionBox : MonoBehaviour, IInteractable
     public void Interact()  //플레이어 상호작용시 포탈 타입에 맞춰 각각의 코드를 진행
     {
         if (!isIntract) return;
-        SoundManager.instance.PlaySound2D("OpenBox");
+        if(SoundManager.instance != null)
+         SoundManager.instance.PlaySound2D("OpenBox");
         switch (boxType)
         {
             case BoxType.GoldBox:
@@ -117,6 +122,9 @@ public class InteractionBox : MonoBehaviour, IInteractable
                 break;
         }
         isIntract = false;
+        IsOpened = true;
+        OnOpened?.Invoke();
+        
         StartCoroutine(BoxDestroyCor());
     }
 
