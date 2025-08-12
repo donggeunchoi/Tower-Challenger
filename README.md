@@ -65,7 +65,7 @@
 | [Stage2Manager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/Stage2Manager.cs) | Stage 2 관리 | 정재훈, 박지원 |
 | [StartStoryUI](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/StartStoryUI.cs) | 스토리 관리 | 김형중 |
 | [GimmickForObject](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/GimmickForObject.cs) | Stage 3 관리 | 이홍준 |
-| [EndingController](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/EndingController.cs) | 전체 스테이지 클리어 및 엔딩씬 관리 | 박지원, 정재훈 |
+| [Stamina](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Stamina.cs) | 스테미나 생성 및 저장 | 이해성 |
 
 ## **Scene 변경 관련**
 
