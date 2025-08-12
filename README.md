@@ -10,7 +10,13 @@
 - **장태현** : 개발자, 각종 미니 게임 개발 및 미니 게임 디테일 수정
 - **최동혁** : 디자이너, 인게임 내의 대부분의 에셋들을 작업
 
-# 게임 소개
+# 게임 미리보기
+![Village]()<br>
+![Tower Map])()<br>
+![MiniGame1]()<br>
+![MiniGame2]()<br>
+![BossGame1]()<br>
+## 게임 소개
 ![게임 시작 화면](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/02%20Images/StartBackGround/ChatGPT_Image_2025_6_27_09_20_12.png)
 - **개발기간** : 6 / 20 ~ 8 / 11
 - **플랫폼** : 모바일(Andriod)
@@ -28,33 +34,28 @@
 - **다양한 미니게임** : 순발력, 창의력, 기억력의 여러 테마를 가지고 있는 미니게임들을 층별로 배치되어 지루할 틈 없이 도전 가능
 - **NPC 및 스토리텔링** : 입구를 지키는 고양이 석상 **먀우라** 등 개성 있는 NPC들과 대화하며 세계관에 몰입
 
-## 기획 의도
-타워 챌린저는 단순한 클리어 목표 외에도 플레이어가 성장과 준비를 체감할 수 있는 구조를 지향합니다<br>
-미니게임마다 다른 난이도와 장를 배치해 반복 플레이에서도 신선함을 유지하며, 게임 내 시간과 자원 관리를 통한 전략적 요소를 가미했습니다<br>
-또한, **독특한 세계관과 캐릭터**를 통해 유저가 게임 속 이야기에 몰입하고 지속적으로 도전 의욕을 잃지 않도록 설계 했습니다.<br>
-
-# 3. 기능 명세서
+# 기능 명세서
 
 <details>
-<summary>UML, 기능 정리</summary>
+<summary>클라이언트 구조 요약</summary>
 
-#### 클라이언트 구조
-<img width="1000" src="https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/064d53e4-f6ff-4b3e-b92c-6ce5fdf6596a">
+## 클라이언트 구조
+<img width="1000" src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Process.webp">
 
-#### JSON
-![Untitled](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/35f9aa2a-85c8-45c9-a4db-edcc2e458789)
+## JSON
+![Untitled](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/JsonData.webp)
 
-#### 상호작용
-<img width="1000" alt="어진이와_아이들_(3)" src="https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/3182fc8c-3fa6-4227-b8b9-fd398cc5f4db">
+## 상호작용
+<img width="1000" src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Interaction.webp">
 
-#### 플레이어
-![Untitled (1)](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/88c687d6-285b-4044-a282-988cb3b34639)
+## 플레이어
+![Untitled (1)](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Player.webp)
 
-#### 스테이지
-![Untitled (2)](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/5a8e1a38-98ea-4857-b238-3e43e15446b3)
+## 스테이지
+![Untitled (2)](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Stage.webp)
 
-#### 빌리지
-![Untitled (2)](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/5a8e1a38-98ea-4857-b238-3e43e15446b3)
+## 빌리지
+![Untitled (2)](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Village.webp)
 </details>
 
 ## **매니저**
