@@ -44,21 +44,22 @@
 #### JSON
 ![Untitled](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/35f9aa2a-85c8-45c9-a4db-edcc2e458789)
 
-#### 스테이지 관리
+#### 상호작용
 <img width="1000" alt="어진이와_아이들_(3)" src="https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/3182fc8c-3fa6-4227-b8b9-fd398cc5f4db">
 
 #### 플레이어
 ![Untitled (1)](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/88c687d6-285b-4044-a282-988cb3b34639)
 
-#### 기믹
+#### 스테이지
 ![Untitled (2)](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/5a8e1a38-98ea-4857-b238-3e43e15446b3)
-![Untitled (3)](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/3f59170e-fc00-41c5-8119-0cb554f73d27)
-![stage3uml](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/904bf4b7-7fec-45a0-90de-ae5189fcff0e)
+
+#### 빌리지
+![Untitled (2)](https://github.com/dlghdwns97/TSEROF_Code/assets/73785455/5a8e1a38-98ea-4857-b238-3e43e15446b3)
 </details>
 
 ## **매니저**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [GameManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/GameManager.cs) | 게임 매니저 | 김형중 |
 | [SoundManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Manager/SoundManager.cs) | 사운드 매니저 | 김형중 |
@@ -69,7 +70,7 @@
 
 ## **Scene 변경 관련**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [AsyncLoading](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/ChangeScene/AsyncLoading.cs) | 로딩창 | 김어진 |
 | [ChangeSceneManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/ChangeScene/ChangeSceneManager.cs) | 스테이지 선택 매니저 | 김형중 |
@@ -77,7 +78,7 @@
 
 ## **시작 화면**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [ConfirmationPopupMenu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/StartScene/ConfirmationPopupMenu.cs) | 확인 버튼 메뉴 | 김어진 |
 | [MainMenu](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/StartScene/MainMenu.cs) | 메인 메뉴 관리 | 김어진 |
@@ -87,7 +88,7 @@
 
 ## **스테이지 선택 화면**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [BgmController](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/StageSelect/BgmController.cs) | 배경음악 조절 | 김형중 |
 | [MoveSelect](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/StageSelect/MoveSelect.cs) | 캐릭터 선택 화면 총괄 | 김형중 |
@@ -95,7 +96,7 @@
 
 ## **데이터 저장(JSON)**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [DataPersistenceManager](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/DataPersistence/DataPersistenceManager.cs) | JSON 데이터 총괄 매니저 | 김어진 |
 | [FileDataHandler](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Json/DataPersistence/FileDataHandler.cs) | JSON 데이터 핸들러 | 김어진 |
@@ -107,7 +108,7 @@
 
 ## **캐릭터**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [Player](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/Player.cs) | 플레이어 총괄 | 박지원 |
 | [ForceReceiver](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Player/ForceReceiver.cs) | 플레이어 점프 및 상태 관리 | 박지원 |
@@ -120,7 +121,7 @@
 
 ## **카메라**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [CamChange](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Camera/CamChange.cs) | 스테이지 1 카메라 회전 관리 | 김형중 |
 | [FollowCam](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Camera/FollowCam.cs) | 스테이지 1 카메라 접근 관리 | 김형중 |
@@ -129,14 +130,14 @@
 
 ## **기믹**
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [JumpMush](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/JumpMush.cs) | 캐릭터를 점프시키는 점프대 | 이홍준 |
 | [Log](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/Log.cs) | 캐릭터가 밟으면 잠시 후 떨어지는 발판 | 이홍준 |
 | [LogChild](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/LogChild.cs) | Log 오브젝트에 신호 전달 | 이홍준 |
 | [Obstacles](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage1/Obstacles.cs) | 캐릭터가 닿으면 밀쳐버리는 토네이도 | 정재훈, 박지원 |
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [CubeType](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/CubeType.cs) | 큐브 블록 속성 | 정재훈 |
 | [FallingObject](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/FallingObject.cs) | 떨어지는 고드름 | 정재훈 |
@@ -158,7 +159,7 @@
 | [Transparents](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/Transparents.cs) | 전체적인 가시벽을 관리 | 정재훈, 박지원 |
 | [TransparentObject](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage2/TransparentObject.cs) | 닿으면 드러나는 투명한 오브젝트 | 박지원, 정재훈 |
 
-| 스크립트 | 내용 | 기여자 |
+| 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
 | [Wind](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/Wind/Wind.cs) | 캐릭터를 특정 방향으로 밀어내는 바람 구역 | 이홍준 |
 | [PopBlock](https://github.com/dlghdwns97/TSEROF_Code/blob/main/Scripts/Gimmick/Stage3/PopBlock.cs) | 캐릭터를 더 높게 점프시키는 일회용 점프대 | 이홍준 |
