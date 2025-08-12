@@ -7,6 +7,7 @@ public class StageManager : MonoBehaviour
     public static StageManager instance;
     public GameObject gameOver;      //게임 오버 창
     public GameObject bossGameOver;
+    public GameObject clearUI;
 
     [Header("정보")]                  //UI정보 넘겨받기
     public StageTimer stageTimer;     //스테이지 타이머
@@ -149,7 +150,10 @@ public class StageManager : MonoBehaviour
         if (floor >= MAX_FLOOR)
         {
             floor = MAX_FLOOR;
-            GameObject gameOverPanel = Instantiate(gameOver, infoUI.transform);  //임시로 게임오버 판넬 추후 클리어판넬 변경
+            if (clearUI != null)
+                Instantiate(clearUI, infoUI.transform);  //임시로 게임오버 판넬 추후 클리어판넬 변경
+            else if (gameOver != null)
+                Instantiate(gameOver, infoUI.transform);
             return;
         }
 

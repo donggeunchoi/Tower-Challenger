@@ -50,13 +50,14 @@ MonoBehaviour:
     type: 3}
   bossGameOver: {fileID: 6143182691706082494, guid: 78fd4790d8ef4d848b6677fe6c5e281c,
     type: 3}
+  clearUI: {fileID: 2800109737038716680, guid: bcaa1072d13105d49973ecf839faa906, type: 3}
   stageTimer: {fileID: 0}
   stageLP: {fileID: 0}
   infoUI: {fileID: 0}
-  isGameActive: 0
-  floor: 1
-  bestFloor: 1
-  totalStageCount: 10
+  isGameActive: 1
+  floor: 10
+  bestFloor: 31
+  totalStageCount: 1
   timerMultiplier: 1
   stageClearPortal: 
 --- !u!114 &6458399170951497763
