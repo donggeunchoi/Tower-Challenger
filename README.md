@@ -66,13 +66,28 @@
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
-[BackGroundPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundPool.cs) | 배경 오브젝트 풀기능 | 최동근|
+| [GameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/GameManager.cs) | 타 매니저 및 정보 관리 | 이해성 |
+| [UIManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/UIManager.cs) | UI 인스턴스 | 이해성 |
+| [PlayerManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/PlayerManager.cs) | 플레이어 위치 저장 및 참초 할당 | 이해성, 차우진 |
+| [SoundManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Sound/SoundManager.cs) | 배경 음악 및 효과음 | 이해성, 장태현 |
+| [TowerManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/TowerManager.cs) | 인게임 내 씬전환 관리 | 이해성 |
+| [StageManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20 Scripts/Stage/StageManager.cs) | 게임 상태 관리 및 스테이지 정보 관리 | 이해성 |
+| [MiniGameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/MiniGameManager.cs) | 미니게임 데이터 관리 | 이해성 |
+| [Stamina](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Stamina.cs) | 스테미나 관리 | 이해성 |
+| [Account](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Account.cs) | 재화 관리 | 이해성 |
+| [Character](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Character.cs) | 캐릭터 데이터 관리 | 이해성 |
+
 
 ## **스테이지**
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
-[BackGroundPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundPool.cs) | 배경 오브젝트 풀기능 | 최동근|
+| [StageLP](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageLP.cs) | 라이프포인트 관리 | 이해성 |
+| [StageTimer](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageTimer.cs) | 타이머 관리 | 이해성 |
+| [Trap](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Trap.cs) | 트랩 | 이해성 |
+| [Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Map.cs) | 맵 상태 관리 | 이해성, 차우진 |
+| [MapObstacle](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/MapObstacle.cs) | 맵 장애물 관리 | 이해성 |
+| [DiffcultyObstacles](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/DiffcultyObstacles.cs) | 난이도 별 장애물 관리 | 이해성 |
 
 ## **빌리지**
 
@@ -101,6 +116,7 @@
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
+[Arrow](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Arrow.cs) | 상자 기믹 (투사체) | 이해성 |
 [RewardManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/RewardTableData/RewardManager.cs) | 보상 관리 | 최동근
 [RewardTavleData](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/RewardTableData/RewardTableData.cs) | 보상 CSV 파일 관련 변수 선언 | 최동근
 
@@ -212,13 +228,57 @@
 
 ---
 
+## 미니게임 순발력 테스트5
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [MiniGameSpeedTest](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/MiniGameSpeedTest/MiniGameSpeedTest.cs) | 미니게임 순발력테스트 | 이해성 |
+  
 </details>
+
+---
+
+## 미니게임 똥피하기 6
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [FallingBlockPlayer](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/FallingBlock/FallingBlockPlayer.cs) | 미니게임 똥피하기 | 이해성 |
+  
+</details>
+
+---
+
+</details>
+
+## **플레이어**
+
+| 스크립트 | 내용 | 당담자 |
+| -- | -- | -- |
+| [PlayerInput](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/PlayerInput.cs) | 플레이어 이동 | 이해성, 최동근 |
+| [PlayerInteraction](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/PlayerInteraction.cs) | 플레이어 상호작용 | 이해성 |
+| [PlayerBuff](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/PlayerBuff.cs) | 플레이어 디버프 상태 | 이해성 |
+| [Interactable](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Interaction%20Object/NPC/Interactable.cs) | 상호작용 인터페이스 | 이해성 |
+| [InteractionBox](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Interaction%20Object/NPC/InteractionBox.cs) | 상호작용 상자 | 이해성 |
+| [InteractionPortal](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Interaction%20Object/NPC/InteractionPortal.cs) | 상호작용 포탈 | 이해성 |
+| [PlayerCamera](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/PlayerCamera.cs) | 플레이어 카메라 관리 | 이해성 |
+
 
 ## **Json**
 
 | 스크립트 | 내용 | 당담자 |
 | -- | -- | -- |
-[BackGroundPool](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/CatTowerJump/BackGroundPool.cs) | 배경 오브젝트 풀기능 | 최동근|
+| [SaveManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/SaveManager.cs) | 세이브매니저 | 이해성 |
+| [Save](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/SaveData/Save.cs) | 저장 유틸 메서드 | 이해성 |
+| [PlayerData](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/SaveData/PlayerData.cs) | 저장 데이터 관리 | 이해성 |
+| [CSVLoader](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/SaveData/CVSLoader.cs) | CSV 데이터 테이블 불러오기 | 이해성 |
+| [StageTable](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageTable.cs) | 스테이지 데이터 테이블 관리 | 이해성 |
+
 
 ---
 
