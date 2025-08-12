@@ -5,22 +5,13 @@
 - **김재의** : 팀장, 리드 기획자 , 미니 / 보스 게임 기획서 작성, 게임 UI/ 핵심 시스템 기획서 작성, 와이어 프레임 작성
 - **박지훈** : 서브 기획자, 미니 / 보스 게임 기획서 작성, 게임 UI/ 핵심 시스템 기획서 작성, 와이어 프레임 작성
 - **이해성** : 리드 개발자, 게임의 전반적인 시스템 개발, 미니 게임 병합 및 오류 수정 작업
-- **최동군** : 개발자, 미니 게임 개발, 게임 내의 대다수 UI 작업, 게임 내의 시스템의 디테일 작업
+- **최동근근** : 개발자, 미니 게임 개발, 게임 내의 대다수 UI 작업, 게임 내의 시스템의 디테일 작업
 - **차우진** : 개발자, 각종 미니 게임 개발 및 미니 게임 디테일 수정
 - **장태현** : 개발자, 각종 미니 게임 개발 및 미니 게임 디테일 수정
 - **최동혁** : 디자이너, 인게임 내의 대부분의 에셋들을 작업
 
-# 게임 미리보기
-![Village](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EB%B9%8C%EB%A6%AC%EC%A7%80.gif)&nbsp;&nbsp;&nbsp;
-![Tower Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%9D%B4%EB%8F%99.gif)<br>
 
-
-![MiniGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EA%B3%B5%EC%A3%BC%EC%A7%80%ED%82%A4%EA%B8%B0.gif)&nbsp;&nbsp;&nbsp;
-![MiniGame2](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%AC%EB%9D%BC%EC%9E%84%20%ED%83%80%EC%9B%8C.gif)<br>
-
-
-![BossGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%A3%BC%EC%A0%95%EB%B1%85%EC%9D%B4%20%EC%95%84%EC%A0%80%EC%94%A8%20%EA%B2%8C%EC%9E%84.gif)<br>
-## 게임 소개
+# 게임 소개
 ![게임 시작 화면](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/02%20Images/StartBackGround/ChatGPT_Image_2025_6_27_09_20_12.png)
 - **개발기간** : 6 / 20 ~ 8 / 11
 - **플랫폼** : 모바일(Andriod)
@@ -37,6 +28,16 @@
 - **스태미나 & 입장권 시스템** : 도전에는 스테미나가 필요하며, 시간 경과로 충전되거나 아이템을 사용해야 도전 가능
 - **다양한 미니게임** : 순발력, 창의력, 기억력의 여러 테마를 가지고 있는 미니게임들을 층별로 배치되어 지루할 틈 없이 도전 가능
 - **NPC 및 스토리텔링** : 입구를 지키는 고양이 석상 **먀우라** 등 개성 있는 NPC들과 대화하며 세계관에 몰입
+
+
+## 게임 미리보기
+![Village](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EB%B9%8C%EB%A6%AC%EC%A7%80.gif)&nbsp;&nbsp;&nbsp;
+![Tower Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%20%EC%9D%B4%EB%8F%99.gif)&nbsp;&nbsp;&nbsp;
+![MiniGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EA%B3%B5%EC%A3%BC%EC%A7%80%ED%82%A4%EA%B8%B0.gif)
+![MiniGame2](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%8A%AC%EB%9D%BC%EC%9E%84%20%ED%83%80%EC%9B%8C.gif)<br>
+
+
+![BossGame1](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/IMAGIF/%EC%A3%BC%EC%A0%95%EB%B1%85%EC%9D%B4%20%EC%95%84%EC%A0%80%EC%94%A8%20%EA%B2%8C%EC%9E%84.gif)<br>
 
 # 기능 명세서
 
@@ -64,6 +65,13 @@
 
 
 ---
+
+
+# 스크립트
+
+<details>
+<summary>스크립트 내용 요약</summary>
+
 
 ## **매니저**
 
@@ -145,6 +153,24 @@
 
 ---
 
+### 스토리
+
+<details>
+<summary>열기</summary>
+
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [StoryManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Story/StoryManager.cs) | 스토리 매니저 | 차우진 |
+| [StoryUi](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Story/StoryUi.cs) | UI | 차우진 |
+| [Story](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Story/Story.cs) | 6층 스토리 오브젝트 관리 | 차우진 |
+| [Story_14Floor](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Story/Story_14Floor.cs) | 14층 스토리 오브젝트 관리 | 차우진 |
+| [StoryTalk](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Story/StoryTalk.cs) | 스토리 대화 진행 | 차우진 |
+| [StoryData](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Story/StoryData.cs) | 스토리 대화 데이터 | 차우진 |
+
+</details>
+
+---
+
 </details>
 
 
@@ -155,6 +181,8 @@
 <summary>열기</summary>
 
 ## 미니게임 슬라임 점프1
+
+<img src="https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Process.webp" width="400" height="400"/>
 
 <details>
 <summary>열기</summary>
@@ -329,6 +357,55 @@
 
 ---
 
+## 미니게임 공주 지키기 12
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| -- | -- | -- |
+| [PrincessManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Princess/PrincessManager.cs) | 공주지키기 매니저 | 차우진 |
+| [BatAttack](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Princess/BatAttack.cs) | 박쥐 공격 | 차우진 |
+| [FireAttack](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Princess/FireAttack.cs) | 불덩이 공격 | 차우진 |
+| [EnemyPos](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Princess/EnemyPos.cs) | 박쥐 및 불덩이 위치 생성 | 차우진 |
+| [GameOver](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Princess/GameOver.cs) | 게임 오버 및 클리어 | 차우진 |
+| [ShieldMove](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Princess/ShieldMove.cs) | 박쥐랑 불덩이 막는 플레이어 | 차우진 |
+
+</details>
+
+---
+
+## 미니게임 그림자 맞추기 13
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| -- | -- | -- |
+| [ShadowManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Shadow/ShadowManager.cs) | 그림자맞추기 매니저 | 차우진 |
+| [Shadow](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Shadow/Shadow.cs) | 문제 생성 | 차우진 |
+| [ShadowUI](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Shadow/ShadowUI.cs) | UI | 차우진 |
+| [ShadowData](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_Shadow/ShadowData.cs) | 그림자 및 이미지 데이터 | 차우진 |
+
+</details>
+
+---
+
+## 미니게임 Up&Down 14
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| -- | -- | -- |
+| [UpAndDownManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_UpAndDown/UpAndDownManager.cs) | 업다운숫자맞추기 매니저 | 차우진 |
+| [UpAndDown](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_UpAndDown/UpAndDown.cs) | 숫자 생성 및 업다운 확인 | 차우진 |
+| [UpAndDownUI](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/CWJ_UpAndDown/UpAndDownUI.cs) | UI | 차우진 |
+
+
+</details>
+
+---
 
 </details>
 
@@ -356,24 +433,13 @@
 | [CSVLoader](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/SaveData/CVSLoader.cs) | CSV 데이터 테이블 불러오기 | 이해성 |
 | [StageTable](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageTable.cs) | 스테이지 데이터 테이블 관리 | 이해성 |
 
+</details>
 
 ---
 
 
 <br>
-<br>
 
 # 4. 사용 에셋
 
-- [KUBIKOS - 3D Cube World](https://assetstore.unity.com/packages/3d/environments/kubikos-3d-cube-world-117341)
-- [Fantasy Skybox FREE](https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353)
-- [Interactive Physical Door Pack](https://assetstore.unity.com/packages/tools/physics/interactive-physical-door-pack-163249)
-- [Forest - Low Poly Toon Battle Arena / Tower Defense Pack](https://assetstore.unity.com/packages/3d/environments/forest-low-poly-toon-battle-arena-tower-defense-pack-100080)
-- [URP Stylized Water Shader - Proto Series](https://assetstore.unity.com/packages/vfx/shaders/urp-stylized-water-shader-proto-series-187485)
-- [Fantasy Wooden GUI : Free](https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811)
-- [3D The Blacksmith's House](https://assetstore.unity.com/packages/3d/environments/fantasy/3d-the-blacksmith-s-house-252972)
-- [Magic Effects FREE](https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933)
-- [The Portal Collection](https://assetstore.unity.com/packages/3d/environments/fantasy/the-portal-collection-205438)
-- [Epic Toon VFX 2](https://assetstore.unity.com/packages/vfx/particles/spells/epic-toon-vfx-2-157651)
-- [Nature Sound FX](https://assetstore.unity.com/packages/audio/sound-fx/nature-sound-fx-180413)
-- [Toon Fantasy Nature](https://assetstore.unity.com/packages/3d/environments/landscapes/toon-fantasy-nature-215197)
+# 팀원 최동혁님이 혼자서 다 해주셨습니다.
