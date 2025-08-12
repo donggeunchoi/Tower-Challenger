@@ -62,6 +62,9 @@
 ![Untitled (2)](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/06%20ReadMeImage/Village.webp)
 </details>
 
+
+---
+
 ## **매니저**
 
 | 스크립트 | 내용 | 당담자 |
@@ -71,23 +74,15 @@
 | [PlayerManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/PlayerManager.cs) | 플레이어 위치 저장 및 참초 할당 | 이해성, 차우진 |
 | [SoundManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Sound/SoundManager.cs) | 배경 음악 및 효과음 | 이해성, 장태현 |
 | [TowerManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/TowerManager.cs) | 인게임 내 씬전환 관리 | 이해성 |
-| [StageManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20 Scripts/Stage/StageManager.cs) | 게임 상태 관리 및 스테이지 정보 관리 | 이해성 |
+| [StageManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageManager.cs)| 게임 상태 관리 및 스테이지 정보 관리 | 이해성 |
 | [MiniGameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/MiniGameManager.cs) | 미니게임 데이터 관리 | 이해성 |
 | [Stamina](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Stamina.cs) | 스테미나 관리 | 이해성 |
 | [Account](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Account.cs) | 재화 관리 | 이해성 |
 | [Character](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/Character.cs) | 캐릭터 데이터 관리 | 이해성 |
+| [PoolManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/PoolManager.cs) | 오브젝트 풀링 시스템을 관리하는 핵심 매니저 | 장태현 |
 
-
-## **스테이지**
-
-| 스크립트 | 내용 | 당담자 |
-| -- | -- | -- |
-| [StageLP](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageLP.cs) | 라이프포인트 관리 | 이해성 |
-| [StageTimer](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageTimer.cs) | 타이머 관리 | 이해성 |
-| [Trap](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Trap.cs) | 트랩 | 이해성 |
-| [Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Map.cs) | 맵 상태 관리 | 이해성, 차우진 |
-| [MapObstacle](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/MapObstacle.cs) | 맵 장애물 관리 | 이해성 |
-| [DiffcultyObstacles](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/DiffcultyObstacles.cs) | 난이도 별 장애물 관리 | 이해성 |
+---
+<br>
 
 ## **빌리지**
 
@@ -108,7 +103,7 @@
 
 </details>
 
----
+
 ## **타워**
 
 <details>
@@ -119,6 +114,13 @@
 [Arrow](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Arrow.cs) | 상자 기믹 (투사체) | 이해성 |
 [RewardManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/RewardTableData/RewardManager.cs) | 보상 관리 | 최동근
 [RewardTavleData](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/RewardTableData/RewardTableData.cs) | 보상 CSV 파일 관련 변수 선언 | 최동근
+| [StageLP](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageLP.cs) | 라이프포인트 관리 | 이해성 |
+| [StageTimer](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/StageTimer.cs) | 타이머 관리 | 이해성 |
+| [Trap](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Trap.cs) | 트랩 | 이해성 |
+| [Map](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/Map.cs) | 맵 상태 관리 | 이해성, 차우진 |
+| [MapObstacle](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/MapObstacle.cs) | 맵 장애물 관리 | 이해성 |
+| [DiffcultyObstacles](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Stage/DiffcultyObstacles.cs) | 난이도 별 장애물 관리 | 이해성 |
+
 
 ---
 
@@ -141,9 +143,11 @@
 
 </details>
 
+---
+
 </details>
 
----
+
 
 ## **미니게임**
 
@@ -252,7 +256,79 @@
   
 </details>
 
+## 미니게임 알게임 7
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [EggClickHandler](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/EggGame/EggClickHandler.cs) | 알 클릭 이벤트 처리 | 장태현 |
+| [EggGameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/EggGame/EggGameManager.cs) | 알게임의 나머지 모든 기능 관리 | 장태현 |
+  
+</details>
+
 ---
+
+## 미니게임 어려운 게임 8
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [ReflectOnWall](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/HardGame/ReflectOnWall.cs) | 고양이의 방향 전환 처리 X축 좌우반전 | 장태현 |
+| [ReflectOnWall2](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/HardGame/ReflectOnWall2.cs) | 고양이의 방향 전환 처리 위보고 시작하는 애 Y축 상하반전 | 장태현 |
+| [ReflectOnWall3](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/HardGame/ReflectOnWall3.cs) | 고양이의 방향 전환 처리 아래보고 시작하는 애 Y축 상하반전 | 장태현 |
+| [HardGamePlayer](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/HardGame/HardGamePlayer.cs) | 장애물 피격 시 해당 맵의 스폰 포인트로 플레이어 이동 | 장태현 |
+| [HardGameGoalTrigger](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/HardGame/HardGameGoalTrigger.cs) | 장애물이 없을 경우 다음 층으로 이동 | 장태현 |
+| [HardGameGameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/HardGame/HardGameGameManager.cs) | 위 기능들을 제외한 모든 어려운 게임 기능 관리 | 장태현 |
+  
+</details>
+
+---
+
+## 미니게임 탄막 피하기 게임 9
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [Ball](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/ProGame/Ball.cs) | PoolManager에서 반환된 발사체 속도 설정 | 장태현 |
+| [ProGamePlayer](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/ProGame/ProGamePlayer.cs) | 발사체 피격 시 무적 시간 부여 및 LP 감소 이벤트 발생 | 장태현 |
+| [ProGameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/ProGame/ProGameManager.cs) | 위 기능들을 제외한 모든 죽림고수 시스템 관리 | 장태현 |
+  
+</details>
+
+---
+
+## 미니게임 야바위 게임 10
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| --- | --- | --- |
+| [SellGameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/SellGame/SellGameManager.cs) | 야바위 게임의 모든 기능 담당 | 장태현 |
+
+</details>
+
+---
+
+## 미니게임 주정뱅이 게임 11
+
+<details>
+<summary>열기</summary>
+  
+| 스크립트 이름 | 내용 | 당담자 |
+| -- | -- | -- |
+| [WalkTheStorkGameManager](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/MiniGames/WalkTheStork/WalkTheStorkGameManager.cs) | 주정뱅이 게임의 모든 기능 담당 | 장태현 |
+
+</details>
+
+---
+
 
 </details>
 
@@ -267,6 +343,7 @@
 | [InteractionBox](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Interaction%20Object/NPC/InteractionBox.cs) | 상호작용 상자 | 이해성 |
 | [InteractionPortal](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Interaction%20Object/NPC/InteractionPortal.cs) | 상호작용 포탈 | 이해성 |
 | [PlayerCamera](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/PlayerCamera.cs) | 플레이어 카메라 관리 | 이해성 |
+| [PlayerAnimation](https://github.com/donggeunchoi/Tower-Challenger/blob/main/Assets/03%20Scripts/Player/PlayerAnimation.cs) | 플레이어 움직임 애니메이션 제어 | 장태현 |
 
 
 ## **Json**
