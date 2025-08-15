@@ -15,6 +15,8 @@ public class TutorialManager : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration;
 
+	public GameObject dashWall;
+
 
     void Start()
     {
@@ -51,13 +53,29 @@ public class TutorialManager : MonoBehaviour
         currentTutorial = cuttentInstance.GetComponent<TutorialBase>();
 
         var bt = cuttentInstance.GetComponent<BoxTutorial>();
-        
+
+        HandleDashWall();
+       
         currentTutorial.Enter();
     }
 
     private void OnAllTutorialsCompleted()
     {
         currentTutorial = null;
+    }
+
+    private void HandleDashWall()
+    {
+        if (currentIndex == 2)
+        {
+            if (dashWall != null)
+                dashWall.SetActive(false);
+        }
+        else
+        {
+            if (dashWall != null)
+                dashWall.SetActive(true);
+        }
     }
 
     #region Fade
