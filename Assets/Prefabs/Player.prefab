@@ -2747,7 +2747,8 @@ GameObject:
   - component: {fileID: 8843363504759506712}
   - component: {fileID: 9037929104545379172}
   - component: {fileID: 43257427236854186}
-  - component: {fileID: 127505070138228707}
+  - component: {fileID: 5057877824375573203}
+  - component: {fileID: 9181371016668062594}
   m_Layer: 20
   m_Name: Player
   m_TagString: Player
@@ -2947,6 +2948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionButton: {fileID: 6604600551109526587}
+  interactImage: {fileID: 0}
   interactionUIPannel: {fileID: 8705998623275428248}
 --- !u!58 &8843363504759506712
 CircleCollider2D:
@@ -3014,8 +3016,32 @@ MonoBehaviour:
   effectTime: 3
   slowSpeed: 15
   playerSprite: {fileID: 822390536679531931}
+  isSlow: 0
+  isStun: 0
   difficulty: 0
---- !u!114 &127505070138228707
+--- !u!95 &5057877824375573203
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289793033996366146}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09043ba7a40710b4eb9ce51f9d17177c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9181371016668062594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3024,9 +3050,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7289793033996366146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb3154aa1568f04da6766c0ef29fdc4, type: 3}
+  m_Script: {fileID: 11500000, guid: e489841a4d007405f83346acfa73f3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5057877824375573203}
+  playerInput: {fileID: 4042260666368113329}
 --- !u!1 &7584014353618184241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,6 +3230,7 @@ MonoBehaviour:
   canDash: 1
   isDashing: 0
   spriteRenderer: {fileID: 0}
+  playerBuff: {fileID: 0}
   InventoryPanel: {fileID: 8134378681660497466}
   isInventory: 0
   PasePanel: {fileID: 5139793126572163873}
