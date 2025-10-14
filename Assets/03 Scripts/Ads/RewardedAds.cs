@@ -1,6 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+
+public enum RewardType
+{
+    none,
+    Dia,
+    Stamina
+}
+
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
    [SerializeField] Button _showAdButton;
@@ -18,7 +26,6 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #elif UNITY_EDITOR
-        // ✅ 에디터 테스트용 (에디터에서 실행 시 Android 단위를 사용)
         _adUnitId = _androidAdUnitId;
 #endif
 
