@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 7931314855873823741}
   - component: {fileID: 1238640296885801336}
   m_Layer: 0
-  m_Name: RewardedAds
+  m_Name: RewardedAdsDia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   _showAdButton: {fileID: 0}
   _androidAdUnitId: Rewarded_Android
   _iOSAdUnitId: Rewarded_iOS
+  tryCount: 1
 --- !u!1 &6115195878132560003
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,8 +126,57 @@ Transform:
   - {fileID: 9182388393960011404}
   - {fileID: 7659346375798273052}
   - {fileID: 7931314855873823741}
+  - {fileID: 2620521275114163144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7159113501580123220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2620521275114163144}
+  - component: {fileID: 62432548820300321}
+  m_Layer: 0
+  m_Name: RewardedAdsCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2620521275114163144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7159113501580123220}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8567377721384497480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &62432548820300321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7159113501580123220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b722d61f72f684a4c9f11e723fd163c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showAdButton: {fileID: 0}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
+  tryCount: 3
 --- !u!1 &8286902539359836479
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,3 +224,6 @@ MonoBehaviour:
   _androidGameId: 5964198
   _iosGameId: 5964199
   _testMode: 1
+  _rewardedAdsDia: {fileID: 1238640296885801336}
+  _rewardedAdsCount: {fileID: 62432548820300321}
+  _interstitialAd: {fileID: 7256735346183205620}

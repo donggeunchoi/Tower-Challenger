@@ -45,7 +45,8 @@ public class VillageManager : MonoBehaviour
     public GameObject quickTicketUI;
 
     [Header("광고 패널")] 
-    public GameObject AdsPanel;
+    public GameObject AdsPanelDia;
+    public GameObject AdsPanelCount;
 
     private void Awake()
     {
@@ -213,8 +214,13 @@ public class VillageManager : MonoBehaviour
         return false;
     }
 
-    public void OnClickAds()
+    public void OnClickAdsDia()
     {
-        AdsPanel.SetActive(true);
+        AdsPanelDia.SetActive(true);
+    }
+
+    public void OnClickAdsCount()
+    {
+        AdsPanelCount.SetActive(true);
     }
 }

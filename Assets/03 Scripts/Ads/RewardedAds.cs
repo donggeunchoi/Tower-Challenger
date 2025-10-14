@@ -7,16 +7,22 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
+
+    [SerializeField] private int tryCount;
  
     void Awake()
     {   
         // Get the Ad Unit ID for the current platform:
-        #if UNITY_IOS
-        _adUnitId = _iOSAdUnitId;
-        #elif UNITY_ANDROID
+#if UNITY_IOS
+        _adUnitId = _iOsAdUnitId;
+#elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
-        #endif
+#elif UNITY_EDITOR
+        // ✅ 에디터 테스트용 (에디터에서 실행 시 Android 단위를 사용)
+        _adUnitId = _androidAdUnitId;
+#endif
 
+        Debug.Log($"✅ Interstitial Ad Unit 설정 완료: {_adUnitId}");
         // Disable the button until the ad is ready to show:
         _showAdButton.interactable = false;
     }
@@ -24,9 +30,16 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     // Call this public method when you want to get an ad ready to show.
     public void LoadAd()
     {
-        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("Loading Ad: " + _adUnitId);
+        if (tryCount <= 0)
+        {
+            Debug.Log("광고 횟수 제한 도달. 더 이상 로드하지 않습니다.");
+            _showAdButton.interactable = false;
+            return;
+        }
+
+        Debug.Log("광고 로드 시도: " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
+        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
     }
  
     // If the ad successfully loads, add a listener to the button and enable it:
@@ -57,8 +70,18 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     {
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
+            Debug.Log("보상 연결 해야하고 카운트 낮추기");
             // Grant a reward.
+            tryCount--;
+
+            if (tryCount > 0)
+            {
+                LoadAd();
+            }
+            else
+            {
+                _showAdButton.interactable = false;
+            }
         }
     }
  
@@ -80,7 +103,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
  
     void OnDestroy()
     {
-        // Clean up the button listeners:
-        _showAdButton.onClick.RemoveAllListeners();
+            // Clean up the button listeners:
+            _showAdButton.onClick.RemoveAllListeners();
+       
     }
 }

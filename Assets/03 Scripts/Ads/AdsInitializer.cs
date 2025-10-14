@@ -9,6 +9,10 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     [SerializeField] private bool _testMode = true;
     private string _gameId;
 
+    [SerializeField] private RewardedAds _rewardedAdsDia;
+    [SerializeField] private RewardedAds _rewardedAdsCount;
+    [SerializeField] private InterstitialAd _interstitialAd;
+    
     private void Awake()
     {
         InitializeAds();
@@ -18,9 +22,9 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     {
         #if UNITY_ANDROID
         _gameId = _androidGameId;
-#elif UNITY_IOS
+        #elif UNITY_IOS
         _gameId = _iosGameId; 
-#elif UNITY_EDITOR
+        #elif UNITY_EDITOR
         _gameId = _androidGameId;
         #endif
         if (!Advertisement.isInitialized && Advertisement.isSupported)
@@ -32,6 +36,15 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     public void OnInitializationComplete()
     {
         Debug.Log("유니티 광고 초기화 되었습니다");
+        
+        if (_rewardedAdsDia != null)
+            _rewardedAdsDia.LoadAd();
+        
+        if (_rewardedAdsCount != null)
+            _rewardedAdsCount.LoadAd();
+
+        if (_interstitialAd != null)
+            _interstitialAd.LoadAd();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
