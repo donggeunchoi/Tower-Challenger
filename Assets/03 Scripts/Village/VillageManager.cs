@@ -44,6 +44,9 @@ public class VillageManager : MonoBehaviour
     public GameObject quickStaminaUI;
     public GameObject quickTicketUI;
 
+    [Header("광고 패널")] 
+    public GameObject AdsPanel;
+
     private void Awake()
     {
         TutorialCheck();
@@ -208,5 +211,10 @@ public class VillageManager : MonoBehaviour
 
         }
         return false;
+    }
+
+    public void OnClickAds()
+    {
+        AdsPanel.SetActive(true);
     }
 }
