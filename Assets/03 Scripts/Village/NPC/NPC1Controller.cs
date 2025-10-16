@@ -12,7 +12,6 @@ public class NPC1Controller : NPCBase
    public float stopRange;
    
    private bool _isPaused = false;
-   private bool _turnToRight = false;
 
    protected override void Update()
    {

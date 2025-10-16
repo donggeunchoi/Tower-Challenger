@@ -2,13 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
-public enum RewardType
-{
-    none,
-    Dia,
-    Stamina
-}
-
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
    [SerializeField] Button _showAdButton;
