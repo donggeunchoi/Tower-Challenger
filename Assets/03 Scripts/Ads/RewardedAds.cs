@@ -122,6 +122,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     private void StaminaReward()
     {
         Debug.Log("스테미나 보상 지금 요망");
+        GameManager.Instance.stamina.AddStamina();
     }
 
     private void DiamondReward()
