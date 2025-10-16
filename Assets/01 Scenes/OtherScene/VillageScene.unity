@@ -3386,13 +3386,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1705620870}
+        m_TargetAssemblyTypeName: StaminaReward, Assembly-CSharp
+        m_MethodName: OnClickWatchAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7206,6 +7206,7 @@ GameObject:
   - component: {fileID: 665994659}
   - component: {fileID: 665994658}
   - component: {fileID: 665994660}
+  - component: {fileID: 665994661}
   m_Layer: 5
   m_Name: ADSPanelDia
   m_TagString: Untagged
@@ -7288,6 +7289,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AdsPanelDia: {fileID: 665994656}
   AdsPanelCount: {fileID: 1705620865}
+--- !u!114 &665994661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665994656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a83e8ee97cd4fb3b3e61ed5f06d210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardedAds: {fileID: 1296363819}
 --- !u!1 &671668156
 GameObject:
   m_ObjectHideFlags: 0
@@ -11110,8 +11124,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1724231699}
   m_HandleRect: {fileID: 1724231698}
   m_Direction: 0
-  m_Value: 0.000000015004805
-  m_Size: 0.29380083
+  m_Value: 0
+  m_Size: 0.2575455
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -15080,6 +15094,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32af424b3f64b4d5da0deb15f2f7d9ca, type: 3}
+--- !u!114 &1296363818 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 62432548820300321, guid: 32af424b3f64b4d5da0deb15f2f7d9ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 1296363817}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b722d61f72f684a4c9f11e723fd163c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1296363819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1238640296885801336, guid: 32af424b3f64b4d5da0deb15f2f7d9ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 1296363817}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b722d61f72f684a4c9f11e723fd163c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299147836
 GameObject:
   m_ObjectHideFlags: 0
@@ -16434,7 +16472,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1411703333}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 665994661}
+        m_TargetAssemblyTypeName: DiaRewardAd, Assembly-CSharp
+        m_MethodName: OnClickWatchAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1411703333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20053,6 +20103,7 @@ GameObject:
   - component: {fileID: 1705620869}
   - component: {fileID: 1705620868}
   - component: {fileID: 1705620867}
+  - component: {fileID: 1705620870}
   m_Layer: 5
   m_Name: ADSPanelCount
   m_TagString: Untagged
@@ -20135,6 +20186,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705620865}
   m_CullTransparentMesh: 1
+--- !u!114 &1705620870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705620865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0db94ecff65044f49f6fa12ff84ecef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardedAds: {fileID: 1296363818}
 --- !u!1 &1717880271
 GameObject:
   m_ObjectHideFlags: 0
@@ -23396,6 +23460,7 @@ GameObject:
   - component: {fileID: 1897285015}
   - component: {fileID: 1897285014}
   - component: {fileID: 1897285016}
+  - component: {fileID: 1897285017}
   m_Layer: 5
   m_Name: DiamondUI
   m_TagString: Untagged
@@ -23518,6 +23583,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1897285017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897285012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a83e8ee97cd4fb3b3e61ed5f06d210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardedAds: {fileID: 1296363819}
 --- !u!1 &1926957613
 GameObject:
   m_ObjectHideFlags: 0

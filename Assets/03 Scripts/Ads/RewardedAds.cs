@@ -2,14 +2,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
+public enum RewardType
+{
+    None,
+    Stamina,
+    Diamond
+}
+
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-   [SerializeField] Button _showAdButton;
+   
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
 
     [SerializeField] private int tryCount;
+    private RewardType currentRewardType = RewardType.None;
  
     void Awake()
     {   
@@ -23,8 +31,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 #endif
 
         Debug.Log($"✅ Interstitial Ad Unit 설정 완료: {_adUnitId}");
-        // Disable the button until the ad is ready to show:
-        _showAdButton.interactable = false;
+
     }
  
     // Call this public method when you want to get an ad ready to show.
@@ -33,34 +40,24 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         if (tryCount <= 0)
         {
             Debug.Log("광고 횟수 제한 도달. 더 이상 로드하지 않습니다.");
-            _showAdButton.interactable = false;
             return;
         }
 
         Debug.Log("광고 로드 시도: " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
-        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
     }
  
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
         Debug.Log("Ad Loaded: " + adUnitId);
- 
-        if (adUnitId.Equals(_adUnitId))
-        {
-            // Configure the button to call the ShowAd() method when clicked:
-            _showAdButton.onClick.AddListener(ShowAd);
-            // Enable the button for users to click:
-            _showAdButton.interactable = true;
-        }
     }
  
     // Implement a method to execute when the user clicks the button:
-    public void ShowAd()
+    public void ShowAd(RewardType rewardType)
     {
-        // Disable the button:
-        _showAdButton.interactable = false;
+        currentRewardType = rewardType;
+        Debug.Log(currentRewardType);
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
     }
@@ -74,14 +71,21 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
             // Grant a reward.
             tryCount--;
 
-            if (tryCount > 0)
+            switch (currentRewardType)
             {
-                LoadAd();
+                case RewardType.Stamina:
+                    StaminaReward();
+                    break;
+                case RewardType.Diamond:
+                    DiamondReward();
+                    break;
+                default:
+                    Debug.LogWarning("RewardType.None");
+                    break;
             }
-            else
-            {
-                _showAdButton.interactable = false;
-            }
+            
+            LoadAd();
+            
         }
     }
  
@@ -100,11 +104,14 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
  
     public void OnUnityAdsShowStart(string adUnitId) { }
     public void OnUnityAdsShowClick(string adUnitId) { }
- 
-    void OnDestroy()
+
+    private void StaminaReward()
     {
-            // Clean up the button listeners:
-            _showAdButton.onClick.RemoveAllListeners();
-       
+        Debug.Log("스테미나 보상 지금 요망");
+    }
+
+    private void DiamondReward()
+    {
+        Debug.Log("다이아 보상 지급 요망");
     }
 }
