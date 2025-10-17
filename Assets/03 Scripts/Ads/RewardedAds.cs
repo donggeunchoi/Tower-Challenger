@@ -25,6 +25,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     string _adUnitId = null; // This will remain null for unsupported platforms
     
     private RewardType currentRewardType = RewardType.None;
+    
+    public int RandomDia;
  
     void Awake()
     {   
@@ -128,6 +130,8 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     private void DiamondReward()
     {
         Debug.Log("다이아 보상 지급 요망");
+        RandomDia = GetRandomNum();
+        GameManager.Instance.account.AddDiamond(RandomDia);
     }
 
     private void UpdateButtonState()
@@ -137,5 +141,40 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
         if (_diamondButton != null)
             _diamondButton.interactable = diamondTryCount > 0;
+    }
+
+    private int GetRandomNum()
+    {
+        int totalNum = 0;
+        int[] nums = new int[30];
+
+        for (int i = 0; i < 6; i++)
+        {
+            nums[i] = 3;
+        }
+
+        for (int i = 6; i < 30; i++)
+        {
+            nums[i] = 1;
+        }
+
+        foreach (int w in nums)
+        {
+            totalNum += w;
+        }
+        
+        int randomNum = Random.Range(1, totalNum + 1);
+
+        int cumulative = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            cumulative += nums[i];
+            if (randomNum <= cumulative)
+            {
+                return i + 1;
+            }
+        }
+
+        return 30;
     }
 }
