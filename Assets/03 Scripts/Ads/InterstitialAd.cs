@@ -4,7 +4,7 @@ using UnityEngine.Advertisements;
 public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] string _androidAdUnitId = "Interstitial_Android";
-    [SerializeField] string _iOsAdUnitId = "Interstitial_iOS";
+    // [SerializeField] string _iOsAdUnitId = "Interstitial_iOS";
     string _adUnitId;
 
     void Awake()

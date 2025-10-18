@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using Random = UnityEngine.Random;
 
 public enum RewardType
 {
@@ -14,19 +16,16 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
    [Header("UI Buttons")]
    [SerializeField] private Button _staminaButton;
    [SerializeField] private Button _diamondButton;
-   
-   [Header("RewardCount")]
-   [SerializeField] private int staminaTryCount;
-   [SerializeField] private int diamondTryCount;
-    
     
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
-    [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
+    // [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
     
     private RewardType currentRewardType = RewardType.None;
     
     public int RandomDia;
+    private PlayerData data;
+    
  
     void Awake()
     {   
@@ -42,6 +41,12 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         Debug.Log($"✅ Interstitial Ad Unit 설정 완료: {_adUnitId}");
 
     }
+
+    void Start()
+    {
+        data = GameManager.Instance.playerData;
+        CheckResetAdData(data);
+    }
  
     // Call this public method when you want to get an ad ready to show.
     public void LoadAd()
@@ -53,15 +58,17 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     // If the ad successfully loads, add a listener to the button and enable it:
     public void ShowAd(RewardType rewardType)
     {
+        CheckResetAdData(data);
+        
         currentRewardType = rewardType;
 
-        if (rewardType == RewardType.Stamina && staminaTryCount <= 0)
+        if (rewardType == RewardType.Stamina && data.staminaAdRemaining <= 0)
         {
             UpdateButtonState();
             return;
         }
 
-        if (rewardType == RewardType.Diamond && diamondTryCount <= 0)
+        if (rewardType == RewardType.Diamond && data.diamondAdRemaining <= 0)
         {
             UpdateButtonState();
             return;
@@ -92,11 +99,13 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
             switch (currentRewardType)
             {
                 case RewardType.Stamina:
-                    staminaTryCount--;
+                    data.staminaAdRemaining--;
+                    Debug.Log(data.staminaAdRemaining);
                     StaminaReward();
                     break;
                 case RewardType.Diamond:
-                    diamondTryCount--;
+                    data.diamondAdRemaining--;
+                    Debug.Log(data.diamondAdRemaining);
                     DiamondReward();
                     break;
                 default:
@@ -137,10 +146,10 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     private void UpdateButtonState()
     {
         if (_staminaButton != null)
-            _staminaButton.interactable = staminaTryCount > 0;
+            _staminaButton.interactable = data.staminaAdRemaining > 0;
 
         if (_diamondButton != null)
-            _diamondButton.interactable = diamondTryCount > 0;
+            _diamondButton.interactable = data.diamondAdRemaining > 0;
     }
 
     private int GetRandomNum()
@@ -176,5 +185,19 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         }
 
         return 30;
+    }
+
+    public static void CheckResetAdData(PlayerData data)
+    {
+        string today = DateTime.Now.ToString("yyyyMMdd");
+        if (data.adLastResetDate != today)
+        {
+            data.staminaAdRemaining = 3;
+            data.diamondAdRemaining = 3;
+            data.adLastResetDate = today;
+            
+            data.SaveData();
+            Debug.Log("광고 횟수 자정 리셋 완료");
+        }
     }
 }

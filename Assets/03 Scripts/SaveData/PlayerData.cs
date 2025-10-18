@@ -18,6 +18,10 @@ public class PlayerData
 
     public string lastTimeString;
 
+    public int staminaAdRemaining = 3;
+    public int diamondAdRemaining = 3;
+    public string adLastResetDate;
+
     [NonSerialized]
     public DateTime lastTime;
 
@@ -35,6 +39,9 @@ public class PlayerData
         itmeDataID = new List<string>();
         characterNames = new List<string>();
         equippedCharacterName = "";
+        staminaAdRemaining = 3;
+        diamondAdRemaining = 3;
+        adLastResetDate = DateTime.Now.ToString("yyyyMMdd");
     }
 
     public void SaveData()
