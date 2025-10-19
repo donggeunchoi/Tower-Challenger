@@ -41,7 +41,7 @@ public class PlayerData
         equippedCharacterName = "";
         staminaAdRemaining = 3;
         diamondAdRemaining = 3;
-        adLastResetDate = DateTime.Now.ToString("yyyyMMdd");
+        adLastResetDate = DateTime.Now.ToString("yyyy-MM-dd");
     }
 
     public void SaveData()
